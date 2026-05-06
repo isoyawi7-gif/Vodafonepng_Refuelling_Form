@@ -85,12 +85,21 @@ button:hover {
     width: 100%;
     margin-top: 10px;
 }
+
+img {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+}
 </style>
 </head>
 
 <body>
 
-<div id="blocked">❌ Access Denied. Please login first.</div>
+<div id="blocked">
+    ❌ Access Denied. Please login first.
+</div>
 
 <div class="container" id="app">
 
@@ -166,10 +175,22 @@ button:hover {
 
 <div class="result" id="calculation"></div>
 
-<h2>Camera</h2>
+<h2>Photos</h2>
 
 <video id="video" autoplay playsinline style="width:100%; display:none;"></video>
-<canvas id="canvas" class="camera-preview"></canvas>
+<canvas id="canvas" style="display:none;"></canvas>
+
+<div>
+    <h3>Before Photo</h3>
+    <img id="beforeImg">
+
+    <h3>TopUp Photo</h3>
+    <img id="topupImg">
+
+    <h3>After Photo</h3>
+    <img id="afterImg">
+</div>
+
 <p id="gps"></p>
 
 <h2>Driver Details</h2>
@@ -215,11 +236,12 @@ function openCamera(type) {
     navigator.mediaDevices.getUserMedia({ video: true })
     .then(function(s) {
         stream = s;
+
         const video = document.getElementById("video");
         video.srcObject = s;
         video.style.display = "block";
 
-        setTimeout(capturePhoto, 3000);
+        setTimeout(capturePhoto, 2500);
     })
     .catch(function() {
         alert("Camera not available");
@@ -257,6 +279,12 @@ function capturePhoto() {
         ctx.fillText(gpsText, 20, 120);
         document.getElementById("gps").innerText = gpsText;
     });
+
+    const imgData = canvas.toDataURL("image/png");
+
+    if (mode === "BEFORE") document.getElementById("beforeImg").src = imgData;
+    if (mode === "TOPUP") document.getElementById("topupImg").src = imgData;
+    if (mode === "AFTER") document.getElementById("afterImg").src = imgData;
 
     stream.getTracks().forEach(track => track.stop());
     video.style.display = "none";
