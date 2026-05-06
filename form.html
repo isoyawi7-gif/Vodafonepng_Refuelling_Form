@@ -13,6 +13,15 @@ body {
     padding: 20px;
 }
 
+/* BLOCK ACCESS MESSAGE STYLE */
+#blocked {
+    display: none;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 20px;
+    color: red;
+}
+
 .container {
     max-width: 800px;
     margin: auto;
@@ -29,7 +38,6 @@ h1 {
 
 h2 {
     margin-top: 20px;
-    color: #333;
 }
 
 .form-group {
@@ -37,16 +45,13 @@ h2 {
 }
 
 label {
-    display: block;
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
-input, textarea {
+input, textarea, button {
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    margin-top: 5px;
 }
 
 .row {
@@ -62,152 +67,212 @@ button {
     background: #e60000;
     color: white;
     border: none;
-    padding: 12px;
-    width: 100%;
-    font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 button:hover {
     background: #cc0000;
 }
 
+.small-btn {
+    width: auto;
+    padding: 8px 12px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
 .result {
-    margin-top: 15px;
+    margin-top: 10px;
     font-weight: bold;
+    color: #333;
+}
+
+.camera-preview {
+    width: 100%;
+    margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Vodafone PNG</h1>
-    <h2>Refuelling Form</h2>
+<!-- BLOCK SCREEN -->
+<div id="blocked">
+    ❌ Access Denied. Please login first.
+</div>
 
-    <form id="fuelForm">
+<div class="container" id="app">
 
-        <div class="row">
-            <div class="form-group">
-                <label>Team on Site</label>
-                <input type="text" name="team">
-            </div>
+<h1>Vodafone PNG</h1>
+<h2>Refuelling Form</h2>
 
-            <div class="form-group">
-                <label>Date</label>
-                <input type="date" name="date" required>
-            </div>
-        </div>
+<form id="fuelForm">
 
-        <div class="row">
-            <div class="form-group">
-                <label>Site Name</label>
-                <input type="text" name="site_name">
-            </div>
+<!-- SESSION -->
+<input type="hidden" id="loginTime">
+<input type="hidden" id="logoutTime">
 
-            <div class="form-group">
-                <label>Site ID</label>
-                <input type="text" name="site_id">
-            </div>
-        </div>
+<div class="row">
+    <div class="form-group">
+        <label>Team on Site</label>
+        <input type="text">
+    </div>
 
-        <div class="row">
-            <div class="form-group">
-                <label>Province</label>
-                <input type="text" name="province">
-            </div>
+    <div class="form-group">
+        <label>Date</label>
+        <input type="date">
+    </div>
+</div>
 
-            <div class="form-group">
-                <label>Region</label>
-                <input type="text" name="region">
-            </div>
-        </div>
+<div class="row">
+    <div class="form-group">
+        <label>Site Name</label>
+        <input type="text">
+    </div>
 
-        <div class="form-group">
-            <label>Refuelling Ticket</label>
-            <input type="text" name="ticket">
-        </div>
+    <div class="form-group">
+        <label>Site ID</label>
+        <input type="text">
+    </div>
+</div>
 
-        <h2>Fuel Details</h2>
+<div class="row">
+    <div class="form-group">
+        <label>Province</label>
+        <input type="text">
+    </div>
 
-        <div class="form-group">
-            <label>Fuel Before (L)</label>
-            <input type="number" id="before" required>
-        </div>
+    <div class="form-group">
+        <label>Region</label>
+        <input type="text">
+    </div>
+</div>
 
-        <div class="form-group">
-            <label>Fuel Top-Up (L)</label>
-            <input type="number" id="added" required>
-        </div>
+<h2>Fuel Details</h2>
 
-        <div class="form-group">
-            <label>Fuel After (L)</label>
-            <input type="number" id="after" required>
-        </div>
+<div class="form-group">
+    <label>Fuel Before (L)</label>
+    <input type="number" id="before">
+</div>
 
-        <div class="result" id="calculation"></div>
+<div class="form-group">
+    <label>Fuel Top-Up (L)</label>
+    <input type="number" id="added">
+</div>
 
-        <div class="form-group">
-            <label>Upload Photos</label>
-            <input type="file" multiple>
-        </div>
+<div class="form-group">
+    <label>Fuel After (L)</label>
+    <input type="number" id="after">
+</div>
 
-        <h2>Driver Details</h2>
+<div class="result" id="calculation"></div>
 
-        <div class="form-group">
-            <label>Driver Name</label>
-            <input type="text" name="driver">
-        </div>
+<h2>Photo Evidence</h2>
 
-        <div class="form-group">
-            <label>Vehicle Reg #</label>
-            <input type="text" name="vehicle">
-        </div>
+<button type="button" class="small-btn" onclick="openCamera()">📸 Add Photo</button>
+<input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
 
-        <div class="form-group">
-            <label>RTO</label>
-            <input type="text" name="rto">
-        </div>
+<canvas id="canvas" class="camera-preview"></canvas>
 
-        <div class="form-group">
-            <label>Comments</label>
-            <textarea rows="4"></textarea>
-        </div>
+<p id="gps"></p>
 
-        <button type="submit">Send</button>
+<h2>Driver Details</h2>
 
-    </form>
+<input type="text" placeholder="Driver Name">
+<input type="text" placeholder="Vehicle Reg">
+<input type="text" placeholder="RTO">
+
+<textarea placeholder="Comments"></textarea>
+
+<button type="submit">Send</button>
+<button type="button" onclick="logout()">Logout</button>
+
+</form>
+
 </div>
 
 <script>
-const before = document.getElementById("before");
-const added = document.getElementById("added");
-const after = document.getElementById("after");
-const result = document.getElementById("calculation");
 
-function calculate() {
-    const b = parseFloat(before.value) || 0;
-    const a = parseFloat(added.value) || 0;
-    const af = parseFloat(after.value) || 0;
-
-    const expected = b + a;
-    const difference = af - expected;
-
-    result.innerHTML = `
-        Expected After: ${expected} L <br>
-        Difference: ${difference} L
-    `;
+/* =======================
+   LOGIN PROTECTION
+======================= */
+if (localStorage.getItem("loggedIn") !== "true") {
+    document.getElementById("app").style.display = "none";
+    document.getElementById("blocked").style.display = "block";
 }
 
-before.addEventListener("input", calculate);
-added.addEventListener("input", calculate);
-after.addEventListener("input", calculate);
+/* LOGIN TIME */
+document.getElementById("loginTime").value = new Date().toISOString();
 
+/* LOGOUT */
+function logout() {
+    localStorage.removeItem("loggedIn");
+    document.getElementById("logoutTime").value = new Date().toISOString();
+    window.location.href = "index.html";
+}
+
+/* CAMERA */
+function openCamera() {
+    document.getElementById("cameraInput").click();
+}
+
+/* IMAGE + WATERMARK + GPS */
+document.getElementById("cameraInput").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const img = new Image();
+
+    img.onload = function() {
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.drawImage(img, 0, 0);
+
+        const now = new Date().toLocaleString();
+
+        ctx.fillStyle = "rgba(255,0,0,0.7)";
+        ctx.font = "20px Arial";
+
+        ctx.fillText("Vodafone PNG", 20, 30);
+        ctx.fillText(now, 20, 60);
+
+        navigator.geolocation.getCurrentPosition(function(pos){
+            const gpsText = `Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`;
+            ctx.fillText(gpsText, 20, 90);
+            document.getElementById("gps").innerText = gpsText;
+        });
+
+    };
+
+    img.src = URL.createObjectURL(file);
+});
+
+/* CALCULATION */
+function calculate() {
+    const b = parseFloat(document.getElementById("before").value) || 0;
+    const a = parseFloat(document.getElementById("added").value) || 0;
+    const af = parseFloat(document.getElementById("after").value) || 0;
+
+    const expected = b + a;
+    const diff = af - expected;
+
+    document.getElementById("calculation").innerHTML =
+        `Expected: ${expected} L | Difference: ${diff} L`;
+}
+
+document.getElementById("before").addEventListener("input", calculate);
+document.getElementById("added").addEventListener("input", calculate);
+document.getElementById("after").addEventListener("input", calculate);
+
+/* SUBMIT */
 document.getElementById("fuelForm").addEventListener("submit", function(e){
     e.preventDefault();
-    alert("Form submitted! (Backend not connected yet)");
+    alert("Form submitted successfully (backend not connected yet)");
 });
+
 </script>
 
 </body>
