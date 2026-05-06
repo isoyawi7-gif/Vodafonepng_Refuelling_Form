@@ -8,62 +8,6 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.login-container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 320px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.logo {
-    width: 120px;
-    margin-bottom: 15px;
-}
-
-h2 {
-    margin-bottom: 20px;
-    color: #e60000;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    background: #e60000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #cc0000;
-}
-
-.error {
-    color: red;
-    margin-top: 10px;
-}
-<style>
-body {
-    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #e60000, #111);
     display: flex;
     justify-content: center;
@@ -130,6 +74,7 @@ button {
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s;
+    margin-top: 10px;
 }
 
 button:hover {
@@ -140,8 +85,45 @@ button:hover {
 .error {
     color: #ff8080;
     margin-top: 10px;
+    font-size: 14px;
 }
 </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- Replace with your Vodafone PNG logo -->
+    <img src="logo.png" class="logo" alt="Logo">
+
+    <h2>Vodafone PNG Login</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <div class="error" id="error"></div>
+
+</div>
+
+<script>
+function login() {
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+    const error = document.getElementById("error");
+
+    if (user === "Admin" && pass === "Admin") {
+        localStorage.setItem("loggedIn", "true");
+
+        // go to next page
+        window.location.href = "form.html";
+    } else {
+        error.innerText = "Invalid username or password";
+    }
+}
+</script>
 
 </body>
 </html>
