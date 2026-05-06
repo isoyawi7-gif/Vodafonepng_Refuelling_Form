@@ -34,7 +34,7 @@ h1 { text-align:center; color:#e60000; }
     min-width:140px;
 }
 
-input {
+input, select, textarea {
     width:100%;
     padding:6px;
     font-size:13px;
@@ -63,12 +63,6 @@ video, canvas { width:100%; display:none; }
     color:gray;
     margin-top:20px;
 }
-
-.alert {
-    color:red;
-    font-size:13px;
-    margin:5px 0;
-}
 </style>
 </head>
 
@@ -78,36 +72,45 @@ video, canvas { width:100%; display:none; }
 
 <h1>Vodafone PNG Refuelling</h1>
 
-<div id="msg" class="alert"></div>
-
 <form id="fuelForm">
 
 <h2>Site Info</h2>
 
 <div class="row">
 <div class="form-group">
-<input id="siteName" placeholder="Site Name">
+<label>Site Name</label>
+<input id="siteName">
 </div>
 
 <div class="form-group">
-<input id="siteId" placeholder="Site ID">
+<label>Site ID</label>
+<input id="siteId">
 </div>
 </div>
 
 <h2>Fuel Readings</h2>
 
 <div class="row">
-<input id="before" placeholder="Before (L)">
+<div class="form-group">
+<label>Before (L)</label>
+<input id="before">
+</div>
 <button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
 </div>
 
 <div class="row">
-<input id="topup" placeholder="TopUp (L)">
+<div class="form-group">
+<label>TopUp (L)</label>
+<input id="topup">
+</div>
 <button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
 </div>
 
 <div class="row">
-<input id="after" placeholder="After (L)">
+<div class="form-group">
+<label>After (L)</label>
+<input id="after">
+</div>
 <button type="button" onclick="openCamera('AFTER')">After Photo</button>
 </div>
 
@@ -116,9 +119,14 @@ video, canvas { width:100%; display:none; }
 <video id="video" autoplay playsinline></video>
 <canvas id="canvas"></canvas>
 
-<h3>Before</h3><img id="imgBefore">
-<h3>TopUp</h3><img id="imgTopup">
-<h3>After</h3><img id="imgAfter">
+<h3>Before Photo</h3>
+<img id="imgBefore">
+
+<h3>TopUp Photo</h3>
+<img id="imgTopup">
+
+<h3>After Photo</h3>
+<img id="imgAfter">
 
 <button type="submit">Send</button>
 
@@ -133,51 +141,30 @@ Powered by Iso Yawi | System Creator
 <script>
 
 let stream;
-let mode="";
+let mode = "";
 
-let beforeCaptured=false;
-let topupCaptured=false;
-let afterCaptured=false;
+let beforeCaptured = false;
+let topupCaptured = false;
 
-function showMsg(text){
-document.getElementById("msg").innerText = text;
-setTimeout(()=>msg.innerText="",3000);
-}
-
-/* VALIDATE BEFORE CAMERA */
-function openCamera(type){
+function openCamera(type) {
 
 if(!siteName.value || !siteId.value){
-showMsg("⚠ Please enter Site Name and Site ID first");
+alert("Please enter Site Name and Site ID first");
 return;
 }
 
+/* FORCE ORDER */
 if(type==="TOPUP" && !beforeCaptured){
-showMsg("⚠ Capture BEFORE photo first");
+alert("Capture BEFORE photo first");
 return;
 }
 
 if(type==="AFTER" && !topupCaptured){
-showMsg("⚠ Capture TOPUP photo first");
+alert("Capture TOPUP photo first");
 return;
 }
 
-if(type==="BEFORE" && !before.value){
-showMsg("⚠ Enter Before fuel reading first");
-return;
-}
-
-if(type==="TOPUP" && !topup.value){
-showMsg("⚠ Enter TopUp fuel reading first");
-return;
-}
-
-if(type==="AFTER" && !after.value){
-showMsg("⚠ Enter After fuel reading first");
-return;
-}
-
-mode=type;
+mode = type;
 
 navigator.mediaDevices.getUserMedia({
 video:{ facingMode:"environment" }
@@ -186,68 +173,64 @@ video:{ facingMode:"environment" }
 stream=s;
 video.srcObject=s;
 video.style.display="block";
-setTimeout(capture,2000);
+setTimeout(capture,2500);
 });
 }
 
 function capture(){
 
-const ctx=canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 
-canvas.width=video.videoWidth;
-canvas.height=video.videoHeight;
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
 
 ctx.drawImage(video,0,0);
 
-let label={
+let label = {
 BEFORE:"BEFORE REFUELLING",
 TOPUP:"REFUELLING IN PROGRESS",
 AFTER:"AFTER REFUELLING"
 }[mode];
 
-let fuel =
-mode==="BEFORE"?before.value:
-mode==="TOPUP"?topup.value:
+let fuelValue =
+mode==="BEFORE" ? before.value :
+mode==="TOPUP" ? topup.value :
 after.value;
+
+let now = new Date().toLocaleString();
 
 ctx.fillStyle="red";
 ctx.font="18px Arial";
 
 ctx.fillText("Vodafone PNG",20,30);
 ctx.fillText(label,20,60);
-ctx.fillText("Fuel: "+fuel+" L",20,90);
+ctx.fillText("Fuel: "+fuelValue+" L",20,90);
 ctx.fillText(siteName.value+" | "+siteId.value,20,120);
-ctx.fillText(new Date().toLocaleString(),20,150);
+ctx.fillText(now,20,150);
 
-let img=canvas.toDataURL("image/png");
+let img = canvas.toDataURL("image/png");
 
-if(mode==="BEFORE"){ imgBefore.src=img; beforeCaptured=true; }
-if(mode==="TOPUP"){ imgTopup.src=img; topupCaptured=true; }
-if(mode==="AFTER"){ imgAfter.src=img; afterCaptured=true; }
+if(mode==="BEFORE"){
+imgBefore.src = img;
+beforeCaptured = true;
+}
+
+if(mode==="TOPUP"){
+imgTopup.src = img;
+topupCaptured = true;
+}
+
+if(mode==="AFTER"){
+imgAfter.src = img;
+}
 
 stream.getTracks().forEach(t=>t.stop());
 video.style.display="none";
 }
 
-/* SEND VALIDATION */
-fuelForm.onsubmit=e=>{
+/* SEND */
+fuelForm.onsubmit = e => {
 e.preventDefault();
-
-if(!siteName.value || !siteId.value){
-showMsg("⚠ Please fill Site details");
-return;
-}
-
-if(!beforeCaptured || !topupCaptured || !afterCaptured){
-showMsg("⚠ Please capture all photos first");
-return;
-}
-
-if(!before.value || !topup.value || !after.value){
-showMsg("⚠ Please fill all fuel readings first");
-return;
-}
-
 alert("Sent successfully ✔");
 };
 
