@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vodafone PNG - Refuelling Form</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #e60000;
+}
+
+h2 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row .form-group {
+    flex: 1;
+}
+
+button {
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #cc0000;
+}
+
+.result {
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Vodafone PNG</h1>
+    <h2>Refuelling Form</h2>
+
+    <form id="fuelForm">
+
+        <div class="row">
+            <div class="form-group">
+                <label>Team on Site</label>
+                <input type="text" name="team">
+            </div>
+
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label>Site Name</label>
+                <input type="text" name="site_name">
+            </div>
+
+            <div class="form-group">
+                <label>Site ID</label>
+                <input type="text" name="site_id">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label>Province</label>
+                <input type="text" name="province">
+            </div>
+
+            <div class="form-group">
+                <label>Region</label>
+                <input type="text" name="region">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Refuelling Ticket</label>
+            <input type="text" name="ticket">
+        </div>
+
+        <h2>Fuel Details</h2>
+
+        <div class="form-group">
+            <label>Fuel Before (L)</label>
+            <input type="number" id="before" required>
+        </div>
+
+        <div class="form-group">
+            <label>Fuel Top-Up (L)</label>
+            <input type="number" id="added" required>
+        </div>
+
+        <div class="form-group">
+            <label>Fuel After (L)</label>
+            <input type="number" id="after" required>
+        </div>
+
+        <div class="result" id="calculation"></div>
+
+        <div class="form-group">
+            <label>Upload Photos</label>
+            <input type="file" multiple>
+        </div>
+
+        <h2>Driver Details</h2>
+
+        <div class="form-group">
+            <label>Driver Name</label>
+            <input type="text" name="driver">
+        </div>
+
+        <div class="form-group">
+            <label>Vehicle Reg #</label>
+            <input type="text" name="vehicle">
+        </div>
+
+        <div class="form-group">
+            <label>RTO</label>
+            <input type="text" name="rto">
+        </div>
+
+        <div class="form-group">
+            <label>Comments</label>
+            <textarea rows="4"></textarea>
+        </div>
+
+        <button type="submit">Send</button>
+
+    </form>
+</div>
+
+<script>
+const before = document.getElementById("before");
+const added = document.getElementById("added");
+const after = document.getElementById("after");
+const result = document.getElementById("calculation");
+
+function calculate() {
+    const b = parseFloat(before.value) || 0;
+    const a = parseFloat(added.value) || 0;
+    const af = parseFloat(after.value) || 0;
+
+    const expected = b + a;
+    const difference = af - expected;
+
+    result.innerHTML = `
+        Expected After: ${expected} L <br>
+        Difference: ${difference} L
+    `;
+}
+
+before.addEventListener("input", calculate);
+added.addEventListener("input", calculate);
+after.addEventListener("input", calculate);
+
+document.getElementById("fuelForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Form submitted! (Backend not connected yet)");
+});
+</script>
+
+</body>
+</html>
