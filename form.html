@@ -248,10 +248,21 @@ function openCamera(type) {
     });
 }
 
-function capturePhoto() {
+);
+    ctx.fillText(label, 20, 60);
+    ctx.fillText(now, 20, 90);
+
+    navigator.geolocation.getCurrentPosition(function(pos){
+        const gpsText =function capturePhoto() {
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
+
+    // SAFETY CHECK (fixes blank AFTER photo bug)
+    if (!video.videoWidth || !video.videoHeight) {
+        setTimeout(capturePhoto, 500);
+        return;
+    }
 
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
@@ -265,7 +276,7 @@ function capturePhoto() {
     if (mode === "TOPUP") label = "REFUELLING IN PROGRESS";
     if (mode === "AFTER") label = "AFTER REFUELLING";
 
-    ctx.fillStyle = "rgba(255,0,0,0.8)";
+    ctx.fillStyle = "rgba(255,0,0,0.85)";
     ctx.font = "20px Arial";
 
     ctx.fillText("Vodafone PNG", 20, 30);
@@ -280,14 +291,27 @@ function capturePhoto() {
         document.getElementById("gps").innerText = gpsText;
     });
 
+    // IMPORTANT: convert FIRST before stopping camera
     const imgData = canvas.toDataURL("image/png");
 
-    if (mode === "BEFORE") document.getElementById("beforeImg").src = imgData;
-    if (mode === "TOPUP") document.getElementById("topupImg").src = imgData;
-    if (mode === "AFTER") document.getElementById("afterImg").src = imgData;
+    // SAVE + DISPLAY (FIXED RELIABILITY)
+    if (mode === "BEFORE") {
+        document.getElementById("beforeImg").src = imgData;
+    }
 
-    stream.getTracks().forEach(track => track.stop());
-    video.style.display = "none";
+    if (mode === "TOPUP") {
+        document.getElementById("topupImg").src = imgData;
+    }
+
+    if (mode === "AFTER") {
+        document.getElementById("afterImg").src = imgData;
+    }
+
+    // stop camera AFTER capture is confirmed
+    setTimeout(() => {
+        stream.getTracks().forEach(track => track.stop());
+        video.style.display = "none";
+    }, 200);
 }
 
 /* CALCULATION */
