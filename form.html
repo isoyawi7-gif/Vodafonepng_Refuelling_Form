@@ -39,18 +39,17 @@ h2 {
     margin-top: 20px;
 }
 
-.form-group {
-    margin-bottom: 15px;
+/* SMALLER INPUTS */
+input, textarea {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 label {
     font-weight: bold;
-}
-
-input, textarea, button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    font-size: 14px;
 }
 
 .row {
@@ -63,12 +62,17 @@ input, textarea, button {
     flex: 1;
 }
 
+.form-group {
+    margin-bottom: 12px;
+}
+
 button {
     background: #e60000;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    padding: 10px;
 }
 
 button:hover {
@@ -77,13 +81,8 @@ button:hover {
 
 .small-btn {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-}
-
-.camera-preview {
-    width: 100%;
-    margin-top: 10px;
+    padding: 8px;
+    font-size: 13px;
 }
 
 img {
@@ -91,6 +90,15 @@ img {
     margin-top: 10px;
     border-radius: 8px;
     border: 2px solid #ddd;
+}
+
+video {
+    width: 100%;
+    display: none;
+}
+
+canvas {
+    display: none;
 }
 </style>
 </head>
@@ -113,10 +121,9 @@ img {
 
 <div class="row">
     <div class="form-group">
-        <label>Team on Site</label>
+        <label>Team</label>
         <input type="text">
     </div>
-
     <div class="form-group">
         <label>Date</label>
         <input type="date">
@@ -128,7 +135,6 @@ img {
         <label>Site Name</label>
         <input type="text">
     </div>
-
     <div class="form-group">
         <label>Site ID</label>
         <input type="text">
@@ -142,9 +148,8 @@ img {
         <label>Fuel Before (L)</label>
         <input type="number" id="before">
     </div>
-
     <div class="form-group">
-        <label>📸 Before Photo</label>
+        <label>📸 Before</label>
         <button type="button" class="small-btn" onclick="openCamera('BEFORE')">Capture</button>
     </div>
 </div>
@@ -154,9 +159,8 @@ img {
         <label>Fuel Top-Up (L)</label>
         <input type="number" id="added">
     </div>
-
     <div class="form-group">
-        <label>📸 Top-Up Photo</label>
+        <label>📸 Top-Up</label>
         <button type="button" class="small-btn" onclick="openCamera('TOPUP')">Capture</button>
     </div>
 </div>
@@ -166,46 +170,40 @@ img {
         <label>Fuel After (L)</label>
         <input type="number" id="after">
     </div>
-
     <div class="form-group">
-        <label>📸 After Photo</label>
+        <label>📸 After</label>
         <button type="button" class="small-btn" onclick="openCamera('AFTER')">Capture</button>
     </div>
 </div>
 
-<div class="result" id="calculation"></div>
+<div id="calculation"></div>
 
 <h2>Photos</h2>
 
-<video id="video" autoplay playsinline style="width:100%; display:none;"></video>
-<canvas id="canvas" style="display:none;"></canvas>
+<video id="video" autoplay playsinline></video>
+<canvas id="canvas"></canvas>
 
-<div>
-    <h3>Before Photo</h3>
-    <img id="beforeImg">
+<h3>Before</h3>
+<img id="beforeImg">
 
-    <h3>TopUp Photo</h3>
-    <img id="topupImg">
+<h3>TopUp</h3>
+<img id="topupImg">
 
-    <h3>After Photo</h3>
-    <img id="afterImg">
-</div>
+<h3>After</h3>
+<img id="afterImg">
 
 <p id="gps"></p>
 
-<h2>Driver Details</h2>
-
+<h2>Driver</h2>
 <input type="text" placeholder="Driver Name">
 <input type="text" placeholder="Vehicle Reg">
 <input type="text" placeholder="RTO">
-
 <textarea placeholder="Comments"></textarea>
 
 <button type="submit">Send</button>
 <button type="button" onclick="logout()">Logout</button>
 
 </form>
-
 </div>
 
 <script>
@@ -222,7 +220,6 @@ document.getElementById("loginTime").value = new Date().toISOString();
 /* LOGOUT */
 function logout() {
     localStorage.removeItem("loggedIn");
-    document.getElementById("logoutTime").value = new Date().toISOString();
     window.location.href = "index.html";
 }
 
@@ -234,32 +231,23 @@ function openCamera(type) {
     mode = type;
 
     navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function(s) {
+    .then(s => {
         stream = s;
-
         const video = document.getElementById("video");
         video.srcObject = s;
         video.style.display = "block";
 
         setTimeout(capturePhoto, 2500);
     })
-    .catch(function() {
-        alert("Camera not available");
-    });
+    .catch(() => alert("Camera not available"));
 }
 
-);
-    ctx.fillText(label, 20, 60);
-    ctx.fillText(now, 20, 90);
-
-    navigator.geolocation.getCurrentPosition(function(pos){
-        const gpsText =function capturePhoto() {
+function capturePhoto() {
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
-    // SAFETY CHECK (fixes blank AFTER photo bug)
-    if (!video.videoWidth || !video.videoHeight) {
+    if (!video.videoWidth) {
         setTimeout(capturePhoto, 500);
         return;
     }
@@ -276,66 +264,45 @@ function openCamera(type) {
     if (mode === "TOPUP") label = "REFUELLING IN PROGRESS";
     if (mode === "AFTER") label = "AFTER REFUELLING";
 
-    ctx.fillStyle = "rgba(255,0,0,0.85)";
-    ctx.font = "20px Arial";
+    ctx.fillStyle = "rgba(255,0,0,0.8)";
+    ctx.font = "18px Arial";
 
     ctx.fillText("Vodafone PNG", 20, 30);
     ctx.fillText(label, 20, 60);
     ctx.fillText(now, 20, 90);
 
-    navigator.geolocation.getCurrentPosition(function(pos){
-        const gpsText =
-            `Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`;
-
-        ctx.fillText(gpsText, 20, 120);
-        document.getElementById("gps").innerText = gpsText;
+    navigator.geolocation.getCurrentPosition(pos => {
+        const gps = `Lat:${pos.coords.latitude}, Lon:${pos.coords.longitude}`;
+        ctx.fillText(gps, 20, 120);
+        document.getElementById("gps").innerText = gps;
     });
 
-    // IMPORTANT: convert FIRST before stopping camera
-    const imgData = canvas.toDataURL("image/png");
+    const img = canvas.toDataURL("image/png");
 
-    // SAVE + DISPLAY (FIXED RELIABILITY)
-    if (mode === "BEFORE") {
-        document.getElementById("beforeImg").src = imgData;
-    }
+    if (mode === "BEFORE") document.getElementById("beforeImg").src = img;
+    if (mode === "TOPUP") document.getElementById("topupImg").src = img;
+    if (mode === "AFTER") document.getElementById("afterImg").src = img;
 
-    if (mode === "TOPUP") {
-        document.getElementById("topupImg").src = imgData;
-    }
-
-    if (mode === "AFTER") {
-        document.getElementById("afterImg").src = imgData;
-    }
-
-    // stop camera AFTER capture is confirmed
-    setTimeout(() => {
-        stream.getTracks().forEach(track => track.stop());
-        video.style.display = "none";
-    }, 200);
+    stream.getTracks().forEach(t => t.stop());
+    video.style.display = "none";
 }
 
 /* CALCULATION */
-function calculate() {
-    const b = parseFloat(document.getElementById("before").value) || 0;
-    const a = parseFloat(document.getElementById("added").value) || 0;
-    const af = parseFloat(document.getElementById("after").value) || 0;
+function calc() {
+    let b = +before.value || 0;
+    let a = +added.value || 0;
+    let af = +after.value || 0;
 
-    const expected = b + a;
-    const diff = af - expected;
-
-    document.getElementById("calculation").innerHTML =
-        `Expected: ${expected} L | Difference: ${diff} L`;
+    calculation.innerHTML = `Expected: ${b+a} L | Difference: ${af-(b+a)} L`;
 }
 
-document.getElementById("before").addEventListener("input", calculate);
-document.getElementById("added").addEventListener("input", calculate);
-document.getElementById("after").addEventListener("input", calculate);
+before.oninput = added.oninput = after.oninput = calc;
 
 /* SUBMIT */
-document.getElementById("fuelForm").addEventListener("submit", function(e){
+fuelForm.onsubmit = e => {
     e.preventDefault();
-    alert("Form submitted successfully");
-});
+    alert("Submitted");
+};
 
 </script>
 
