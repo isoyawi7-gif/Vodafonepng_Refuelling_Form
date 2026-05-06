@@ -3,191 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vodafone PNG - Refuelling Form</title>
+<title>Vodafone PNG Refuelling System</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
     background: #f4f6f8;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
 }
 
 #blocked {
     display: none;
     text-align: center;
     margin-top: 100px;
-    font-size: 20px;
+    font-size: 18px;
     color: red;
 }
 
 .container {
-    max-width: 850px;
+    max-width: 900px;
     margin: auto;
-    background: #fff;
-    padding: 20px;
+    background: white;
+    padding: 15px;
     border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-h1 { text-align:center; color:#e60000; }
-h2 { margin-top:15px; }
+h1 {
+    text-align: center;
+    color: #e60000;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 18px;
+}
 
 .row {
-    display:flex;
-    gap:10px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .form-group {
-    flex:1;
-    margin-bottom:10px;
+    flex: 1;
+    min-width: 140px;
 }
 
 label {
-    font-size:13px;
-    font-weight:bold;
+    font-size: 13px;
+    font-weight: bold;
 }
 
-input {
-    width:100%;
-    padding:6px;
-    font-size:13px;
+input, select, textarea {
+    width: 100%;
+    padding: 6px;
+    font-size: 13px;
+    margin-top: 4px;
 }
 
 button {
-    background:#e60000;
-    color:white;
-    border:none;
-    padding:8px;
-    border-radius:5px;
-    cursor:pointer;
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 13px;
 }
 
 .small-btn {
-    width:100%;
-    font-size:12px;
+    width: 100%;
 }
 
 img {
-    width:100%;
-    margin-top:10px;
-    border:2px solid #ddd;
-    border-radius:8px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
 }
 
-video, canvas {
-    width:100%;
-    display:none;
+video {
+    width: 100%;
+    display: none;
 }
 
-footer {
-    text-align:center;
-    margin-top:20px;
-    font-size:13px;
-    color:#555;
+.footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+    color: gray;
 }
 </style>
 </head>
 
 <body>
 
-<div id="blocked">❌ Access Denied. Please login first.</div>
+<div id="blocked">❌ Access Denied. Login required.</div>
 
 <div class="container" id="app">
 
-<h1>Vodafone PNG</h1>
-<h2>Refuelling Form</h2>
+<h1>Vodafone PNG Refuelling</h1>
 
 <form id="fuelForm">
 
+<!-- SESSION -->
 <input type="hidden" id="loginTime">
+<input type="hidden" id="logoutTime">
 
-<!-- PERSONNEL INFO -->
+<h2>Site Info</h2>
+
 <div class="row">
-    <div class="form-group">
-        <label>Field Engineer</label>
-        <input type="text" id="engineer">
-    </div>
-    <div class="form-group">
-        <label>Additional Team</label>
-        <input type="text" id="team">
-    </div>
+<div class="form-group">
+<label>Field Engineer</label>
+<input type="text" id="engineer">
+</div>
+
+<div class="form-group">
+<label>Additional Team</label>
+<input type="text" id="team">
+</div>
 </div>
 
 <div class="row">
-    <div class="form-group">
-        <label>Date</label>
-        <input type="date" id="date">
-    </div>
-    <div class="form-group">
-        <label>Time</label>
-        <input type="text" id="time" readonly>
-    </div>
+<div class="form-group">
+<label>Date</label>
+<input type="date" id="date">
 </div>
 
-<!-- SITE -->
+<div class="form-group">
+<label>Time</label>
+<input type="time" id="time">
+</div>
+</div>
+
 <div class="row">
-    <div class="form-group">
-        <label>Site Name</label>
-        <input type="text" id="siteName">
-    </div>
-    <div class="form-group">
-        <label>Site ID</label>
-        <input type="text" id="siteID">
-    </div>
+<div class="form-group">
+<label>Site Name</label>
+<input type="text" id="siteName">
+</div>
+
+<div class="form-group">
+<label>Site ID</label>
+<input type="text" id="siteId">
+</div>
 </div>
 
 <h2>Fuel Details</h2>
 
 <div class="row">
-    <div class="form-group">
-        <label>Fuel Before (L)</label>
-        <input type="number" id="before">
-    </div>
-    <div class="form-group">
-        <button type="button" class="small-btn" onclick="openCamera('BEFORE')">📸 Before</button>
-    </div>
+<div class="form-group">
+<label>Fuel Before (L)</label>
+<input type="number" id="before">
+</div>
+<div class="form-group">
+<button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
+</div>
 </div>
 
 <div class="row">
-    <div class="form-group">
-        <label>Fuel Top-Up (L)</label>
-        <input type="number" id="added">
-    </div>
-    <div class="form-group">
-        <button type="button" class="small-btn" onclick="openCamera('TOPUP')">📸 Top-Up</button>
-    </div>
+<div class="form-group">
+<label>Fuel TopUp (L)</label>
+<input type="number" id="added">
+</div>
+<div class="form-group">
+<button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
+</div>
 </div>
 
 <div class="row">
-    <div class="form-group">
-        <label>Fuel After (L)</label>
-        <input type="number" id="after">
-    </div>
-    <div class="form-group">
-        <button type="button" class="small-btn" onclick="openCamera('AFTER')">📸 After</button>
-    </div>
+<div class="form-group">
+<label>Fuel After (L)</label>
+<input type="number" id="after">
+</div>
+<div class="form-group">
+<button type="button" onclick="openCamera('AFTER')">After Photo</button>
+</div>
 </div>
 
-<h2>Photos</h2>
+<div id="calc"></div>
+
+<h2>Genset & Power</h2>
+
+<select id="genset">
+<option>FG Wilson 15KVa</option>
+<option>Polar Power</option>
+<option>Sengen 15Kva</option>
+</select>
+
+<div class="row">
+<div class="form-group">
+<label>Tower Height (m)</label>
+<input type="number" id="tower">
+</div>
+</div>
+
+<div class="row">
+<div class="form-group">
+<label>PPL Connected?</label>
+<select id="ppl" onchange="togglePPL()">
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+</select>
+</div>
+
+<div class="form-group" id="pplFields" style="display:none;">
+<input placeholder="PPL Meter Number" id="meter">
+<input placeholder="PPL Reading" id="reading">
+</div>
+</div>
+
+<h2>Camera</h2>
 
 <video id="video" autoplay playsinline></video>
 <canvas id="canvas"></canvas>
 
-<h3>Before</h3>
-<img id="beforeImg">
+<h3>Before</h3><img id="imgBefore">
+<button type="button" onclick="resetPhoto('BEFORE')">Reset</button>
 
-<h3>Top-Up</h3>
-<img id="topupImg">
+<h3>TopUp</h3><img id="imgTopup">
+<button type="button" onclick="resetPhoto('TOPUP')">Reset</button>
 
-<h3>After</h3>
-<img id="afterImg">
-
-<p id="gps"></p>
+<h3>After</h3><img id="imgAfter">
+<button type="button" onclick="resetPhoto('AFTER')">Reset</button>
 
 <h2>Driver</h2>
-<input type="text" placeholder="Driver Name">
-<input type="text" placeholder="Vehicle Reg">
-<input type="text" placeholder="RTO">
+
+<input placeholder="Driver Name">
+<input placeholder="Vehicle Reg">
 <textarea placeholder="Comments"></textarea>
 
 <button type="submit">Send</button>
@@ -195,27 +238,33 @@ footer {
 
 </form>
 
-<footer>
-Powered by <b>Iso Yawi</b> | System Creator
-</footer>
+<div class="footer">
+Powered by Iso Yawi | System Creator
+</div>
 
 </div>
 
 <script>
 
 /* LOGIN CHECK */
-if (localStorage.getItem("loggedIn") !== "true") {
-    document.getElementById("app").style.display = "none";
-    document.getElementById("blocked").style.display = "block";
+if(localStorage.getItem("loggedIn")!=="true"){
+document.getElementById("app").style.display="none";
+document.getElementById("blocked").style.display="block";
 }
 
 /* TIME */
-document.getElementById("loginTime").value = new Date().toISOString();
-document.getElementById("time").value = new Date().toLocaleTimeString();
+loginTime.value=new Date().toISOString();
 
 function logout(){
-    localStorage.removeItem("loggedIn");
-    window.location.href="index.html";
+localStorage.removeItem("loggedIn");
+logoutTime.value=new Date().toISOString();
+window.location.href="index.html";
+}
+
+/* PPL */
+function togglePPL(){
+document.getElementById("pplFields").style.display =
+ppl.value==="Yes"?"block":"none";
 }
 
 /* CAMERA */
@@ -224,88 +273,76 @@ let mode="";
 
 function openCamera(type){
 
-    const siteName = document.getElementById("siteName").value;
-    const siteID = document.getElementById("siteID").value;
+if(!siteName.value || !siteId.value){
+alert("Please enter Site Name and Site ID first");
+return;
+}
 
-    if(!siteName || !siteID){
-        alert("Please enter Site Name and Site ID first!");
-        return;
-    }
+mode=type;
 
-    mode = type;
-
-    navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: "environment" } }
-    })
-    .then(s=>{
-        stream = s;
-        const video = document.getElementById("video");
-        video.srcObject = s;
-        video.style.display="block";
-        setTimeout(capture,2500);
-    })
-    .catch(()=>alert("Camera error"));
+navigator.mediaDevices.getUserMedia({
+video:{facingMode:"environment"}
+})
+.then(s=>{
+stream=s;
+video.srcObject=s;
+video.style.display="block";
+setTimeout(capture,2500);
+});
 }
 
 function capture(){
 
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
+const ctx=canvas.getContext("2d");
 
-    if(!video.videoWidth){
-        setTimeout(capture,500);
-        return;
-    }
+canvas.width=video.videoWidth;
+canvas.height=video.videoHeight;
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+ctx.drawImage(video,0,0);
 
-    ctx.drawImage(video,0,0);
+let label={
+BEFORE:"BEFORE REFUELLING",
+TOPUP:"REFUELLING IN PROGRESS",
+AFTER:"AFTER REFUELLING"
+}[mode];
 
-    const now = new Date().toLocaleString();
+let now=new Date().toLocaleString();
 
-    const siteName = document.getElementById("siteName").value;
-    const siteID = document.getElementById("siteID").value;
-    const engineer = document.getElementById("engineer").value;
-    const team = document.getElementById("team").value;
+ctx.fillStyle="red";
+ctx.font="18px Arial";
 
-    let label = "";
-    if(mode==="BEFORE") label="BEFORE REFUELLING";
-    if(mode==="TOPUP") label="REFUELLING IN PROGRESS";
-    if(mode==="AFTER") label="AFTER REFUELLING";
+ctx.fillText("Vodafone PNG",20,30);
+ctx.fillText(label,20,60);
+ctx.fillText(now,20,90);
+ctx.fillText(siteName.value+" | "+siteId.value,20,120);
 
-    ctx.fillStyle="rgba(255,0,0,0.85)";
-    ctx.font="16px Arial";
+let img=canvas.toDataURL("image/png");
 
-    ctx.fillText("Vodafone PNG",20,30);
-    ctx.fillText(label,20,55);
-    ctx.fillText(`Site:${siteName} (${siteID})`,20,80);
-    ctx.fillText(`Eng:${engineer} Team:${team}`,20,105);
-    ctx.fillText(now,20,130);
+if(mode==="BEFORE")imgBefore.src=img;
+if(mode==="TOPUP")imgTopup.src=img;
+if(mode==="AFTER")imgAfter.src=img;
 
-    navigator.geolocation.getCurrentPosition(pos=>{
-        const gps=`Lat:${pos.coords.latitude}, Lon:${pos.coords.longitude}`;
-        ctx.fillText(gps,20,155);
-        document.getElementById("gps").innerText=gps;
-    });
+stream.getTracks().forEach(t=>t.stop());
+video.style.display="none";
+}
 
-    const img=canvas.toDataURL("image/png");
-
-    if(mode==="BEFORE") document.getElementById("beforeImg").src=img;
-    if(mode==="TOPUP") document.getElementById("topupImg").src=img;
-    if(mode==="AFTER") document.getElementById("afterImg").src=img;
-
-    stream.getTracks().forEach(t=>t.stop());
-    video.style.display="none";
+/* RESET */
+function resetPhoto(type){
+if(type==="BEFORE")imgBefore.src="";
+if(type==="TOPUP")imgTopup.src="";
+if(type==="AFTER")imgAfter.src="";
 }
 
 /* CALC */
-before.oninput=added.oninput=after.oninput=()=>{
-    const b=+before.value||0;
-    const a=+added.value||0;
-    const af=+after.value||0;
-    calculation.innerHTML=`Expected:${b+a} L | Diff:${af-(b+a)} L`;
+function calc(){
+calc.innerHTML="Expected: "+(+before.value+ +added.value)+" L";
+}
+before.oninput=added.oninput=after.oninput=calc;
+
+/* SUBMIT */
+fuelForm.onsubmit=e=>{
+e.preventDefault();
+alert("Submitted Successfully");
 };
 
 </script>
