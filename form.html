@@ -6,108 +6,27 @@
 <title>Vodafone PNG Refuelling System</title>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    margin: 0;
-    padding: 10px;
-}
-
-#blocked {
-    display: none;
-    text-align: center;
-    margin-top: 100px;
-    font-size: 18px;
-    color: red;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #e60000;
-}
-
-h2 {
-    margin-top: 20px;
-    font-size: 18px;
-}
-
-.row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.form-group {
-    flex: 1;
-    min-width: 140px;
-}
-
-label {
-    font-size: 13px;
-    font-weight: bold;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 6px;
-    font-size: 13px;
-    margin-top: 4px;
-}
-
-button {
-    background: #e60000;
-    color: white;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 13px;
-}
-
-.small-btn {
-    width: 100%;
-}
-
-img {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-
-video {
-    width: 100%;
-    display: none;
-}
-
-.footer {
-    text-align: center;
-    font-size: 12px;
-    margin-top: 20px;
-    color: gray;
-}
+body {font-family:Arial;background:#f4f6f8;margin:0;padding:10px;}
+.container {max-width:900px;margin:auto;background:white;padding:15px;border-radius:10px;}
+h1{text-align:center;color:#e60000;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+.form-group{flex:1;min-width:140px;}
+input,select,textarea{width:100%;padding:6px;font-size:13px;margin-top:4px;}
+button{background:#e60000;color:white;border:none;padding:8px;border-radius:5px;cursor:pointer;}
+img{width:100%;margin-top:10px;border-radius:8px;}
+video,canvas{width:100%;display:none;}
+.footer{text-align:center;font-size:12px;margin-top:20px;color:gray;}
 </style>
 </head>
 
 <body>
 
-<div id="blocked">❌ Access Denied. Login required.</div>
-
-<div class="container" id="app">
+<div class="container">
 
 <h1>Vodafone PNG Refuelling</h1>
 
 <form id="fuelForm">
 
-<!-- SESSION -->
 <input type="hidden" id="loginTime">
 <input type="hidden" id="logoutTime">
 
@@ -116,12 +35,11 @@ video {
 <div class="row">
 <div class="form-group">
 <label>Field Engineer</label>
-<input type="text" id="engineer">
+<input id="engineer">
 </div>
-
 <div class="form-group">
 <label>Additional Team</label>
-<input type="text" id="team">
+<input id="team">
 </div>
 </div>
 
@@ -130,7 +48,6 @@ video {
 <label>Date</label>
 <input type="date" id="date">
 </div>
-
 <div class="form-group">
 <label>Time</label>
 <input type="time" id="time">
@@ -140,114 +57,70 @@ video {
 <div class="row">
 <div class="form-group">
 <label>Site Name</label>
-<input type="text" id="siteName">
+<input id="siteName">
 </div>
-
 <div class="form-group">
 <label>Site ID</label>
-<input type="text" id="siteId">
+<input id="siteId">
 </div>
 </div>
 
 <div class="row">
 <div class="form-group">
 <label>Region</label>
-<input type="text" id="region">
-</div>
+<select id="region" onchange="loadProvinces()">
+<option value="">Select Region</option>
+<option>Momase</option>
+<option>Highlands</option>
+<option>Southern</option>
+<option>Islands</option>
+</select>
 </div>
 
 <div class="form-group">
 <label>Province</label>
-<input type="text" id="province">
-</div>
-</div>
-    
-<div class="row">
-<div class="form-group">
-<label>Tower Height (m)</label>
-<select id="tower">
-<option>23 Meter Monopole</option>
-<option>30M RDS</option>
-<option>45 M RDS</option>
-<option>45 M Grilliage</option>
-<option>45 M SST</option>
-<option>60 M RDS</option>
-<option>60 M Grilliage</option>
-<option>60 M SST</option>
-<option>80 M Grilliage</option>
-<option>80 M SST </option>
-<option>100 M SST</option>
-<option>110 M SST</option>
+<select id="province"></select>
 </div>
 </div>
 
-<br><br><br>
+<div class="row">
+<div class="form-group">
+<label>Tower Height</label>
+<select id="tower">
+<option>23M Monopole</option>
+<option>30M RDS</option>
+<option>45M RDS</option>
+<option>60M RDS</option>
+<option>80M SST</option>
+<option>100M SST</option>
+</select>
+</div>
+</div>
 
 <h2>Fuel Details</h2>
 
 <div class="row">
 <div class="form-group">
-<label>Fuel Before (L)</label>
-<input type="number" id="before">
+<label>Before (L)</label>
+<input id="before" type="number">
 </div>
-<div class="form-group">
 <button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
 </div>
-</div>
 
 <div class="row">
 <div class="form-group">
-<label>Fuel TopUp (L)</label>
-<input type="number" id="added">
+<label>TopUp (L)</label>
+<input id="topup" type="number">
 </div>
-<div class="form-group">
 <button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
 </div>
-</div>
 
 <div class="row">
 <div class="form-group">
-<label>Fuel After (L)</label>
-<input type="number" id="after">
+<label>After (L)</label>
+<input id="after" type="number">
 </div>
-<div class="form-group">
 <button type="button" onclick="openCamera('AFTER')">After Photo</button>
-</div>
-</div>
-
-<div id="calc"></div>
-
-<h2>Genset & Power</h2>
-
-<div class="row">
-<div class="form-group">
-<label>Genset Type</label>
-<select id="genset">
-<option>Yanhan 8KVA </option>
-<option>Yanhan 17Kva</option>
-<option>Yanhan 24Kva</option>
-<option>CCTC 11KVa</option>
-<option>CCTC 17Kva</option>
-<option>CCTC 24Kva</option>
-<option>FG Wilson 15KVa</option>
-<option>Polar Power</option>
-<option>Sengen 15Kva</option>
-</select>
-
-
-<div class="row">
-<div class="form-group">
-<label>PPL Connected?</label>
-<select id="ppl" onchange="togglePPL()">
-<option value="No">No</option>
-<option value="Yes">Yes</option>
-</select>
-</div>
-
-<div class="form-group" id="pplFields" style="display:none;">
-<input placeholder="PPL Meter Number" id="meter">
-<input placeholder="PPL Reading" id="reading">
-</div>
 </div>
 
 <h2>Camera</h2>
@@ -256,13 +129,26 @@ video {
 <canvas id="canvas"></canvas>
 
 <h3>Before</h3><img id="imgBefore">
-<button type="button" onclick="resetPhoto('BEFORE')">Reset</button>
-
 <h3>TopUp</h3><img id="imgTopup">
-<button type="button" onclick="resetPhoto('TOPUP')">Reset</button>
-
 <h3>After</h3><img id="imgAfter">
-<button type="button" onclick="resetPhoto('AFTER')">Reset</button>
+
+<h2>Power</h2>
+
+<select id="genset">
+<option>FG Wilson 15KVa</option>
+<option>Polar Power</option>
+<option>Sengen 15Kva</option>
+</select>
+
+<select id="ppl" onchange="togglePPL()">
+<option>No PPL</option>
+<option>Yes</option>
+</select>
+
+<div id="pplFields" style="display:none;">
+<input placeholder="Meter Number" id="meter">
+<input placeholder="Reading" id="reading">
+</div>
 
 <h2>Driver</h2>
 
@@ -271,7 +157,6 @@ video {
 <textarea placeholder="Comments"></textarea>
 
 <button type="submit">Send</button>
-<button type="button" onclick="logout()">Logout</button>
 
 </form>
 
@@ -283,38 +168,62 @@ Powered by Iso Yawi | System Creator
 
 <script>
 
-/* LOGIN CHECK */
-if(localStorage.getItem("loggedIn")!=="true"){
-document.getElementById("app").style.display="none";
-document.getElementById("blocked").style.display="block";
-}
-
-/* TIME */
+/* LOGIN TIME */
 loginTime.value=new Date().toISOString();
 
-function logout(){
-localStorage.removeItem("loggedIn");
-logoutTime.value=new Date().toISOString();
-window.location.href="index.html";
+/* PROVINCES */
+function loadProvinces(){
+let region=region.value;
+let list=[];
+
+if(region==="Momase"){
+list=["Morobe","Madang","Sepik","Eastern Highlands"];
 }
 
-/* PPL */
-function togglePPL(){
-document.getElementById("pplFields").style.display =
-ppl.value==="Yes"?"block":"none";
+if(region==="Highlands"){
+list=["Simbu","Western Highlands","Enga","Jiwaka"];
+}
+
+if(region==="Southern"){
+list=["NCD","Central","Gulf","Oro"];
+}
+
+if(region==="Islands"){
+list=["ENB","WNB","Bougainville","Manus"];
+}
+
+province.innerHTML="";
+list.forEach(p=>{
+let opt=document.createElement("option");
+opt.text=p;
+province.add(opt);
+});
 }
 
 /* CAMERA */
-let stream;
-let mode="";
+let stream,mode;
 
 function openCamera(type){
 
-if(!siteName.value || !siteId.value ||!engineer.value ){
-alert("Please enter Site Name and Site ID first");
+if(!siteName.value || !siteId.value || !engineer.value){
+alert("Fill Site + Engineer first");
 return;
 }
 
+if(type==="BEFORE" && !before.value){
+alert("Enter BEFORE fuel first");
+return;
+}
+
+if(type==="TOPUP" && !topup.value){
+alert("Enter TOPUP fuel first");
+return;
+}
+
+if(type==="AFTER" && !after.value){
+alert("Enter AFTER fuel first");
+return;
+}
 
 mode=type;
 
@@ -325,7 +234,7 @@ video:{facingMode:"environment"}
 stream=s;
 video.srcObject=s;
 video.style.display="block";
-setTimeout(capture,2500);
+setTimeout(capture,2000);
 });
 }
 
@@ -344,43 +253,47 @@ TOPUP:"REFUELLING IN PROGRESS",
 AFTER:"AFTER REFUELLING"
 }[mode];
 
-let now=new Date().toLocaleString();
+let fuel={
+BEFORE:before.value,
+TOPUP:topup.value,
+AFTER:after.value
+}[mode];
 
 ctx.fillStyle="red";
 ctx.font="18px Arial";
 
 ctx.fillText("Vodafone PNG",20,30);
 ctx.fillText(label,20,60);
-ctx.fillText(now,20,90);
+ctx.fillText("Fuel: "+fuel+"L",20,90);
 ctx.fillText(siteName.value+" | "+siteId.value,20,120);
+ctx.fillText(region.value+" - "+province.value,20,150);
+ctx.fillText(new Date().toLocaleString(),20,180);
 
 let img=canvas.toDataURL("image/png");
 
-if(mode==="BEFORE")imgBefore.src=img;
-if(mode==="TOPUP")imgTopup.src=img;
-if(mode==="AFTER")imgAfter.src=img;
+if(mode==="BEFORE") imgBefore.src=img;
+if(mode==="TOPUP") imgTopup.src=img;
+if(mode==="AFTER") imgAfter.src=img;
 
 stream.getTracks().forEach(t=>t.stop());
 video.style.display="none";
 }
 
-/* RESET */
-function resetPhoto(type){
-if(type==="BEFORE")imgBefore.src="";
-if(type==="TOPUP")imgTopup.src="";
-if(type==="AFTER")imgAfter.src="";
+/* PPL */
+function togglePPL(){
+pplFields.style.display = ppl.value==="Yes" ? "block":"none";
 }
-
-/* CALC */
-function calc(){
-calc.innerHTML="Expected: "+(+before.value+ +added.value)+" L";
-}
-before.oninput=added.oninput=after.oninput=calc;
 
 /* SUBMIT */
 fuelForm.onsubmit=e=>{
 e.preventDefault();
-alert("Submitted Successfully");
+
+if(!imgBefore.src || !imgTopup.src || !imgAfter.src){
+alert("Capture all photos first");
+return;
+}
+
+alert("Sent successfully ✔");
 };
 
 </script>
