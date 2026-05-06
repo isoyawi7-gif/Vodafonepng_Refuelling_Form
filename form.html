@@ -6,16 +6,68 @@
 <title>Vodafone PNG Refuelling System</title>
 
 <style>
-body {font-family:Arial;background:#f4f6f8;margin:0;padding:10px;}
-.container {max-width:900px;margin:auto;background:white;padding:15px;border-radius:10px;}
-h1{text-align:center;color:#e60000;}
-.row{display:flex;gap:10px;flex-wrap:wrap;}
-.form-group{flex:1;min-width:140px;}
-input,select,textarea{width:100%;padding:6px;font-size:13px;margin-top:4px;}
-button{background:#e60000;color:white;border:none;padding:8px;border-radius:5px;cursor:pointer;}
-img{width:100%;margin-top:10px;border-radius:8px;}
-video,canvas{width:100%;display:none;}
-.footer{text-align:center;font-size:12px;margin-top:20px;color:gray;}
+body {
+    font-family: Arial;
+    background:#f4f6f8;
+    margin:0;
+    padding:10px;
+}
+
+.container {
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:15px;
+    border-radius:10px;
+}
+
+h1 {text-align:center;color:#e60000;}
+
+.row {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.form-group {
+    flex:1;
+    min-width:140px;
+}
+
+label {
+    font-size:13px;
+    font-weight:bold;
+}
+
+input, select, textarea {
+    width:100%;
+    padding:6px;
+    font-size:13px;
+    margin-top:4px;
+}
+
+button {
+    background:#e60000;
+    color:white;
+    border:none;
+    padding:8px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+img {
+    width:100%;
+    margin-top:10px;
+    border-radius:8px;
+}
+
+video {width:100%; display:none;}
+
+.footer {
+    text-align:center;
+    font-size:12px;
+    margin-top:20px;
+}
 </style>
 </head>
 
@@ -27,16 +79,13 @@ video,canvas{width:100%;display:none;}
 
 <form id="fuelForm">
 
-<input type="hidden" id="loginTime">
-<input type="hidden" id="logoutTime">
-
-<h2>Site Info</h2>
-
+<!-- SITE INFO -->
 <div class="row">
 <div class="form-group">
 <label>Field Engineer</label>
 <input id="engineer">
 </div>
+
 <div class="form-group">
 <label>Additional Team</label>
 <input id="team">
@@ -48,6 +97,7 @@ video,canvas{width:100%;display:none;}
 <label>Date</label>
 <input type="date" id="date">
 </div>
+
 <div class="form-group">
 <label>Time</label>
 <input type="time" id="time">
@@ -59,17 +109,18 @@ video,canvas{width:100%;display:none;}
 <label>Site Name</label>
 <input id="siteName">
 </div>
+
 <div class="form-group">
 <label>Site ID</label>
 <input id="siteId">
 </div>
 </div>
 
+<!-- REGION -->
 <div class="row">
 <div class="form-group">
 <label>Region</label>
-<select id="region" onchange="loadProvinces()">
-<option value="">Select Region</option>
+<select id="region">
 <option>Momase</option>
 <option>Highlands</option>
 <option>Southern</option>
@@ -79,15 +130,22 @@ video,canvas{width:100%;display:none;}
 
 <div class="form-group">
 <label>Province</label>
-<select id="province"></select>
+<select id="province">
+<option>Morobe</option>
+<option>Eastern Highlands</option>
+<option>Simbu</option>
+<option>Western Highlands</option>
+<option>Enga</option>
+<option>Southern Highlands</option>
+<option>Madang</option>
+</select>
 </div>
 </div>
 
-<div class="row">
+<!-- TOWER -->
 <div class="form-group">
 <label>Tower Height</label>
 <select id="tower">
-<option>23M Monopole</option>
 <option>30M RDS</option>
 <option>45M RDS</option>
 <option>60M RDS</option>
@@ -95,63 +153,84 @@ video,canvas{width:100%;display:none;}
 <option>100M SST</option>
 </select>
 </div>
-</div>
 
-<h2>Fuel Details</h2>
+<h2>Fuel</h2>
 
 <div class="row">
 <div class="form-group">
-<label>Before (L)</label>
-<input id="before" type="number">
+<label>Fuel Before</label>
+<input type="number" id="before">
 </div>
+<div class="form-group">
 <button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
 </div>
+</div>
 
 <div class="row">
 <div class="form-group">
-<label>TopUp (L)</label>
-<input id="topup" type="number">
+<label>Fuel TopUp</label>
+<input type="number" id="added">
 </div>
+<div class="form-group">
 <button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
 </div>
+</div>
 
 <div class="row">
 <div class="form-group">
-<label>After (L)</label>
-<input id="after" type="number">
+<label>Fuel After</label>
+<input type="number" id="after">
 </div>
+<div class="form-group">
 <button type="button" onclick="openCamera('AFTER')">After Photo</button>
 </div>
+</div>
 
-<h2>Camera</h2>
+<div id="calc"></div>
 
-<video id="video" autoplay playsinline></video>
-<canvas id="canvas"></canvas>
+<!-- PPL SECTION -->
+<h2>PPL</h2>
 
-<h3>Before</h3><img id="imgBefore">
-<h3>TopUp</h3><img id="imgTopup">
-<h3>After</h3><img id="imgAfter">
+<div class="row">
+<div class="form-group">
+<label>PPL Connected?</label>
+<select id="ppl" onchange="togglePPL()">
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+</select>
+</div>
 
-<h2>Power</h2>
+<div class="form-group" id="pplFields" style="display:none;">
+<input placeholder="Meter Number" id="meter">
+<input placeholder="Reading" id="reading">
+</div>
+</div>
 
+<!-- GENSET -->
+<h2>Genset</h2>
 <select id="genset">
 <option>FG Wilson 15KVa</option>
 <option>Polar Power</option>
 <option>Sengen 15Kva</option>
 </select>
 
-<select id="ppl" onchange="togglePPL()">
-<option>No PPL</option>
-<option>Yes</option>
-</select>
+<!-- CAMERA -->
+<video id="video" autoplay playsinline></video>
+<canvas id="canvas"></canvas>
 
-<div id="pplFields" style="display:none;">
-<input placeholder="Meter Number" id="meter">
-<input placeholder="Reading" id="reading">
-</div>
+<h3>Before</h3>
+<img id="imgBefore">
+<button type="button" onclick="resetPhoto('BEFORE')">Reset</button>
+
+<h3>TopUp</h3>
+<img id="imgTopup">
+<button type="button" onclick="resetPhoto('TOPUP')">Reset</button>
+
+<h3>After</h3>
+<img id="imgAfter">
+<button type="button" onclick="resetPhoto('AFTER')">Reset</button>
 
 <h2>Driver</h2>
-
 <input placeholder="Driver Name">
 <input placeholder="Vehicle Reg">
 <textarea placeholder="Comments"></textarea>
@@ -168,60 +247,20 @@ Powered by Iso Yawi | System Creator
 
 <script>
 
-/* LOGIN TIME */
-loginTime.value=new Date().toISOString();
-
-/* PROVINCES */
-function loadProvinces(){
-let region=region.value;
-let list=[];
-
-if(region==="Momase"){
-list=["Morobe","Madang","Sepik","Eastern Highlands"];
-}
-
-if(region==="Highlands"){
-list=["Simbu","Western Highlands","Enga","Jiwaka"];
-}
-
-if(region==="Southern"){
-list=["NCD","Central","Gulf","Oro"];
-}
-
-if(region==="Islands"){
-list=["ENB","WNB","Bougainville","Manus"];
-}
-
-province.innerHTML="";
-list.forEach(p=>{
-let opt=document.createElement("option");
-opt.text=p;
-province.add(opt);
-});
+/* PPL TOGGLE */
+function togglePPL(){
+document.getElementById("pplFields").style.display =
+document.getElementById("ppl").value==="Yes" ? "block" : "none";
 }
 
 /* CAMERA */
-let stream,mode;
+let stream;
+let mode="";
 
 function openCamera(type){
 
 if(!siteName.value || !siteId.value || !engineer.value){
-alert("Fill Site + Engineer first");
-return;
-}
-
-if(type==="BEFORE" && !before.value){
-alert("Enter BEFORE fuel first");
-return;
-}
-
-if(type==="TOPUP" && !topup.value){
-alert("Enter TOPUP fuel first");
-return;
-}
-
-if(type==="AFTER" && !after.value){
-alert("Enter AFTER fuel first");
+alert("Enter Site Name, Site ID & Engineer first");
 return;
 }
 
@@ -240,11 +279,10 @@ setTimeout(capture,2000);
 
 function capture(){
 
-const ctx=canvas.getContext("2d");
-
 canvas.width=video.videoWidth;
 canvas.height=video.videoHeight;
 
+const ctx=canvas.getContext("2d");
 ctx.drawImage(video,0,0);
 
 let label={
@@ -253,21 +291,13 @@ TOPUP:"REFUELLING IN PROGRESS",
 AFTER:"AFTER REFUELLING"
 }[mode];
 
-let fuel={
-BEFORE:before.value,
-TOPUP:topup.value,
-AFTER:after.value
-}[mode];
-
 ctx.fillStyle="red";
 ctx.font="18px Arial";
 
 ctx.fillText("Vodafone PNG",20,30);
 ctx.fillText(label,20,60);
-ctx.fillText("Fuel: "+fuel+"L",20,90);
+ctx.fillText(new Date().toLocaleString(),20,90);
 ctx.fillText(siteName.value+" | "+siteId.value,20,120);
-ctx.fillText(region.value+" - "+province.value,20,150);
-ctx.fillText(new Date().toLocaleString(),20,180);
 
 let img=canvas.toDataURL("image/png");
 
@@ -279,21 +309,34 @@ stream.getTracks().forEach(t=>t.stop());
 video.style.display="none";
 }
 
-/* PPL */
-function togglePPL(){
-pplFields.style.display = ppl.value==="Yes" ? "block":"none";
+/* RESET */
+function resetPhoto(type){
+if(type==="BEFORE") imgBefore.src="";
+if(type==="TOPUP") imgTopup.src="";
+if(type==="AFTER") imgAfter.src="";
 }
 
-/* SUBMIT */
+/* CALCULATION */
+function calculate(){
+let expected=(+before.value||0)+(+added.value||0);
+let diff=(+after.value||0)-expected;
+
+calc.innerHTML=`Expected: ${expected} L | Diff: ${diff} L`;
+}
+
+before.oninput=added.oninput=after.oninput=calculate;
+
+/* SUBMIT VALIDATION */
 fuelForm.onsubmit=e=>{
 e.preventDefault();
 
-if(!imgBefore.src || !imgTopup.src || !imgAfter.src){
-alert("Capture all photos first");
+if(!before.value || !added.value || !after.value ||
+!imgBefore.src || !imgTopup.src || !imgAfter.src){
+alert("Please fill all fields and capture all photos");
 return;
 }
 
-alert("Sent successfully ✔");
+alert("Submitted Successfully");
 };
 
 </script>
