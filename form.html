@@ -81,12 +81,6 @@ button:hover {
     margin-top: 5px;
 }
 
-.result {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
 .camera-preview {
     width: 100%;
     margin-top: 10px;
@@ -96,9 +90,7 @@ button:hover {
 
 <body>
 
-<div id="blocked">
-    ❌ Access Denied. Please login first.
-</div>
+<div id="blocked">❌ Access Denied. Please login first.</div>
 
 <div class="container" id="app">
 
@@ -134,21 +126,8 @@ button:hover {
     </div>
 </div>
 
-<div class="row">
-    <div class="form-group">
-        <label>Province</label>
-        <input type="text">
-    </div>
-
-    <div class="form-group">
-        <label>Region</label>
-        <input type="text">
-    </div>
-</div>
-
 <h2>Fuel Details</h2>
 
-<!-- 🔥 FIXED: SIDE BY SIDE -->
 <div class="row">
     <div class="form-group">
         <label>Fuel Before (L)</label>
@@ -156,26 +135,39 @@ button:hover {
     </div>
 
     <div class="form-group">
-        <label>📸 Add Photo</label>
-        <button type="button" class="small-btn" onclick="openCamera()">Open Camera</button>
+        <label>📸 Before Photo</label>
+        <button type="button" class="small-btn" onclick="openCamera('BEFORE')">Capture</button>
     </div>
 </div>
 
-<div class="form-group">
-    <label>Fuel Top-Up (L)</label>
-    <input type="number" id="added">
+<div class="row">
+    <div class="form-group">
+        <label>Fuel Top-Up (L)</label>
+        <input type="number" id="added">
+    </div>
+
+    <div class="form-group">
+        <label>📸 Top-Up Photo</label>
+        <button type="button" class="small-btn" onclick="openCamera('TOPUP')">Capture</button>
+    </div>
 </div>
 
-<div class="form-group">
-    <label>Fuel After (L)</label>
-    <input type="number" id="after">
+<div class="row">
+    <div class="form-group">
+        <label>Fuel After (L)</label>
+        <input type="number" id="after">
+    </div>
+
+    <div class="form-group">
+        <label>📸 After Photo</label>
+        <button type="button" class="small-btn" onclick="openCamera('AFTER')">Capture</button>
+    </div>
 </div>
 
 <div class="result" id="calculation"></div>
 
-<h2>Photo Evidence</h2>
+<h2>Camera</h2>
 
-<!-- REAL CAMERA -->
 <video id="video" autoplay playsinline style="width:100%; display:none;"></video>
 <canvas id="canvas" class="camera-preview"></canvas>
 <p id="gps"></p>
@@ -213,23 +205,24 @@ function logout() {
     window.location.href = "index.html";
 }
 
-/* CAMERA STREAM */
+/* CAMERA */
 let stream;
+let mode = "";
 
-function openCamera() {
-    const video = document.getElementById("video");
+function openCamera(type) {
+    mode = type;
 
     navigator.mediaDevices.getUserMedia({ video: true })
     .then(function(s) {
         stream = s;
+        const video = document.getElementById("video");
         video.srcObject = s;
         video.style.display = "block";
 
-        // auto capture after 3 sec
         setTimeout(capturePhoto, 3000);
     })
-    .catch(function(err) {
-        alert("Camera not available or permission denied");
+    .catch(function() {
+        alert("Camera not available");
     });
 }
 
@@ -245,17 +238,23 @@ function capturePhoto() {
 
     const now = new Date().toLocaleString();
 
-    ctx.fillStyle = "rgba(255,0,0,0.7)";
+    let label = "";
+    if (mode === "BEFORE") label = "BEFORE REFUELLING";
+    if (mode === "TOPUP") label = "REFUELLING IN PROGRESS";
+    if (mode === "AFTER") label = "AFTER REFUELLING";
+
+    ctx.fillStyle = "rgba(255,0,0,0.8)";
     ctx.font = "20px Arial";
 
     ctx.fillText("Vodafone PNG", 20, 30);
-    ctx.fillText(now, 20, 60);
+    ctx.fillText(label, 20, 60);
+    ctx.fillText(now, 20, 90);
 
     navigator.geolocation.getCurrentPosition(function(pos){
         const gpsText =
             `Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`;
 
-        ctx.fillText(gpsText, 20, 90);
+        ctx.fillText(gpsText, 20, 120);
         document.getElementById("gps").innerText = gpsText;
     });
 
