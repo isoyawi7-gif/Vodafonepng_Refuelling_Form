@@ -3,126 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - Vodafone PNG</title>
+<title>Vodafone PNG Refuelling System</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e60000, #111);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background: #f4f6f8;
     margin: 0;
+    padding: 10px;
 }
 
-/* GLASS LOGIN BOX */
-.login-container {
-    width: 340px;
-    padding: 35px;
-    text-align: center;
-
-    /* Glass effect */
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    color: white;
-}
-
-.logo {
-    width: 110px;
-    margin-bottom: 15px;
-}
-
-h2 {
-    margin-bottom: 20px;
-    color: white;
-    letter-spacing: 1px;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 15px;
     border-radius: 10px;
-    border: none;
-    outline: none;
-
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
 }
 
-input::placeholder {
-    color: rgba(255,255,255,0.7);
+h1 { text-align:center; color:#e60000; }
+
+.row {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.form-group {
+    flex:1;
+    min-width:140px;
+}
+
+input, select, textarea {
+    width:100%;
+    padding:6px;
+    font-size:13px;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-
-    background: #e60000;
-    color: white;
-    border: none;
-    border-radius: 10px;
-
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-    margin-top: 10px;
+    background:#e60000;
+    color:white;
+    border:none;
+    padding:8px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
-button:hover {
-    background: #ff1a1a;
-    transform: scale(1.03);
+img {
+    width:100%;
+    margin-top:10px;
+    border-radius:8px;
 }
 
-.error {
-    color: #ff8080;
-    margin-top: 10px;
-    font-size: 14px;
+video, canvas { width:100%; display:none; }
+
+.footer {
+    text-align:center;
+    font-size:12px;
+    color:gray;
+    margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-container">
+<div class="container">
 
-    <!-- Replace with your Vodafone PNG logo -->
-    <img src="Logo.jpg" class="logo" alt="Vodafone PNG Logo">
+<h1>Vodafone PNG Refuelling</h1>
 
-    <h2>Vodafone PNG Login</h2>
+<form id="fuelForm">
 
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+<h2>Site Info</h2>
 
-    <button onclick="login()">Login</button>
+<div class="row">
+<div class="form-group">
+<label>Site Name</label>
+<input id="siteName">
+</div>
 
-    <div class="error" id="error"></div>
+<div class="form-group">
+<label>Site ID</label>
+<input id="siteId">
+</div>
+</div>
+
+<h2>Fuel Readings</h2>
+
+<div class="row">
+<div class="form-group">
+<label>Before (L)</label>
+<input id="before">
+</div>
+<button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
+</div>
+
+<div class="row">
+<div class="form-group">
+<label>TopUp (L)</label>
+<input id="topup">
+</div>
+<button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
+</div>
+
+<div class="row">
+<div class="form-group">
+<label>After (L)</label>
+<input id="after">
+</div>
+<button type="button" onclick="openCamera('AFTER')">After Photo</button>
+</div>
+
+<h2>Camera</h2>
+
+<video id="video" autoplay playsinline></video>
+<canvas id="canvas"></canvas>
+
+<h3>Before Photo</h3>
+<img id="imgBefore">
+
+<h3>TopUp Photo</h3>
+<img id="imgTopup">
+
+<h3>After Photo</h3>
+<img id="imgAfter">
+
+<button type="submit">Send</button>
+
+</form>
+
+<div class="footer">
+Powered by Iso Yawi | System Creator
+</div>
 
 </div>
 
 <script>
-function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
-    const error = document.getElementById("error");
 
-    if (user === "Admin" && pass === "Admin") {
-        localStorage.setItem("loggedIn", "true");
+let stream;
+let mode = "";
 
-        // go to next page
-        window.location.href = "form.html";
-    } else {
-        error.innerText = "Invalid username or password";
-    }
+let beforeCaptured = false;
+let topupCaptured = false;
+
+function openCamera(type) {
+
+if(!siteName.value || !siteId.value){
+alert("Please enter Site Name and Site ID first");
+return;
 }
+
+/* FORCE ORDER */
+if(type==="TOPUP" && !beforeCaptured){
+alert("Capture BEFORE photo first");
+return;
+}
+
+if(type==="AFTER" && !topupCaptured){
+alert("Capture TOPUP photo first");
+return;
+}
+
+mode = type;
+
+navigator.mediaDevices.getUserMedia({
+video:{ facingMode:"environment" }
+})
+.then(s=>{
+stream=s;
+video.srcObject=s;
+video.style.display="block";
+setTimeout(capture,2500);
+});
+}
+
+function capture(){
+
+const ctx = canvas.getContext("2d");
+
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+
+ctx.drawImage(video,0,0);
+
+let label = {
+BEFORE:"BEFORE REFUELLING",
+TOPUP:"REFUELLING IN PROGRESS",
+AFTER:"AFTER REFUELLING"
+}[mode];
+
+let fuelValue =
+mode==="BEFORE" ? before.value :
+mode==="TOPUP" ? topup.value :
+after.value;
+
+let now = new Date().toLocaleString();
+
+ctx.fillStyle="red";
+ctx.font="18px Arial";
+
+ctx.fillText("Vodafone PNG",20,30);
+ctx.fillText(label,20,60);
+ctx.fillText("Fuel: "+fuelValue+" L",20,90);
+ctx.fillText(siteName.value+" | "+siteId.value,20,120);
+ctx.fillText(now,20,150);
+
+let img = canvas.toDataURL("image/png");
+
+if(mode==="BEFORE"){
+imgBefore.src = img;
+beforeCaptured = true;
+}
+
+if(mode==="TOPUP"){
+imgTopup.src = img;
+topupCaptured = true;
+}
+
+if(mode==="AFTER"){
+imgAfter.src = img;
+}
+
+stream.getTracks().forEach(t=>t.stop());
+video.style.display="none";
+}
+
+/* SEND */
+fuelForm.onsubmit = e => {
+e.preventDefault();
+alert("Sent successfully ✔");
+};
+
 </script>
 
 </body>
