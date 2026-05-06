@@ -149,6 +149,37 @@ video {
 </div>
 </div>
 
+<div class="form-group">
+<label>Region</label>
+<input type="text" id="region">
+</div>
+</div>
+
+<div class="form-group">
+<label>Province</label>
+<input type="text" id="province">
+</div>
+</div>
+    
+<div class="row">
+<div class="form-group">
+<label>Tower Height (m)</label>
+<input type="number" id="tower">
+    <option>23 Meter Monopole</option>
+<option>30M RDS</option>
+<option>45 M RDS</option>
+<option>45 M Grilliage</option>
+<option>45 M SST</option>
+<option>60 M RDS</option>
+<option>60 M Grilliage</option>
+<option>60 M SST</option>
+<option>80 M Grilliage</option>
+<option>80 M SST </option>
+<option>100 M SST</option>
+<option>110 M SST</option>
+</div>
+</div>
+
 <h2>Fuel Details</h2>
 
 <div class="row">
@@ -186,17 +217,17 @@ video {
 <h2>Genset & Power</h2>
 
 <select id="genset">
+<option>Yanhan 8KVA </option>
+<option>Yanhan 17Kva</option>
+<option>Yanhan 24Kva</option>
+<option>CCTC 11KVa</option>
+<option>CCTC 17Kva</option>
+<option>CCTC 24Kva</option>
 <option>FG Wilson 15KVa</option>
 <option>Polar Power</option>
 <option>Sengen 15Kva</option>
 </select>
 
-<div class="row">
-<div class="form-group">
-<label>Tower Height (m)</label>
-<input type="number" id="tower">
-</div>
-</div>
 
 <div class="row">
 <div class="form-group">
@@ -273,10 +304,11 @@ let mode="";
 
 function openCamera(type){
 
-if(!siteName.value || !siteId.value){
+if(!siteName.value || !siteId.value ||!engineer.value ){
 alert("Please enter Site Name and Site ID first");
 return;
 }
+
 
 mode=type;
 
