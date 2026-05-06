@@ -39,17 +39,17 @@ h2 {
     margin-top: 20px;
 }
 
-/* SMALLER INPUTS */
+/* SMALL INPUTS */
 input, textarea {
     width: 100%;
     padding: 6px;
+    font-size: 13px;
     margin-top: 5px;
-    font-size: 14px;
 }
 
 label {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .row {
@@ -58,12 +58,9 @@ label {
     align-items: flex-end;
 }
 
-.row .form-group {
-    flex: 1;
-}
-
 .form-group {
-    margin-bottom: 12px;
+    flex: 1;
+    margin-bottom: 10px;
 }
 
 button {
@@ -72,17 +69,13 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    padding: 10px;
-}
-
-button:hover {
-    background: #cc0000;
+    padding: 8px;
 }
 
 .small-btn {
     width: 100%;
     padding: 8px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 img {
@@ -92,13 +85,17 @@ img {
     border: 2px solid #ddd;
 }
 
-video {
+video, canvas {
     width: 100%;
     display: none;
 }
 
-canvas {
-    display: none;
+/* FOOTER */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 13px;
+    color: #555;
 }
 </style>
 </head>
@@ -117,27 +114,15 @@ canvas {
 <form id="fuelForm">
 
 <input type="hidden" id="loginTime">
-<input type="hidden" id="logoutTime">
-
-<div class="row">
-    <div class="form-group">
-        <label>Team</label>
-        <input type="text">
-    </div>
-    <div class="form-group">
-        <label>Date</label>
-        <input type="date">
-    </div>
-</div>
 
 <div class="row">
     <div class="form-group">
         <label>Site Name</label>
-        <input type="text">
+        <input type="text" id="siteName">
     </div>
     <div class="form-group">
         <label>Site ID</label>
-        <input type="text">
+        <input type="text" id="siteID">
     </div>
 </div>
 
@@ -186,7 +171,7 @@ canvas {
 <h3>Before</h3>
 <img id="beforeImg">
 
-<h3>TopUp</h3>
+<h3>Top-Up</h3>
 <img id="topupImg">
 
 <h3>After</h3>
@@ -194,7 +179,7 @@ canvas {
 
 <p id="gps"></p>
 
-<h2>Driver</h2>
+<h2>Driver Details</h2>
 <input type="text" placeholder="Driver Name">
 <input type="text" placeholder="Vehicle Reg">
 <input type="text" placeholder="RTO">
@@ -204,6 +189,11 @@ canvas {
 <button type="button" onclick="logout()">Logout</button>
 
 </form>
+
+<footer>
+Powered by <b>Iso Yawi</b> | System Creator
+</footer>
+
 </div>
 
 <script>
@@ -228,21 +218,34 @@ let stream;
 let mode = "";
 
 function openCamera(type) {
+
+    const siteName = document.getElementById("siteName").value;
+    const siteID = document.getElementById("siteID").value;
+
+    if (!siteName || !siteID) {
+        alert("Please enter Site Name and Site ID first!");
+        return;
+    }
+
     mode = type;
 
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { exact: "environment" } }
+    })
     .then(s => {
         stream = s;
+
         const video = document.getElementById("video");
         video.srcObject = s;
         video.style.display = "block";
 
         setTimeout(capturePhoto, 2500);
     })
-    .catch(() => alert("Camera not available"));
+    .catch(() => alert("Back camera not available"));
 }
 
 function capturePhoto() {
+
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -258,22 +261,26 @@ function capturePhoto() {
     ctx.drawImage(video, 0, 0);
 
     const now = new Date().toLocaleString();
+    const siteName = document.getElementById("siteName").value;
+    const siteID = document.getElementById("siteID").value;
 
     let label = "";
     if (mode === "BEFORE") label = "BEFORE REFUELLING";
     if (mode === "TOPUP") label = "REFUELLING IN PROGRESS";
     if (mode === "AFTER") label = "AFTER REFUELLING";
 
-    ctx.fillStyle = "rgba(255,0,0,0.8)";
+    ctx.fillStyle = "rgba(255,0,0,0.85)";
     ctx.font = "18px Arial";
 
     ctx.fillText("Vodafone PNG", 20, 30);
     ctx.fillText(label, 20, 60);
-    ctx.fillText(now, 20, 90);
+    ctx.fillText(`Site: ${siteName}`, 20, 90);
+    ctx.fillText(`ID: ${siteID}`, 20, 120);
+    ctx.fillText(now, 20, 150);
 
     navigator.geolocation.getCurrentPosition(pos => {
         const gps = `Lat:${pos.coords.latitude}, Lon:${pos.coords.longitude}`;
-        ctx.fillText(gps, 20, 120);
+        ctx.fillText(gps, 20, 180);
         document.getElementById("gps").innerText = gps;
     });
 
@@ -289,9 +296,9 @@ function capturePhoto() {
 
 /* CALCULATION */
 function calc() {
-    let b = +before.value || 0;
-    let a = +added.value || 0;
-    let af = +after.value || 0;
+    const b = +before.value || 0;
+    const a = +added.value || 0;
+    const af = +after.value || 0;
 
     calculation.innerHTML = `Expected: ${b+a} L | Difference: ${af-(b+a)} L`;
 }
@@ -301,7 +308,7 @@ before.oninput = added.oninput = after.oninput = calc;
 /* SUBMIT */
 fuelForm.onsubmit = e => {
     e.preventDefault();
-    alert("Submitted");
+    alert("Form submitted successfully");
 };
 
 </script>
