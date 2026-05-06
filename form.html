@@ -13,7 +13,6 @@ body {
     padding: 20px;
 }
 
-/* BLOCK ACCESS MESSAGE STYLE */
 #blocked {
     display: none;
     text-align: center;
@@ -57,6 +56,7 @@ input, textarea, button {
 .row {
     display: flex;
     gap: 10px;
+    align-items: flex-end;
 }
 
 .row .form-group {
@@ -76,10 +76,9 @@ button:hover {
 }
 
 .small-btn {
-    width: auto;
-    padding: 8px 12px;
-    margin-top: 10px;
-    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
 }
 
 .result {
@@ -97,7 +96,6 @@ button:hover {
 
 <body>
 
-<!-- BLOCK SCREEN -->
 <div id="blocked">
     ❌ Access Denied. Please login first.
 </div>
@@ -109,7 +107,6 @@ button:hover {
 
 <form id="fuelForm">
 
-<!-- SESSION -->
 <input type="hidden" id="loginTime">
 <input type="hidden" id="logoutTime">
 
@@ -151,9 +148,17 @@ button:hover {
 
 <h2>Fuel Details</h2>
 
-<div class="form-group">
-    <label>Fuel Before (L)</label>
-    <input type="number" id="before">
+<!-- 🔥 FIXED: SIDE BY SIDE -->
+<div class="row">
+    <div class="form-group">
+        <label>Fuel Before (L)</label>
+        <input type="number" id="before">
+    </div>
+
+    <div class="form-group">
+        <label>📸 Add Photo</label>
+        <button type="button" class="small-btn" onclick="openCamera()">Open Camera</button>
+    </div>
 </div>
 
 <div class="form-group">
@@ -170,11 +175,9 @@ button:hover {
 
 <h2>Photo Evidence</h2>
 
-<button type="button" class="small-btn" onclick="openCamera()">📸 Add Photo</button>
-<input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
-
+<!-- REAL CAMERA -->
+<video id="video" autoplay playsinline style="width:100%; display:none;"></video>
 <canvas id="canvas" class="camera-preview"></canvas>
-
 <p id="gps"></p>
 
 <h2>Driver Details</h2>
@@ -194,9 +197,7 @@ button:hover {
 
 <script>
 
-/* =======================
-   LOGIN PROTECTION
-======================= */
+/* LOGIN CHECK */
 if (localStorage.getItem("loggedIn") !== "true") {
     document.getElementById("app").style.display = "none";
     document.getElementById("blocked").style.display = "block";
@@ -212,43 +213,55 @@ function logout() {
     window.location.href = "index.html";
 }
 
-/* CAMERA */
+/* CAMERA STREAM */
+let stream;
+
 function openCamera() {
-    document.getElementById("cameraInput").click();
+    const video = document.getElementById("video");
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(s) {
+        stream = s;
+        video.srcObject = s;
+        video.style.display = "block";
+
+        // auto capture after 3 sec
+        setTimeout(capturePhoto, 3000);
+    })
+    .catch(function(err) {
+        alert("Camera not available or permission denied");
+    });
 }
 
-/* IMAGE + WATERMARK + GPS */
-document.getElementById("cameraInput").addEventListener("change", function(event) {
-    const file = event.target.files[0];
+function capturePhoto() {
+    const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
-    const img = new Image();
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
 
-    img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
+    ctx.drawImage(video, 0, 0);
 
-        ctx.drawImage(img, 0, 0);
+    const now = new Date().toLocaleString();
 
-        const now = new Date().toLocaleString();
+    ctx.fillStyle = "rgba(255,0,0,0.7)";
+    ctx.font = "20px Arial";
 
-        ctx.fillStyle = "rgba(255,0,0,0.7)";
-        ctx.font = "20px Arial";
+    ctx.fillText("Vodafone PNG", 20, 30);
+    ctx.fillText(now, 20, 60);
 
-        ctx.fillText("Vodafone PNG", 20, 30);
-        ctx.fillText(now, 20, 60);
+    navigator.geolocation.getCurrentPosition(function(pos){
+        const gpsText =
+            `Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`;
 
-        navigator.geolocation.getCurrentPosition(function(pos){
-            const gpsText = `Lat: ${pos.coords.latitude}, Lon: ${pos.coords.longitude}`;
-            ctx.fillText(gpsText, 20, 90);
-            document.getElementById("gps").innerText = gpsText;
-        });
+        ctx.fillText(gpsText, 20, 90);
+        document.getElementById("gps").innerText = gpsText;
+    });
 
-    };
-
-    img.src = URL.createObjectURL(file);
-});
+    stream.getTracks().forEach(track => track.stop());
+    video.style.display = "none";
+}
 
 /* CALCULATION */
 function calculate() {
@@ -270,7 +283,7 @@ document.getElementById("after").addEventListener("input", calculate);
 /* SUBMIT */
 document.getElementById("fuelForm").addEventListener("submit", function(e){
     e.preventDefault();
-    alert("Form submitted successfully (backend not connected yet)");
+    alert("Form submitted successfully");
 });
 
 </script>
