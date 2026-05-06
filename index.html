@@ -61,44 +61,87 @@ button:hover {
     color: red;
     margin-top: 10px;
 }
-</style>
-</head>
-
-<body>
-
-<div class="login-container">
-
-    <!-- Replace logo.png with your uploaded logo -->
-    <img src="logo.png" class="logo" alt="Vodafone Logo">
-
-    <h2>Vodafone PNG</h2>
-
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-
-    <button onclick="login()">Login</button>
-
-    <div class="error" id="error"></div>
-
-</div>
-
-<script>
-function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
-    const error = document.getElementById("error");
-
-    if (user === "Admin" && pass === "Admin") {
-        // Save login state
-        localStorage.setItem("loggedIn", "true");
-
-        // Redirect to form page
-        window.location.href = "form.html";
-    } else {
-        error.innerText = "Invalid username or password";
-    }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e60000, #111);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
-</script>
+
+/* GLASS LOGIN BOX */
+.login-container {
+    width: 340px;
+    padding: 35px;
+    text-align: center;
+
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.logo {
+    width: 110px;
+    margin-bottom: 15px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+
+    background: #e60000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff1a1a;
+    transform: scale(1.03);
+}
+
+.error {
+    color: #ff8080;
+    margin-top: 10px;
+}
+</style>
 
 </body>
 </html>
