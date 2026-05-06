@@ -13,204 +13,102 @@ body {
     padding: 10px;
 }
 
-#blocked {
-    display: none;
-    text-align: center;
-    margin-top: 100px;
-    font-size: 18px;
-    color: red;
-}
-
 .container {
     max-width: 900px;
     margin: auto;
     background: white;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-h1 {
-    text-align: center;
-    color: #e60000;
-}
-
-h2 {
-    margin-top: 20px;
-    font-size: 18px;
-}
+h1 { text-align:center; color:#e60000; }
 
 .row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 .form-group {
-    flex: 1;
-    min-width: 140px;
+    flex:1;
+    min-width:140px;
 }
 
-label {
-    font-size: 13px;
-    font-weight: bold;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 6px;
-    font-size: 13px;
-    margin-top: 4px;
+input {
+    width:100%;
+    padding:6px;
+    font-size:13px;
 }
 
 button {
-    background: #e60000;
-    color: white;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 13px;
-}
-
-.small-btn {
-    width: 100%;
+    background:#e60000;
+    color:white;
+    border:none;
+    padding:8px;
+    border-radius:5px;
+    cursor:pointer;
 }
 
 img {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
+    width:100%;
+    margin-top:10px;
+    border-radius:8px;
 }
 
-video {
-    width: 100%;
-    display: none;
-}
+video, canvas { width:100%; display:none; }
 
 .footer {
-    text-align: center;
-    font-size: 12px;
-    margin-top: 20px;
-    color: gray;
+    text-align:center;
+    font-size:12px;
+    color:gray;
+    margin-top:20px;
+}
+
+.alert {
+    color:red;
+    font-size:13px;
+    margin:5px 0;
 }
 </style>
 </head>
 
 <body>
 
-<div id="blocked">❌ Access Denied. Login required.</div>
-
-<div class="container" id="app">
+<div class="container">
 
 <h1>Vodafone PNG Refuelling</h1>
 
-<form id="fuelForm">
+<div id="msg" class="alert"></div>
 
-<!-- SESSION -->
-<input type="hidden" id="loginTime">
-<input type="hidden" id="logoutTime">
+<form id="fuelForm">
 
 <h2>Site Info</h2>
 
 <div class="row">
 <div class="form-group">
-<label>Field Engineer</label>
-<input type="text" id="engineer">
+<input id="siteName" placeholder="Site Name">
 </div>
 
 <div class="form-group">
-<label>Additional Team</label>
-<input type="text" id="team">
+<input id="siteId" placeholder="Site ID">
 </div>
 </div>
 
-<div class="row">
-<div class="form-group">
-<label>Date</label>
-<input type="date" id="date">
-</div>
-
-<div class="form-group">
-<label>Time</label>
-<input type="time" id="time">
-</div>
-</div>
+<h2>Fuel Readings</h2>
 
 <div class="row">
-<div class="form-group">
-<label>Site Name</label>
-<input type="text" id="siteName">
-</div>
-
-<div class="form-group">
-<label>Site ID</label>
-<input type="text" id="siteId">
-</div>
-</div>
-
-<h2>Fuel Details</h2>
-
-<div class="row">
-<div class="form-group">
-<label>Fuel Before (L)</label>
-<input type="number" id="before">
-</div>
-<div class="form-group">
+<input id="before" placeholder="Before (L)">
 <button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
 </div>
-</div>
 
 <div class="row">
-<div class="form-group">
-<label>Fuel TopUp (L)</label>
-<input type="number" id="added">
-</div>
-<div class="form-group">
+<input id="topup" placeholder="TopUp (L)">
 <button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
 </div>
-</div>
 
 <div class="row">
-<div class="form-group">
-<label>Fuel After (L)</label>
-<input type="number" id="after">
-</div>
-<div class="form-group">
+<input id="after" placeholder="After (L)">
 <button type="button" onclick="openCamera('AFTER')">After Photo</button>
-</div>
-</div>
-
-<div id="calc"></div>
-
-<h2>Genset & Power</h2>
-
-<select id="genset">
-<option>FG Wilson 15KVa</option>
-<option>Polar Power</option>
-<option>Sengen 15Kva</option>
-</select>
-
-<div class="row">
-<div class="form-group">
-<label>Tower Height (m)</label>
-<input type="number" id="tower">
-</div>
-</div>
-
-<div class="row">
-<div class="form-group">
-<label>PPL Connected?</label>
-<select id="ppl" onchange="togglePPL()">
-<option value="No">No</option>
-<option value="Yes">Yes</option>
-</select>
-</div>
-
-<div class="form-group" id="pplFields" style="display:none;">
-<input placeholder="PPL Meter Number" id="meter">
-<input placeholder="PPL Reading" id="reading">
-</div>
 </div>
 
 <h2>Camera</h2>
@@ -219,22 +117,10 @@ video {
 <canvas id="canvas"></canvas>
 
 <h3>Before</h3><img id="imgBefore">
-<button type="button" onclick="resetPhoto('BEFORE')">Reset</button>
-
 <h3>TopUp</h3><img id="imgTopup">
-<button type="button" onclick="resetPhoto('TOPUP')">Reset</button>
-
 <h3>After</h3><img id="imgAfter">
-<button type="button" onclick="resetPhoto('AFTER')">Reset</button>
-
-<h2>Driver</h2>
-
-<input placeholder="Driver Name">
-<input placeholder="Vehicle Reg">
-<textarea placeholder="Comments"></textarea>
 
 <button type="submit">Send</button>
-<button type="button" onclick="logout()">Logout</button>
 
 </form>
 
@@ -246,48 +132,61 @@ Powered by Iso Yawi | System Creator
 
 <script>
 
-/* LOGIN CHECK */
-if(localStorage.getItem("loggedIn")!=="true"){
-document.getElementById("app").style.display="none";
-document.getElementById("blocked").style.display="block";
-}
-
-/* TIME */
-loginTime.value=new Date().toISOString();
-
-function logout(){
-localStorage.removeItem("loggedIn");
-logoutTime.value=new Date().toISOString();
-window.location.href="index.html";
-}
-
-/* PPL */
-function togglePPL(){
-document.getElementById("pplFields").style.display =
-ppl.value==="Yes"?"block":"none";
-}
-
-/* CAMERA */
 let stream;
 let mode="";
 
+let beforeCaptured=false;
+let topupCaptured=false;
+let afterCaptured=false;
+
+function showMsg(text){
+document.getElementById("msg").innerText = text;
+setTimeout(()=>msg.innerText="",3000);
+}
+
+/* VALIDATE BEFORE CAMERA */
 function openCamera(type){
 
 if(!siteName.value || !siteId.value){
-alert("Please enter Site Name and Site ID first");
+showMsg("⚠ Please enter Site Name and Site ID first");
+return;
+}
+
+if(type==="TOPUP" && !beforeCaptured){
+showMsg("⚠ Capture BEFORE photo first");
+return;
+}
+
+if(type==="AFTER" && !topupCaptured){
+showMsg("⚠ Capture TOPUP photo first");
+return;
+}
+
+if(type==="BEFORE" && !before.value){
+showMsg("⚠ Enter Before fuel reading first");
+return;
+}
+
+if(type==="TOPUP" && !topup.value){
+showMsg("⚠ Enter TopUp fuel reading first");
+return;
+}
+
+if(type==="AFTER" && !after.value){
+showMsg("⚠ Enter After fuel reading first");
 return;
 }
 
 mode=type;
 
 navigator.mediaDevices.getUserMedia({
-video:{facingMode:"environment"}
+video:{ facingMode:"environment" }
 })
 .then(s=>{
 stream=s;
 video.srcObject=s;
 video.style.display="block";
-setTimeout(capture,2500);
+setTimeout(capture,2000);
 });
 }
 
@@ -306,43 +205,50 @@ TOPUP:"REFUELLING IN PROGRESS",
 AFTER:"AFTER REFUELLING"
 }[mode];
 
-let now=new Date().toLocaleString();
+let fuel =
+mode==="BEFORE"?before.value:
+mode==="TOPUP"?topup.value:
+after.value;
 
 ctx.fillStyle="red";
 ctx.font="18px Arial";
 
 ctx.fillText("Vodafone PNG",20,30);
 ctx.fillText(label,20,60);
-ctx.fillText(now,20,90);
+ctx.fillText("Fuel: "+fuel+" L",20,90);
 ctx.fillText(siteName.value+" | "+siteId.value,20,120);
+ctx.fillText(new Date().toLocaleString(),20,150);
 
 let img=canvas.toDataURL("image/png");
 
-if(mode==="BEFORE")imgBefore.src=img;
-if(mode==="TOPUP")imgTopup.src=img;
-if(mode==="AFTER")imgAfter.src=img;
+if(mode==="BEFORE"){ imgBefore.src=img; beforeCaptured=true; }
+if(mode==="TOPUP"){ imgTopup.src=img; topupCaptured=true; }
+if(mode==="AFTER"){ imgAfter.src=img; afterCaptured=true; }
 
 stream.getTracks().forEach(t=>t.stop());
 video.style.display="none";
 }
 
-/* RESET */
-function resetPhoto(type){
-if(type==="BEFORE")imgBefore.src="";
-if(type==="TOPUP")imgTopup.src="";
-if(type==="AFTER")imgAfter.src="";
-}
-
-/* CALC */
-function calc(){
-calc.innerHTML="Expected: "+(+before.value+ +added.value)+" L";
-}
-before.oninput=added.oninput=after.oninput=calc;
-
-/* SUBMIT */
+/* SEND VALIDATION */
 fuelForm.onsubmit=e=>{
 e.preventDefault();
-alert("Submitted Successfully");
+
+if(!siteName.value || !siteId.value){
+showMsg("⚠ Please fill Site details");
+return;
+}
+
+if(!beforeCaptured || !topupCaptured || !afterCaptured){
+showMsg("⚠ Please capture all photos first");
+return;
+}
+
+if(!before.value || !topup.value || !after.value){
+showMsg("⚠ Please fill all fuel readings first");
+return;
+}
+
+alert("Sent successfully ✔");
 };
 
 </script>
