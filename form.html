@@ -156,7 +156,38 @@ video {width:100%; display:none;}
 </select>
 </div>
 
-<h2>Fuel</h2>
+<h2>Refuelling Fuel</h2>
+<!-- GENSET -->
+<label>Genset (DG) Type</label>
+<select id="genset">
+<option>Yanhan 8KVA </option> 
+<option>Yanhan 17Kva</option>
+    <option>Yanhan 24Kva</option> 
+    <option>CCTC 11KVa</option> 
+    <option>CCTC 17Kva</option> 
+    <option>CCTC 24Kva</option> 
+    <option>FG Wilson 15KVa</option> 
+    <option>Polar Power</option> 
+     <option>Sengen 15Kva</option>
+</select>
+
+<div class="row">
+<div class="form-group">
+<label>Engine Oil Level</label>
+<input type="number" id="before">
+</div>
+
+<div class="row">
+<div class="form-group">
+<label>Coolant Level</label>
+<input type="number" id="before">
+</div>
+
+<div class="row">
+<div class="form-group">
+<label>Engine speed (RPM)</label>
+<input type="number" id="before">
+</div>
 
 <div class="row">
 <div class="form-group">
@@ -207,20 +238,6 @@ video {width:100%; display:none;}
 <input placeholder="Reading" id="reading">
 </div>
 </div>
-
-<!-- GENSET -->
-<label>Genset (DG) Type</label>
-<select id="genset">
-<option>Yanhan 8KVA </option> 
-<option>Yanhan 17Kva</option>
-    <option>Yanhan 24Kva</option> 
-    <option>CCTC 11KVa</option> 
-    <option>CCTC 17Kva</option> 
-    <option>CCTC 24Kva</option> 
-    <option>FG Wilson 15KVa</option> 
-    <option>Polar Power</option> 
-     <option>Sengen 15Kva</option>
-</select>
 
 <!-- CAMERA -->
 <video id="video" autoplay playsinline></video>
