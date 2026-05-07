@@ -172,21 +172,22 @@ video {width:100%; display:none;}
 </select>
 
 <div class="row">
+
 <div class="form-group">
 <label>Engine Oil Level</label>
-<input type="number" id="before">
+<input type="number" id="oilLevel">
 </div>
 
-<div class="row">
 <div class="form-group">
 <label>Coolant Level</label>
-<input type="number" id="before">
+<input type="number" id="coolantLevel">
 </div>
 
-<div class="row">
 <div class="form-group">
-<label>Engine speed (RPM)</label>
-<input type="number" id="before">
+<label>Engine Speed (RPM)</label>
+<input type="number" id="rpm">
+</div>
+
 </div>
 
 <div class="row">
@@ -194,8 +195,11 @@ video {width:100%; display:none;}
 <label>Fuel Before</label>
 <input type="number" id="before">
 </div>
+
 <div class="form-group">
-<button type="button" onclick="openCamera('BEFORE')">Before Photo</button>
+<button type="button" onclick="openCamera('BEFORE')">
+Before Photo
+</button>
 </div>
 </div>
 
@@ -204,8 +208,11 @@ video {width:100%; display:none;}
 <label>Fuel TopUp</label>
 <input type="number" id="added">
 </div>
+
 <div class="form-group">
-<button type="button" onclick="openCamera('TOPUP')">TopUp Photo</button>
+<button type="button" onclick="openCamera('TOPUP')">
+TopUp Photo
+</button>
 </div>
 </div>
 
@@ -214,12 +221,13 @@ video {width:100%; display:none;}
 <label>Fuel After</label>
 <input type="number" id="after">
 </div>
-<div class="form-group">
-<button type="button" onclick="openCamera('AFTER')">After Photo</button>
-</div>
-</div>
 
-<div id="calc"></div>
+<div class="form-group">
+<button type="button" onclick="openCamera('AFTER')">
+After Photo
+</button>
+</div>
+</div>
 
 <!-- PPL SECTION -->
 <h2>Power and Genset</h2>
