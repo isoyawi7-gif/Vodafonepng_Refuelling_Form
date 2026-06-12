@@ -402,24 +402,44 @@ list.forEach(p=>{
 }
 
 /* SUBMIT VALIDATION */
-fuelForm.onsubmit=e=>{
-e.preventDefault();
+fuelForm.onsubmit = function(e){
+    e.preventDefault();
 
-if(!before.value || !added.value || !after.value ||
-!imgBefore.src || !imgTopup.src || !imgAfter.src){
-alert("Please fill all fields and capture all photos");
-return;
-}
+    if(!before.value || !added.value || !after.value ||
+       !imgBefore.src || !imgTopup.src || !imgAfter.src){
+        alert("Please fill all fields and capture all photos");
+        return;
+    }
 
-alert("Submitted Successfully");
+    const params = {
+        engineer: engineer.value,
+        team: team.value,
+        date: date.value,
+        time: time.value,
+        siteName: siteName.value,
+        siteId: siteId.value,
+        province: province.value,
+        fuelBefore: before.value,
+        fuelAdded: added.value,
+        fuelAfter: after.value,
+        genset: genset.value,
+        comments: document.querySelector("textarea").value
+    };
 
+    emailjs.send(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        params
+    ).then(function(){
+        alert("Report sent to isoyawi7@gmail.com");
+    }).catch(function(error){
+        alert("Failed to send email");
+        console.log(error);
+    });
 };
 
-function logout(){
-    localStorage.removeItem("loggedIn");   // remove login session
-    window.location.href = "index.html";   // redirect to login page
-}
-
+<script>
+emailjs.init("YOUR_PUBLIC_KEY");
 </script>
 
 </body>
