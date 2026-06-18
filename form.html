@@ -325,13 +325,13 @@ setTimeout(capture,2000);
 
 function capture(){
 
-canvas.width=video.videoWidth;
-canvas.height=video.videoHeight;
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
 
-const ctx=canvas.getContext("2d");
+const ctx = canvas.getContext("2d");
 ctx.drawImage(video,0,0);
 
-let label={
+let label = {
 BEFORE:"BEFORE REFUELLING",
 TOPUP:"REFUELLING IN PROGRESS",
 AFTER:"AFTER REFUELLING"
@@ -347,16 +347,27 @@ ctx.fillText("Site: " + siteName.value + " | " + siteId.value,20,120);
 ctx.fillText("Province: " + province.value,20,150);
 ctx.fillText("Photo Taken By: " + engineer.value,20,180);
 
-let img=canvas.toDataURL("image/png");
+/* =========================
+   FUEL DATA STAMP SECTION
+========================= */
 
-if(mode==="BEFORE") imgBefore.src=img;
-if(mode==="TOPUP") imgTopup.src=img;
-if(mode==="AFTER") imgAfter.src=img;
+let beforeVal = before.value || 0;
+let addedVal  = added.value || 0;
+let afterVal  = after.value || 0;
 
-stream.getTracks().forEach(t=>t.stop());
-video.style.display="none";
+ctx.fillText("Fuel Before: " + beforeVal + " L",20,220);
+ctx.fillText("Fuel TopUp: " + addedVal + " L",20,250);
+ctx.fillText("Fuel After: " + afterVal + " L",20,280);
+
+let img = canvas.toDataURL("image/png");
+
+if(mode==="BEFORE") imgBefore.src = img;
+if(mode==="TOPUP") imgTopup.src = img;
+if(mode==="AFTER") imgAfter.src = img;
+
+stream.getTracks().forEach(t => t.stop());
+video.style.display = "none";
 }
-
 /* RESET */
 function resetPhoto(type){
 if(type==="BEFORE") imgBefore.src="";
