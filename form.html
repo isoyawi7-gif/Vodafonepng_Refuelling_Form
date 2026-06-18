@@ -117,13 +117,27 @@ video {width:100%; display:none;}
 </div>
 
 <!-- REGION -->
-<select id="region" onchange="updateProvinces()">
-    <option value="">Select Region</option>
-    <option value="Momase">Momase</option>
-    <option value="Highlands">Highlands</option>
-    <option value="Southern">Southern</option>
-    <option value="NGI">New Guinea Islands</option>
-</select>
+<div class="row">
+
+    <div class="form-group">
+        <label>Region</label>
+        <select id="region" onchange="updateProvinces()">
+            <option value="">Select Region</option>
+            <option value="Momase">Momase</option>
+            <option value="Highlands">Highlands</option>
+            <option value="Southern">Southern</option>
+            <option value="NGI">New Guinea Islands</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Province</label>
+        <select id="province">
+            <option value="">Select Province</option>
+        </select>
+    </div>
+
+</div>
 
 <!-- TOWER -->
 <div class="form-group">
@@ -273,7 +287,10 @@ Powered by Iso Yawi | System Creator
 </div>
 
 </div>
+<!-- EMAILJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+    <!-- MAIN JS -->
 <script>
 
 /* PPL TOGGLE */
@@ -363,7 +380,7 @@ function updateProvinces(){
     let list = [];
 
     /* MOMASE REGION */
-    if(region === "Momase"){
+    if(region === "Momase + EHP"){
         list = [
             "Eastern Highlands",
             "Morobe",
@@ -473,9 +490,6 @@ function logout(){
 }
 
 </script>
-
-<!-- EMAILJS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 </body>
 </html>
