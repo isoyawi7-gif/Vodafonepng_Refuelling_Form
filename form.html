@@ -270,6 +270,15 @@ After Photo
 <input placeholder="Vehicle Reg">
 <textarea placeholder="Comments"></textarea>
 
+    <div class="row">
+    <div class="form-group">
+        <button type="button" onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+    <div class="form-group">
+        <button type="button" onclick="downloadExcel()">Download Excel</button>
+    </div>
+</div>
 <div class="row">
     <div class="form-group">
         <button type="submit">Send</button>
@@ -502,7 +511,71 @@ function logout(){
     location.reload();
 }
 
-</script>
+function downloadPDF(){
 
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+
+let line = 10;
+
+doc.setFontSize(12);
+doc.text("Vodafone PNG Refuelling Report", 10, line); line += 10;
+
+doc.text("Engineer: " + engineer.value, 10, line); line += 10;
+doc.text("Team: " + team.value, 10, line); line += 10;
+doc.text("Date: " + date.value + " " + time.value, 10, line); line += 10;
+
+doc.text("Site: " + siteName.value + " | " + siteId.value, 10, line); line += 10;
+doc.text("Region: " + region.value, 10, line); line += 10;
+doc.text("Province: " + province.value, 10, line); line += 10;
+
+doc.text("Genset: " + genset.value, 10, line); line += 10;
+
+doc.text("Fuel Before: " + before.value + " L", 10, line); line += 10;
+doc.text("Fuel TopUp: " + added.value + " L", 10, line); line += 10;
+doc.text("Fuel After: " + after.value + " L", 10, line); line += 10;
+
+doc.text("PPL: " + ppl.value, 10, line); line += 10;
+
+doc.text("Comments: " + document.querySelector("textarea").value, 10, line);
+
+doc.save("fuel_report.pdf");
+}
+
+function downloadExcel(){
+
+let data = [
+{
+Engineer: engineer.value,
+Team: team.value,
+Date: date.value,
+Time: time.value,
+Site: siteName.value,
+SiteID: siteId.value,
+Region: region.value,
+Province: province.value,
+Genset: genset.value,
+FuelBefore: before.value,
+FuelTopUp: added.value,
+FuelAfter: after.value,
+PPL: ppl.value,
+Comments: document.querySelector("textarea").value
+}
+];
+
+let ws = XLSX.utils.json_to_sheet(data);
+let wb = XLSX.utils.book_new();
+
+XLSX.utils.book_append_sheet(wb, ws, "Fuel Report");
+
+XLSX.writeFile(wb, "fuel_report.xlsx");
+}
+
+</script>
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
