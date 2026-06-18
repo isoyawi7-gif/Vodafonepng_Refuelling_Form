@@ -511,66 +511,131 @@ function logout(){
     location.reload();
 }
 
+/* Download PDF JS */
 function downloadPDF(){
 
 const { jsPDF } = window.jspdf;
 const doc = new jsPDF();
 
-let line = 10;
+let y = 10;
 
-doc.setFontSize(12);
-doc.text("Vodafone PNG Refuelling Report", 10, line); line += 10;
+doc.setFontSize(16);
+doc.text("Vodafone PNG Refuelling Report", 10, y);
+y += 10;
 
-doc.text("Engineer: " + engineer.value, 10, line); line += 10;
-doc.text("Team: " + team.value, 10, line); line += 10;
-doc.text("Date: " + date.value + " " + time.value, 10, line); line += 10;
+doc.setFontSize(11);
 
-doc.text("Site: " + siteName.value + " | " + siteId.value, 10, line); line += 10;
-doc.text("Region: " + region.value, 10, line); line += 10;
-doc.text("Province: " + province.value, 10, line); line += 10;
+doc.text("Engineer: " + engineer.value, 10, y); y += 8;
+doc.text("Team: " + team.value, 10, y); y += 8;
+doc.text("Date: " + date.value + " " + time.value, 10, y); y += 8;
 
-doc.text("Genset: " + genset.value, 10, line); line += 10;
+doc.text("Site: " + siteName.value + " | " + siteId.value, 10, y); y += 8;
+doc.text("Region: " + region.value, 10, y); y += 8;
+doc.text("Province: " + province.value, 10, y); y += 8;
 
-doc.text("Fuel Before: " + before.value + " L", 10, line); line += 10;
-doc.text("Fuel TopUp: " + added.value + " L", 10, line); line += 10;
-doc.text("Fuel After: " + after.value + " L", 10, line); line += 10;
+doc.text("Tower: " + tower.value, 10, y); y += 8;
+doc.text("Genset: " + genset.value, 10, y); y += 8;
 
-doc.text("PPL: " + ppl.value, 10, line); line += 10;
+doc.text("Fuel Before: " + before.value + " L", 10, y); y += 8;
+doc.text("Fuel TopUp: " + added.value + " L", 10, y); y += 8;
+doc.text("Fuel After: " + after.value + " L", 10, y); y += 8;
 
-doc.text("Comments: " + document.querySelector("textarea").value, 10, line);
+doc.text("Engine Oil: " + oilLevel.value, 10, y); y += 8;
+doc.text("Coolant: " + coolantLevel.value, 10, y); y += 8;
+doc.text("RPM: " + rpm.value, 10, y); y += 8;
 
-doc.save("fuel_report.pdf");
+doc.text("PPL Connected: " + ppl.value, 10, y); y += 8;
+
+if(ppl.value === "Yes"){
+    doc.text("Meter No: " + meter.value, 10, y); y += 8;
+    doc.text("Reading: " + reading.value, 10, y); y += 8;
 }
 
-function downloadExcel(){
+doc.text("Comments:", 10, y);
+y += 8;
 
-let data = [
-{
-Engineer: engineer.value,
-Team: team.value,
-Date: date.value,
-Time: time.value,
-Site: siteName.value,
-SiteID: siteId.value,
-Region: region.value,
-Province: province.value,
-Genset: genset.value,
-FuelBefore: before.value,
-FuelTopUp: added.value,
-FuelAfter: after.value,
-PPL: ppl.value,
-Comments: document.querySelector("textarea").value
+doc.text(
+document.querySelector("textarea").value || "None",
+10,
+y
+);
+
+y += 20;
+
+/* BEFORE PHOTO */
+
+if(imgBefore.src){
+
+doc.text("Before Refuelling",10,y);
+y += 5;
+
+doc.addImage(
+imgBefore.src,
+"PNG",
+10,
+y,
+80,
+60
+);
+
+y += 70;
 }
-];
 
-let ws = XLSX.utils.json_to_sheet(data);
-let wb = XLSX.utils.book_new();
+/* TOPUP PHOTO */
 
-XLSX.utils.book_append_sheet(wb, ws, "Fuel Report");
+if(imgTopup.src){
 
-XLSX.writeFile(wb, "fuel_report.xlsx");
+if(y > 220){
+doc.addPage();
+y = 10;
 }
 
+doc.text("TopUp Photo",10,y);
+y += 5;
+
+doc.addImage(
+imgTopup.src,
+"PNG",
+10,
+y,
+80,
+60
+);
+
+y += 70;
+}
+
+/* AFTER PHOTO */
+
+if(imgAfter.src){
+
+if(y > 220){
+doc.addPage();
+y = 10;
+}
+
+doc.text("After Refuelling",10,y);
+y += 5;
+
+doc.addImage(
+imgAfter.src,
+"PNG",
+10,
+y,
+80,
+60
+);
+
+y += 70;
+}
+
+doc.save(
+siteId.value + "_" +
+date.value +
+"_Refuelling_Report.pdf"
+);
+
+}
 </script>
 <!-- PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
