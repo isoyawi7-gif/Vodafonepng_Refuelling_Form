@@ -337,14 +337,15 @@ TOPUP:"REFUELLING IN PROGRESS",
 AFTER:"AFTER REFUELLING"
 }[mode];
 
-ctx.fillStyle="red";
-ctx.font="18px Arial";
+ctx.fillStyle = "red";
+ctx.font = "18px Arial";
 
-ctx.fillText("Vodafone PNG",20,30);
+ctx.fillText("Vodafone PNG Refuelling Report",20,30);
 ctx.fillText(label,20,60);
-ctx.fillText(new Date().toLocaleString(),20,90);
-ctx.fillText(siteName.value+" | "+siteId.value,20,120);
-ctx.fillText(engineer.value,20,130");
+ctx.fillText("Date/Time: " + new Date().toLocaleString(),20,90);
+ctx.fillText("Site: " + siteName.value + " | " + siteId.value,20,120);
+ctx.fillText("Province: " + province.value,20,150);
+ctx.fillText("Photo Taken By: " + engineer.value,20,180);
 
 let img=canvas.toDataURL("image/png");
 
