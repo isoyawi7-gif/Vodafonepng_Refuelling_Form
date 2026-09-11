@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Vodafone PNG Refuelling System</title>
+
 
 <!-- =========================================================
      EMAILJS
 ========================================================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 
 <!-- =========================================================
      PDF
 ========================================================= -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+
 <!-- =========================================================
-     EXCEL
+     EXCELJS
 ========================================================= -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
 
 
 <style>
@@ -46,6 +55,7 @@ body {
     box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
+
 /* =========================================================
    HEADER
 ========================================================= */
@@ -69,6 +79,7 @@ body {
     color: #666;
 }
 
+
 /* =========================================================
    SECTIONS
 ========================================================= */
@@ -88,6 +99,7 @@ body {
     padding-bottom: 8px;
 }
 
+
 /* =========================================================
    ROW
 ========================================================= */
@@ -104,6 +116,7 @@ body {
     margin-bottom: 10px;
 }
 
+
 /* =========================================================
    LABELS
 ========================================================= */
@@ -113,6 +126,7 @@ label {
     font-weight: bold;
     display: block;
 }
+
 
 /* =========================================================
    INPUTS
@@ -133,6 +147,7 @@ textarea {
     min-height: 80px;
     resize: vertical;
 }
+
 
 /* =========================================================
    BUTTONS
@@ -174,6 +189,7 @@ button:disabled {
     background: #106b29;
 }
 
+
 /* =========================================================
    CAMERA
 ========================================================= */
@@ -190,6 +206,7 @@ button:disabled {
 #canvas {
     display: none;
 }
+
 
 /* =========================================================
    PHOTO GRID
@@ -227,6 +244,32 @@ button:disabled {
     font-weight: bold;
 }
 
+
+/* =========================================================
+   GPS STATUS
+========================================================= */
+
+.gps-status {
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 8px 0;
+    font-size: 11px;
+    text-align: left;
+    color: #555;
+}
+
+.gps-good {
+    color: #168a35;
+    font-weight: bold;
+}
+
+.gps-error {
+    color: #e60000;
+    font-weight: bold;
+}
+
+
 /* =========================================================
    SEND AREA
 ========================================================= */
@@ -252,6 +295,7 @@ button:disabled {
     font-size: 14px;
 }
 
+
 /* =========================================================
    FOOTER
 ========================================================= */
@@ -262,6 +306,7 @@ button:disabled {
     margin-top: 25px;
     color: #777;
 }
+
 
 /* =========================================================
    MOBILE
@@ -302,7 +347,7 @@ button:disabled {
     <h1>Vodafone PNG Refuelling</h1>
 
     <p>
-        Genset Refuelling Report
+        Genset Refuelling & Site Inspection Report
     </p>
 
 </div>
@@ -359,7 +404,6 @@ button:disabled {
 <div class="section">
 
     <h2>2. Site Information</h2>
-
 
     <div class="row">
 
@@ -516,7 +560,6 @@ button:disabled {
 
     <h2>3. Genset Information</h2>
 
-
     <div class="form-group">
 
         <label>Genset / DG Type *</label>
@@ -597,7 +640,6 @@ button:disabled {
 
     <h2>4. Refuelling Details</h2>
 
-
     <div class="row">
 
         <div class="form-group">
@@ -672,13 +714,21 @@ button:disabled {
 
     <h2>5. Refuelling Photos</h2>
 
-
     <p style="font-size:12px;color:#666;">
 
-        Capture all three photos. The system automatically stamps
-        the photo with site, engineer, date/time and fuel information.
+        Capture all three photos. The system records the current
+        GPS position and stamps the location directly onto each photo.
 
     </p>
+
+
+    <div
+        id="gpsMainStatus"
+        class="gps-status">
+
+        GPS: Waiting for photo capture
+
+    </div>
 
 
     <video
@@ -709,6 +759,15 @@ button:disabled {
                 class="photo-status">
 
                 Not captured
+
+            </div>
+
+
+            <div
+                id="gpsBefore"
+                class="gps-status">
+
+                GPS: Not captured
 
             </div>
 
@@ -757,6 +816,15 @@ button:disabled {
             </div>
 
 
+            <div
+                id="gpsTopup"
+                class="gps-status">
+
+                GPS: Not captured
+
+            </div>
+
+
             <button
                 type="button"
                 onclick="openCamera('TOPUP')">
@@ -801,6 +869,15 @@ button:disabled {
             </div>
 
 
+            <div
+                id="gpsAfter"
+                class="gps-status">
+
+                GPS: Not captured
+
+            </div>
+
+
             <button
                 type="button"
                 onclick="openCamera('AFTER')">
@@ -837,7 +914,6 @@ button:disabled {
 <div class="section">
 
     <h2>6. Power Information</h2>
-
 
     <div class="form-group">
 
@@ -906,7 +982,6 @@ button:disabled {
 
     <h2>7. Driver & Vehicle</h2>
 
-
     <div class="row">
 
         <div class="form-group">
@@ -957,7 +1032,6 @@ button:disabled {
 
     <h2>8. Report</h2>
 
-
     <div class="row">
 
         <div class="form-group">
@@ -992,7 +1066,6 @@ button:disabled {
 
     <div class="send-area">
 
-
         <button
             type="submit"
             id="sendButton"
@@ -1006,10 +1079,6 @@ button:disabled {
         <br>
         <br>
 
-
-        <!-- =====================================================
-             LOGOUT BUTTON
-        ====================================================== -->
 
         <button
             type="button"
@@ -1049,10 +1118,10 @@ button:disabled {
 
 <!-- =========================================================
      JAVASCRIPT
-     ONLY ONE SCRIPT BLOCK
 ========================================================= -->
 
 <script>
+
 
 /* ============================================================
    EMAILJS CONFIGURATION
@@ -1067,9 +1136,19 @@ const EMAILJS_SERVICE_ID =
 const EMAILJS_TEMPLATE_ID =
     "YOUR_TEMPLATE_ID";
 
+/* ============================================================
+   FIXED REPORT RECIPIENT
+============================================================ */
+
+const REPORT_RECIPIENT_EMAIL =
+    "isoyawi7@gmail.com";
+
 
 emailjs.init({
-    publicKey: EMAILJS_PUBLIC_KEY
+
+    publicKey:
+        EMAILJS_PUBLIC_KEY
+
 });
 
 
@@ -1169,6 +1248,28 @@ const sendStatus =
 
 
 /* ============================================================
+   GPS DATA
+============================================================ */
+
+let gpsData = {
+
+    BEFORE: null,
+
+    TOPUP: null,
+
+    AFTER: null
+
+};
+
+
+/* ============================================================
+   CURRENT GPS POSITION
+============================================================ */
+
+let currentGPS = null;
+
+
+/* ============================================================
    DEFAULT DATE / TIME
 ============================================================ */
 
@@ -1177,15 +1278,18 @@ function setCurrentDateTime(){
     const now =
         new Date();
 
+
     date.value =
         now.toISOString()
             .split("T")[0];
+
 
     time.value =
         now.toTimeString()
             .slice(0,5);
 
 }
+
 
 setCurrentDateTime();
 
@@ -1215,55 +1319,75 @@ function updateProvinces(){
     const list = [];
 
 
-    if(region.value === "Momase + EHP"){
+    if(
+        region.value ===
+        "Momase + EHP"
+    ){
 
         list.push(
+
             "Eastern Highlands",
             "Morobe",
             "Madang",
             "East Sepik",
             "West Sepik (Sandaun)"
+
         );
 
     }
 
 
-    if(region.value === "Highlands"){
+    if(
+        region.value ===
+        "Highlands"
+    ){
 
         list.push(
+
             "Western Highlands",
             "Simbu",
             "Jiwaka",
             "Enga",
             "Southern Highlands",
             "Hela"
+
         );
 
     }
 
 
-    if(region.value === "Southern"){
+    if(
+        region.value ===
+        "Southern"
+    ){
 
         list.push(
+
             "National Capital District",
             "Central",
             "Gulf",
             "Oro (Northern)",
             "Milne Bay",
             "Western"
+
         );
 
     }
 
 
-    if(region.value === "NGI"){
+    if(
+        region.value ===
+        "NGI"
+    ){
 
         list.push(
+
             "East New Britain",
             "West New Britain",
             "New Ireland",
             "Autonomous Region of Bougainville",
             "Manus"
+
         );
 
     }
@@ -1281,9 +1405,14 @@ function updateProvinces(){
                     "option"
                 );
 
-            option.value = p;
 
-            option.textContent = p;
+            option.value =
+                p;
+
+
+            option.textContent =
+                p;
+
 
             province.appendChild(
                 option
@@ -1302,13 +1431,21 @@ function updateProvinces(){
 function calculateFuel(){
 
     const beforeValue =
-        parseFloat(before.value) || 0;
+        parseFloat(
+            before.value
+        ) || 0;
+
 
     const addedValue =
-        parseFloat(added.value) || 0;
+        parseFloat(
+            added.value
+        ) || 0;
+
 
     const afterValue =
-        parseFloat(after.value) || 0;
+        parseFloat(
+            after.value
+        ) || 0;
 
 
     const expected =
@@ -1324,8 +1461,245 @@ function calculateFuel(){
     document.getElementById(
         "calc"
     ).innerHTML =
+
         `Expected: ${expected.toFixed(1)} L |
          Difference: ${difference.toFixed(1)} L`;
+
+}
+
+
+/* ============================================================
+   GET GPS LOCATION
+============================================================ */
+
+function getGPSLocation(){
+
+    return new Promise(
+        function(resolve,reject){
+
+            if(
+                !navigator.geolocation
+            ){
+
+                reject(
+                    new Error(
+                        "Geolocation is not supported by this browser."
+                    )
+                );
+
+                return;
+
+            }
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position){
+
+                    const gps = {
+
+                        latitude:
+                            position.coords.latitude,
+
+                        longitude:
+                            position.coords.longitude,
+
+                        accuracy:
+                            position.coords.accuracy,
+
+                        timestamp:
+                            new Date(
+                                position.timestamp
+                            ).toLocaleString()
+
+                    };
+
+
+                    currentGPS =
+                        gps;
+
+
+                    resolve(
+                        gps
+                    );
+
+                },
+
+
+                function(error){
+
+                    let message =
+                        "Unable to obtain GPS location.";
+
+
+                    if(
+                        error.code ===
+                        error.PERMISSION_DENIED
+                    ){
+
+                        message =
+                            "GPS permission was denied.";
+
+                    }
+
+
+                    if(
+                        error.code ===
+                        error.POSITION_UNAVAILABLE
+                    ){
+
+                        message =
+                            "GPS position is unavailable.";
+
+                    }
+
+
+                    if(
+                        error.code ===
+                        error.TIMEOUT
+                    ){
+
+                        message =
+                            "GPS request timed out.";
+
+                    }
+
+
+                    reject(
+                        new Error(
+                            message
+                        )
+                    );
+
+                },
+
+
+                {
+
+                    enableHighAccuracy:
+                        true,
+
+                    timeout:
+                        15000,
+
+                    maximumAge:
+                        0
+
+                }
+
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   FORMAT GPS
+============================================================ */
+
+function formatGPS(gps){
+
+    if(!gps){
+
+        return "GPS unavailable";
+
+    }
+
+
+    return (
+
+        "GPS: " +
+
+        gps.latitude.toFixed(6) +
+
+        ", " +
+
+        gps.longitude.toFixed(6) +
+
+        " | ±" +
+
+        Math.round(
+            gps.accuracy
+        ) +
+
+        " m"
+
+    );
+
+}
+
+
+/* ============================================================
+   UPDATE GPS DISPLAY
+============================================================ */
+
+function updateGPSDisplay(
+    type,
+    gps
+){
+
+    let elementId = "";
+
+
+    if(type === "BEFORE"){
+
+        elementId =
+            "gpsBefore";
+
+    }
+
+
+    if(type === "TOPUP"){
+
+        elementId =
+            "gpsTopup";
+
+    }
+
+
+    if(type === "AFTER"){
+
+        elementId =
+            "gpsAfter";
+
+    }
+
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    if(gps){
+
+        element.innerHTML =
+
+            `<span class="gps-good">
+            ✓ ${formatGPS(gps)}
+            </span>`;
+
+    }
+
+
+    else{
+
+        element.innerHTML =
+
+            `<span class="gps-error">
+            GPS unavailable
+            </span>`;
+
+    }
 
 }
 
@@ -1360,8 +1734,112 @@ async function openCamera(type){
     }
 
 
-    mode = type;
+    mode =
+        type;
 
+
+    document.getElementById(
+        "gpsMainStatus"
+    ).textContent =
+        "GPS: Obtaining current location...";
+
+
+    /* ========================================================
+       GET LIVE GPS BEFORE PHOTO
+    ======================================================== */
+
+    let gps;
+
+
+    try{
+
+        gps =
+            await getGPSLocation();
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            "GPS ERROR:",
+            error
+        );
+
+
+        const continueWithoutGPS =
+            confirm(
+
+                error.message +
+
+                "\n\n" +
+
+                "The photo cannot contain a verified GPS position " +
+                "unless location permission is allowed." +
+
+                "\n\n" +
+
+                "Continue without GPS?"
+
+            );
+
+
+        if(!continueWithoutGPS){
+
+            document.getElementById(
+                "gpsMainStatus"
+            ).textContent =
+                "GPS: Capture cancelled";
+
+            return;
+
+        }
+
+
+        gps =
+            null;
+
+    }
+
+
+    if(gps){
+
+        gpsData[type] =
+            gps;
+
+
+        updateGPSDisplay(
+            type,
+            gps
+        );
+
+
+        document.getElementById(
+            "gpsMainStatus"
+        ).textContent =
+            "✓ " +
+            formatGPS(gps);
+
+    }
+
+
+    else{
+
+        gpsData[type] =
+            null;
+
+
+        document.getElementById(
+            "gpsMainStatus"
+        ).textContent =
+            "GPS: Not available";
+
+    }
+
+
+    /* ========================================================
+       OPEN CAMERA
+    ======================================================== */
 
     try{
 
@@ -1369,12 +1847,18 @@ async function openCamera(type){
             await navigator.mediaDevices.getUserMedia({
 
                 video: {
+
                     facingMode: {
-                        ideal: "environment"
+
+                        ideal:
+                            "environment"
+
                     }
+
                 },
 
-                audio: false
+                audio:
+                    false
 
             });
 
@@ -1388,8 +1872,11 @@ async function openCamera(type){
 
 
         setTimeout(
+
             capturePhoto,
+
             1500
+
         );
 
     }
@@ -1401,9 +1888,13 @@ async function openCamera(type){
             error
         );
 
+
         alert(
             "Camera could not be opened. Please allow camera access."
         );
+
+
+        stopCamera();
 
     }
 
@@ -1416,13 +1907,17 @@ async function openCamera(type){
 
 function capturePhoto(){
 
-    if(!video.videoWidth){
+    if(
+        !video.videoWidth
+    ){
 
         alert(
             "Camera is not ready. Please try again."
         );
 
+
         stopCamera();
+
 
         return;
 
@@ -1432,21 +1927,36 @@ function capturePhoto(){
     canvas.width =
         video.videoWidth;
 
+
     canvas.height =
         video.videoHeight;
 
 
     const ctx =
-        canvas.getContext("2d");
+        canvas.getContext(
+            "2d"
+        );
 
 
     ctx.drawImage(
+
         video,
+
         0,
         0,
+
         canvas.width,
         canvas.height
+
     );
+
+
+    /* ========================================================
+       GPS
+    ======================================================== */
+
+    const gps =
+        gpsData[mode];
 
 
     /* ========================================================
@@ -1492,6 +2002,40 @@ function capturePhoto(){
     ];
 
 
+    if(gps){
+
+        stamp.push(
+
+            "GPS: " +
+            gps.latitude.toFixed(6) +
+            ", " +
+            gps.longitude.toFixed(6)
+
+        );
+
+
+        stamp.push(
+
+            "GPS Accuracy: ±" +
+            Math.round(
+                gps.accuracy
+            ) +
+            " m"
+
+        );
+
+    }
+
+
+    else{
+
+        stamp.push(
+            "GPS: UNAVAILABLE"
+        );
+
+    }
+
+
     const lineHeight =
         26;
 
@@ -1502,65 +2046,100 @@ function capturePhoto(){
         20;
 
 
-    /* Stamp background */
+    /* ========================================================
+       STAMP BACKGROUND
+    ======================================================== */
 
     ctx.fillStyle =
-        "rgba(0,0,0,0.70)";
+        "rgba(0,0,0,0.72)";
 
 
     ctx.fillRect(
+
         0,
-        canvas.height - boxHeight,
+
+        canvas.height -
+        boxHeight,
+
         canvas.width,
+
         boxHeight
+
     );
 
 
-    /* Stamp text */
+    /* ========================================================
+       STAMP TEXT
+    ======================================================== */
 
     ctx.fillStyle =
         "white";
 
 
     ctx.font =
+
         Math.max(
             16,
             canvas.width / 55
         ) +
+
         "px Arial";
 
 
     stamp.forEach(
-        function(text,index){
+
+        function(
+            text,
+            index
+        ){
 
             ctx.fillText(
+
                 text,
+
                 15,
+
                 canvas.height -
                 boxHeight +
                 25 +
                 index *
                 lineHeight
+
             );
 
         }
+
     );
 
 
-    /* Resize/compress */
+    /* ========================================================
+       RESIZE / COMPRESS
+    ======================================================== */
 
     const image =
         resizeCanvas(
+
             canvas,
+
             1200,
+
             0.75
+
         );
 
 
-    if(mode === "BEFORE"){
+    /* ========================================================
+       SAVE PHOTO
+    ======================================================== */
+
+    if(
+        mode ===
+        "BEFORE"
+    ){
 
         imgBefore.src =
             image;
+
 
         document.getElementById(
             "statusBefore"
@@ -1570,10 +2149,14 @@ function capturePhoto(){
     }
 
 
-    if(mode === "TOPUP"){
+    if(
+        mode ===
+        "TOPUP"
+    ){
 
         imgTopup.src =
             image;
+
 
         document.getElementById(
             "statusTopup"
@@ -1583,10 +2166,14 @@ function capturePhoto(){
     }
 
 
-    if(mode === "AFTER"){
+    if(
+        mode ===
+        "AFTER"
+    ){
 
         imgAfter.src =
             image;
+
 
         document.getElementById(
             "statusAfter"
@@ -1613,9 +2200,12 @@ function resizeCanvas(
 
     const scale =
         Math.min(
+
             1,
+
             maxWidth /
             sourceCanvas.width
+
         );
 
 
@@ -1642,17 +2232,24 @@ function resizeCanvas(
 
 
     ctx.drawImage(
+
         sourceCanvas,
+
         0,
         0,
+
         newCanvas.width,
         newCanvas.height
+
     );
 
 
     return newCanvas.toDataURL(
+
         "image/jpeg",
+
         quality
+
     );
 
 }
@@ -1669,10 +2266,15 @@ function stopCamera(){
         stream
             .getTracks()
             .forEach(
-                track => track.stop()
+
+                track =>
+                    track.stop()
+
             );
 
-        stream = null;
+
+        stream =
+            null;
 
     }
 
@@ -1693,12 +2295,7 @@ function stopCamera(){
 
 function logout(){
 
-    /* Stop camera */
-
     stopCamera();
-
-
-    /* Return to login page */
 
     window.location.href =
         "index.html";
@@ -1712,41 +2309,80 @@ function logout(){
 
 function resetPhoto(type){
 
-    if(type === "BEFORE"){
+    if(
+        type ===
+        "BEFORE"
+    ){
 
         imgBefore.src =
             "";
+
+        gpsData.BEFORE =
+            null;
+
 
         document.getElementById(
             "statusBefore"
         ).textContent =
             "Not captured";
 
+
+        document.getElementById(
+            "gpsBefore"
+        ).textContent =
+            "GPS: Not captured";
+
     }
 
 
-    if(type === "TOPUP"){
+    if(
+        type ===
+        "TOPUP"
+    ){
 
         imgTopup.src =
             "";
+
+        gpsData.TOPUP =
+            null;
+
 
         document.getElementById(
             "statusTopup"
         ).textContent =
             "Not captured";
 
+
+        document.getElementById(
+            "gpsTopup"
+        ).textContent =
+            "GPS: Not captured";
+
     }
 
 
-    if(type === "AFTER"){
+    if(
+        type ===
+        "AFTER"
+    ){
 
         imgAfter.src =
             "";
+
+        gpsData.AFTER =
+            null;
+
 
         document.getElementById(
             "statusAfter"
         ).textContent =
             "Not captured";
+
+
+        document.getElementById(
+            "gpsAfter"
+        ).textContent =
+            "GPS: Not captured";
 
     }
 
@@ -1825,9 +2461,52 @@ function getReportData(){
             vehicle.value,
 
         comments:
-            comments.value
+            comments.value,
+
+        gpsBefore:
+            gpsData.BEFORE,
+
+        gpsTopup:
+            gpsData.TOPUP,
+
+        gpsAfter:
+            gpsData.AFTER
 
     };
+
+}
+
+
+/* ============================================================
+   GPS TEXT
+============================================================ */
+
+function gpsText(gps){
+
+    if(!gps){
+
+        return "GPS unavailable";
+
+    }
+
+
+    return (
+
+        gps.latitude.toFixed(6) +
+
+        ", " +
+
+        gps.longitude.toFixed(6) +
+
+        " (±" +
+
+        Math.round(
+            gps.accuracy
+        ) +
+
+        " m)"
+
+    );
 
 }
 
@@ -1838,7 +2517,9 @@ function getReportData(){
 
 function generatePDF(){
 
-    const { jsPDF } =
+    const {
+        jsPDF
+    } =
         window.jspdf;
 
 
@@ -1849,8 +2530,6 @@ function generatePDF(){
     let y =
         15;
 
-
-    /* Title */
 
     doc.setFontSize(
         18
@@ -1935,6 +2614,7 @@ function generatePDF(){
 
 
     lines.forEach(
+
         function(line){
 
             doc.text(
@@ -1943,16 +2623,19 @@ function generatePDF(){
                 y
             );
 
+
             y +=
                 7;
 
         }
+
     );
 
 
-    /* PPL details */
-
-    if(data.ppl === "Yes"){
+    if(
+        data.ppl ===
+        "Yes"
+    ){
 
         doc.text(
             "Meter Number: " +
@@ -1960,6 +2643,7 @@ function generatePDF(){
             10,
             y
         );
+
 
         y +=
             7;
@@ -1972,13 +2656,12 @@ function generatePDF(){
             y
         );
 
+
         y +=
             7;
 
     }
 
-
-    /* Driver */
 
     doc.text(
         "Driver: " +
@@ -1987,11 +2670,10 @@ function generatePDF(){
         y
     );
 
+
     y +=
         7;
 
-
-    /* Vehicle */
 
     doc.text(
         "Vehicle: " +
@@ -2000,11 +2682,10 @@ function generatePDF(){
         y
     );
 
+
     y +=
         7;
 
-
-    /* Comments */
 
     doc.text(
         "Comments:",
@@ -2012,15 +2693,19 @@ function generatePDF(){
         y
     );
 
+
     y +=
         6;
 
 
     const commentLines =
         doc.splitTextToSize(
+
             data.comments ||
             "None",
+
             180
+
         );
 
 
@@ -2034,6 +2719,67 @@ function generatePDF(){
     y +=
         commentLines.length *
         6 +
+        10;
+
+
+    /* ========================================================
+       GPS SUMMARY
+    ======================================================== */
+
+    doc.setFontSize(
+        11
+    );
+
+
+    doc.text(
+        "GPS Locations:",
+        10,
+        y
+    );
+
+
+    y +=
+        7;
+
+
+    doc.setFontSize(
+        9
+    );
+
+
+    doc.text(
+        "Before: " +
+        gpsText(data.gpsBefore),
+        10,
+        y
+    );
+
+
+    y +=
+        6;
+
+
+    doc.text(
+        "TopUp: " +
+        gpsText(data.gpsTopup),
+        10,
+        y
+    );
+
+
+    y +=
+        6;
+
+
+    doc.text(
+        "After: " +
+        gpsText(data.gpsAfter),
+        10,
+        y
+    );
+
+
+    y +=
         10;
 
 
@@ -2074,16 +2820,21 @@ function generatePDF(){
 
 
     photos.forEach(
+
         function(photo){
 
-            if(!photo.src){
+            if(
+                !photo.src
+            ){
 
                 return;
 
             }
 
 
-            if(y > 210){
+            if(
+                y > 210
+            ){
 
                 doc.addPage();
 
@@ -2110,12 +2861,19 @@ function generatePDF(){
 
 
             doc.addImage(
+
                 photo.src,
+
                 "JPEG",
+
                 10,
+
                 y,
+
                 90,
+
                 60
+
             );
 
 
@@ -2123,6 +2881,7 @@ function generatePDF(){
                 70;
 
         }
+
     );
 
 
@@ -2147,6 +2906,7 @@ function downloadPDF(){
             "Please capture all three photos first."
         );
 
+
         return;
 
     }
@@ -2157,36 +2917,103 @@ function downloadPDF(){
 
 
     doc.save(
+
         siteId.value +
         "_" +
         date.value +
         "_Refuelling_Report.pdf"
+
     );
 
 }
 
 
 /* ============================================================
-   CREATE EXCEL
+   CREATE EXCEL WITH PHOTOS + GPS
 ============================================================ */
 
-function createExcel(){
+async function createExcelBlob(){
 
     const data =
         getReportData();
 
 
+    /* ========================================================
+       CREATE WORKBOOK
+    ======================================================== */
+
+    const workbook =
+        new ExcelJS.Workbook();
+
+
+    /* ========================================================
+       REPORT SHEET
+    ======================================================== */
+
+    const sheet =
+        workbook.addWorksheet(
+            "Refuelling Report"
+        );
+
+
+    sheet.columns = [
+
+        {
+            width: 32
+        },
+
+        {
+            width: 55
+        }
+
+    ];
+
+
+    sheet.mergeCells(
+        "A1:B1"
+    );
+
+
+    sheet.getCell(
+        "A1"
+    ).value =
+        "VODAFONE PNG REFUELLING REPORT";
+
+
+    sheet.getCell(
+        "A1"
+    ).font = {
+
+        bold: true,
+        size: 16
+
+    };
+
+
+    sheet.getCell(
+        "A1"
+    ).alignment = {
+
+        horizontal:
+            "center",
+
+        vertical:
+            "middle"
+
+    };
+
+
+    sheet.getRow(
+        1
+    ).height =
+        30;
+
+
+    /* ========================================================
+       REPORT DATA
+    ======================================================== */
+
     const rows = [
-
-        [
-            "VODAFONE PNG REFUELLING REPORT",
-            ""
-        ],
-
-        [
-            "",
-            ""
-        ],
 
         [
             "Field Engineer",
@@ -2272,10 +3099,13 @@ function createExcel(){
             "Expected Fuel (L)",
 
             (
+
                 Number(
                     data.fuelBefore ||
                     0
-                ) +
+                )
+
+                +
 
                 Number(
                     data.fuelAdded ||
@@ -2290,16 +3120,22 @@ function createExcel(){
             "Fuel Difference (L)",
 
             (
+
                 Number(
                     data.fuelAfter ||
                     0
-                ) -
+                )
+
+                -
 
                 (
+
                     Number(
                         data.fuelBefore ||
                         0
-                    ) +
+                    )
+
+                    +
 
                     Number(
                         data.fuelAdded ||
@@ -2340,94 +3176,480 @@ function createExcel(){
         [
             "Comments",
             data.comments
-        ],
-
-        [
-            "",
-            ""
-        ],
-
-        [
-            "Photos",
-            "Captured"
-        ],
-
-        [
-            "Before Photo",
-            imgBefore.src
-                ? "YES"
-                : "NO"
-        ],
-
-        [
-            "TopUp Photo",
-            imgTopup.src
-                ? "YES"
-                : "NO"
-        ],
-
-        [
-            "After Photo",
-            imgAfter.src
-                ? "YES"
-                : "NO"
         ]
 
     ];
 
 
-    const worksheet =
-        XLSX.utils.aoa_to_sheet(
-            rows
+    rows.forEach(
+
+        function(rowData){
+
+            const row =
+                sheet.addRow(
+                    rowData
+                );
+
+
+            row.getCell(
+                1
+            ).font = {
+
+                bold:
+                    true
+
+            };
+
+        }
+
+    );
+
+
+    /* ========================================================
+       GPS INFORMATION
+    ======================================================== */
+
+    sheet.addRow(
+        []
+    );
+
+
+    const gpsHeader =
+        sheet.addRow(
+            [
+                "GPS PHOTO LOCATIONS",
+                ""
+            ]
         );
 
 
-    worksheet["!cols"] = [
+    gpsHeader.getCell(
+        1
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            13
+
+    };
+
+
+    sheet.addRow(
+
+        [
+            "Before GPS",
+            gpsText(
+                data.gpsBefore
+            )
+        ]
+
+    );
+
+
+    sheet.addRow(
+
+        [
+            "TopUp GPS",
+            gpsText(
+                data.gpsTopup
+            )
+        ]
+
+    );
+
+
+    sheet.addRow(
+
+        [
+            "After GPS",
+            gpsText(
+                data.gpsAfter
+            )
+        ]
+
+    );
+
+
+    /* ========================================================
+       PHOTO SHEET
+    ======================================================== */
+
+    const photoSheet =
+        workbook.addWorksheet(
+            "Photos"
+        );
+
+
+    photoSheet.columns = [
 
         {
-            wch: 28
+            width: 5
         },
 
         {
-            wch: 55
+            width: 28
+        },
+
+        {
+            width: 28
+        },
+
+        {
+            width: 28
+        },
+
+        {
+            width: 28
         }
 
     ];
 
 
-    const workbook =
-        XLSX.utils.book_new();
-
-
-    XLSX.utils.book_append_sheet(
-        workbook,
-        worksheet,
-        "Refuelling Report"
+    photoSheet.mergeCells(
+        "B1:E1"
     );
 
 
-    return workbook;
-
-}
-
-
-/* ============================================================
-   DOWNLOAD EXCEL
-============================================================ */
-
-function downloadExcel(){
-
-    const workbook =
-        createExcel();
+    photoSheet.getCell(
+        "B1"
+    ).value =
+        "VODAFONE PNG REFUELLING PHOTOS";
 
 
-    XLSX.writeFile(
-        workbook,
+    photoSheet.getCell(
+        "B1"
+    ).font = {
 
-        siteId.value +
-        "_" +
-        date.value +
-        "_Refuelling_Report.xlsx"
+        bold:
+            true,
+
+        size:
+            16
+
+    };
+
+
+    photoSheet.getCell(
+        "B1"
+    ).alignment = {
+
+        horizontal:
+            "center"
+
+    };
+
+
+    /* ========================================================
+       BEFORE PHOTO
+    ======================================================== */
+
+    if(
+        imgBefore.src
+    ){
+
+        photoSheet.getCell(
+            "B3"
+        ).value =
+            "BEFORE REFUELLING";
+
+
+        photoSheet.getCell(
+            "B3"
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                14
+
+        };
+
+
+        const beforeImage =
+            workbook.addImage({
+
+                base64:
+                    imgBefore.src,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        photoSheet.addImage(
+
+            beforeImage,
+
+            {
+
+                tl: {
+
+                    col:
+                        1,
+
+                    row:
+                        4
+
+                },
+
+                ext: {
+
+                    width:
+                        600,
+
+                    height:
+                        400
+
+                }
+
+            }
+
+        );
+
+
+        photoSheet.getCell(
+            "D3"
+        ).value =
+            "GPS";
+
+
+        photoSheet.getCell(
+            "D3"
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        photoSheet.getCell(
+            "D4"
+        ).value =
+            gpsText(
+                data.gpsBefore
+            );
+
+    }
+
+
+    /* ========================================================
+       TOPUP PHOTO
+    ======================================================== */
+
+    if(
+        imgTopup.src
+    ){
+
+        photoSheet.getCell(
+            "B22"
+        ).value =
+            "TOPUP";
+
+
+        photoSheet.getCell(
+            "B22"
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                14
+
+        };
+
+
+        const topupImage =
+            workbook.addImage({
+
+                base64:
+                    imgTopup.src,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        photoSheet.addImage(
+
+            topupImage,
+
+            {
+
+                tl: {
+
+                    col:
+                        1,
+
+                    row:
+                        23
+
+                },
+
+                ext: {
+
+                    width:
+                        600,
+
+                    height:
+                        400
+
+                }
+
+            }
+
+        );
+
+
+        photoSheet.getCell(
+            "D22"
+        ).value =
+            "GPS";
+
+
+        photoSheet.getCell(
+            "D22"
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        photoSheet.getCell(
+            "D23"
+        ).value =
+            gpsText(
+                data.gpsTopup
+            );
+
+    }
+
+
+    /* ========================================================
+       AFTER PHOTO
+    ======================================================== */
+
+    if(
+        imgAfter.src
+    ){
+
+        photoSheet.getCell(
+            "B41"
+        ).value =
+            "AFTER REFUELLING";
+
+
+        photoSheet.getCell(
+            "B41"
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                14
+
+        };
+
+
+        const afterImage =
+            workbook.addImage({
+
+                base64:
+                    imgAfter.src,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        photoSheet.addImage(
+
+            afterImage,
+
+            {
+
+                tl: {
+
+                    col:
+                        1,
+
+                    row:
+                        42
+
+                },
+
+                ext: {
+
+                    width:
+                        600,
+
+                    height:
+                        400
+
+                }
+
+            }
+
+        );
+
+
+        photoSheet.getCell(
+            "D41"
+        ).value =
+            "GPS";
+
+
+        photoSheet.getCell(
+            "D41"
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        photoSheet.getCell(
+            "D42"
+        ).value =
+            gpsText(
+                data.gpsAfter
+            );
+
+    }
+
+
+    /* ========================================================
+       GENERATE XLSX
+    ======================================================== */
+
+    const buffer =
+        await workbook.xlsx.writeBuffer();
+
+
+    return new Blob(
+
+        [
+            buffer
+        ],
+
+        {
+
+            type:
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+        }
+
     );
 
 }
@@ -2440,6 +3662,7 @@ function downloadExcel(){
 function blobToDataURL(blob){
 
     return new Promise(
+
         function(resolve,reject){
 
             const reader =
@@ -2465,6 +3688,7 @@ function blobToDataURL(blob){
             );
 
         }
+
     );
 
 }
@@ -2499,30 +3723,8 @@ async function getPDFBase64(){
 
 async function getExcelBase64(){
 
-    const workbook =
-        createExcel();
-
-
-    const excelArray =
-        XLSX.write(
-            workbook,
-            {
-                bookType: "xlsx",
-                type: "array"
-            }
-        );
-
-
     const blob =
-        new Blob(
-            [
-                excelArray
-            ],
-            {
-                type:
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            }
-        );
+        await createExcelBlob();
 
 
     return await blobToDataURL(
@@ -2533,10 +3735,100 @@ async function getExcelBase64(){
 
 
 /* ============================================================
+   DOWNLOAD EXCEL
+============================================================ */
+
+async function downloadExcel(){
+
+    if(
+        !imgBefore.src ||
+        !imgTopup.src ||
+        !imgAfter.src
+    ){
+
+        alert(
+            "Please capture BEFORE, TOPUP and AFTER photos first."
+        );
+
+
+        return;
+
+    }
+
+
+    try{
+
+        const blob =
+            await createExcelBlob();
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const a =
+            document.createElement(
+                "a"
+            );
+
+
+        a.href =
+            url;
+
+
+        a.download =
+
+            siteId.value +
+            "_" +
+            date.value +
+            "_Refuelling_Report.xlsx";
+
+
+        document.body.appendChild(
+            a
+        );
+
+
+        a.click();
+
+
+        document.body.removeChild(
+            a
+        );
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            "EXCEL ERROR:",
+            error
+        );
+
+
+        alert(
+            "Could not create Excel file. Please try again."
+        );
+
+    }
+
+}
+
+
+/* ============================================================
    SEND COMPLETE REPORT
 ============================================================ */
 
 form.addEventListener(
+
     "submit",
 
     async function(event){
@@ -2548,7 +3840,9 @@ form.addEventListener(
            HTML VALIDATION
         ==================================================== */
 
-        if(!form.checkValidity()){
+        if(
+            !form.checkValidity()
+        ){
 
             form.reportValidity();
 
@@ -2568,10 +3862,47 @@ form.addEventListener(
         ){
 
             alert(
-                "Please capture Before, TopUp and After photos before sending."
+
+                "Please capture Before, TopUp and After " +
+                "photos before sending."
+
             );
 
+
             return;
+
+        }
+
+
+        /* ====================================================
+           GPS VALIDATION
+        ==================================================== */
+
+        if(
+            !gpsData.BEFORE ||
+            !gpsData.TOPUP ||
+            !gpsData.AFTER
+        ){
+
+            const continueWithoutGPS =
+                confirm(
+
+                    "One or more photos do not have GPS data." +
+
+                    "\n\n" +
+
+                    "Do you want to send the report anyway?"
+
+                );
+
+
+            if(
+                !continueWithoutGPS
+            ){
+
+                return;
+
+            }
 
         }
 
@@ -2596,7 +3927,7 @@ form.addEventListener(
 
 
             /* =================================================
-               GENERATE PDF
+               PDF
             ================================================= */
 
             const pdfBase64 =
@@ -2604,7 +3935,7 @@ form.addEventListener(
 
 
             /* =================================================
-               GENERATE EXCEL
+               EXCEL
             ================================================= */
 
             const excelBase64 =
@@ -2697,6 +4028,26 @@ form.addEventListener(
 
 
                 /* =============================================
+                   GPS DATA
+                ============================================= */
+
+                gps_before:
+                    gpsText(
+                        data.gpsBefore
+                    ),
+
+                gps_topup:
+                    gpsText(
+                        data.gpsTopup
+                    ),
+
+                gps_after:
+                    gpsText(
+                        data.gpsAfter
+                    ),
+
+
+                /* =============================================
                    FILE ATTACHMENTS
                 ============================================= */
 
@@ -2719,7 +4070,7 @@ form.addEventListener(
 
 
             /* =================================================
-               SEND THROUGH EMAILJS
+               SEND EMAIL
             ================================================= */
 
             await emailjs.send(
@@ -2746,25 +4097,28 @@ form.addEventListener(
 
 
             alert(
-                "Complete refuelling report sent successfully.\n\n" +
+
+                "Complete refuelling report sent successfully." +
+
+                "\n\n" +
+
                 "Returning to login page..."
+
             );
 
 
-            /* =================================================
-               RETURN TO LOGIN PAGE
-            ================================================= */
-
             setTimeout(
+
                 function(){
 
                     window.location.href =
                         "index.html";
 
                 },
-                1000
-            );
 
+                1000
+
+            );
 
         }
 
@@ -2790,21 +4144,25 @@ form.addEventListener(
 
 
             alert(
-                "The report could not be sent.\n\n" +
+
+                "The report could not be sent." +
+
+                "\n\n" +
+
                 "Please check your internet connection " +
                 "and EmailJS configuration."
+
             );
-
-
-            return;
 
         }
 
     }
+
 );
 
 </script>
 
 
 </body>
+
 </html>
