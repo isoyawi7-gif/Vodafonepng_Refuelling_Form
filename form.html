@@ -5,9 +5,11 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Vodafone PNG Refuelling System</title>
+
 
 <!-- =========================================================
      EMAILJS
@@ -15,11 +17,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+
 <!-- =========================================================
      PDF
 ========================================================= -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
 <!-- =========================================================
      EXCELJS
@@ -51,6 +55,7 @@ body {
     box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
+
 /* =========================================================
    HEADER
 ========================================================= */
@@ -74,6 +79,7 @@ body {
     color: #666;
 }
 
+
 /* =========================================================
    SECTIONS
 ========================================================= */
@@ -93,6 +99,7 @@ body {
     padding-bottom: 8px;
 }
 
+
 /* =========================================================
    ROW
 ========================================================= */
@@ -109,6 +116,7 @@ body {
     margin-bottom: 10px;
 }
 
+
 /* =========================================================
    LABELS
 ========================================================= */
@@ -118,6 +126,7 @@ label {
     font-weight: bold;
     display: block;
 }
+
 
 /* =========================================================
    INPUTS
@@ -138,6 +147,7 @@ textarea {
     min-height: 80px;
     resize: vertical;
 }
+
 
 /* =========================================================
    BUTTONS
@@ -179,6 +189,7 @@ button:disabled {
     background: #106b29;
 }
 
+
 /* =========================================================
    CAMERA
 ========================================================= */
@@ -195,6 +206,7 @@ button:disabled {
 #canvas {
     display: none;
 }
+
 
 /* =========================================================
    PHOTO GRID
@@ -232,8 +244,9 @@ button:disabled {
     font-weight: bold;
 }
 
+
 /* =========================================================
-   GPS
+   GPS STATUS
 ========================================================= */
 
 .gps-status {
@@ -255,6 +268,7 @@ button:disabled {
     color: #e60000;
     font-weight: bold;
 }
+
 
 /* =========================================================
    SEND AREA
@@ -281,6 +295,7 @@ button:disabled {
     font-size: 14px;
 }
 
+
 /* =========================================================
    FOOTER
 ========================================================= */
@@ -291,6 +306,7 @@ button:disabled {
     margin-top: 25px;
     color: #777;
 }
+
 
 /* =========================================================
    MOBILE
@@ -321,6 +337,7 @@ button:disabled {
 
 <div class="container">
 
+
 <!-- =========================================================
      HEADER
 ========================================================= -->
@@ -337,6 +354,7 @@ button:disabled {
 
 
 <form id="fuelForm">
+
 
 <!-- =========================================================
      1. SITE PERSONNEL
@@ -360,6 +378,7 @@ button:disabled {
                 placeholder="Enter engineer name">
 
         </div>
+
 
         <div class="form-group">
 
@@ -400,6 +419,7 @@ button:disabled {
 
         </div>
 
+
         <div class="form-group">
 
             <label>Time *</label>
@@ -429,6 +449,7 @@ button:disabled {
                 placeholder="Site name">
 
         </div>
+
 
         <div class="form-group">
 
@@ -482,6 +503,7 @@ button:disabled {
 
         </div>
 
+
         <div class="form-group">
 
             <label>Province *</label>
@@ -506,7 +528,9 @@ button:disabled {
 
         <label>Tower Height</label>
 
-        <select id="tower" name="tower">
+        <select
+            id="tower"
+            name="tower">
 
             <option>23 Meter Monopole</option>
             <option>30M RDS</option>
@@ -529,7 +553,7 @@ button:disabled {
 
 
 <!-- =========================================================
-     3. GENSET
+     3. GENSET INFORMATION
 ========================================================= -->
 
 <div class="section">
@@ -540,7 +564,10 @@ button:disabled {
 
         <label>Genset / DG Type *</label>
 
-        <select id="genset" name="genset" required>
+        <select
+            id="genset"
+            name="genset"
+            required>
 
             <option>Yanhan 8KVA</option>
             <option>Yanhan 17KVA</option>
@@ -573,6 +600,7 @@ button:disabled {
 
         </div>
 
+
         <div class="form-group">
 
             <label>Coolant Level</label>
@@ -585,6 +613,7 @@ button:disabled {
                 placeholder="Level">
 
         </div>
+
 
         <div class="form-group">
 
@@ -604,7 +633,7 @@ button:disabled {
 
 
 <!-- =========================================================
-     4. REFUELLING
+     4. REFUELLING DETAILS
 ========================================================= -->
 
 <div class="section">
@@ -627,6 +656,7 @@ button:disabled {
 
         </div>
 
+
         <div class="form-group">
 
             <label>Fuel TopUp (L) *</label>
@@ -640,6 +670,7 @@ button:disabled {
                 oninput="calculateFuel()">
 
         </div>
+
 
         <div class="form-group">
 
@@ -658,17 +689,16 @@ button:disabled {
     </div>
 
 
-    <div
-        id="calc"
-        style="
-        background:#f1f1f1;
-        padding:10px;
-        border-radius:5px;
-        font-size:13px;
-        font-weight:bold;
-        ">
+    <div id="calc"
+         style="
+         background:#f1f1f1;
+         padding:10px;
+         border-radius:5px;
+         font-size:13px;
+         font-weight:bold;
+         ">
 
-        Expected: 0.0 L | Difference: 0.0 L
+        Expected: 0 L | Difference: 0 L
 
     </div>
 
@@ -676,7 +706,7 @@ button:disabled {
 
 
 <!-- =========================================================
-     5. PHOTOS
+     5. REFUELLING PHOTOS
 ========================================================= -->
 
 <div class="section">
@@ -685,13 +715,15 @@ button:disabled {
 
     <p style="font-size:12px;color:#666;">
 
-        Capture all three photos. GPS coordinates are obtained at
-        the time of each photo and stamped onto the image.
+        Capture all three photos. The current GPS position,
+        date, site and refuelling information will be printed
+        directly onto each photograph.
 
     </p>
 
 
-    <div id="gpsMainStatus" class="gps-status">
+    <div id="gpsMainStatus"
+         class="gps-status">
 
         GPS: Waiting for photo capture
 
@@ -710,7 +742,10 @@ button:disabled {
 
     <div class="photo-grid">
 
-        <!-- BEFORE -->
+
+        <!-- =================================================
+             BEFORE
+        ================================================= -->
 
         <div class="photo-card">
 
@@ -728,6 +763,7 @@ button:disabled {
 
             </div>
 
+
             <div
                 id="gpsBefore"
                 class="gps-status">
@@ -735,6 +771,7 @@ button:disabled {
                 GPS: Not captured
 
             </div>
+
 
             <button
                 type="button"
@@ -744,7 +781,10 @@ button:disabled {
 
             </button>
 
-            <br><br>
+
+            <br>
+            <br>
+
 
             <button
                 type="button"
@@ -758,7 +798,9 @@ button:disabled {
         </div>
 
 
-        <!-- TOPUP -->
+        <!-- =================================================
+             TOPUP
+        ================================================= -->
 
         <div class="photo-card">
 
@@ -776,6 +818,7 @@ button:disabled {
 
             </div>
 
+
             <div
                 id="gpsTopup"
                 class="gps-status">
@@ -783,6 +826,7 @@ button:disabled {
                 GPS: Not captured
 
             </div>
+
 
             <button
                 type="button"
@@ -792,7 +836,10 @@ button:disabled {
 
             </button>
 
-            <br><br>
+
+            <br>
+            <br>
+
 
             <button
                 type="button"
@@ -806,7 +853,9 @@ button:disabled {
         </div>
 
 
-        <!-- AFTER -->
+        <!-- =================================================
+             AFTER
+        ================================================= -->
 
         <div class="photo-card">
 
@@ -824,6 +873,7 @@ button:disabled {
 
             </div>
 
+
             <div
                 id="gpsAfter"
                 class="gps-status">
@@ -831,6 +881,7 @@ button:disabled {
                 GPS: Not captured
 
             </div>
+
 
             <button
                 type="button"
@@ -840,7 +891,10 @@ button:disabled {
 
             </button>
 
-            <br><br>
+
+            <br>
+            <br>
+
 
             <button
                 type="button"
@@ -859,7 +913,7 @@ button:disabled {
 
 
 <!-- =========================================================
-     6. POWER
+     6. POWER INFORMATION
 ========================================================= -->
 
 <div class="section">
@@ -875,15 +929,21 @@ button:disabled {
             name="ppl"
             onchange="togglePPL()">
 
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
+            <option value="No">
+                No
+            </option>
+
+            <option value="Yes">
+                Yes
+            </option>
 
         </select>
 
     </div>
 
 
-    <div id="pplFields" style="display:none;">
+    <div id="pplFields"
+         style="display:none;">
 
         <div class="row">
 
@@ -897,6 +957,7 @@ button:disabled {
                     name="meter">
 
             </div>
+
 
             <div class="form-group">
 
@@ -918,7 +979,7 @@ button:disabled {
 
 
 <!-- =========================================================
-     7. DRIVER
+     7. DRIVER & VEHICLE
 ========================================================= -->
 
 <div class="section">
@@ -937,6 +998,7 @@ button:disabled {
                 name="driver">
 
         </div>
+
 
         <div class="form-group">
 
@@ -989,6 +1051,7 @@ button:disabled {
 
         </div>
 
+
         <div class="form-group">
 
             <button
@@ -1017,7 +1080,8 @@ button:disabled {
         </button>
 
 
-        <br><br>
+        <br>
+        <br>
 
 
         <button
@@ -1030,7 +1094,9 @@ button:disabled {
         </button>
 
 
-        <div id="sendStatus" class="status">
+        <div
+            id="sendStatus"
+            class="status">
 
             Ready to send
 
@@ -1039,6 +1105,7 @@ button:disabled {
     </div>
 
 </div>
+
 
 </form>
 
@@ -1049,15 +1116,27 @@ button:disabled {
 
 </div>
 
+
 </div>
 
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
+
 
 /* ============================================================
    EMAILJS CONFIGURATION
-   !!! REPLACE THESE THREE VALUES !!!
 ============================================================ */
+
+/*
+   ===========================================================
+   REPLACE THESE THREE VALUES
+   ===========================================================
+*/
 
 const EMAILJS_PUBLIC_KEY =
     "YOUR_PUBLIC_KEY";
@@ -1070,7 +1149,7 @@ const EMAILJS_TEMPLATE_ID =
 
 
 /* ============================================================
-   FIXED REPORT RECIPIENT
+   REPORT RECIPIENT
 ============================================================ */
 
 const REPORT_RECIPIENT_EMAIL =
@@ -1078,12 +1157,16 @@ const REPORT_RECIPIENT_EMAIL =
 
 
 /* ============================================================
-   INITIALISE EMAILJS
+   INITIALIZE EMAILJS
 ============================================================ */
 
 emailjs.init({
-    publicKey: EMAILJS_PUBLIC_KEY
+
+    publicKey:
+        EMAILJS_PUBLIC_KEY
+
 });
+
 
 
 /* ============================================================
@@ -1181,270 +1264,380 @@ const sendStatus =
     document.getElementById("sendStatus");
 
 
+
 /* ============================================================
    GPS DATA
 ============================================================ */
 
 let gpsData = {
+
     BEFORE: null,
+
     TOPUP: null,
+
     AFTER: null
+
 };
+
+
+
+/* ============================================================
+   CAMERA DATA
+============================================================ */
+
+let stream = null;
+
+let mode = "";
+
+
+
+/* ============================================================
+   CURRENT GPS
+============================================================ */
 
 let currentGPS = null;
 
 
-/* ============================================================
-   CAMERA VARIABLES
-============================================================ */
-
-let stream = null;
-let mode = "";
-
 
 /* ============================================================
-   DATE / TIME
+   DEFAULT DATE/TIME
 ============================================================ */
 
-function setCurrentDateTime() {
+function setCurrentDateTime(){
 
-    const now = new Date();
+    const now =
+        new Date();
 
     date.value =
-        now.toISOString().split("T")[0];
+        now.toISOString()
+            .split("T")[0];
 
     time.value =
-        now.toTimeString().slice(0,5);
+        now.toTimeString()
+            .slice(0,5);
+
 }
 
 setCurrentDateTime();
+
 
 
 /* ============================================================
    PPL TOGGLE
 ============================================================ */
 
-function togglePPL() {
+function togglePPL(){
 
-    document.getElementById("pplFields").style.display =
+    document.getElementById(
+        "pplFields"
+    ).style.display =
         ppl.value === "Yes"
             ? "block"
             : "none";
+
 }
+
 
 
 /* ============================================================
    PROVINCES
 ============================================================ */
 
-function updateProvinces() {
+function updateProvinces(){
 
     const list = [];
 
-    if (region.value === "Momase + EHP") {
+
+    if(
+        region.value ===
+        "Momase + EHP"
+    ){
 
         list.push(
+
             "Eastern Highlands",
             "Morobe",
             "Madang",
             "East Sepik",
             "West Sepik (Sandaun)"
+
         );
+
     }
 
-    if (region.value === "Highlands") {
+
+    if(
+        region.value ===
+        "Highlands"
+    ){
 
         list.push(
+
             "Western Highlands",
             "Simbu",
             "Jiwaka",
             "Enga",
             "Southern Highlands",
             "Hela"
+
         );
+
     }
 
-    if (region.value === "Southern") {
+
+    if(
+        region.value ===
+        "Southern"
+    ){
 
         list.push(
+
             "National Capital District",
             "Central",
             "Gulf",
             "Oro (Northern)",
             "Milne Bay",
             "Western"
+
         );
+
     }
 
-    if (region.value === "NGI") {
+
+    if(
+        region.value ===
+        "NGI"
+    ){
 
         list.push(
+
             "East New Britain",
             "West New Britain",
             "New Ireland",
             "Autonomous Region of Bougainville",
             "Manus"
+
         );
+
     }
+
 
     province.innerHTML =
         '<option value="">Select Province</option>';
 
-    list.forEach(function(p) {
 
-        const option =
-            document.createElement("option");
+    list.forEach(
+        function(p){
 
-        option.value = p;
-        option.textContent = p;
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        province.appendChild(option);
+            option.value =
+                p;
 
-    });
+            option.textContent =
+                p;
+
+            province.appendChild(
+                option
+            );
+
+        }
+    );
+
 }
+
 
 
 /* ============================================================
    FUEL CALCULATION
 ============================================================ */
 
-function calculateFuel() {
+function calculateFuel(){
 
     const beforeValue =
-        parseFloat(before.value) || 0;
+        parseFloat(
+            before.value
+        ) || 0;
+
 
     const addedValue =
-        parseFloat(added.value) || 0;
+        parseFloat(
+            added.value
+        ) || 0;
+
 
     const afterValue =
-        parseFloat(after.value) || 0;
+        parseFloat(
+            after.value
+        ) || 0;
+
 
     const expected =
-        beforeValue + addedValue;
+        beforeValue +
+        addedValue;
+
 
     const difference =
-        afterValue - expected;
+        afterValue -
+        expected;
 
-    document.getElementById("calc").innerHTML =
 
-        "Expected: " +
-        expected.toFixed(1) +
-        " L | Difference: " +
-        difference.toFixed(1) +
-        " L";
+    document.getElementById(
+        "calc"
+    ).innerHTML =
+
+        `Expected: ${expected.toFixed(1)} L |
+         Difference: ${difference.toFixed(1)} L`;
+
 }
+
 
 
 /* ============================================================
-   GPS
+   GPS LOCATION
 ============================================================ */
 
-function getGPSLocation() {
+function getGPSLocation(){
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(
 
-        if (!navigator.geolocation) {
+        function(resolve,reject){
 
-            reject(
-                new Error(
-                    "Geolocation is not supported by this browser."
-                )
-            );
-
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-
-            function(position) {
-
-                const gps = {
-
-                    latitude:
-                        position.coords.latitude,
-
-                    longitude:
-                        position.coords.longitude,
-
-                    accuracy:
-                        position.coords.accuracy,
-
-                    timestamp:
-                        new Date(
-                            position.timestamp
-                        ).toLocaleString()
-
-                };
-
-                currentGPS = gps;
-
-                resolve(gps);
-            },
-
-            function(error) {
-
-                let message =
-                    "Unable to obtain GPS location.";
-
-                if (
-                    error.code ===
-                    error.PERMISSION_DENIED
-                ) {
-
-                    message =
-                        "GPS permission was denied.";
-
-                }
-
-                else if (
-                    error.code ===
-                    error.POSITION_UNAVAILABLE
-                ) {
-
-                    message =
-                        "GPS position is unavailable.";
-
-                }
-
-                else if (
-                    error.code ===
-                    error.TIMEOUT
-                ) {
-
-                    message =
-                        "GPS request timed out.";
-
-                }
+            if(
+                !navigator.geolocation
+            ){
 
                 reject(
-                    new Error(message)
+                    new Error(
+                        "Geolocation is not supported by this browser."
+                    )
                 );
 
-            },
+                return;
 
-            {
-                enableHighAccuracy: true,
-                timeout: 15000,
-                maximumAge: 0
             }
 
-        );
 
-    });
+            navigator.geolocation.getCurrentPosition(
+
+                function(position){
+
+                    const gps = {
+
+                        latitude:
+                            position.coords.latitude,
+
+                        longitude:
+                            position.coords.longitude,
+
+                        accuracy:
+                            position.coords.accuracy,
+
+                        timestamp:
+                            new Date(
+                                position.timestamp
+                            ).toLocaleString()
+
+                    };
+
+
+                    currentGPS =
+                        gps;
+
+
+                    resolve(
+                        gps
+                    );
+
+                },
+
+
+                function(error){
+
+                    let message =
+                        "Unable to obtain GPS location.";
+
+
+                    if(
+                        error.code ===
+                        error.PERMISSION_DENIED
+                    ){
+
+                        message =
+                            "GPS permission was denied.";
+
+                    }
+
+
+                    if(
+                        error.code ===
+                        error.POSITION_UNAVAILABLE
+                    ){
+
+                        message =
+                            "GPS position is unavailable.";
+
+                    }
+
+
+                    if(
+                        error.code ===
+                        error.TIMEOUT
+                    ){
+
+                        message =
+                            "GPS request timed out.";
+
+                    }
+
+
+                    reject(
+                        new Error(
+                            message
+                        )
+                    );
+
+                },
+
+
+                {
+
+                    enableHighAccuracy:
+                        true,
+
+                    timeout:
+                        15000,
+
+                    maximumAge:
+                        0
+
+                }
+
+            );
+
+        }
+
+    );
+
 }
+
 
 
 /* ============================================================
    FORMAT GPS
 ============================================================ */
 
-function formatGPS(gps) {
+function formatGPS(gps){
 
-    if (!gps) {
+    if(!gps){
 
         return "GPS unavailable";
 
     }
+
 
     return (
 
@@ -1458,81 +1651,156 @@ function formatGPS(gps) {
 
         " | ±" +
 
-        Math.round(gps.accuracy) +
+        Math.round(
+            gps.accuracy
+        ) +
 
         " m"
 
     );
+
 }
+
+
+
+/* ============================================================
+   GPS TEXT
+============================================================ */
+
+function gpsText(gps){
+
+    if(!gps){
+
+        return "GPS unavailable";
+
+    }
+
+
+    return (
+
+        gps.latitude.toFixed(6) +
+
+        ", " +
+
+        gps.longitude.toFixed(6) +
+
+        " (±" +
+
+        Math.round(
+            gps.accuracy
+        ) +
+
+        " m)"
+
+    );
+
+}
+
 
 
 /* ============================================================
    UPDATE GPS DISPLAY
 ============================================================ */
 
-function updateGPSDisplay(type, gps) {
+function updateGPSDisplay(
+    type,
+    gps
+){
 
     let elementId = "";
 
-    if (type === "BEFORE") {
-        elementId = "gpsBefore";
+
+    if(
+        type === "BEFORE"
+    ){
+
+        elementId =
+            "gpsBefore";
+
     }
 
-    else if (type === "TOPUP") {
-        elementId = "gpsTopup";
+
+    if(
+        type === "TOPUP"
+    ){
+
+        elementId =
+            "gpsTopup";
+
     }
 
-    else if (type === "AFTER") {
-        elementId = "gpsAfter";
+
+    if(
+        type === "AFTER"
+    ){
+
+        elementId =
+            "gpsAfter";
+
     }
+
 
     const element =
-        document.getElementById(elementId);
+        document.getElementById(
+            elementId
+        );
 
-    if (!element) {
+
+    if(!element){
+
         return;
+
     }
 
-    if (gps) {
+
+    if(gps){
 
         element.innerHTML =
-            '<span class="gps-good">✓ ' +
-            formatGPS(gps) +
-            '</span>';
+
+            `<span class="gps-good">
+            ✓ ${formatGPS(gps)}
+            </span>`;
 
     }
 
-    else {
+    else{
 
         element.innerHTML =
-            '<span class="gps-error">' +
-            'GPS unavailable' +
-            '</span>';
+
+            `<span class="gps-error">
+            GPS unavailable
+            </span>`;
 
     }
+
 }
+
 
 
 /* ============================================================
    OPEN CAMERA
 ============================================================ */
 
-async function openCamera(type) {
+async function openCamera(type){
 
-    if (
+    if(
         !siteName.value ||
         !siteId.value ||
         !engineer.value
-    ) {
+    ){
 
         alert(
             "Please enter Site Name, Site ID and Engineer first."
         );
 
         return;
+
     }
 
-    mode = type;
+
+    mode =
+        type;
+
 
     document.getElementById(
         "gpsMainStatus"
@@ -1543,16 +1811,20 @@ async function openCamera(type) {
     let gps = null;
 
 
-    try {
+    try{
 
         gps =
             await getGPSLocation();
 
     }
 
-    catch (error) {
+    catch(error){
 
-        console.error("GPS ERROR:", error);
+        console.error(
+            "GPS ERROR:",
+            error
+        );
+
 
         const continueWithoutGPS =
             confirm(
@@ -1565,7 +1837,8 @@ async function openCamera(type) {
 
             );
 
-        if (!continueWithoutGPS) {
+
+        if(!continueWithoutGPS){
 
             document.getElementById(
                 "gpsMainStatus"
@@ -1573,36 +1846,35 @@ async function openCamera(type) {
                 "GPS: Capture cancelled";
 
             return;
+
         }
+
     }
 
 
-    if (gps) {
+    gpsData[type] =
+        gps;
 
-        gpsData[type] =
-            gps;
 
-        updateGPSDisplay(
-            type,
-            gps
-        );
+    updateGPSDisplay(
+        type,
+        gps
+    );
+
+
+    if(gps){
 
         document.getElementById(
             "gpsMainStatus"
-        ).textContent =
-            "✓ " + formatGPS(gps);
+        ).innerHTML =
+
+            `<span class="gps-good">
+            ✓ ${formatGPS(gps)}
+            </span>`;
 
     }
 
-    else {
-
-        gpsData[type] =
-            null;
-
-        updateGPSDisplay(
-            type,
-            null
-        );
+    else{
 
         document.getElementById(
             "gpsMainStatus"
@@ -1616,118 +1888,161 @@ async function openCamera(type) {
        CAMERA
     ======================================================== */
 
-    try {
+    try{
 
-        if (
+        if(
             !navigator.mediaDevices ||
             !navigator.mediaDevices.getUserMedia
-        ) {
+        ){
 
             throw new Error(
-                "Camera API is not available."
+                "Camera is not supported by this browser."
             );
+
         }
+
 
         stream =
             await navigator.mediaDevices.getUserMedia({
 
                 video: {
+
                     facingMode: {
-                        ideal: "environment"
+
+                        ideal:
+                            "environment"
+
                     }
+
                 },
 
-                audio: false
+                audio:
+                    false
 
             });
+
 
         video.srcObject =
             stream;
 
+
         video.style.display =
             "block";
 
+
         await video.play();
 
+
         setTimeout(
+
             capturePhoto,
-            1200
+
+            1500
+
         );
 
     }
 
-    catch (error) {
+
+    catch(error){
 
         console.error(
             "CAMERA ERROR:",
             error
         );
 
+
         alert(
-            "Camera could not be opened.\n\n" +
-            "Please allow camera access and try again."
+            "Camera could not be opened.\n\nPlease allow camera access."
         );
 
+
         stopCamera();
+
     }
 
 }
+
 
 
 /* ============================================================
    CAPTURE PHOTO
 ============================================================ */
 
-function capturePhoto() {
+function capturePhoto(){
 
-    if (!video.videoWidth) {
+    if(
+        !video.videoWidth
+    ){
 
         alert(
             "Camera is not ready. Please try again."
         );
 
+
         stopCamera();
 
         return;
+
     }
 
 
     canvas.width =
         video.videoWidth;
 
+
     canvas.height =
         video.videoHeight;
 
 
     const ctx =
-        canvas.getContext("2d");
+        canvas.getContext(
+            "2d"
+        );
 
+
+    /* ========================================================
+       PHOTO
+    ======================================================== */
 
     ctx.drawImage(
+
         video,
+
         0,
         0,
+
         canvas.width,
         canvas.height
+
     );
 
+
+    /* ========================================================
+       GPS
+    ======================================================== */
 
     const gps =
         gpsData[mode];
 
 
     /* ========================================================
-       PHOTO STAMP
+       RED PHOTO STAMP
+       
+       NO BLACK BACKGROUND
+       NO BLACK RECTANGLE
+       
+       RED TEXT DIRECTLY ON PHOTO
     ======================================================== */
 
     const stamp = [
 
-        "Vodafone PNG Refuelling Report",
+        "VODAFONE PNG REFUELLING",
 
         mode === "BEFORE"
             ? "BEFORE REFUELLING"
             : mode === "TOPUP"
-                ? "REFUELLING IN PROGRESS"
+                ? "REFUELLING / TOP UP"
                 : "AFTER REFUELLING",
 
         "Date/Time: " +
@@ -1759,7 +2074,7 @@ function capturePhoto() {
     ];
 
 
-    if (gps) {
+    if(gps){
 
         stamp.push(
 
@@ -1770,17 +2085,20 @@ function capturePhoto() {
 
         );
 
+
         stamp.push(
 
-            "GPS Accuracy: ±" +
-            Math.round(gps.accuracy) +
+            "Accuracy: ±" +
+            Math.round(
+                gps.accuracy
+            ) +
             " m"
 
         );
 
     }
 
-    else {
+    else{
 
         stamp.push(
             "GPS: UNAVAILABLE"
@@ -1789,93 +2107,169 @@ function capturePhoto() {
     }
 
 
-    const lineHeight =
-        26;
-
-    const boxHeight =
-        stamp.length *
-        lineHeight +
-        20;
-
-
     /* ========================================================
-       STAMP BACKGROUND
+       STAMP POSITION
     ======================================================== */
 
-    ctx.fillStyle =
-        "rgba(0,0,0,0.72)";
-
-    ctx.fillRect(
-
-        0,
-
-        canvas.height -
-        boxHeight,
-
-        canvas.width,
-
-        boxHeight
-
-    );
-
-
-    /* ========================================================
-       STAMP TEXT
-    ======================================================== */
-
-    ctx.fillStyle =
-        "white";
-
-    ctx.font =
-
+    const fontSize =
         Math.max(
             16,
-            canvas.width / 55
-        ) +
+            Math.round(
+                canvas.width / 65
+            )
+        );
+
+
+    const lineHeight =
+        Math.round(
+            fontSize * 1.45
+        );
+
+
+    const padding =
+        Math.round(
+            canvas.width * 0.015
+        );
+
+
+    /*
+       Put the stamp near the bottom-left,
+       but WITHOUT a background box.
+    */
+
+    let startY =
+        canvas.height -
+        (
+            stamp.length *
+            lineHeight
+        ) -
+        padding;
+
+
+    if(
+        startY < padding
+    ){
+
+        startY =
+            padding +
+            fontSize;
+
+    }
+
+
+    /* ========================================================
+       RED TEXT
+    ======================================================== */
+
+    ctx.font =
+        "bold " +
+        fontSize +
         "px Arial";
 
 
+    ctx.textBaseline =
+        "top";
+
+
+    /*
+       White shadow first.
+       This keeps red writing readable
+       over dark areas of the photograph.
+    */
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.95)";
+
+
     stamp.forEach(
-        function(text, index) {
+
+        function(text,index){
+
+            const x =
+                padding + 2;
+
+            const y =
+                startY +
+                (
+                    index *
+                    lineHeight
+                ) +
+                2;
+
 
             ctx.fillText(
-
                 text,
-
-                15,
-
-                canvas.height -
-                boxHeight +
-                25 +
-                index *
-                lineHeight
-
+                x,
+                y
             );
 
         }
+
+    );
+
+
+    /*
+       Red writing.
+    */
+
+    ctx.fillStyle =
+        "#e60000";
+
+
+    stamp.forEach(
+
+        function(text,index){
+
+            const x =
+                padding;
+
+            const y =
+                startY +
+                (
+                    index *
+                    lineHeight
+                );
+
+
+            ctx.fillText(
+                text,
+                x,
+                y
+            );
+
+        }
+
     );
 
 
     /* ========================================================
-       RESIZE
+       RESIZE / COMPRESS
     ======================================================== */
 
     const image =
         resizeCanvas(
+
             canvas,
+
             1200,
-            0.75
+
+            0.78
+
         );
 
 
     /* ========================================================
-       SAVE IMAGE
+       SAVE PHOTO
     ======================================================== */
 
-    if (mode === "BEFORE") {
+    if(
+        mode ===
+        "BEFORE"
+    ){
 
         imgBefore.src =
             image;
+
 
         document.getElementById(
             "statusBefore"
@@ -1884,10 +2278,15 @@ function capturePhoto() {
 
     }
 
-    else if (mode === "TOPUP") {
+
+    if(
+        mode ===
+        "TOPUP"
+    ){
 
         imgTopup.src =
             image;
+
 
         document.getElementById(
             "statusTopup"
@@ -1896,10 +2295,15 @@ function capturePhoto() {
 
     }
 
-    else if (mode === "AFTER") {
+
+    if(
+        mode ===
+        "AFTER"
+    ){
 
         imgAfter.src =
             image;
+
 
         document.getElementById(
             "statusAfter"
@@ -1914,6 +2318,7 @@ function capturePhoto() {
 }
 
 
+
 /* ============================================================
    RESIZE IMAGE
 ============================================================ */
@@ -1922,30 +2327,43 @@ function resizeCanvas(
     sourceCanvas,
     maxWidth,
     quality
-) {
+){
 
     const scale =
         Math.min(
+
             1,
-            maxWidth / sourceCanvas.width
+
+            maxWidth /
+            sourceCanvas.width
+
         );
 
+
     const newCanvas =
-        document.createElement("canvas");
+        document.createElement(
+            "canvas"
+        );
+
 
     newCanvas.width =
         Math.round(
-            sourceCanvas.width * scale
+            sourceCanvas.width *
+            scale
         );
+
 
     newCanvas.height =
         Math.round(
-            sourceCanvas.height * scale
+            sourceCanvas.height *
+            scale
         );
 
 
     const ctx =
-        newCanvas.getContext("2d");
+        newCanvas.getContext(
+            "2d"
+        );
 
 
     ctx.drawImage(
@@ -1962,117 +2380,168 @@ function resizeCanvas(
 
 
     return newCanvas.toDataURL(
+
         "image/jpeg",
+
         quality
+
     );
+
 }
+
 
 
 /* ============================================================
    STOP CAMERA
 ============================================================ */
 
-function stopCamera() {
+function stopCamera(){
 
-    if (stream) {
+    if(stream){
 
         stream
             .getTracks()
             .forEach(
-                track => track.stop()
+
+                function(track){
+
+                    track.stop();
+
+                }
+
             );
 
-        stream = null;
+
+        stream =
+            null;
+
     }
+
 
     video.srcObject =
         null;
 
+
     video.style.display =
         "none";
+
 }
+
 
 
 /* ============================================================
    RESET PHOTO
 ============================================================ */
 
-function resetPhoto(type) {
+function resetPhoto(type){
 
-    if (type === "BEFORE") {
+    if(
+        type ===
+        "BEFORE"
+    ){
 
-        imgBefore.src = "";
+        imgBefore.removeAttribute(
+            "src"
+        );
 
-        gpsData.BEFORE = null;
+        gpsData.BEFORE =
+            null;
+
 
         document.getElementById(
             "statusBefore"
         ).textContent =
             "Not captured";
 
+
         document.getElementById(
             "gpsBefore"
         ).textContent =
             "GPS: Not captured";
+
     }
 
 
-    else if (type === "TOPUP") {
+    if(
+        type ===
+        "TOPUP"
+    ){
 
-        imgTopup.src = "";
+        imgTopup.removeAttribute(
+            "src"
+        );
 
-        gpsData.TOPUP = null;
+        gpsData.TOPUP =
+            null;
+
 
         document.getElementById(
             "statusTopup"
         ).textContent =
             "Not captured";
 
+
         document.getElementById(
             "gpsTopup"
         ).textContent =
             "GPS: Not captured";
+
     }
 
 
-    else if (type === "AFTER") {
+    if(
+        type ===
+        "AFTER"
+    ){
 
-        imgAfter.src = "";
+        imgAfter.removeAttribute(
+            "src"
+        );
 
-        gpsData.AFTER = null;
+        gpsData.AFTER =
+            null;
+
 
         document.getElementById(
             "statusAfter"
         ).textContent =
             "Not captured";
 
+
         document.getElementById(
             "gpsAfter"
         ).textContent =
             "GPS: Not captured";
+
     }
 
 }
 
 
+
 /* ============================================================
-   LOGOUT
+   PHOTO VALIDATION
 ============================================================ */
 
-function logout() {
+function photosReady(){
 
-    stopCamera();
+    return (
 
-    window.location.href =
-        "index.html";
+        imgBefore.getAttribute("src") &&
+        imgTopup.getAttribute("src") &&
+        imgAfter.getAttribute("src")
+
+    );
+
 }
+
 
 
 /* ============================================================
    REPORT DATA
 ============================================================ */
 
-function getReportData() {
+function getReportData(){
 
     return {
 
@@ -2150,44 +2619,18 @@ function getReportData() {
 
         gpsAfter:
             gpsData.AFTER
+
     };
+
 }
 
-
-/* ============================================================
-   GPS TEXT
-============================================================ */
-
-function gpsText(gps) {
-
-    if (!gps) {
-
-        return "GPS unavailable";
-    }
-
-    return (
-
-        gps.latitude.toFixed(6) +
-
-        ", " +
-
-        gps.longitude.toFixed(6) +
-
-        " (±" +
-
-        Math.round(gps.accuracy) +
-
-        " m)"
-
-    );
-}
 
 
 /* ============================================================
    GENERATE PDF
 ============================================================ */
 
-function generatePDF() {
+function generatePDF(){
 
     const {
         jsPDF
@@ -2199,15 +2642,18 @@ function generatePDF() {
         new jsPDF();
 
 
-    const data =
-        getReportData();
-
-
     let y =
         15;
 
 
-    doc.setFontSize(18);
+    const data =
+        getReportData();
+
+
+    doc.setFontSize(
+        18
+    );
+
 
     doc.text(
         "Vodafone PNG Refuelling Report",
@@ -2216,10 +2662,13 @@ function generatePDF() {
     );
 
 
-    y += 12;
+    y +=
+        12;
 
 
-    doc.setFontSize(10);
+    doc.setFontSize(
+        10
+    );
 
 
     const lines = [
@@ -2279,27 +2728,39 @@ function generatePDF() {
     ];
 
 
-    lines.forEach(function(line) {
+    lines.forEach(
 
-        if (y > 280) {
+        function(line){
 
-            doc.addPage();
+            if(y > 280){
 
-            y = 15;
+                doc.addPage();
+
+                y =
+                    15;
+
+            }
+
+
+            doc.text(
+                line,
+                10,
+                y
+            );
+
+
+            y +=
+                7;
+
         }
 
-        doc.text(
-            line,
-            10,
-            y
-        );
-
-        y += 7;
-
-    });
+    );
 
 
-    if (data.ppl === "Yes") {
+    if(
+        data.ppl ===
+        "Yes"
+    ){
 
         doc.text(
             "Meter Number: " +
@@ -2308,7 +2769,10 @@ function generatePDF() {
             y
         );
 
-        y += 7;
+
+        y +=
+            7;
+
 
         doc.text(
             "Meter Reading: " +
@@ -2317,7 +2781,10 @@ function generatePDF() {
             y
         );
 
-        y += 7;
+
+        y +=
+            7;
+
     }
 
 
@@ -2328,7 +2795,9 @@ function generatePDF() {
         y
     );
 
-    y += 7;
+
+    y +=
+        7;
 
 
     doc.text(
@@ -2338,7 +2807,9 @@ function generatePDF() {
         y
     );
 
-    y += 7;
+
+    y +=
+        7;
 
 
     doc.text(
@@ -2347,13 +2818,19 @@ function generatePDF() {
         y
     );
 
-    y += 6;
+
+    y +=
+        6;
 
 
     const commentLines =
         doc.splitTextToSize(
-            data.comments || "None",
+
+            data.comments ||
+            "None",
+
             180
+
         );
 
 
@@ -2365,8 +2842,10 @@ function generatePDF() {
 
 
     y +=
-        commentLines.length *
-        6 +
+        (
+            commentLines.length *
+            6
+        ) +
         10;
 
 
@@ -2374,15 +2853,22 @@ function generatePDF() {
        GPS
     ======================================================== */
 
-    if (y > 270) {
+    if(
+        y > 250
+    ){
 
         doc.addPage();
 
-        y = 15;
+        y =
+            15;
+
     }
 
 
-    doc.setFontSize(11);
+    doc.setFontSize(
+        11
+    );
+
 
     doc.text(
         "GPS Locations:",
@@ -2390,39 +2876,56 @@ function generatePDF() {
         y
     );
 
-    y += 7;
+
+    y +=
+        7;
 
 
-    doc.setFontSize(9);
+    doc.setFontSize(
+        9
+    );
+
 
     doc.text(
         "Before: " +
-        gpsText(data.gpsBefore),
+        gpsText(
+            data.gpsBefore
+        ),
         10,
         y
     );
 
-    y += 6;
+
+    y +=
+        6;
 
 
     doc.text(
         "TopUp: " +
-        gpsText(data.gpsTopup),
+        gpsText(
+            data.gpsTopup
+        ),
         10,
         y
     );
 
-    y += 6;
+
+    y +=
+        6;
 
 
     doc.text(
         "After: " +
-        gpsText(data.gpsAfter),
+        gpsText(
+            data.gpsAfter
+        ),
         10,
         y
     );
 
-    y += 10;
+
+    y +=
+        10;
 
 
     /* ========================================================
@@ -2432,108 +2935,181 @@ function generatePDF() {
     const photos = [
 
         {
-            title: "Before Refuelling",
-            src: imgBefore.src
+            title:
+                "Before Refuelling",
+
+            src:
+                imgBefore.getAttribute(
+                    "src"
+                )
+
         },
 
         {
-            title: "TopUp",
-            src: imgTopup.src
+            title:
+                "TopUp",
+
+            src:
+                imgTopup.getAttribute(
+                    "src"
+                )
+
         },
 
         {
-            title: "After Refuelling",
-            src: imgAfter.src
+            title:
+                "After Refuelling",
+
+            src:
+                imgAfter.getAttribute(
+                    "src"
+                )
+
         }
 
     ];
 
 
-    photos.forEach(function(photo) {
+    photos.forEach(
 
-        if (!photo.src) {
-            return;
+        function(photo){
+
+            if(
+                !photo.src
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                y > 210
+            ){
+
+                doc.addPage();
+
+                y =
+                    15;
+
+            }
+
+
+            doc.setFontSize(
+                12
+            );
+
+
+            doc.text(
+                photo.title,
+                10,
+                y
+            );
+
+
+            y +=
+                5;
+
+
+            doc.addImage(
+
+                photo.src,
+
+                "JPEG",
+
+                10,
+
+                y,
+
+                90,
+
+                60
+
+            );
+
+
+            y +=
+                70;
+
         }
 
-
-        if (y > 210) {
-
-            doc.addPage();
-
-            y = 15;
-        }
-
-
-        doc.setFontSize(12);
-
-        doc.text(
-            photo.title,
-            10,
-            y
-        );
-
-        y += 5;
-
-
-        doc.addImage(
-            photo.src,
-            "JPEG",
-            10,
-            y,
-            90,
-            60
-        );
-
-
-        y += 70;
-
-    });
+    );
 
 
     return doc;
+
 }
+
 
 
 /* ============================================================
    DOWNLOAD PDF
 ============================================================ */
 
-function downloadPDF() {
+function downloadPDF(){
 
-    if (
-        !imgBefore.src ||
-        !imgTopup.src ||
-        !imgAfter.src
-    ) {
+    if(
+        !photosReady()
+    ){
 
         alert(
             "Please capture all three photos first."
         );
 
         return;
+
     }
 
 
-    const doc =
-        generatePDF();
+    try{
+
+        const doc =
+            generatePDF();
 
 
-    doc.save(
+        doc.save(
 
-        (siteId.value || "SITE") +
-        "_" +
-        (date.value || "DATE") +
-        "_Refuelling_Report.pdf"
+            (
+                siteId.value ||
+                "SITE"
+            ) +
 
-    );
+            "_" +
+
+            (
+                date.value ||
+                "DATE"
+            ) +
+
+            "_Refuelling_Report.pdf"
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "PDF ERROR:",
+            error
+        );
+
+
+        alert(
+            "Could not create PDF. Please try again."
+        );
+
+    }
+
 }
+
 
 
 /* ============================================================
    CREATE EXCEL
 ============================================================ */
 
-async function createExcelBlob() {
+async function createExcelBlob(){
 
     const data =
         getReportData();
@@ -2554,112 +3130,237 @@ async function createExcelBlob() {
 
 
     sheet.columns = [
-        { width: 32 },
-        { width: 55 }
+
+        {
+            width:
+                32
+        },
+
+        {
+            width:
+                55
+        }
+
     ];
 
 
-    sheet.mergeCells("A1:B1");
+    sheet.mergeCells(
+        "A1:B1"
+    );
 
 
-    sheet.getCell("A1").value =
+    sheet.getCell(
+        "A1"
+    ).value =
         "VODAFONE PNG REFUELLING REPORT";
 
 
-    sheet.getCell("A1").font = {
-        bold: true,
-        size: 16
+    sheet.getCell(
+        "A1"
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            16
+
     };
 
 
-    sheet.getCell("A1").alignment = {
-        horizontal: "center",
-        vertical: "middle"
+    sheet.getCell(
+        "A1"
+    ).alignment = {
+
+        horizontal:
+            "center",
+
+        vertical:
+            "middle"
+
     };
 
 
-    sheet.getRow(1).height =
+    sheet.getRow(
+        1
+    ).height =
         30;
+
+
+    const expectedFuel =
+
+        Number(
+            data.fuelBefore ||
+            0
+        )
+
+        +
+
+        Number(
+            data.fuelAdded ||
+            0
+        );
+
+
+    const fuelDifference =
+
+        Number(
+            data.fuelAfter ||
+            0
+        )
+
+        -
+
+        expectedFuel;
 
 
     const rows = [
 
-        ["Field Engineer", data.engineer],
+        [
+            "Field Engineer",
+            data.engineer
+        ],
 
-        ["Additional Team", data.team],
+        [
+            "Additional Team",
+            data.team
+        ],
 
-        ["Date", data.date],
+        [
+            "Date",
+            data.date
+        ],
 
-        ["Time", data.time],
+        [
+            "Time",
+            data.time
+        ],
 
-        ["Site Name", data.siteName],
+        [
+            "Site Name",
+            data.siteName
+        ],
 
-        ["Site ID", data.siteId],
+        [
+            "Site ID",
+            data.siteId
+        ],
 
-        ["Region", data.region],
+        [
+            "Region",
+            data.region
+        ],
 
-        ["Province", data.province],
+        [
+            "Province",
+            data.province
+        ],
 
-        ["Tower Height", data.tower],
+        [
+            "Tower Height",
+            data.tower
+        ],
 
-        ["Genset Type", data.genset],
+        [
+            "Genset Type",
+            data.genset
+        ],
 
-        ["Engine Oil Level", data.oilLevel],
+        [
+            "Engine Oil Level",
+            data.oilLevel
+        ],
 
-        ["Coolant Level", data.coolantLevel],
+        [
+            "Coolant Level",
+            data.coolantLevel
+        ],
 
-        ["Engine Speed RPM", data.rpm],
+        [
+            "Engine Speed RPM",
+            data.rpm
+        ],
 
-        ["Fuel Before (L)", data.fuelBefore],
+        [
+            "Fuel Before (L)",
+            data.fuelBefore
+        ],
 
-        ["Fuel TopUp (L)", data.fuelAdded],
+        [
+            "Fuel TopUp (L)",
+            data.fuelAdded
+        ],
 
-        ["Fuel After (L)", data.fuelAfter],
+        [
+            "Fuel After (L)",
+            data.fuelAfter
+        ],
 
         [
             "Expected Fuel (L)",
-            (
-                Number(data.fuelBefore || 0) +
-                Number(data.fuelAdded || 0)
-            ).toFixed(1)
+            expectedFuel.toFixed(1)
         ],
 
         [
             "Fuel Difference (L)",
-            (
-                Number(data.fuelAfter || 0) -
-                (
-                    Number(data.fuelBefore || 0) +
-                    Number(data.fuelAdded || 0)
-                )
-            ).toFixed(1)
+            fuelDifference.toFixed(1)
         ],
 
-        ["PPL Connected", data.ppl],
+        [
+            "PPL Connected",
+            data.ppl
+        ],
 
-        ["Meter Number", data.meter],
+        [
+            "Meter Number",
+            data.meter
+        ],
 
-        ["Meter Reading", data.reading],
+        [
+            "Meter Reading",
+            data.reading
+        ],
 
-        ["Driver", data.driver],
+        [
+            "Driver",
+            data.driver
+        ],
 
-        ["Vehicle Registration", data.vehicle],
+        [
+            "Vehicle Registration",
+            data.vehicle
+        ],
 
-        ["Comments", data.comments]
+        [
+            "Comments",
+            data.comments
+        ]
 
     ];
 
 
-    rows.forEach(function(rowData) {
+    rows.forEach(
 
-        const row =
-            sheet.addRow(rowData);
+        function(rowData){
 
-        row.getCell(1).font = {
-            bold: true
-        };
+            const row =
+                sheet.addRow(
+                    rowData
+                );
 
-    });
+
+            row.getCell(
+                1
+            ).font = {
+
+                bold:
+                    true
+
+            };
+
+        }
+
+    );
 
 
     /* ========================================================
@@ -2668,35 +3369,66 @@ async function createExcelBlob() {
 
     sheet.addRow([]);
 
+
     const gpsHeader =
-        sheet.addRow([
-            "GPS PHOTO LOCATIONS",
-            ""
-        ]);
+        sheet.addRow(
+
+            [
+                "GPS PHOTO LOCATIONS",
+                ""
+
+            ]
+
+        );
 
 
-    gpsHeader.getCell(1).font = {
-        bold: true,
-        size: 13
+    gpsHeader.getCell(
+        1
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            13
+
     };
 
 
-    sheet.addRow([
-        "Before GPS",
-        gpsText(data.gpsBefore)
-    ]);
+    sheet.addRow(
+
+        [
+            "Before GPS",
+            gpsText(
+                data.gpsBefore
+            )
+        ]
+
+    );
 
 
-    sheet.addRow([
-        "TopUp GPS",
-        gpsText(data.gpsTopup)
-    ]);
+    sheet.addRow(
+
+        [
+            "TopUp GPS",
+            gpsText(
+                data.gpsTopup
+            )
+        ]
+
+    );
 
 
-    sheet.addRow([
-        "After GPS",
-        gpsText(data.gpsAfter)
-    ]);
+    sheet.addRow(
+
+        [
+            "After GPS",
+            gpsText(
+                data.gpsAfter
+            )
+        ]
+
+    );
 
 
     /* ========================================================
@@ -2704,35 +3436,72 @@ async function createExcelBlob() {
     ======================================================== */
 
     const photoSheet =
-        workbook.addWorksheet("Photos");
+        workbook.addWorksheet(
+            "Photos"
+        );
 
 
     photoSheet.columns = [
 
-        { width: 5 },
-        { width: 28 },
-        { width: 28 },
-        { width: 28 },
-        { width: 28 }
+        {
+            width:
+                5
+        },
+
+        {
+            width:
+                28
+        },
+
+        {
+            width:
+                28
+        },
+
+        {
+            width:
+                28
+        },
+
+        {
+            width:
+                28
+        }
 
     ];
 
 
-    photoSheet.mergeCells("B1:E1");
+    photoSheet.mergeCells(
+        "B1:E1"
+    );
 
 
-    photoSheet.getCell("B1").value =
+    photoSheet.getCell(
+        "B1"
+    ).value =
         "VODAFONE PNG REFUELLING PHOTOS";
 
 
-    photoSheet.getCell("B1").font = {
-        bold: true,
-        size: 16
+    photoSheet.getCell(
+        "B1"
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            16
+
     };
 
 
-    photoSheet.getCell("B1").alignment = {
-        horizontal: "center"
+    photoSheet.getCell(
+        "B1"
+    ).alignment = {
+
+        horizontal:
+            "center"
+
     };
 
 
@@ -2740,273 +3509,326 @@ async function createExcelBlob() {
        BEFORE
     ======================================================== */
 
-    if (imgBefore.src) {
+    addExcelPhoto(
 
-        photoSheet.getCell("B3").value =
-            "BEFORE REFUELLING";
+        workbook,
 
+        photoSheet,
 
-        photoSheet.getCell("B3").font = {
-            bold: true,
-            size: 14
-        };
+        imgBefore.getAttribute("src"),
 
+        "BEFORE REFUELLING",
 
-        const beforeImage =
-            workbook.addImage({
+        data.gpsBefore,
 
-                base64: imgBefore.src,
+        3,
+        4
 
-                extension: "jpeg"
-
-            });
-
-
-        photoSheet.addImage(
-            beforeImage,
-            {
-                tl: {
-                    col: 1,
-                    row: 4
-                },
-
-                ext: {
-                    width: 600,
-                    height: 400
-                }
-            }
-        );
-
-
-        photoSheet.getCell("D3").value =
-            "GPS";
-
-
-        photoSheet.getCell("D3").font = {
-            bold: true
-        };
-
-
-        photoSheet.getCell("D4").value =
-            gpsText(data.gpsBefore);
-
-    }
+    );
 
 
     /* ========================================================
        TOPUP
     ======================================================== */
 
-    if (imgTopup.src) {
+    addExcelPhoto(
 
-        photoSheet.getCell("B22").value =
-            "TOPUP";
+        workbook,
 
+        photoSheet,
 
-        photoSheet.getCell("B22").font = {
-            bold: true,
-            size: 14
-        };
+        imgTopup.getAttribute("src"),
 
+        "TOPUP",
 
-        const topupImage =
-            workbook.addImage({
+        data.gpsTopup,
 
-                base64: imgTopup.src,
+        22,
+        23
 
-                extension: "jpeg"
-
-            });
-
-
-        photoSheet.addImage(
-            topupImage,
-            {
-                tl: {
-                    col: 1,
-                    row: 23
-                },
-
-                ext: {
-                    width: 600,
-                    height: 400
-                }
-            }
-        );
-
-
-        photoSheet.getCell("D22").value =
-            "GPS";
-
-
-        photoSheet.getCell("D22").font = {
-            bold: true
-        };
-
-
-        photoSheet.getCell("D23").value =
-            gpsText(data.gpsTopup);
-
-    }
+    );
 
 
     /* ========================================================
        AFTER
     ======================================================== */
 
-    if (imgAfter.src) {
+    addExcelPhoto(
 
-        photoSheet.getCell("B41").value =
-            "AFTER REFUELLING";
+        workbook,
 
+        photoSheet,
 
-        photoSheet.getCell("B41").font = {
-            bold: true,
-            size: 14
-        };
+        imgAfter.getAttribute("src"),
 
+        "AFTER REFUELLING",
 
-        const afterImage =
-            workbook.addImage({
+        data.gpsAfter,
 
-                base64: imgAfter.src,
+        41,
+        42
 
-                extension: "jpeg"
-
-            });
+    );
 
 
-        photoSheet.addImage(
-            afterImage,
-            {
-                tl: {
-                    col: 1,
-                    row: 42
-                },
-
-                ext: {
-                    width: 600,
-                    height: 400
-                }
-            }
-        );
-
-
-        photoSheet.getCell("D41").value =
-            "GPS";
-
-
-        photoSheet.getCell("D41").font = {
-            bold: true
-        };
-
-
-        photoSheet.getCell("D42").value =
-            gpsText(data.gpsAfter);
-
-    }
-
+    /* ========================================================
+       WRITE
+    ======================================================== */
 
     const buffer =
         await workbook.xlsx.writeBuffer();
 
 
     return new Blob(
-        [buffer],
+
+        [
+            buffer
+        ],
+
         {
+
             type:
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
         }
+
     );
+
 }
+
 
 
 /* ============================================================
-   BLOB → DATA URL
+   ADD PHOTO TO EXCEL
 ============================================================ */
 
-function blobToDataURL(blob) {
+function addExcelPhoto(
 
-    return new Promise(function(resolve, reject) {
+    workbook,
+    sheet,
+    src,
+    title,
+    gps,
+    titleRow,
+    imageRow
 
-        const reader =
-            new FileReader();
+){
 
-        reader.onload =
-            function() {
-                resolve(reader.result);
-            };
+    if(
+        !src
+    ){
 
-        reader.onerror =
-            reject;
+        return;
 
-        reader.readAsDataURL(blob);
+    }
 
-    });
+
+    sheet.getCell(
+        `B${titleRow}`
+    ).value =
+        title;
+
+
+    sheet.getCell(
+        `B${titleRow}`
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            14
+
+    };
+
+
+    const image =
+        workbook.addImage({
+
+            base64:
+                src,
+
+            extension:
+                "jpeg"
+
+        });
+
+
+    sheet.addImage(
+
+        image,
+
+        {
+
+            tl: {
+
+                col:
+                    1,
+
+                row:
+                    imageRow
+
+            },
+
+            ext: {
+
+                width:
+                    600,
+
+                height:
+                    400
+
+            }
+
+        }
+
+    );
+
+
+    sheet.getCell(
+        `D${titleRow}`
+    ).value =
+        "GPS";
+
+
+    sheet.getCell(
+        `D${titleRow}`
+    ).font = {
+
+        bold:
+            true
+
+    };
+
+
+    sheet.getCell(
+        `D${imageRow}`
+    ).value =
+        gpsText(
+            gps
+        );
+
 }
+
+
+
+/* ============================================================
+   BLOB TO DATA URL
+============================================================ */
+
+function blobToDataURL(blob){
+
+    return new Promise(
+
+        function(resolve,reject){
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(){
+
+                    resolve(
+                        reader.result
+                    );
+
+                };
+
+
+            reader.onerror =
+                reject;
+
+
+            reader.readAsDataURL(
+                blob
+            );
+
+        }
+
+    );
+
+}
+
 
 
 /* ============================================================
    PDF BASE64
 ============================================================ */
 
-async function getPDFBase64() {
+async function getPDFBase64(){
 
     const doc =
         generatePDF();
 
-    const blob =
-        doc.output("blob");
 
-    return await blobToDataURL(blob);
+    const blob =
+        doc.output(
+            "blob"
+        );
+
+
+    return await blobToDataURL(
+        blob
+    );
+
 }
+
 
 
 /* ============================================================
    EXCEL BASE64
 ============================================================ */
 
-async function getExcelBase64() {
+async function getExcelBase64(){
 
     const blob =
         await createExcelBlob();
 
-    return await blobToDataURL(blob);
+
+    return await blobToDataURL(
+        blob
+    );
+
 }
+
 
 
 /* ============================================================
    DOWNLOAD EXCEL
 ============================================================ */
 
-async function downloadExcel() {
+async function downloadExcel(){
 
-    if (
-        !imgBefore.src ||
-        !imgTopup.src ||
-        !imgAfter.src
-    ) {
+    if(
+        !photosReady()
+    ){
 
         alert(
             "Please capture BEFORE, TOPUP and AFTER photos first."
         );
 
         return;
+
     }
 
 
-    try {
+    try{
 
         const blob =
             await createExcelBlob();
 
 
         const url =
-            URL.createObjectURL(blob);
+            URL.createObjectURL(
+                blob
+            );
 
 
         const a =
-            document.createElement("a");
+            document.createElement(
+                "a"
+            );
 
 
         a.href =
@@ -3015,33 +3837,50 @@ async function downloadExcel() {
 
         a.download =
 
-            (siteId.value || "SITE") +
+            (
+                siteId.value ||
+                "SITE"
+            ) +
+
             "_" +
-            (date.value || "DATE") +
+
+            (
+                date.value ||
+                "DATE"
+            ) +
+
             "_Refuelling_Report.xlsx";
 
 
-        document.body.appendChild(a);
+        document.body.appendChild(
+            a
+        );
+
 
         a.click();
 
-        document.body.removeChild(a);
+
+        document.body.removeChild(
+            a
+        );
 
 
-        URL.revokeObjectURL(url);
+        URL.revokeObjectURL(
+            url
+        );
 
     }
 
-    catch (error) {
+    catch(error){
 
         console.error(
             "EXCEL ERROR:",
             error
         );
 
+
         alert(
-            "Could not create Excel file.\n\n" +
-            error.message
+            "Could not create Excel file. Please try again."
         );
 
     }
@@ -3049,80 +3888,66 @@ async function downloadExcel() {
 }
 
 
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+    stopCamera();
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
 /* ============================================================
    SEND COMPLETE REPORT
 ============================================================ */
 
 form.addEventListener(
+
     "submit",
-    async function(event) {
+
+    async function(event){
 
         event.preventDefault();
 
 
         /* ====================================================
-           CHECK EMAILJS CONFIGURATION
+           VALIDATE FORM
         ==================================================== */
 
-        if (
-            !EMAILJS_PUBLIC_KEY ||
-            EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY" ||
-
-            !EMAILJS_SERVICE_ID ||
-            EMAILJS_SERVICE_ID === "YOUR_SERVICE_ID" ||
-
-            !EMAILJS_TEMPLATE_ID ||
-            EMAILJS_TEMPLATE_ID === "YOUR_TEMPLATE_ID"
-        ) {
-
-            alert(
-
-                "EmailJS is not configured yet.\n\n" +
-
-                "Please enter your:\n" +
-
-                "1. Public Key\n" +
-
-                "2. Service ID\n" +
-
-                "3. Template ID"
-
-            );
-
-            return;
-        }
-
-
-        /* ====================================================
-           FORM VALIDATION
-        ==================================================== */
-
-        if (!form.checkValidity()) {
+        if(
+            !form.checkValidity()
+        ){
 
             form.reportValidity();
 
             return;
+
         }
 
 
         /* ====================================================
-           PHOTO VALIDATION
+           VALIDATE PHOTOS
         ==================================================== */
 
-        if (
-            !imgBefore.src ||
-            !imgTopup.src ||
-            !imgAfter.src
-        ) {
+        if(
+            !photosReady()
+        ){
 
             alert(
 
-                "Please capture Before, TopUp and After " +
-                "photos before sending."
+                "Please capture Before, TopUp and After photos."
 
             );
 
             return;
+
         }
 
 
@@ -3130,69 +3955,117 @@ form.addEventListener(
            GPS WARNING
         ==================================================== */
 
-        if (
+        if(
+
             !gpsData.BEFORE ||
             !gpsData.TOPUP ||
             !gpsData.AFTER
-        ) {
+
+        ){
 
             const continueWithoutGPS =
                 confirm(
 
-                    "One or more photos do not have GPS data.\n\n" +
+                    "One or more photos do not contain GPS data." +
+
+                    "\n\n" +
+
                     "Do you want to send the report anyway?"
 
                 );
 
-            if (!continueWithoutGPS) {
+
+            if(
+                !continueWithoutGPS
+            ){
 
                 return;
+
             }
+
         }
 
 
         /* ====================================================
-           DISABLE BUTTON
+           CHECK EMAILJS CONFIGURATION
+        ==================================================== */
+
+        if(
+
+            EMAILJS_PUBLIC_KEY ===
+                "YOUR_PUBLIC_KEY" ||
+
+            EMAILJS_SERVICE_ID ===
+                "YOUR_SERVICE_ID" ||
+
+            EMAILJS_TEMPLATE_ID ===
+                "YOUR_TEMPLATE_ID"
+
+        ){
+
+            alert(
+
+                "EmailJS is not configured yet.\n\n" +
+
+                "Please enter your Public Key, Service ID " +
+                "and Template ID in the code."
+
+            );
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           DISABLE SEND
         ==================================================== */
 
         sendButton.disabled =
             true;
 
+
         sendButton.textContent =
             "GENERATING REPORT...";
+
 
         sendStatus.textContent =
             "Preparing PDF and Excel files...";
 
 
-        try {
+        try{
+
 
             /* =================================================
-               GENERATE FILES
+               GET DATA
             ================================================= */
-
-            const pdfBase64 =
-                await getPDFBase64();
-
-
-            sendStatus.textContent =
-                "Generating Excel report...";
-
-
-            const excelBase64 =
-                await getExcelBase64();
-
 
             const data =
                 getReportData();
 
 
             /* =================================================
-               EMAILJS PARAMETERS
+               CREATE PDF
+            ================================================= */
 
-               IMPORTANT:
-               These names must match the variables in
-               your EmailJS template.
+            const pdfBase64 =
+                await getPDFBase64();
+
+
+            /* =================================================
+               CREATE EXCEL
+            ================================================= */
+
+            sendStatus.textContent =
+                "Preparing Excel report...";
+
+
+            const excelBase64 =
+                await getExcelBase64();
+
+
+            /* =================================================
+               EMAIL PARAMETERS
             ================================================= */
 
             const params = {
@@ -3206,7 +4079,18 @@ form.addEventListener(
 
 
                 /* =============================================
-                   REPORT INFORMATION
+                   SUBJECT
+                ============================================= */
+
+                subject:
+
+                    "Vodafone PNG Refuelling Report - " +
+
+                    data.siteId,
+
+
+                /* =============================================
+                   PERSONNEL
                 ============================================= */
 
                 engineer:
@@ -3214,6 +4098,11 @@ form.addEventListener(
 
                 team:
                     data.team,
+
+
+                /* =============================================
+                   SITE
+                ============================================= */
 
                 date:
                     data.date,
@@ -3236,6 +4125,11 @@ form.addEventListener(
                 tower:
                     data.tower,
 
+
+                /* =============================================
+                   GENSET
+                ============================================= */
+
                 genset:
                     data.genset,
 
@@ -3248,6 +4142,11 @@ form.addEventListener(
                 rpm:
                     data.rpm,
 
+
+                /* =============================================
+                   FUEL
+                ============================================= */
+
                 fuelBefore:
                     data.fuelBefore,
 
@@ -3256,6 +4155,60 @@ form.addEventListener(
 
                 fuelAfter:
                     data.fuelAfter,
+
+
+                expectedFuel:
+
+                    (
+
+                        Number(
+                            data.fuelBefore ||
+                            0
+                        )
+
+                        +
+
+                        Number(
+                            data.fuelAdded ||
+                            0
+                        )
+
+                    ).toFixed(1),
+
+
+                fuelDifference:
+
+                    (
+
+                        Number(
+                            data.fuelAfter ||
+                            0
+                        )
+
+                        -
+
+                        (
+
+                            Number(
+                                data.fuelBefore ||
+                                0
+                            )
+
+                            +
+
+                            Number(
+                                data.fuelAdded ||
+                                0
+                            )
+
+                        )
+
+                    ).toFixed(1),
+
+
+                /* =============================================
+                   POWER
+                ============================================= */
 
                 ppl:
                     data.ppl,
@@ -3266,14 +4219,24 @@ form.addEventListener(
                 reading:
                     data.reading,
 
+
+                /* =============================================
+                   DRIVER
+                ============================================= */
+
                 driver:
                     data.driver,
 
                 vehicle:
                     data.vehicle,
 
+
+                /* =============================================
+                   COMMENTS
+                ============================================= */
+
                 comments:
-                    data.comments,
+                    data.comments || "None",
 
 
                 /* =============================================
@@ -3281,63 +4244,92 @@ form.addEventListener(
                 ============================================= */
 
                 gps_before:
-                    gpsText(data.gpsBefore),
+                    gpsText(
+                        data.gpsBefore
+                    ),
 
                 gps_topup:
-                    gpsText(data.gpsTopup),
+                    gpsText(
+                        data.gpsTopup
+                    ),
 
                 gps_after:
-                    gpsText(data.gpsAfter),
+                    gpsText(
+                        data.gpsAfter
+                    ),
 
 
                 /* =============================================
-                   EMAIL SUBJECT
-                ============================================= */
-
-                subject:
-                    "Vodafone PNG Refuelling Report - " +
-                    data.siteId +
-                    " - " +
-                    data.date,
-
-
-                /* =============================================
-                   DYNAMIC ATTACHMENTS
+                   ATTACHMENT 1
+                   PDF
                 ============================================= */
 
                 pdf_attachment:
                     pdfBase64,
 
+
+                /* =============================================
+                   ATTACHMENT 2
+                   EXCEL
+                ============================================= */
+
                 excel_attachment:
                     excelBase64,
 
+
+                /* =============================================
+                   ATTACHMENT 3
+                   BEFORE PHOTO
+                ============================================= */
+
                 before_photo:
-                    imgBefore.src,
+
+                    imgBefore.getAttribute(
+                        "src"
+                    ),
+
+
+                /* =============================================
+                   ATTACHMENT 4
+                   TOPUP PHOTO
+                ============================================= */
 
                 topup_photo:
-                    imgTopup.src,
+
+                    imgTopup.getAttribute(
+                        "src"
+                    ),
+
+
+                /* =============================================
+                   ATTACHMENT 5
+                   AFTER PHOTO
+                ============================================= */
 
                 after_photo:
-                    imgAfter.src
+
+                    imgAfter.getAttribute(
+                        "src"
+                    )
 
             };
 
 
             /* =================================================
-               SEND EMAIL
-
-               THIS WAS MISSING FROM YOUR ORIGINAL CODE.
+               SEND EMAILJS
             ================================================= */
 
             sendStatus.textContent =
                 "Sending report by email...";
+
 
             sendButton.textContent =
                 "SENDING...";
 
 
             console.log(
-                "Sending EmailJS report..."
+                "EmailJS parameters:",
+                params
             );
 
 
@@ -3353,18 +4345,19 @@ form.addEventListener(
                 );
 
 
-            /* =================================================
-               SUCCESS
-            ================================================= */
-
             console.log(
                 "EMAILJS SUCCESS:",
                 response
             );
 
 
+            /* =================================================
+               SUCCESS
+            ================================================= */
+
             sendStatus.textContent =
                 "✓ Report sent successfully.";
+
 
             sendButton.textContent =
                 "REPORT SENT ✓";
@@ -3378,39 +4371,26 @@ form.addEventListener(
 
 
             setTimeout(
-                function() {
+
+                function(){
 
                     window.location.href =
                         "index.html";
 
                 },
+
                 1200
+
             );
 
         }
 
 
-        catch (error) {
-
-            /* =================================================
-               REAL ERROR MESSAGE
-            ================================================= */
+        catch(error){
 
             console.error(
                 "EMAILJS ERROR:",
                 error
-            );
-
-
-            console.error(
-                "STATUS:",
-                error?.status
-            );
-
-
-            console.error(
-                "TEXT:",
-                error?.text
             );
 
 
@@ -3430,46 +4410,62 @@ form.addEventListener(
                 "The report could not be sent.";
 
 
-            if (error && error.text) {
+            if(
+                error &&
+                error.text
+            ){
 
                 errorMessage +=
-                    "\n\nEmailJS says:\n" +
+
+                    "\n\nEmailJS: " +
                     error.text;
 
             }
 
-            else if (error && error.message) {
+
+            if(
+                error &&
+                error.status
+            ){
 
                 errorMessage +=
-                    "\n\n" +
-                    error.message;
+
+                    "\nStatus: " +
+                    error.status;
 
             }
 
 
             errorMessage +=
 
-                "\n\nCheck:\n" +
+                "\n\nPlease check:" +
 
-                "1. EmailJS Public Key\n" +
+                "\n1. EmailJS Public Key" +
 
-                "2. EmailJS Service ID\n" +
+                "\n2. EmailJS Service ID" +
 
-                "3. EmailJS Template ID\n" +
+                "\n3. EmailJS Template ID" +
 
-                "4. EmailJS template configuration\n" +
+                "\n4. EmailJS template configuration" +
 
-                "5. EmailJS attachment configuration";
+                "\n5. EmailJS attachment settings" +
+
+                "\n6. Internet connection";
 
 
-            alert(errorMessage);
+            alert(
+                errorMessage
+            );
 
         }
 
     }
+
 );
 
+
 </script>
+
 
 </body>
 
