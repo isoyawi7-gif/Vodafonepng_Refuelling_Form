@@ -3,71 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Vodafone PNG Refuelling System</title>
 
+<!-- =========================
+     EMAILJS
+========================= -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- =========================
+     PDF
+========================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- =========================
+     EXCEL
+========================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <style>
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial;
-    background:#f4f6f8;
-    margin:0;
-    padding:10px;
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 10px;
+    color: #222;
 }
 
 .container {
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:15px;
-    border-radius:10px;
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
-h1 {text-align:center;color:#e60000;}
+/* HEADER */
+
+.header {
+    text-align: center;
+    border-bottom: 3px solid #e60000;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #e60000;
+    margin: 0;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+/* SECTIONS */
+
+.section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #e60000;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+/* ROW */
 
 .row {
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .form-group {
-    flex:1;
-    min-width:140px;
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 10px;
 }
+
+/* LABEL */
 
 label {
-    font-size:13px;
-    font-weight:bold;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
 }
 
-input, select, textarea {
-    width:100%;
-    padding:6px;
-    font-size:13px;
-    margin-top:4px;
+/* INPUT */
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 9px;
+    font-size: 13px;
+    margin-top: 5px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
 }
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* BUTTONS */
 
 button {
-    background:#e60000;
-    color:white;
-    border:none;
-    padding:8px;
-    border-radius:5px;
-    cursor:pointer;
+    background: #e60000;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    width: 100%;
 }
 
-img {
-    width:100%;
-    margin-top:10px;
-    border-radius:8px;
+button:hover {
+    background: #c90000;
 }
 
-video {width:100%; display:none;}
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #555;
+}
+
+.btn-secondary:hover {
+    background: #333;
+}
+
+.btn-green {
+    background: #168a35;
+}
+
+.btn-green:hover {
+    background: #106b29;
+}
+
+/* CAMERA */
+
+#video {
+    width: 100%;
+    max-height: 400px;
+    display: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    background: black;
+}
+
+#canvas {
+    display: none;
+}
+
+/* PHOTO CARDS */
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.photo-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.photo-card h3 {
+    font-size: 14px;
+    margin-top: 0;
+}
+
+.photo-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #eee;
+}
+
+.photo-status {
+    font-size: 12px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+/* SEND AREA */
+
+.send-area {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7f7f7;
+    border-radius: 8px;
+}
+
+.send-button {
+    background: #e60000;
+    font-size: 16px;
+    padding: 14px;
+    font-weight: bold;
+}
+
+.status {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* FOOTER */
 
 .footer {
-    text-align:center;
-    font-size:12px;
-    margin-top:20px;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 25px;
+    color: #777;
 }
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+}
+
 </style>
 </head>
 
@@ -75,377 +265,841 @@ video {width:100%; display:none;}
 
 <div class="container">
 
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
 <h1>Vodafone PNG Refuelling</h1>
+
+<p>
+Genset Refuelling & Site Inspection Report
+</p>
+
+</div>
 
 <form id="fuelForm">
 
-<!-- SITE INFO -->
+<!-- =========================
+     ENGINEER
+========================= -->
+
+<div class="section">
+
+<h2>1. Site Personnel</h2>
+
 <div class="row">
+
 <div class="form-group">
-<label>Field Engineer</label>
-<input id="engineer">
+
+<label>Field Engineer *</label>
+
+<input
+type="text"
+id="engineer"
+name="engineer"
+required
+placeholder="Enter engineer name">
+
 </div>
 
 <div class="form-group">
+
 <label>Additional Team</label>
-<input id="team">
+
+<input
+type="text"
+id="team"
+name="team"
+placeholder="Additional team members">
+
 </div>
+
 </div>
+
+</div>
+
+<!-- =========================
+     DATE / TIME
+========================= -->
+
+<div class="section">
+
+<h2>2. Site Information</h2>
 
 <div class="row">
+
 <div class="form-group">
-<label>Date</label>
-<input type="date" id="date">
+
+<label>Date *</label>
+
+<input
+type="date"
+id="date"
+name="date"
+required>
+
 </div>
 
 <div class="form-group">
-<label>Time</label>
-<input type="time" id="time">
+
+<label>Time *</label>
+
+<input
+type="time"
+id="time"
+name="time"
+required>
+
 </div>
+
 </div>
+
 
 <div class="row">
-<div class="form-group">
-<label>Site Name</label>
-<input id="siteName">
-</div>
 
 <div class="form-group">
-<label>Site ID</label>
-<input id="siteId">
-</div>
+
+<label>Site Name *</label>
+
+<input
+type="text"
+id="siteName"
+name="siteName"
+required
+placeholder="Site name">
+
 </div>
 
-<!-- REGION -->
+
+<div class="form-group">
+
+<label>Site ID *</label>
+
+<input
+type="text"
+id="siteId"
+name="siteId"
+required
+placeholder="Site ID">
+
+</div>
+
+</div>
+
+
 <div class="row">
 
-    <div class="form-group">
-        <label>Region</label>
-        <select id="region" onchange="updateProvinces()">
-            <option value="">Select Region</option>
-            <option value="Momase + EHP">Momase + EHP</option>
-            <option value="Highlands">Highlands</option>
-            <option value="Southern">Southern</option>
-            <option value="NGI">New Guinea Islands</option>
-        </select>
-    </div>
+<div class="form-group">
 
-    <div class="form-group">
-        <label>Province</label>
-        <select id="province">
-            <option value="">Select Province</option>
-        </select>
-    </div>
+<label>Region *</label>
+
+<select
+id="region"
+name="region"
+onchange="updateProvinces()"
+required>
+
+<option value="">Select Region</option>
+
+<option value="Momase + EHP">
+Momase + EHP
+</option>
+
+<option value="Highlands">
+Highlands
+</option>
+
+<option value="Southern">
+Southern
+</option>
+
+<option value="NGI">
+New Guinea Islands
+</option>
+
+</select>
 
 </div>
 
-<!-- TOWER -->
+
 <div class="form-group">
+
+<label>Province *</label>
+
+<select
+id="province"
+name="province"
+required>
+
+<option value="">
+Select Province
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
 <label>Tower Height</label>
-<select id="tower">
-<option>23 Meter Monopole</option> 
-    <option>30M RDS</option> 
-    <option>45 M RDS</option> 
-    <option>45 M Grilliage</option> 
-    <option>45 M SST</option> 
-    <option>60 M RDS</option> 
-    <option>60 M Grilliage</option> 
-    <option>60 M SST</option> 
-    <option>80 M Grilliage</option> 
-    <option>80 M SST </option> 
-    <option>100 M SST</option> 
-    <option>110 M SST</option>
+
+<select id="tower" name="tower">
+
+<option>23 Meter Monopole</option>
+<option>30M RDS</option>
+<option>45M RDS</option>
+<option>45M Grilliage</option>
+<option>45M SST</option>
+<option>60M RDS</option>
+<option>60M Grilliage</option>
+<option>60M SST</option>
+<option>80M Grilliage</option>
+<option>80M SST</option>
+<option>100M SST</option>
+<option>110M SST</option>
+
 </select>
+
 </div>
 
-<h2>Refuelling Details</h2>
-<!-- GENSET -->
-<label>Genset (DG) Type</label>
-<select id="genset">
-<option>Yanhan 8KVA </option> 
-<option>Yanhan 17Kva</option>
-    <option>Yanhan 24Kva</option> 
-    <option>CCTC 11KVa</option> 
-    <option>CCTC 17Kva</option> 
-    <option>CCTC 24Kva</option> 
-    <option>FG Wilson 15KVa</option> 
-    <option>Polar Power</option> 
-     <option>Sengen 15Kva</option>
+</div>
+
+<!-- =========================
+     GENSET
+========================= -->
+
+<div class="section">
+
+<h2>3. Genset Information</h2>
+
+<div class="form-group">
+
+<label>Genset / DG Type *</label>
+
+<select id="genset" name="genset" required>
+
+<option>Yanhan 8KVA</option>
+<option>Yanhan 17KVA</option>
+<option>Yanhan 24KVA</option>
+<option>CCTC 11KVA</option>
+<option>CCTC 17KVA</option>
+<option>CCTC 24KVA</option>
+<option>FG Wilson 15KVA</option>
+<option>Polar Power</option>
+<option>Sengen 15KVA</option>
+
 </select>
+
+</div>
+
 
 <div class="row">
 
 <div class="form-group">
+
 <label>Engine Oil Level</label>
-<input type="number" id="oilLevel">
+
+<input
+type="number"
+step="0.1"
+id="oilLevel"
+name="oilLevel"
+placeholder="Level">
+
 </div>
 
+
 <div class="form-group">
+
 <label>Coolant Level</label>
-<input type="number" id="coolantLevel">
+
+<input
+type="number"
+step="0.1"
+id="coolantLevel"
+name="coolantLevel"
+placeholder="Level">
+
 </div>
 
+
 <div class="form-group">
+
 <label>Engine Speed (RPM)</label>
-<input type="number" id="rpm">
+
+<input
+type="number"
+id="rpm"
+name="rpm"
+placeholder="RPM">
+
+</div>
+
 </div>
 
 </div>
 
-<div class="row">
-<div class="form-group">
-<label>Fuel Before</label>
-<input type="number" id="before">
-</div>
+<!-- =========================
+     FUEL
+========================= -->
 
-<div class="form-group">
-<button type="button" onclick="openCamera('BEFORE')">
-Before Photo
-</button>
-</div>
-</div>
+<div class="section">
 
-<div class="row">
-<div class="form-group">
-<label>Fuel TopUp</label>
-<input type="number" id="added">
-</div>
-
-<div class="form-group">
-<button type="button" onclick="openCamera('TOPUP')">
-TopUp Photo
-</button>
-</div>
-</div>
+<h2>4. Refuelling Details</h2>
 
 <div class="row">
-<div class="form-group">
-<label>Fuel After</label>
-<input type="number" id="after">
-</div>
 
 <div class="form-group">
-<button type="button" onclick="openCamera('AFTER')">
-After Photo
-</button>
-</div>
+
+<label>Fuel Before (L) *</label>
+
+<input
+type="number"
+step="0.1"
+id="before"
+name="before"
+required
+oninput="calculateFuel()">
+
 </div>
 
-<!-- PPL SECTION -->
-<h2>Power</h2>
 
-<div class="row">
 <div class="form-group">
-<label>PPL Connected?</label>
-<select id="ppl" onchange="togglePPL()">
-<option value="No">No</option>
-<option value="Yes">Yes</option>
-</select>
+
+<label>Fuel TopUp (L) *</label>
+
+<input
+type="number"
+step="0.1"
+id="added"
+name="added"
+required
+oninput="calculateFuel()">
+
 </div>
 
-<div class="form-group" id="pplFields" style="display:none;">
-<input placeholder="Meter Number" id="meter">
-<input placeholder="Reading" id="reading">
-</div>
+
+<div class="form-group">
+
+<label>Fuel After (L) *</label>
+
+<input
+type="number"
+step="0.1"
+id="after"
+name="after"
+required
+oninput="calculateFuel()">
+
 </div>
 
-<!-- CAMERA -->
+</div>
+
+
+<div id="calc"
+style="
+background:#f1f1f1;
+padding:10px;
+border-radius:5px;
+font-size:13px;
+font-weight:bold;
+">
+
+Expected: 0 L | Difference: 0 L
+
+</div>
+
+</div>
+
+<!-- =========================
+     CAMERA
+========================= -->
+
+<div class="section">
+
+<h2>5. Refuelling Photos</h2>
+
+<p style="font-size:12px;color:#666;">
+Capture all three photos. The system automatically stamps the photo with site,
+engineer, date/time and fuel information.
+</p>
+
+
 <video id="video" autoplay playsinline></video>
+
 <canvas id="canvas"></canvas>
 
-<h3>Before</h3>
-<img id="imgBefore">
-<button type="button" onclick="resetPhoto('BEFORE')">Reset</button>
+
+<div class="photo-grid">
+
+<!-- BEFORE -->
+
+<div class="photo-card">
+
+<h3>Before Refuelling</h3>
+
+<img id="imgBefore" alt="Before photo">
+
+<div
+id="statusBefore"
+class="photo-status">
+
+Not captured
+
+</div>
+
+<button
+type="button"
+onclick="openCamera('BEFORE')">
+
+Capture Before
+
+</button>
+
+<br><br>
+
+<button
+type="button"
+class="btn-secondary"
+onclick="resetPhoto('BEFORE')">
+
+Reset
+
+</button>
+
+</div>
+
+
+<!-- TOPUP -->
+
+<div class="photo-card">
 
 <h3>TopUp</h3>
-<img id="imgTopup">
-<button type="button" onclick="resetPhoto('TOPUP')">Reset</button>
 
-<h3>After</h3>
-<img id="imgAfter">
-<button type="button" onclick="resetPhoto('AFTER')">Reset</button>
+<img id="imgTopup" alt="TopUp photo">
 
-<h2>Driver</h2>
-<input placeholder="Driver Name">
-<input placeholder="Vehicle Reg">
-<textarea placeholder="Comments"></textarea>
+<div
+id="statusTopup"
+class="photo-status">
 
-    <div class="row">
-    <div class="form-group">
-        <button type="button" onclick="downloadPDF()">Download PDF</button>
-    </div>
+Not captured
 
-    <div class="form-group">
-        <button type="button" onclick="downloadExcel()">Download Excel</button>
-    </div>
 </div>
-<div class="row">
-    <div class="form-group">
-        <button type="submit">Send</button>
-    </div>
 
-    <div class="form-group">
-        <button type="button" onclick="logout()">Logout</button>
-    </div>
+<button
+type="button"
+onclick="openCamera('TOPUP')">
+
+Capture TopUp
+
+</button>
+
+<br><br>
+
+<button
+type="button"
+class="btn-secondary"
+onclick="resetPhoto('TOPUP')">
+
+Reset
+
+</button>
+
+</div>
+
+
+<!-- AFTER -->
+
+<div class="photo-card">
+
+<h3>After Refuelling</h3>
+
+<img id="imgAfter" alt="After photo">
+
+<div
+id="statusAfter"
+class="photo-status">
+
+Not captured
+
+</div>
+
+<button
+type="button"
+onclick="openCamera('AFTER')">
+
+Capture After
+
+</button>
+
+<br><br>
+
+<button
+type="button"
+class="btn-secondary"
+onclick="resetPhoto('AFTER')">
+
+Reset
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================
+     POWER
+========================= -->
+
+<div class="section">
+
+<h2>6. Power Information</h2>
+
+<div class="form-group">
+
+<label>PPL Connected?</label>
+
+<select
+id="ppl"
+name="ppl"
+onchange="togglePPL()">
+
+<option value="No">
+No
+</option>
+
+<option value="Yes">
+Yes
+</option>
+
+</select>
+
+</div>
+
+
+<div
+id="pplFields"
+style="display:none;">
+
+<div class="row">
+
+<div class="form-group">
+
+<label>Meter Number</label>
+
+<input
+type="text"
+id="meter"
+name="meter">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Meter Reading</label>
+
+<input
+type="number"
+step="0.1"
+id="reading"
+name="reading">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =========================
+     DRIVER
+========================= -->
+
+<div class="section">
+
+<h2>7. Driver & Vehicle</h2>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>Driver Name</label>
+
+<input
+type="text"
+id="driver"
+name="driver">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Vehicle Registration</label>
+
+<input
+type="text"
+id="vehicle"
+name="vehicle">
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Comments / Observations</label>
+
+<textarea
+id="comments"
+name="comments"
+placeholder="Enter comments, abnormalities or observations..."></textarea>
+
+</div>
+
+</div>
+
+<!-- =========================
+     ACTIONS
+========================= -->
+
+<div class="section">
+
+<h2>8. Report</h2>
+
+<div class="row">
+
+<div class="form-group">
+
+<button
+type="button"
+class="btn-secondary"
+onclick="downloadPDF()">
+
+Download PDF
+
+</button>
+
+</div>
+
+
+<div class="form-group">
+
+<button
+type="button"
+class="btn-secondary"
+onclick="downloadExcel()">
+
+Download Excel
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="send-area">
+
+<button
+type="submit"
+id="sendButton"
+class="send-button">
+
+SEND COMPLETE REPORT
+
+</button>
+
+<div
+id="sendStatus"
+class="status">
+
+Ready to send
+
+</div>
+
+</div>
+
 </div>
 
 </form>
 
+
 <div class="footer">
+
 Powered by Iso Yawi | System Creator
+
 </div>
 
 </div>
-<!-- EMAILJS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- MAIN JS -->
+
 <script>
 
-/* PPL TOGGLE */
-function togglePPL(){
-document.getElementById("pplFields").style.display =
-document.getElementById("ppl").value==="Yes" ? "block" : "none";
-}
+/* ============================================================
+   EMAILJS CONFIGURATION
+============================================================ */
 
-/* CAMERA */
-let stream;
-let mode="";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
-function openCamera(type){
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
 
-if(!siteName.value || !siteId.value || !engineer.value){
-alert("Enter Site Name, Site ID & Engineer first");
-return;
-}
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 
-mode=type;
 
-navigator.mediaDevices.getUserMedia({
-video:{facingMode:"environment"}
-})
-.then(s=>{
-stream=s;
-video.srcObject=s;
-video.style.display="block";
-setTimeout(capture,2000);
+emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY
 });
+
+
+/* ============================================================
+   ELEMENTS
+============================================================ */
+
+const form = document.getElementById("fuelForm");
+
+const engineer = document.getElementById("engineer");
+const team = document.getElementById("team");
+
+const date = document.getElementById("date");
+const time = document.getElementById("time");
+
+const siteName = document.getElementById("siteName");
+const siteId = document.getElementById("siteId");
+
+const region = document.getElementById("region");
+const province = document.getElementById("province");
+
+const tower = document.getElementById("tower");
+const genset = document.getElementById("genset");
+
+const oilLevel = document.getElementById("oilLevel");
+const coolantLevel = document.getElementById("coolantLevel");
+const rpm = document.getElementById("rpm");
+
+const before = document.getElementById("before");
+const added = document.getElementById("added");
+const after = document.getElementById("after");
+
+const ppl = document.getElementById("ppl");
+const meter = document.getElementById("meter");
+const reading = document.getElementById("reading");
+
+const driver = document.getElementById("driver");
+const vehicle = document.getElementById("vehicle");
+
+const comments = document.getElementById("comments");
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+
+const imgBefore = document.getElementById("imgBefore");
+const imgTopup = document.getElementById("imgTopup");
+const imgAfter = document.getElementById("imgAfter");
+
+const sendButton = document.getElementById("sendButton");
+const sendStatus = document.getElementById("sendStatus");
+
+
+/* ============================================================
+   DEFAULT DATE / TIME
+============================================================ */
+
+function setCurrentDateTime(){
+
+    const now = new Date();
+
+    date.value =
+        now.toISOString().split("T")[0];
+
+    time.value =
+        now.toTimeString().slice(0,5);
+
 }
 
-function capture(){
+setCurrentDateTime();
 
-canvas.width = video.videoWidth;
-canvas.height = video.videoHeight;
 
-const ctx = canvas.getContext("2d");
-ctx.drawImage(video,0,0);
+/* ============================================================
+   PPL TOGGLE
+============================================================ */
 
-let label = {
-BEFORE:"BEFORE REFUELLING",
-TOPUP:"REFUELLING IN PROGRESS",
-AFTER:"AFTER REFUELLING"
-}[mode];
+function togglePPL(){
 
-ctx.fillStyle = "red";
-ctx.font = "18px Arial";
+    document.getElementById("pplFields").style.display =
+        ppl.value === "Yes"
+        ? "block"
+        : "none";
 
-ctx.fillText("Vodafone PNG Refuelling Report",20,30);
-ctx.fillText(label,20,60);
-ctx.fillText("Date/Time: " + new Date().toLocaleString(),20,90);
-ctx.fillText("Site: " + siteName.value + " | " + siteId.value,20,120);
-ctx.fillText("Province: " + province.value,20,150);
-ctx.fillText("Photo Taken By: " + engineer.value,20,180);
-
-/* =========================
-   FUEL DATA STAMP SECTION
-========================= */
-
-let beforeVal = before.value || 0;
-let addedVal  = added.value || 0;
-let afterVal  = after.value || 0;
-
-ctx.fillText("Fuel Before: " + beforeVal + " L",20,220);
-ctx.fillText("Fuel TopUp: " + addedVal + " L",20,250);
-ctx.fillText("Fuel After: " + afterVal + " L",20,280);
-
-let img = canvas.toDataURL("image/png");
-
-if(mode==="BEFORE") imgBefore.src = img;
-if(mode==="TOPUP") imgTopup.src = img;
-if(mode==="AFTER") imgAfter.src = img;
-
-stream.getTracks().forEach(t => t.stop());
-video.style.display = "none";
-}
-/* RESET */
-function resetPhoto(type){
-if(type==="BEFORE") imgBefore.src="";
-if(type==="TOPUP") imgTopup.src="";
-if(type==="AFTER") imgAfter.src="";
 }
 
-/* CALCULATION */
-function calculate(){
-let expected=(+before.value||0)+(+added.value||0);
-let diff=(+after.value||0)-expected;
 
-calc.innerHTML=`Expected: ${expected} L | Diff: ${diff} L`;
-}
-
-before.oninput=added.oninput=after.oninput=calculate;
+/* ============================================================
+   PROVINCES
+============================================================ */
 
 function updateProvinces(){
 
-    const region = document.getElementById("region").value;
-    const province = document.getElementById("province");
+    const list = [];
 
-    let list = [];
+    if(region.value === "Momase + EHP"){
 
-    /* MOMASE REGION */
-    if(region === "Momase + EHP"){
-        list = [
+        list.push(
             "Eastern Highlands",
             "Morobe",
             "Madang",
             "East Sepik",
             "West Sepik (Sandaun)"
-        ];
+        );
+
     }
 
-    /* HIGHLANDS REGION */
-    if(region === "Highlands"){
-        list = [
-    
+    if(region.value === "Highlands"){
+
+        list.push(
             "Western Highlands",
             "Simbu",
             "Jiwaka",
             "Enga",
             "Southern Highlands",
             "Hela"
-        ];
+        );
+
     }
 
-    /* SOUTHERN REGION */
-    if(region === "Southern"){
-        list = [
+    if(region.value === "Southern"){
+
+        list.push(
             "National Capital District",
             "Central",
             "Gulf",
             "Oro (Northern)",
             "Milne Bay",
             "Western"
-        ];
+        );
+
     }
 
-    /* NEW GUINEA ISLANDS */
-    if(region === "NGI"){
-        list = [
+    if(region.value === "NGI"){
+
+        list.push(
             "East New Britain",
             "West New Britain",
             "New Ireland",
             "Autonomous Region of Bougainville",
             "Manus"
-        ];
+        );
+
     }
 
     province.innerHTML =
@@ -453,194 +1107,1219 @@ function updateProvinces(){
 
     list.forEach(function(p){
 
-        let option =
+        const option =
             document.createElement("option");
 
         option.value = p;
-        option.text = p;
+        option.textContent = p;
 
         province.appendChild(option);
 
     });
 
 }
-/* SUBMIT VALIDATION */
-fuelForm.onsubmit = function(e){
-    e.preventDefault();
 
-    if(!before.value || !added.value || !after.value ||
-       !imgBefore.src || !imgTopup.src || !imgAfter.src){
-        alert("Please fill all fields and capture all photos");
+
+/* ============================================================
+   FUEL CALCULATION
+============================================================ */
+
+function calculateFuel(){
+
+    const beforeValue =
+        parseFloat(before.value) || 0;
+
+    const addedValue =
+        parseFloat(added.value) || 0;
+
+    const afterValue =
+        parseFloat(after.value) || 0;
+
+    const expected =
+        beforeValue + addedValue;
+
+    const difference =
+        afterValue - expected;
+
+    document.getElementById("calc").innerHTML =
+        `Expected: ${expected.toFixed(1)} L |
+         Difference: ${difference.toFixed(1)} L`;
+
+}
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+let stream = null;
+
+let mode = "";
+
+
+/* Open camera */
+
+async function openCamera(type){
+
+    if(
+        !siteName.value ||
+        !siteId.value ||
+        !engineer.value
+    ){
+
+        alert(
+            "Please enter Site Name, Site ID and Engineer first."
+        );
+
         return;
+
     }
 
-    const params = {
+    mode = type;
+
+    try{
+
+        stream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video:{
+                    facingMode:{
+                        ideal:"environment"
+                    }
+                },
+
+                audio:false
+
+            });
+
+        video.srcObject = stream;
+
+        video.style.display = "block";
+
+        setTimeout(
+            capturePhoto,
+            1500
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Camera could not be opened. Please allow camera access."
+        );
+
+    }
+
+}
+
+
+/* Capture */
+
+function capturePhoto(){
+
+    if(!video.videoWidth){
+
+        alert(
+            "Camera is not ready. Please try again."
+        );
+
+        stopCamera();
+
+        return;
+
+    }
+
+    canvas.width =
+        video.videoWidth;
+
+    canvas.height =
+        video.videoHeight;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    ctx.drawImage(
+        video,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* Photo stamp */
+
+    const stamp = [
+
+        "Vodafone PNG Refuelling Report",
+
+        mode === "BEFORE"
+            ? "BEFORE REFUELLING"
+            : mode === "TOPUP"
+            ? "REFUELLING IN PROGRESS"
+            : "AFTER REFUELLING",
+
+        "Date/Time: " +
+        new Date().toLocaleString(),
+
+        "Site: " +
+        siteName.value +
+        " | " +
+        siteId.value,
+
+        "Province: " +
+        province.value,
+
+        "Engineer: " +
+        engineer.value,
+
+        "Fuel Before: " +
+        (before.value || "0") +
+        " L",
+
+        "Fuel TopUp: " +
+        (added.value || "0") +
+        " L",
+
+        "Fuel After: " +
+        (after.value || "0") +
+        " L"
+
+    ];
+
+
+    /* Stamp background */
+
+    const lineHeight = 26;
+
+    const boxHeight =
+        stamp.length * lineHeight + 20;
+
+    ctx.fillStyle =
+        "rgba(0,0,0,0.70)";
+
+    ctx.fillRect(
+        0,
+        canvas.height - boxHeight,
+        canvas.width,
+        boxHeight
+    );
+
+
+    /* Stamp text */
+
+    ctx.fillStyle = "white";
+
+    ctx.font =
+        Math.max(
+            16,
+            canvas.width / 55
+        ) +
+        "px Arial";
+
+
+    stamp.forEach(
+        function(text,index){
+
+            ctx.fillText(
+                text,
+                15,
+                canvas.height -
+                boxHeight +
+                25 +
+                index * lineHeight
+            );
+
+        }
+    );
+
+
+    /* Resize/compress image */
+
+    const image =
+        resizeCanvas(canvas,1200,0.75);
+
+
+    if(mode === "BEFORE"){
+
+        imgBefore.src = image;
+
+        document.getElementById(
+            "statusBefore"
+        ).textContent =
+            "✓ Captured";
+
+    }
+
+
+    if(mode === "TOPUP"){
+
+        imgTopup.src = image;
+
+        document.getElementById(
+            "statusTopup"
+        ).textContent =
+            "✓ Captured";
+
+    }
+
+
+    if(mode === "AFTER"){
+
+        imgAfter.src = image;
+
+        document.getElementById(
+            "statusAfter"
+        ).textContent =
+            "✓ Captured";
+
+    }
+
+
+    stopCamera();
+
+}
+
+
+/* ============================================================
+   RESIZE IMAGE
+============================================================ */
+
+function resizeCanvas(
+    sourceCanvas,
+    maxWidth,
+    quality
+){
+
+    const scale =
+        Math.min(
+            1,
+            maxWidth /
+            sourceCanvas.width
+        );
+
+
+    const newCanvas =
+        document.createElement("canvas");
+
+
+    newCanvas.width =
+        sourceCanvas.width * scale;
+
+    newCanvas.height =
+        sourceCanvas.height * scale;
+
+
+    const ctx =
+        newCanvas.getContext("2d");
+
+
+    ctx.drawImage(
+        sourceCanvas,
+        0,
+        0,
+        newCanvas.width,
+        newCanvas.height
+    );
+
+
+    return newCanvas.toDataURL(
+        "image/jpeg",
+        quality
+    );
+
+}
+
+
+/* ============================================================
+   STOP CAMERA
+============================================================ */
+
+function stopCamera(){
+
+    if(stream){
+
+        stream
+        .getTracks()
+        .forEach(
+            track => track.stop()
+        );
+
+        stream = null;
+
+    }
+
+    video.srcObject = null;
+
+    video.style.display = "none";
+
+}
+
+
+/* ============================================================
+   RESET PHOTO
+============================================================ */
+
+function resetPhoto(type){
+
+    if(type === "BEFORE"){
+
+        imgBefore.src = "";
+
+        document.getElementById(
+            "statusBefore"
+        ).textContent =
+            "Not captured";
+
+    }
+
+
+    if(type === "TOPUP"){
+
+        imgTopup.src = "";
+
+        document.getElementById(
+            "statusTopup"
+        ).textContent =
+            "Not captured";
+
+    }
+
+
+    if(type === "AFTER"){
+
+        imgAfter.src = "";
+
+        document.getElementById(
+            "statusAfter"
+        ).textContent =
+            "Not captured";
+
+    }
+
+}
+
+
+/* ============================================================
+   CREATE REPORT DATA
+============================================================ */
+
+function getReportData(){
+
+    return {
+
         engineer: engineer.value,
+
         team: team.value,
+
         date: date.value,
+
         time: time.value,
+
         siteName: siteName.value,
+
         siteId: siteId.value,
+
+        region: region.value,
+
         province: province.value,
-        fuelBefore: before.value,
-        fuelAdded: added.value,
-        fuelAfter: after.value,
+
+        tower: tower.value,
+
         genset: genset.value,
-        comments: document.querySelector("textarea").value
+
+        oilLevel: oilLevel.value,
+
+        coolantLevel: coolantLevel.value,
+
+        rpm: rpm.value,
+
+        fuelBefore: before.value,
+
+        fuelAdded: added.value,
+
+        fuelAfter: after.value,
+
+        ppl: ppl.value,
+
+        meter: meter.value,
+
+        reading: reading.value,
+
+        driver: driver.value,
+
+        vehicle: vehicle.value,
+
+        comments: comments.value
+
     };
 
-       emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        params
-    ).then(function(){
-        alert("Report sent to isoyawi7@gmail.com");
-    }).catch(function(error){
-        alert("Failed to send email");
-        console.log(error);
-    });
-};
-
-/* EMAILJS INITIALIZATION */
-emailjs.init({
-    publicKey: "YOUR_PUBLIC_KEY"
-});
-
-/* LOGOUT */
-function logout(){
-    location.reload();
 }
 
-/* Download PDF JS */
+
+/* ============================================================
+   GENERATE PDF
+============================================================ */
+
+function generatePDF(){
+
+    const { jsPDF } =
+        window.jspdf;
+
+    const doc =
+        new jsPDF();
+
+
+    let y = 15;
+
+
+    doc.setFontSize(18);
+
+    doc.text(
+        "Vodafone PNG Refuelling Report",
+        10,
+        y
+    );
+
+    y += 12;
+
+
+    doc.setFontSize(10);
+
+
+    const data =
+        getReportData();
+
+
+    const lines = [
+
+        "Engineer: " + data.engineer,
+
+        "Additional Team: " + data.team,
+
+        "Date: " +
+        data.date +
+        " " +
+        data.time,
+
+        "Site: " +
+        data.siteName +
+        " | " +
+        data.siteId,
+
+        "Region: " +
+        data.region,
+
+        "Province: " +
+        data.province,
+
+        "Tower: " +
+        data.tower,
+
+        "Genset: " +
+        data.genset,
+
+        "Fuel Before: " +
+        data.fuelBefore +
+        " L",
+
+        "Fuel TopUp: " +
+        data.fuelAdded +
+        " L",
+
+        "Fuel After: " +
+        data.fuelAfter +
+        " L",
+
+        "Engine Oil: " +
+        data.oilLevel,
+
+        "Coolant: " +
+        data.coolantLevel,
+
+        "RPM: " +
+        data.rpm,
+
+        "PPL Connected: " +
+        data.ppl
+
+    ];
+
+
+    lines.forEach(
+        function(line){
+
+            doc.text(
+                line,
+                10,
+                y
+            );
+
+            y += 7;
+
+        }
+    );
+
+
+    if(data.ppl === "Yes"){
+
+        doc.text(
+            "Meter Number: " +
+            data.meter,
+            10,
+            y
+        );
+
+        y += 7;
+
+
+        doc.text(
+            "Meter Reading: " +
+            data.reading,
+            10,
+            y
+        );
+
+        y += 7;
+
+    }
+
+
+    doc.text(
+        "Driver: " +
+        data.driver,
+        10,
+        y
+    );
+
+    y += 7;
+
+
+    doc.text(
+        "Vehicle: " +
+        data.vehicle,
+        10,
+        y
+    );
+
+    y += 7;
+
+
+    doc.text(
+        "Comments:",
+        10,
+        y
+    );
+
+    y += 6;
+
+
+    const commentLines =
+        doc.splitTextToSize(
+            data.comments || "None",
+            180
+        );
+
+
+    doc.text(
+        commentLines,
+        10,
+        y
+    );
+
+
+    y +=
+        commentLines.length * 6 +
+        10;
+
+
+    /* Photos */
+
+    const photos = [
+
+        {
+            title:
+                "Before Refuelling",
+            src:
+                imgBefore.src
+        },
+
+        {
+            title:
+                "TopUp",
+            src:
+                imgTopup.src
+        },
+
+        {
+            title:
+                "After Refuelling",
+            src:
+                imgAfter.src
+        }
+
+    ];
+
+
+    photos.forEach(
+        function(photo){
+
+            if(!photo.src){
+                return;
+            }
+
+
+            if(y > 210){
+
+                doc.addPage();
+
+                y = 15;
+
+            }
+
+
+            doc.setFontSize(12);
+
+            doc.text(
+                photo.title,
+                10,
+                y
+            );
+
+            y += 5;
+
+
+            doc.addImage(
+                photo.src,
+                "JPEG",
+                10,
+                y,
+                90,
+                60
+            );
+
+
+            y += 70;
+
+        }
+    );
+
+
+    return doc;
+
+}
+
+
+/* ============================================================
+   DOWNLOAD PDF
+============================================================ */
+
 function downloadPDF(){
 
-const { jsPDF } = window.jspdf;
-const doc = new jsPDF();
+    if(
+        !imgBefore.src ||
+        !imgTopup.src ||
+        !imgAfter.src
+    ){
 
-let y = 10;
+        alert(
+            "Please capture all three photos first."
+        );
 
-doc.setFontSize(16);
-doc.text("Vodafone PNG Refuelling Report", 10, y);
-y += 10;
+        return;
 
-doc.setFontSize(11);
+    }
 
-doc.text("Engineer: " + engineer.value, 10, y); y += 8;
-doc.text("Team: " + team.value, 10, y); y += 8;
-doc.text("Date: " + date.value + " " + time.value, 10, y); y += 8;
 
-doc.text("Site: " + siteName.value + " | " + siteId.value, 10, y); y += 8;
-doc.text("Region: " + region.value, 10, y); y += 8;
-doc.text("Province: " + province.value, 10, y); y += 8;
+    const doc =
+        generatePDF();
 
-doc.text("Tower: " + tower.value, 10, y); y += 8;
-doc.text("Genset: " + genset.value, 10, y); y += 8;
 
-doc.text("Fuel Before: " + before.value + " L", 10, y); y += 8;
-doc.text("Fuel TopUp: " + added.value + " L", 10, y); y += 8;
-doc.text("Fuel After: " + after.value + " L", 10, y); y += 8;
+    doc.save(
+        siteId.value +
+        "_" +
+        date.value +
+        "_Refuelling_Report.pdf"
+    );
 
-doc.text("Engine Oil: " + oilLevel.value, 10, y); y += 8;
-doc.text("Coolant: " + coolantLevel.value, 10, y); y += 8;
-doc.text("RPM: " + rpm.value, 10, y); y += 8;
-
-doc.text("PPL Connected: " + ppl.value, 10, y); y += 8;
-
-if(ppl.value === "Yes"){
-    doc.text("Meter No: " + meter.value, 10, y); y += 8;
-    doc.text("Reading: " + reading.value, 10, y); y += 8;
 }
 
-doc.text("Comments:", 10, y);
-y += 8;
 
-doc.text(
-document.querySelector("textarea").value || "None",
-10,
-y
+/* ============================================================
+   CREATE EXCEL
+============================================================ */
+
+function createExcel(){
+
+    const data =
+        getReportData();
+
+
+    const rows = [
+
+        ["VODAFONE PNG REFUELLING REPORT",""],
+
+        ["",""],
+
+        ["Field Engineer",data.engineer],
+
+        ["Additional Team",data.team],
+
+        ["Date",data.date],
+
+        ["Time",data.time],
+
+        ["Site Name",data.siteName],
+
+        ["Site ID",data.siteId],
+
+        ["Region",data.region],
+
+        ["Province",data.province],
+
+        ["Tower Height",data.tower],
+
+        ["Genset Type",data.genset],
+
+        ["Engine Oil Level",data.oilLevel],
+
+        ["Coolant Level",data.coolantLevel],
+
+        ["Engine Speed RPM",data.rpm],
+
+        ["Fuel Before (L)",data.fuelBefore],
+
+        ["Fuel TopUp (L)",data.fuelAdded],
+
+        ["Fuel After (L)",data.fuelAfter],
+
+        ["Expected Fuel (L)",
+            (
+                Number(data.fuelBefore || 0) +
+                Number(data.fuelAdded || 0)
+            ).toFixed(1)
+        ],
+
+        ["Fuel Difference (L)",
+            (
+                Number(data.fuelAfter || 0) -
+                (
+                    Number(data.fuelBefore || 0) +
+                    Number(data.fuelAdded || 0)
+                )
+            ).toFixed(1)
+        ],
+
+        ["PPL Connected",data.ppl],
+
+        ["Meter Number",data.meter],
+
+        ["Meter Reading",data.reading],
+
+        ["Driver",data.driver],
+
+        ["Vehicle Registration",data.vehicle],
+
+        ["Comments",data.comments],
+
+        ["",""],
+
+        ["Photos","Captured"],
+
+        ["Before Photo",
+            imgBefore.src ? "YES" : "NO"
+        ],
+
+        ["TopUp Photo",
+            imgTopup.src ? "YES" : "NO"
+        ],
+
+        ["After Photo",
+            imgAfter.src ? "YES" : "NO"
+        ]
+
+    ];
+
+
+    const worksheet =
+        XLSX.utils.aoa_to_sheet(rows);
+
+
+    worksheet["!cols"] = [
+
+        {wch:28},
+        {wch:55}
+
+    ];
+
+
+    const workbook =
+        XLSX.utils.book_new();
+
+
+    XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        "Refuelling Report"
+    );
+
+
+    return workbook;
+
+}
+
+
+/* ============================================================
+   DOWNLOAD EXCEL
+============================================================ */
+
+function downloadExcel(){
+
+    const workbook =
+        createExcel();
+
+
+    XLSX.writeFile(
+        workbook,
+        siteId.value +
+        "_" +
+        date.value +
+        "_Refuelling_Report.xlsx"
+    );
+
+}
+
+
+/* ============================================================
+   CONVERT BLOB TO BASE64
+============================================================ */
+
+function blobToDataURL(blob){
+
+    return new Promise(
+        function(resolve,reject){
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                function(){
+
+                    resolve(
+                        reader.result
+                    );
+
+                };
+
+            reader.onerror =
+                reject;
+
+            reader.readAsDataURL(blob);
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   CREATE PDF BASE64
+============================================================ */
+
+function getPDFBase64(){
+
+    const doc =
+        generatePDF();
+
+
+    const blob =
+        doc.output("blob");
+
+
+    return blobToDataURL(blob);
+
+}
+
+
+/* ============================================================
+   CREATE EXCEL BASE64
+============================================================ */
+
+function getExcelBase64(){
+
+    const workbook =
+        createExcel();
+
+
+    const excelArray =
+        XLSX.write(
+            workbook,
+            {
+                bookType:"xlsx",
+                type:"array"
+            }
+        );
+
+
+    const blob =
+        new Blob(
+            [excelArray],
+            {
+                type:
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            }
+        );
+
+
+    return blobToDataURL(blob);
+
+}
+
+
+/* ============================================================
+   SEND COMPLETE REPORT
+============================================================ */
+
+form.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        /* HTML VALIDATION */
+
+        if(!form.checkValidity()){
+
+            form.reportValidity();
+
+            return;
+
+        }
+
+
+        /* PHOTO VALIDATION */
+
+        if(
+            !imgBefore.src ||
+            !imgTopup.src ||
+            !imgAfter.src
+        ){
+
+            alert(
+                "Please capture Before, TopUp and After photos before sending."
+            );
+
+            return;
+
+        }
+
+
+        /* PREVENT DOUBLE SEND */
+
+        sendButton.disabled = true;
+
+        sendButton.textContent =
+            "GENERATING REPORT...";
+
+
+        sendStatus.textContent =
+            "Preparing PDF and Excel files...";
+
+
+        try{
+
+            /* Generate PDF */
+
+            const pdfBase64 =
+                await getPDFBase64();
+
+
+            /* Generate Excel */
+
+            const excelBase64 =
+                await getExcelBase64();
+
+
+            sendStatus.textContent =
+                "Sending report by email...";
+
+
+            sendButton.textContent =
+                "SENDING...";
+
+
+            const data =
+                getReportData();
+
+
+            const params = {
+
+                engineer:
+                    data.engineer,
+
+                team:
+                    data.team,
+
+                date:
+                    data.date,
+
+                time:
+                    data.time,
+
+                siteName:
+                    data.siteName,
+
+                siteId:
+                    data.siteId,
+
+                region:
+                    data.region,
+
+                province:
+                    data.province,
+
+                tower:
+                    data.tower,
+
+                genset:
+                    data.genset,
+
+                oilLevel:
+                    data.oilLevel,
+
+                coolantLevel:
+                    data.coolantLevel,
+
+                rpm:
+                    data.rpm,
+
+                fuelBefore:
+                    data.fuelBefore,
+
+                fuelAdded:
+                    data.fuelAdded,
+
+                fuelAfter:
+                    data.fuelAfter,
+
+                ppl:
+                    data.ppl,
+
+                meter:
+                    data.meter,
+
+                reading:
+                    data.reading,
+
+                driver:
+                    data.driver,
+
+                vehicle:
+                    data.vehicle,
+
+                comments:
+                    data.comments,
+
+                /* ATTACHMENTS */
+
+                pdf_attachment:
+                    pdfBase64,
+
+                excel_attachment:
+                    excelBase64,
+
+                before_photo:
+                    imgBefore.src,
+
+                topup_photo:
+                    imgTopup.src,
+
+                after_photo:
+                    imgAfter.src
+
+            };
+
+
+            await emailjs.send(
+
+                EMAILJS_SERVICE_ID,
+
+                EMAILJS_TEMPLATE_ID,
+
+                params
+
+            );
+
+
+            sendStatus.textContent =
+                "✓ Report sent successfully.";
+
+
+            sendButton.textContent =
+                "REPORT SENT ✓";
+
+
+            alert(
+                "Complete refuelling report sent successfully."
+            );
+
+
+        }
+
+        catch(error){
+
+            console.error(
+                "EMAIL ERROR:",
+                error
+            );
+
+
+            sendStatus.textContent =
+                "✗ Failed to send report.";
+
+
+            sendButton.textContent =
+                "SEND COMPLETE REPORT";
+
+
+            alert(
+                "The report could not be sent.\n\n" +
+                "Please check your internet connection and EmailJS configuration."
+            );
+
+
+            sendButton.disabled = false;
+
+            return;
+
+        }
+
+
+        /* ENABLE AGAIN */
+
+        setTimeout(
+            function(){
+
+                sendButton.disabled =
+                    false;
+
+                sendButton.textContent =
+                    "SEND COMPLETE REPORT";
+
+            },
+            3000
+        );
+
+    }
 );
 
-y += 20;
-
-/* BEFORE PHOTO */
-
-if(imgBefore.src){
-
-doc.text("Before Refuelling",10,y);
-y += 5;
-
-doc.addImage(
-imgBefore.src,
-"PNG",
-10,
-y,
-80,
-60
-);
-
-y += 70;
-}
-
-/* TOPUP PHOTO */
-
-if(imgTopup.src){
-
-if(y > 220){
-doc.addPage();
-y = 10;
-}
-
-doc.text("TopUp Photo",10,y);
-y += 5;
-
-doc.addImage(
-imgTopup.src,
-"PNG",
-10,
-y,
-80,
-60
-);
-
-y += 70;
-}
-
-/* AFTER PHOTO */
-
-if(imgAfter.src){
-
-if(y > 220){
-doc.addPage();
-y = 10;
-}
-
-doc.text("After Refuelling",10,y);
-y += 5;
-
-doc.addImage(
-imgAfter.src,
-"PNG",
-10,
-y,
-80,
-60
-);
-
-y += 70;
-}
-
-doc.save(
-siteId.value + "_" +
-date.value +
-"_Refuelling_Report.pdf"
-);
-
-}
 </script>
-<!-- PDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- Excel -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
