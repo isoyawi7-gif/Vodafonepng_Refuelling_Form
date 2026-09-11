@@ -19,7 +19,7 @@
 
 
 <!-- =========================================================
-     PDF
+     PDF - jsPDF
 ========================================================= -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1127,6 +1127,11 @@ button:disabled {
    EMAILJS CONFIGURATION
 ============================================================ */
 
+/*
+   IMPORTANT:
+   Replace ONLY these three values with your real EmailJS values.
+*/
+
 const EMAILJS_PUBLIC_KEY =
     "YOUR_PUBLIC_KEY";
 
@@ -1136,6 +1141,7 @@ const EMAILJS_SERVICE_ID =
 const EMAILJS_TEMPLATE_ID =
     "YOUR_TEMPLATE_ID";
 
+
 /* ============================================================
    FIXED REPORT RECIPIENT
 ============================================================ */
@@ -1143,6 +1149,10 @@ const EMAILJS_TEMPLATE_ID =
 const REPORT_RECIPIENT_EMAIL =
     "isoyawi7@gmail.com";
 
+
+/* ============================================================
+   INITIALIZE EMAILJS
+============================================================ */
 
 emailjs.init({
 
@@ -1263,10 +1273,19 @@ let gpsData = {
 
 
 /* ============================================================
-   CURRENT GPS POSITION
+   CURRENT GPS
 ============================================================ */
 
 let currentGPS = null;
+
+
+/* ============================================================
+   CAMERA VARIABLES
+============================================================ */
+
+let stream = null;
+
+let mode = "";
 
 
 /* ============================================================
@@ -1705,15 +1724,6 @@ function updateGPSDisplay(
 
 
 /* ============================================================
-   CAMERA
-============================================================ */
-
-let stream = null;
-
-let mode = "";
-
-
-/* ============================================================
    OPEN CAMERA
 ============================================================ */
 
@@ -1745,7 +1755,7 @@ async function openCamera(type){
 
 
     /* ========================================================
-       GET LIVE GPS BEFORE PHOTO
+       GET LIVE GPS
     ======================================================== */
 
     let gps;
@@ -1843,6 +1853,18 @@ async function openCamera(type){
 
     try{
 
+        if(
+            !navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia
+        ){
+
+            throw new Error(
+                "Camera access is not supported by this browser."
+            );
+
+        }
+
+
         stream =
             await navigator.mediaDevices.getUserMedia({
 
@@ -1885,6 +1907,7 @@ async function openCamera(type){
     catch(error){
 
         console.error(
+            "CAMERA ERROR:",
             error
         );
 
@@ -2216,13 +2239,17 @@ function resizeCanvas(
 
 
     newCanvas.width =
-        sourceCanvas.width *
-        scale;
+        Math.round(
+            sourceCanvas.width *
+            scale
+        );
 
 
     newCanvas.height =
-        sourceCanvas.height *
-        scale;
+        Math.round(
+            sourceCanvas.height *
+            scale
+        );
 
 
     const ctx =
@@ -2314,8 +2341,9 @@ function resetPhoto(type){
         "BEFORE"
     ){
 
-        imgBefore.src =
-            "";
+        imgBefore.removeAttribute(
+            "src"
+        );
 
         gpsData.BEFORE =
             null;
@@ -2340,8 +2368,9 @@ function resetPhoto(type){
         "TOPUP"
     ){
 
-        imgTopup.src =
-            "";
+        imgTopup.removeAttribute(
+            "src"
+        );
 
         gpsData.TOPUP =
             null;
@@ -2366,8 +2395,9 @@ function resetPhoto(type){
         "AFTER"
     ){
 
-        imgAfter.src =
-            "";
+        imgAfter.removeAttribute(
+            "src"
+        );
 
         gpsData.AFTER =
             null;
@@ -2385,6 +2415,23 @@ function resetPhoto(type){
             "GPS: Not captured";
 
     }
+
+}
+
+
+/* ============================================================
+   PHOTO CHECK
+============================================================ */
+
+function photosReady(){
+
+    return (
+
+        imgBefore.getAttribute("src") &&
+        imgTopup.getAttribute("src") &&
+        imgAfter.getAttribute("src")
+
+    );
 
 }
 
@@ -2794,7 +2841,7 @@ function generatePDF(){
                 "Before Refuelling",
 
             src:
-                imgBefore.src
+                imgBefore.getAttribute("src")
 
         },
 
@@ -2803,7 +2850,7 @@ function generatePDF(){
                 "TopUp",
 
             src:
-                imgTopup.src
+                imgTopup.getAttribute("src")
 
         },
 
@@ -2812,7 +2859,7 @@ function generatePDF(){
                 "After Refuelling",
 
             src:
-                imgAfter.src
+                imgAfter.getAttribute("src")
 
         }
 
@@ -2897,9 +2944,7 @@ function generatePDF(){
 function downloadPDF(){
 
     if(
-        !imgBefore.src ||
-        !imgTopup.src ||
-        !imgAfter.src
+        !photosReady()
     ){
 
         alert(
@@ -2912,18 +2957,37 @@ function downloadPDF(){
     }
 
 
-    const doc =
-        generatePDF();
+    try{
+
+        const doc =
+            generatePDF();
 
 
-    doc.save(
+        doc.save(
 
-        siteId.value +
-        "_" +
-        date.value +
-        "_Refuelling_Report.pdf"
+            siteId.value +
+            "_" +
+            date.value +
+            "_Refuelling_Report.pdf"
 
-    );
+        );
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            "PDF ERROR:",
+            error
+        );
+
+
+        alert(
+            "Could not create PDF. Please try again."
+        );
+
+    }
 
 }
 
@@ -3345,8 +3409,12 @@ async function createExcelBlob(){
        BEFORE PHOTO
     ======================================================== */
 
+    const beforeSrc =
+        imgBefore.getAttribute("src");
+
+
     if(
-        imgBefore.src
+        beforeSrc
     ){
 
         photoSheet.getCell(
@@ -3372,7 +3440,7 @@ async function createExcelBlob(){
             workbook.addImage({
 
                 base64:
-                    imgBefore.src,
+                    beforeSrc,
 
                 extension:
                     "jpeg"
@@ -3441,8 +3509,12 @@ async function createExcelBlob(){
        TOPUP PHOTO
     ======================================================== */
 
+    const topupSrc =
+        imgTopup.getAttribute("src");
+
+
     if(
-        imgTopup.src
+        topupSrc
     ){
 
         photoSheet.getCell(
@@ -3468,7 +3540,7 @@ async function createExcelBlob(){
             workbook.addImage({
 
                 base64:
-                    imgTopup.src,
+                    topupSrc,
 
                 extension:
                     "jpeg"
@@ -3537,8 +3609,12 @@ async function createExcelBlob(){
        AFTER PHOTO
     ======================================================== */
 
+    const afterSrc =
+        imgAfter.getAttribute("src");
+
+
     if(
-        imgAfter.src
+        afterSrc
     ){
 
         photoSheet.getCell(
@@ -3564,7 +3640,7 @@ async function createExcelBlob(){
             workbook.addImage({
 
                 base64:
-                    imgAfter.src,
+                    afterSrc,
 
                 extension:
                     "jpeg"
@@ -3741,9 +3817,7 @@ async function getExcelBase64(){
 async function downloadExcel(){
 
     if(
-        !imgBefore.src ||
-        !imgTopup.src ||
-        !imgAfter.src
+        !photosReady()
     ){
 
         alert(
@@ -3856,9 +3930,7 @@ form.addEventListener(
         ==================================================== */
 
         if(
-            !imgBefore.src ||
-            !imgTopup.src ||
-            !imgAfter.src
+            !photosReady()
         ){
 
             alert(
@@ -3927,7 +3999,15 @@ form.addEventListener(
 
 
             /* =================================================
-               PDF
+               GET REPORT DATA
+            ================================================= */
+
+            const data =
+                getReportData();
+
+
+            /* =================================================
+               GENERATE PDF
             ================================================= */
 
             const pdfBase64 =
@@ -3935,12 +4015,16 @@ form.addEventListener(
 
 
             /* =================================================
-               EXCEL
+               GENERATE EXCEL
             ================================================= */
 
             const excelBase64 =
                 await getExcelBase64();
 
+
+            /* =================================================
+               UPDATE STATUS
+            ================================================= */
 
             sendStatus.textContent =
                 "Sending report by email...";
@@ -3950,15 +4034,23 @@ form.addEventListener(
                 "SENDING...";
 
 
-            const data =
-                getReportData();
-
-
             /* =================================================
                EMAIL PARAMETERS
             ================================================= */
 
             const params = {
+
+                /* =============================================
+                   FIXED RECIPIENT
+                ============================================= */
+
+                to_email:
+                    REPORT_RECIPIENT_EMAIL,
+
+
+                /* =============================================
+                   REPORT INFORMATION
+                ============================================= */
 
                 engineer:
                     data.engineer,
@@ -4028,7 +4120,7 @@ form.addEventListener(
 
 
                 /* =============================================
-                   GPS DATA
+                   GPS
                 ============================================= */
 
                 gps_before:
@@ -4048,39 +4140,56 @@ form.addEventListener(
 
 
                 /* =============================================
-                   FILE ATTACHMENTS
+                   PDF
                 ============================================= */
 
                 pdf_attachment:
                     pdfBase64,
 
+
+                /* =============================================
+                   EXCEL
+                ============================================= */
+
                 excel_attachment:
                     excelBase64,
 
+
+                /* =============================================
+                   PHOTOS
+                ============================================= */
+
                 before_photo:
-                    imgBefore.src,
+                    imgBefore.getAttribute("src"),
 
                 topup_photo:
-                    imgTopup.src,
+                    imgTopup.getAttribute("src"),
 
                 after_photo:
-                    imgAfter.src
+                    imgAfter.getAttribute("src")
 
             };
 
 
             /* =================================================
-               SEND EMAIL
+               SEND EMAIL THROUGH EMAILJS
             ================================================= */
 
-            await emailjs.send(
+            const response =
+                await emailjs.send(
 
-                EMAILJS_SERVICE_ID,
+                    EMAILJS_SERVICE_ID,
 
-                EMAILJS_TEMPLATE_ID,
+                    EMAILJS_TEMPLATE_ID,
 
-                params
+                    params
 
+                );
+
+
+            console.log(
+                "EmailJS response:",
+                response
             );
 
 
@@ -4149,8 +4258,17 @@ form.addEventListener(
 
                 "\n\n" +
 
-                "Please check your internet connection " +
-                "and EmailJS configuration."
+                "Please check:" +
+
+                "\n1. Internet connection" +
+
+                "\n2. EmailJS Public Key" +
+
+                "\n3. EmailJS Service ID" +
+
+                "\n4. EmailJS Template ID" +
+
+                "\n5. EmailJS template configuration"
 
             );
 
