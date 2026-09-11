@@ -1,25 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Vodafone PNG Refuelling System</title>
 
-<!-- =========================
+<!-- =========================================================
      EMAILJS
-========================= -->
+========================================================= -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<!-- =========================
+<!-- =========================================================
      PDF
-========================= -->
+========================================================= -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- =========================
+<!-- =========================================================
      EXCEL
-========================= -->
+========================================================= -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 
 <style>
 
@@ -44,7 +47,9 @@ body {
     box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header {
     text-align: center;
@@ -65,7 +70,9 @@ body {
     color: #666;
 }
 
-/* SECTIONS */
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 .section {
     margin-top: 20px;
@@ -82,7 +89,9 @@ body {
     padding-bottom: 8px;
 }
 
-/* ROW */
+/* =========================================================
+   ROW
+========================================================= */
 
 .row {
     display: flex;
@@ -96,7 +105,9 @@ body {
     margin-bottom: 10px;
 }
 
-/* LABEL */
+/* =========================================================
+   LABELS
+========================================================= */
 
 label {
     font-size: 13px;
@@ -104,7 +115,9 @@ label {
     display: block;
 }
 
-/* INPUT */
+/* =========================================================
+   INPUTS
+========================================================= */
 
 input,
 select,
@@ -122,7 +135,9 @@ textarea {
     resize: vertical;
 }
 
-/* BUTTONS */
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 button {
     background: #e60000;
@@ -160,7 +175,9 @@ button:disabled {
     background: #106b29;
 }
 
-/* CAMERA */
+/* =========================================================
+   CAMERA
+========================================================= */
 
 #video {
     width: 100%;
@@ -175,7 +192,9 @@ button:disabled {
     display: none;
 }
 
-/* PHOTO CARDS */
+/* =========================================================
+   PHOTO GRID
+========================================================= */
 
 .photo-grid {
     display: grid;
@@ -209,7 +228,9 @@ button:disabled {
     font-weight: bold;
 }
 
-/* SEND AREA */
+/* =========================================================
+   SEND AREA
+========================================================= */
 
 .send-area {
     margin-top: 20px;
@@ -232,7 +253,9 @@ button:disabled {
     font-size: 14px;
 }
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer {
     text-align: center;
@@ -241,7 +264,9 @@ button:disabled {
     color: #777;
 }
 
-/* MOBILE */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:700px) {
 
@@ -256,693 +281,777 @@ button:disabled {
     .header h1 {
         font-size: 21px;
     }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
-<!-- =========================
+
+<!-- =========================================================
      HEADER
-========================= -->
+========================================================= -->
 
 <div class="header">
 
-<h1>Vodafone PNG Refuelling</h1>
+    <h1>Vodafone PNG Refuelling</h1>
 
-<p>
-Genset Refuelling & Site Inspection Report
-</p>
+    <p>
+        Genset Refuelling & Site Inspection Report
+    </p>
 
 </div>
+
 
 <form id="fuelForm">
 
-<!-- =========================
-     ENGINEER
-========================= -->
+
+<!-- =========================================================
+     1. SITE PERSONNEL
+========================================================= -->
 
 <div class="section">
 
-<h2>1. Site Personnel</h2>
+    <h2>1. Site Personnel</h2>
 
-<div class="row">
+    <div class="row">
 
-<div class="form-group">
+        <div class="form-group">
 
-<label>Field Engineer *</label>
+            <label>Field Engineer *</label>
 
-<input
-type="text"
-id="engineer"
-name="engineer"
-required
-placeholder="Enter engineer name">
+            <input
+                type="text"
+                id="engineer"
+                name="engineer"
+                required
+                placeholder="Enter engineer name">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Additional Team</label>
+
+            <input
+                type="text"
+                id="team"
+                name="team"
+                placeholder="Additional team members">
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="form-group">
 
-<label>Additional Team</label>
-
-<input
-type="text"
-id="team"
-name="team"
-placeholder="Additional team members">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-     DATE / TIME
-========================= -->
+<!-- =========================================================
+     2. SITE INFORMATION
+========================================================= -->
 
 <div class="section">
 
-<h2>2. Site Information</h2>
+    <h2>2. Site Information</h2>
 
-<div class="row">
 
-<div class="form-group">
+    <div class="row">
 
-<label>Date *</label>
+        <div class="form-group">
 
-<input
-type="date"
-id="date"
-name="date"
-required>
+            <label>Date *</label>
+
+            <input
+                type="date"
+                id="date"
+                name="date"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Time *</label>
+
+            <input
+                type="time"
+                id="time"
+                name="time"
+                required>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Site Name *</label>
+
+            <input
+                type="text"
+                id="siteName"
+                name="siteName"
+                required
+                placeholder="Site name">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Site ID *</label>
+
+            <input
+                type="text"
+                id="siteId"
+                name="siteId"
+                required
+                placeholder="Site ID">
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Region *</label>
+
+            <select
+                id="region"
+                name="region"
+                onchange="updateProvinces()"
+                required>
+
+                <option value="">
+                    Select Region
+                </option>
+
+                <option value="Momase + EHP">
+                    Momase + EHP
+                </option>
+
+                <option value="Highlands">
+                    Highlands
+                </option>
+
+                <option value="Southern">
+                    Southern
+                </option>
+
+                <option value="NGI">
+                    New Guinea Islands
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Province *</label>
+
+            <select
+                id="province"
+                name="province"
+                required>
+
+                <option value="">
+                    Select Province
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>Tower Height</label>
+
+        <select
+            id="tower"
+            name="tower">
+
+            <option>23 Meter Monopole</option>
+            <option>30M RDS</option>
+            <option>45M RDS</option>
+            <option>45M Grilliage</option>
+            <option>45M SST</option>
+            <option>60M RDS</option>
+            <option>60M Grilliage</option>
+            <option>60M SST</option>
+            <option>80M Grilliage</option>
+            <option>80M SST</option>
+            <option>100M SST</option>
+            <option>110M SST</option>
+
+        </select>
+
+    </div>
 
 </div>
 
-<div class="form-group">
 
-<label>Time *</label>
-
-<input
-type="time"
-id="time"
-name="time"
-required>
-
-</div>
-
-</div>
-
-
-<div class="row">
-
-<div class="form-group">
-
-<label>Site Name *</label>
-
-<input
-type="text"
-id="siteName"
-name="siteName"
-required
-placeholder="Site name">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Site ID *</label>
-
-<input
-type="text"
-id="siteId"
-name="siteId"
-required
-placeholder="Site ID">
-
-</div>
-
-</div>
-
-
-<div class="row">
-
-<div class="form-group">
-
-<label>Region *</label>
-
-<select
-id="region"
-name="region"
-onchange="updateProvinces()"
-required>
-
-<option value="">Select Region</option>
-
-<option value="Momase + EHP">
-Momase + EHP
-</option>
-
-<option value="Highlands">
-Highlands
-</option>
-
-<option value="Southern">
-Southern
-</option>
-
-<option value="NGI">
-New Guinea Islands
-</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Province *</label>
-
-<select
-id="province"
-name="province"
-required>
-
-<option value="">
-Select Province
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Tower Height</label>
-
-<select id="tower" name="tower">
-
-<option>23 Meter Monopole</option>
-<option>30M RDS</option>
-<option>45M RDS</option>
-<option>45M Grilliage</option>
-<option>45M SST</option>
-<option>60M RDS</option>
-<option>60M Grilliage</option>
-<option>60M SST</option>
-<option>80M Grilliage</option>
-<option>80M SST</option>
-<option>100M SST</option>
-<option>110M SST</option>
-
-</select>
-
-</div>
-
-</div>
-
-<!-- =========================
-     GENSET
-========================= -->
+<!-- =========================================================
+     3. GENSET INFORMATION
+========================================================= -->
 
 <div class="section">
 
-<h2>3. Genset Information</h2>
+    <h2>3. Genset Information</h2>
 
-<div class="form-group">
 
-<label>Genset / DG Type *</label>
+    <div class="form-group">
 
-<select id="genset" name="genset" required>
+        <label>Genset / DG Type *</label>
 
-<option>Yanhan 8KVA</option>
-<option>Yanhan 17KVA</option>
-<option>Yanhan 24KVA</option>
-<option>CCTC 11KVA</option>
-<option>CCTC 17KVA</option>
-<option>CCTC 24KVA</option>
-<option>FG Wilson 15KVA</option>
-<option>Polar Power</option>
-<option>Sengen 15KVA</option>
+        <select
+            id="genset"
+            name="genset"
+            required>
 
-</select>
+            <option>Yanhan 8KVA</option>
+            <option>Yanhan 17KVA</option>
+            <option>Yanhan 24KVA</option>
+            <option>CCTC 11KVA</option>
+            <option>CCTC 17KVA</option>
+            <option>CCTC 24KVA</option>
+            <option>FG Wilson 15KVA</option>
+            <option>Polar Power</option>
+            <option>Sengen 15KVA</option>
+            <option>LEGA</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Engine Oil Level</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="oilLevel"
+                name="oilLevel"
+                placeholder="Level">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Coolant Level</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="coolantLevel"
+                name="coolantLevel"
+                placeholder="Level">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Engine Speed (RPM)</label>
+
+            <input
+                type="number"
+                id="rpm"
+                name="rpm"
+                placeholder="RPM">
+
+        </div>
+
+    </div>
 
 </div>
 
 
-<div class="row">
-
-<div class="form-group">
-
-<label>Engine Oil Level</label>
-
-<input
-type="number"
-step="0.1"
-id="oilLevel"
-name="oilLevel"
-placeholder="Level">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Coolant Level</label>
-
-<input
-type="number"
-step="0.1"
-id="coolantLevel"
-name="coolantLevel"
-placeholder="Level">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Engine Speed (RPM)</label>
-
-<input
-type="number"
-id="rpm"
-name="rpm"
-placeholder="RPM">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-     FUEL
-========================= -->
+<!-- =========================================================
+     4. REFUELLING DETAILS
+========================================================= -->
 
 <div class="section">
 
-<h2>4. Refuelling Details</h2>
+    <h2>4. Refuelling Details</h2>
 
-<div class="row">
 
-<div class="form-group">
+    <div class="row">
 
-<label>Fuel Before (L) *</label>
+        <div class="form-group">
 
-<input
-type="number"
-step="0.1"
-id="before"
-name="before"
-required
-oninput="calculateFuel()">
+            <label>Fuel Before (L) *</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="before"
+                name="before"
+                required
+                oninput="calculateFuel()">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Fuel TopUp (L) *</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="added"
+                name="added"
+                required
+                oninput="calculateFuel()">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Fuel After (L) *</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="after"
+                name="after"
+                required
+                oninput="calculateFuel()">
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="calc"
+        style="
+        background:#f1f1f1;
+        padding:10px;
+        border-radius:5px;
+        font-size:13px;
+        font-weight:bold;
+        ">
+
+        Expected: 0 L | Difference: 0 L
+
+    </div>
 
 </div>
 
 
-<div class="form-group">
-
-<label>Fuel TopUp (L) *</label>
-
-<input
-type="number"
-step="0.1"
-id="added"
-name="added"
-required
-oninput="calculateFuel()">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Fuel After (L) *</label>
-
-<input
-type="number"
-step="0.1"
-id="after"
-name="after"
-required
-oninput="calculateFuel()">
-
-</div>
-
-</div>
-
-
-<div id="calc"
-style="
-background:#f1f1f1;
-padding:10px;
-border-radius:5px;
-font-size:13px;
-font-weight:bold;
-">
-
-Expected: 0 L | Difference: 0 L
-
-</div>
-
-</div>
-
-<!-- =========================
-     CAMERA
-========================= -->
+<!-- =========================================================
+     5. REFUELLING PHOTOS
+========================================================= -->
 
 <div class="section">
 
-<h2>5. Refuelling Photos</h2>
-
-<p style="font-size:12px;color:#666;">
-Capture all three photos. The system automatically stamps the photo with site,
-engineer, date/time and fuel information.
-</p>
+    <h2>5. Refuelling Photos</h2>
 
 
-<video id="video" autoplay playsinline></video>
+    <p style="font-size:12px;color:#666;">
 
-<canvas id="canvas"></canvas>
+        Capture all three photos. The system automatically stamps
+        the photo with site, engineer, date/time and fuel information.
+
+    </p>
 
 
-<div class="photo-grid">
+    <video
+        id="video"
+        autoplay
+        playsinline>
+    </video>
 
-<!-- BEFORE -->
 
-<div class="photo-card">
+    <canvas id="canvas"></canvas>
 
-<h3>Before Refuelling</h3>
 
-<img id="imgBefore" alt="Before photo">
+    <div class="photo-grid">
 
-<div
-id="statusBefore"
-class="photo-status">
 
-Not captured
+        <!-- BEFORE -->
+
+        <div class="photo-card">
+
+            <h3>Before Refuelling</h3>
+
+            <img
+                id="imgBefore"
+                alt="Before photo">
+
+            <div
+                id="statusBefore"
+                class="photo-status">
+
+                Not captured
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openCamera('BEFORE')">
+
+                Capture Before
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="resetPhoto('BEFORE')">
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+        <!-- TOPUP -->
+
+        <div class="photo-card">
+
+            <h3>TopUp</h3>
+
+            <img
+                id="imgTopup"
+                alt="TopUp photo">
+
+            <div
+                id="statusTopup"
+                class="photo-status">
+
+                Not captured
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openCamera('TOPUP')">
+
+                Capture TopUp
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="resetPhoto('TOPUP')">
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+        <!-- AFTER -->
+
+        <div class="photo-card">
+
+            <h3>After Refuelling</h3>
+
+            <img
+                id="imgAfter"
+                alt="After photo">
+
+            <div
+                id="statusAfter"
+                class="photo-status">
+
+                Not captured
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openCamera('AFTER')">
+
+                Capture After
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="resetPhoto('AFTER')">
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-<button
-type="button"
-onclick="openCamera('BEFORE')">
 
-Capture Before
-
-</button>
-
-<br><br>
-
-<button
-type="button"
-class="btn-secondary"
-onclick="resetPhoto('BEFORE')">
-
-Reset
-
-</button>
-
-</div>
-
-
-<!-- TOPUP -->
-
-<div class="photo-card">
-
-<h3>TopUp</h3>
-
-<img id="imgTopup" alt="TopUp photo">
-
-<div
-id="statusTopup"
-class="photo-status">
-
-Not captured
-
-</div>
-
-<button
-type="button"
-onclick="openCamera('TOPUP')">
-
-Capture TopUp
-
-</button>
-
-<br><br>
-
-<button
-type="button"
-class="btn-secondary"
-onclick="resetPhoto('TOPUP')">
-
-Reset
-
-</button>
-
-</div>
-
-
-<!-- AFTER -->
-
-<div class="photo-card">
-
-<h3>After Refuelling</h3>
-
-<img id="imgAfter" alt="After photo">
-
-<div
-id="statusAfter"
-class="photo-status">
-
-Not captured
-
-</div>
-
-<button
-type="button"
-onclick="openCamera('AFTER')">
-
-Capture After
-
-</button>
-
-<br><br>
-
-<button
-type="button"
-class="btn-secondary"
-onclick="resetPhoto('AFTER')">
-
-Reset
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-     POWER
-========================= -->
+<!-- =========================================================
+     6. POWER INFORMATION
+========================================================= -->
 
 <div class="section">
 
-<h2>6. Power Information</h2>
+    <h2>6. Power Information</h2>
 
-<div class="form-group">
 
-<label>PPL Connected?</label>
+    <div class="form-group">
 
-<select
-id="ppl"
-name="ppl"
-onchange="togglePPL()">
+        <label>PPL Connected?</label>
 
-<option value="No">
-No
-</option>
+        <select
+            id="ppl"
+            name="ppl"
+            onchange="togglePPL()">
 
-<option value="Yes">
-Yes
-</option>
+            <option value="No">
+                No
+            </option>
 
-</select>
+            <option value="Yes">
+                Yes
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        id="pplFields"
+        style="display:none;">
+
+        <div class="row">
+
+            <div class="form-group">
+
+                <label>Meter Number</label>
+
+                <input
+                    type="text"
+                    id="meter"
+                    name="meter">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Meter Reading</label>
+
+                <input
+                    type="number"
+                    step="0.1"
+                    id="reading"
+                    name="reading">
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
 
-<div
-id="pplFields"
-style="display:none;">
-
-<div class="row">
-
-<div class="form-group">
-
-<label>Meter Number</label>
-
-<input
-type="text"
-id="meter"
-name="meter">
-
-</div>
-
-
-<div class="form-group">
-
-<label>Meter Reading</label>
-
-<input
-type="number"
-step="0.1"
-id="reading"
-name="reading">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- =========================
-     DRIVER
-========================= -->
+<!-- =========================================================
+     7. DRIVER & VEHICLE
+========================================================= -->
 
 <div class="section">
 
-<h2>7. Driver & Vehicle</h2>
+    <h2>7. Driver & Vehicle</h2>
 
-<div class="row">
 
-<div class="form-group">
+    <div class="row">
 
-<label>Driver Name</label>
+        <div class="form-group">
 
-<input
-type="text"
-id="driver"
-name="driver">
+            <label>Driver Name</label>
+
+            <input
+                type="text"
+                id="driver"
+                name="driver">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Vehicle Registration</label>
+
+            <input
+                type="text"
+                id="vehicle"
+                name="vehicle">
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>Comments / Observations</label>
+
+        <textarea
+            id="comments"
+            name="comments"
+            placeholder="Enter comments, abnormalities or observations..."></textarea>
+
+    </div>
 
 </div>
 
 
-<div class="form-group">
-
-<label>Vehicle Registration</label>
-
-<input
-type="text"
-id="vehicle"
-name="vehicle">
-
-</div>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Comments / Observations</label>
-
-<textarea
-id="comments"
-name="comments"
-placeholder="Enter comments, abnormalities or observations..."></textarea>
-
-</div>
-
-</div>
-
-<!-- =========================
-     ACTIONS
-========================= -->
+<!-- =========================================================
+     8. REPORT
+========================================================= -->
 
 <div class="section">
 
-<h2>8. Report</h2>
+    <h2>8. Report</h2>
 
-<div class="row">
 
-<div class="form-group">
+    <div class="row">
 
-<button
-type="button"
-class="btn-secondary"
-onclick="downloadPDF()">
+        <div class="form-group">
 
-Download PDF
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="downloadPDF()">
 
-</button>
+                Download PDF
+
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="downloadExcel()">
+
+                Download Excel
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="send-area">
+
+
+        <button
+            type="submit"
+            id="sendButton"
+            class="send-button">
+
+            SEND COMPLETE REPORT
+
+        </button>
+
+
+        <br>
+        <br>
+
+
+        <!-- =====================================================
+             LOGOUT BUTTON
+        ====================================================== -->
+
+        <button
+            type="button"
+            class="btn-secondary"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+
+        <div
+            id="sendStatus"
+            class="status">
+
+            Ready to send
+
+        </div>
+
+    </div>
 
 </div>
 
-
-<div class="form-group">
-
-<button
-type="button"
-class="btn-secondary"
-onclick="downloadExcel()">
-
-Download Excel
-
-</button>
-
-</div>
-
-</div>
-
-
-<div class="send-area">
-
-<button
-type="submit"
-id="sendButton"
-class="send-button">
-
-SEND COMPLETE REPORT
-
-</button>
-
-<div
-id="sendStatus"
-class="status">
-
-Ready to send
-
-</div>
-
-</div>
-
-</div>
 
 </form>
 
 
 <div class="footer">
 
-Powered by Iso Yawi | System Creator
+    Powered by Iso Yawi | System Creator
 
 </div>
 
+
 </div>
 
+
+<!-- =========================================================
+     JAVASCRIPT
+     ONLY ONE SCRIPT BLOCK
+========================================================= -->
 
 <script>
 
@@ -950,11 +1059,14 @@ Powered by Iso Yawi | System Creator
    EMAILJS CONFIGURATION
 ============================================================ */
 
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_PUBLIC_KEY =
+    "YOUR_PUBLIC_KEY";
 
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_SERVICE_ID =
+    "YOUR_SERVICE_ID";
 
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_TEMPLATE_ID =
+    "YOUR_TEMPLATE_ID";
 
 
 emailjs.init({
@@ -966,49 +1078,95 @@ emailjs.init({
    ELEMENTS
 ============================================================ */
 
-const form = document.getElementById("fuelForm");
+const form =
+    document.getElementById("fuelForm");
 
-const engineer = document.getElementById("engineer");
-const team = document.getElementById("team");
+const engineer =
+    document.getElementById("engineer");
 
-const date = document.getElementById("date");
-const time = document.getElementById("time");
+const team =
+    document.getElementById("team");
 
-const siteName = document.getElementById("siteName");
-const siteId = document.getElementById("siteId");
+const date =
+    document.getElementById("date");
 
-const region = document.getElementById("region");
-const province = document.getElementById("province");
+const time =
+    document.getElementById("time");
 
-const tower = document.getElementById("tower");
-const genset = document.getElementById("genset");
+const siteName =
+    document.getElementById("siteName");
 
-const oilLevel = document.getElementById("oilLevel");
-const coolantLevel = document.getElementById("coolantLevel");
-const rpm = document.getElementById("rpm");
+const siteId =
+    document.getElementById("siteId");
 
-const before = document.getElementById("before");
-const added = document.getElementById("added");
-const after = document.getElementById("after");
+const region =
+    document.getElementById("region");
 
-const ppl = document.getElementById("ppl");
-const meter = document.getElementById("meter");
-const reading = document.getElementById("reading");
+const province =
+    document.getElementById("province");
 
-const driver = document.getElementById("driver");
-const vehicle = document.getElementById("vehicle");
+const tower =
+    document.getElementById("tower");
 
-const comments = document.getElementById("comments");
+const genset =
+    document.getElementById("genset");
 
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
+const oilLevel =
+    document.getElementById("oilLevel");
 
-const imgBefore = document.getElementById("imgBefore");
-const imgTopup = document.getElementById("imgTopup");
-const imgAfter = document.getElementById("imgAfter");
+const coolantLevel =
+    document.getElementById("coolantLevel");
 
-const sendButton = document.getElementById("sendButton");
-const sendStatus = document.getElementById("sendStatus");
+const rpm =
+    document.getElementById("rpm");
+
+const before =
+    document.getElementById("before");
+
+const added =
+    document.getElementById("added");
+
+const after =
+    document.getElementById("after");
+
+const ppl =
+    document.getElementById("ppl");
+
+const meter =
+    document.getElementById("meter");
+
+const reading =
+    document.getElementById("reading");
+
+const driver =
+    document.getElementById("driver");
+
+const vehicle =
+    document.getElementById("vehicle");
+
+const comments =
+    document.getElementById("comments");
+
+const video =
+    document.getElementById("video");
+
+const canvas =
+    document.getElementById("canvas");
+
+const imgBefore =
+    document.getElementById("imgBefore");
+
+const imgTopup =
+    document.getElementById("imgTopup");
+
+const imgAfter =
+    document.getElementById("imgAfter");
+
+const sendButton =
+    document.getElementById("sendButton");
+
+const sendStatus =
+    document.getElementById("sendStatus");
 
 
 /* ============================================================
@@ -1017,13 +1175,16 @@ const sendStatus = document.getElementById("sendStatus");
 
 function setCurrentDateTime(){
 
-    const now = new Date();
+    const now =
+        new Date();
 
     date.value =
-        now.toISOString().split("T")[0];
+        now.toISOString()
+            .split("T")[0];
 
     time.value =
-        now.toTimeString().slice(0,5);
+        now.toTimeString()
+            .slice(0,5);
 
 }
 
@@ -1036,10 +1197,12 @@ setCurrentDateTime();
 
 function togglePPL(){
 
-    document.getElementById("pplFields").style.display =
+    document.getElementById(
+        "pplFields"
+    ).style.display =
         ppl.value === "Yes"
-        ? "block"
-        : "none";
+            ? "block"
+            : "none";
 
 }
 
@@ -1052,6 +1215,7 @@ function updateProvinces(){
 
     const list = [];
 
+
     if(region.value === "Momase + EHP"){
 
         list.push(
@@ -1063,6 +1227,7 @@ function updateProvinces(){
         );
 
     }
+
 
     if(region.value === "Highlands"){
 
@@ -1077,6 +1242,7 @@ function updateProvinces(){
 
     }
 
+
     if(region.value === "Southern"){
 
         list.push(
@@ -1090,6 +1256,7 @@ function updateProvinces(){
 
     }
 
+
     if(region.value === "NGI"){
 
         list.push(
@@ -1102,20 +1269,29 @@ function updateProvinces(){
 
     }
 
+
     province.innerHTML =
         '<option value="">Select Province</option>';
 
-    list.forEach(function(p){
 
-        const option =
-            document.createElement("option");
+    list.forEach(
+        function(p){
 
-        option.value = p;
-        option.textContent = p;
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        province.appendChild(option);
+            option.value = p;
 
-    });
+            option.textContent = p;
+
+            province.appendChild(
+                option
+            );
+
+        }
+    );
 
 }
 
@@ -1135,13 +1311,20 @@ function calculateFuel(){
     const afterValue =
         parseFloat(after.value) || 0;
 
+
     const expected =
-        beforeValue + addedValue;
+        beforeValue +
+        addedValue;
+
 
     const difference =
-        afterValue - expected;
+        afterValue -
+        expected;
 
-    document.getElementById("calc").innerHTML =
+
+    document.getElementById(
+        "calc"
+    ).innerHTML =
         `Expected: ${expected.toFixed(1)} L |
          Difference: ${difference.toFixed(1)} L`;
 
@@ -1157,7 +1340,9 @@ let stream = null;
 let mode = "";
 
 
-/* Open camera */
+/* ============================================================
+   OPEN CAMERA
+============================================================ */
 
 async function openCamera(type){
 
@@ -1175,26 +1360,33 @@ async function openCamera(type){
 
     }
 
+
     mode = type;
+
 
     try{
 
         stream =
             await navigator.mediaDevices.getUserMedia({
 
-                video:{
-                    facingMode:{
-                        ideal:"environment"
+                video: {
+                    facingMode: {
+                        ideal: "environment"
                     }
                 },
 
-                audio:false
+                audio: false
 
             });
 
-        video.srcObject = stream;
 
-        video.style.display = "block";
+        video.srcObject =
+            stream;
+
+
+        video.style.display =
+            "block";
+
 
         setTimeout(
             capturePhoto,
@@ -1203,9 +1395,12 @@ async function openCamera(type){
 
     }
 
+
     catch(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         alert(
             "Camera could not be opened. Please allow camera access."
@@ -1216,7 +1411,9 @@ async function openCamera(type){
 }
 
 
-/* Capture */
+/* ============================================================
+   CAPTURE PHOTO
+============================================================ */
 
 function capturePhoto(){
 
@@ -1231,6 +1428,7 @@ function capturePhoto(){
         return;
 
     }
+
 
     canvas.width =
         video.videoWidth;
@@ -1252,7 +1450,9 @@ function capturePhoto(){
     );
 
 
-    /* Photo stamp */
+    /* ========================================================
+       PHOTO STAMP
+    ======================================================== */
 
     const stamp = [
 
@@ -1261,8 +1461,8 @@ function capturePhoto(){
         mode === "BEFORE"
             ? "BEFORE REFUELLING"
             : mode === "TOPUP"
-            ? "REFUELLING IN PROGRESS"
-            : "AFTER REFUELLING",
+                ? "REFUELLING IN PROGRESS"
+                : "AFTER REFUELLING",
 
         "Date/Time: " +
         new Date().toLocaleString(),
@@ -1293,15 +1493,21 @@ function capturePhoto(){
     ];
 
 
-    /* Stamp background */
+    const lineHeight =
+        26;
 
-    const lineHeight = 26;
 
     const boxHeight =
-        stamp.length * lineHeight + 20;
+        stamp.length *
+        lineHeight +
+        20;
+
+
+    /* Stamp background */
 
     ctx.fillStyle =
         "rgba(0,0,0,0.70)";
+
 
     ctx.fillRect(
         0,
@@ -1313,7 +1519,9 @@ function capturePhoto(){
 
     /* Stamp text */
 
-    ctx.fillStyle = "white";
+    ctx.fillStyle =
+        "white";
+
 
     ctx.font =
         Math.max(
@@ -1332,22 +1540,28 @@ function capturePhoto(){
                 canvas.height -
                 boxHeight +
                 25 +
-                index * lineHeight
+                index *
+                lineHeight
             );
 
         }
     );
 
 
-    /* Resize/compress image */
+    /* Resize/compress */
 
     const image =
-        resizeCanvas(canvas,1200,0.75);
+        resizeCanvas(
+            canvas,
+            1200,
+            0.75
+        );
 
 
     if(mode === "BEFORE"){
 
-        imgBefore.src = image;
+        imgBefore.src =
+            image;
 
         document.getElementById(
             "statusBefore"
@@ -1359,7 +1573,8 @@ function capturePhoto(){
 
     if(mode === "TOPUP"){
 
-        imgTopup.src = image;
+        imgTopup.src =
+            image;
 
         document.getElementById(
             "statusTopup"
@@ -1371,7 +1586,8 @@ function capturePhoto(){
 
     if(mode === "AFTER"){
 
-        imgAfter.src = image;
+        imgAfter.src =
+            image;
 
         document.getElementById(
             "statusAfter"
@@ -1405,18 +1621,25 @@ function resizeCanvas(
 
 
     const newCanvas =
-        document.createElement("canvas");
+        document.createElement(
+            "canvas"
+        );
 
 
     newCanvas.width =
-        sourceCanvas.width * scale;
+        sourceCanvas.width *
+        scale;
+
 
     newCanvas.height =
-        sourceCanvas.height * scale;
+        sourceCanvas.height *
+        scale;
 
 
     const ctx =
-        newCanvas.getContext("2d");
+        newCanvas.getContext(
+            "2d"
+        );
 
 
     ctx.drawImage(
@@ -1445,18 +1668,41 @@ function stopCamera(){
     if(stream){
 
         stream
-        .getTracks()
-        .forEach(
-            track => track.stop()
-        );
+            .getTracks()
+            .forEach(
+                track => track.stop()
+            );
 
         stream = null;
 
     }
 
-    video.srcObject = null;
 
-    video.style.display = "none";
+    video.srcObject =
+        null;
+
+
+    video.style.display =
+        "none";
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+    /* Stop camera */
+
+    stopCamera();
+
+
+    /* Return to login page */
+
+    window.location.href =
+        "index.html";
 
 }
 
@@ -1469,7 +1715,8 @@ function resetPhoto(type){
 
     if(type === "BEFORE"){
 
-        imgBefore.src = "";
+        imgBefore.src =
+            "";
 
         document.getElementById(
             "statusBefore"
@@ -1481,7 +1728,8 @@ function resetPhoto(type){
 
     if(type === "TOPUP"){
 
-        imgTopup.src = "";
+        imgTopup.src =
+            "";
 
         document.getElementById(
             "statusTopup"
@@ -1493,7 +1741,8 @@ function resetPhoto(type){
 
     if(type === "AFTER"){
 
-        imgAfter.src = "";
+        imgAfter.src =
+            "";
 
         document.getElementById(
             "statusAfter"
@@ -1506,56 +1755,78 @@ function resetPhoto(type){
 
 
 /* ============================================================
-   CREATE REPORT DATA
+   GET REPORT DATA
 ============================================================ */
 
 function getReportData(){
 
     return {
 
-        engineer: engineer.value,
+        engineer:
+            engineer.value,
 
-        team: team.value,
+        team:
+            team.value,
 
-        date: date.value,
+        date:
+            date.value,
 
-        time: time.value,
+        time:
+            time.value,
 
-        siteName: siteName.value,
+        siteName:
+            siteName.value,
 
-        siteId: siteId.value,
+        siteId:
+            siteId.value,
 
-        region: region.value,
+        region:
+            region.value,
 
-        province: province.value,
+        province:
+            province.value,
 
-        tower: tower.value,
+        tower:
+            tower.value,
 
-        genset: genset.value,
+        genset:
+            genset.value,
 
-        oilLevel: oilLevel.value,
+        oilLevel:
+            oilLevel.value,
 
-        coolantLevel: coolantLevel.value,
+        coolantLevel:
+            coolantLevel.value,
 
-        rpm: rpm.value,
+        rpm:
+            rpm.value,
 
-        fuelBefore: before.value,
+        fuelBefore:
+            before.value,
 
-        fuelAdded: added.value,
+        fuelAdded:
+            added.value,
 
-        fuelAfter: after.value,
+        fuelAfter:
+            after.value,
 
-        ppl: ppl.value,
+        ppl:
+            ppl.value,
 
-        meter: meter.value,
+        meter:
+            meter.value,
 
-        reading: reading.value,
+        reading:
+            reading.value,
 
-        driver: driver.value,
+        driver:
+            driver.value,
 
-        vehicle: vehicle.value,
+        vehicle:
+            vehicle.value,
 
-        comments: comments.value
+        comments:
+            comments.value
 
     };
 
@@ -1571,14 +1842,21 @@ function generatePDF(){
     const { jsPDF } =
         window.jspdf;
 
+
     const doc =
         new jsPDF();
 
 
-    let y = 15;
+    let y =
+        15;
 
 
-    doc.setFontSize(18);
+    /* Title */
+
+    doc.setFontSize(
+        18
+    );
+
 
     doc.text(
         "Vodafone PNG Refuelling Report",
@@ -1586,10 +1864,14 @@ function generatePDF(){
         y
     );
 
-    y += 12;
+
+    y +=
+        12;
 
 
-    doc.setFontSize(10);
+    doc.setFontSize(
+        10
+    );
 
 
     const data =
@@ -1598,9 +1880,11 @@ function generatePDF(){
 
     const lines = [
 
-        "Engineer: " + data.engineer,
+        "Engineer: " +
+        data.engineer,
 
-        "Additional Team: " + data.team,
+        "Additional Team: " +
+        data.team,
 
         "Date: " +
         data.date +
@@ -1660,11 +1944,14 @@ function generatePDF(){
                 y
             );
 
-            y += 7;
+            y +=
+                7;
 
         }
     );
 
+
+    /* PPL details */
 
     if(data.ppl === "Yes"){
 
@@ -1675,7 +1962,8 @@ function generatePDF(){
             y
         );
 
-        y += 7;
+        y +=
+            7;
 
 
         doc.text(
@@ -1685,10 +1973,13 @@ function generatePDF(){
             y
         );
 
-        y += 7;
+        y +=
+            7;
 
     }
 
+
+    /* Driver */
 
     doc.text(
         "Driver: " +
@@ -1697,8 +1988,11 @@ function generatePDF(){
         y
     );
 
-    y += 7;
+    y +=
+        7;
 
+
+    /* Vehicle */
 
     doc.text(
         "Vehicle: " +
@@ -1707,8 +2001,11 @@ function generatePDF(){
         y
     );
 
-    y += 7;
+    y +=
+        7;
 
+
+    /* Comments */
 
     doc.text(
         "Comments:",
@@ -1716,12 +2013,14 @@ function generatePDF(){
         y
     );
 
-    y += 6;
+    y +=
+        6;
 
 
     const commentLines =
         doc.splitTextToSize(
-            data.comments || "None",
+            data.comments ||
+            "None",
             180
         );
 
@@ -1734,33 +2033,42 @@ function generatePDF(){
 
 
     y +=
-        commentLines.length * 6 +
+        commentLines.length *
+        6 +
         10;
 
 
-    /* Photos */
+    /* ========================================================
+       PHOTOS
+    ======================================================== */
 
     const photos = [
 
         {
             title:
                 "Before Refuelling",
+
             src:
                 imgBefore.src
+
         },
 
         {
             title:
                 "TopUp",
+
             src:
                 imgTopup.src
+
         },
 
         {
             title:
                 "After Refuelling",
+
             src:
                 imgAfter.src
+
         }
 
     ];
@@ -1770,7 +2078,9 @@ function generatePDF(){
         function(photo){
 
             if(!photo.src){
+
                 return;
+
             }
 
 
@@ -1778,12 +2088,16 @@ function generatePDF(){
 
                 doc.addPage();
 
-                y = 15;
+                y =
+                    15;
 
             }
 
 
-            doc.setFontSize(12);
+            doc.setFontSize(
+                12
+            );
+
 
             doc.text(
                 photo.title,
@@ -1791,7 +2105,9 @@ function generatePDF(){
                 y
             );
 
-            y += 5;
+
+            y +=
+                5;
 
 
             doc.addImage(
@@ -1804,7 +2120,8 @@ function generatePDF(){
             );
 
 
-            y += 70;
+            y +=
+                70;
 
         }
     );
@@ -1862,98 +2179,219 @@ function createExcel(){
 
     const rows = [
 
-        ["VODAFONE PNG REFUELLING REPORT",""],
-
-        ["",""],
-
-        ["Field Engineer",data.engineer],
-
-        ["Additional Team",data.team],
-
-        ["Date",data.date],
-
-        ["Time",data.time],
-
-        ["Site Name",data.siteName],
-
-        ["Site ID",data.siteId],
-
-        ["Region",data.region],
-
-        ["Province",data.province],
-
-        ["Tower Height",data.tower],
-
-        ["Genset Type",data.genset],
-
-        ["Engine Oil Level",data.oilLevel],
-
-        ["Coolant Level",data.coolantLevel],
-
-        ["Engine Speed RPM",data.rpm],
-
-        ["Fuel Before (L)",data.fuelBefore],
-
-        ["Fuel TopUp (L)",data.fuelAdded],
-
-        ["Fuel After (L)",data.fuelAfter],
-
-        ["Expected Fuel (L)",
-            (
-                Number(data.fuelBefore || 0) +
-                Number(data.fuelAdded || 0)
-            ).toFixed(1)
+        [
+            "VODAFONE PNG REFUELLING REPORT",
+            ""
         ],
 
-        ["Fuel Difference (L)",
+        [
+            "",
+            ""
+        ],
+
+        [
+            "Field Engineer",
+            data.engineer
+        ],
+
+        [
+            "Additional Team",
+            data.team
+        ],
+
+        [
+            "Date",
+            data.date
+        ],
+
+        [
+            "Time",
+            data.time
+        ],
+
+        [
+            "Site Name",
+            data.siteName
+        ],
+
+        [
+            "Site ID",
+            data.siteId
+        ],
+
+        [
+            "Region",
+            data.region
+        ],
+
+        [
+            "Province",
+            data.province
+        ],
+
+        [
+            "Tower Height",
+            data.tower
+        ],
+
+        [
+            "Genset Type",
+            data.genset
+        ],
+
+        [
+            "Engine Oil Level",
+            data.oilLevel
+        ],
+
+        [
+            "Coolant Level",
+            data.coolantLevel
+        ],
+
+        [
+            "Engine Speed RPM",
+            data.rpm
+        ],
+
+        [
+            "Fuel Before (L)",
+            data.fuelBefore
+        ],
+
+        [
+            "Fuel TopUp (L)",
+            data.fuelAdded
+        ],
+
+        [
+            "Fuel After (L)",
+            data.fuelAfter
+        ],
+
+        [
+            "Expected Fuel (L)",
+
             (
-                Number(data.fuelAfter || 0) -
-                (
-                    Number(data.fuelBefore || 0) +
-                    Number(data.fuelAdded || 0)
+                Number(
+                    data.fuelBefore ||
+                    0
+                ) +
+
+                Number(
+                    data.fuelAdded ||
+                    0
                 )
+
             ).toFixed(1)
+
         ],
 
-        ["PPL Connected",data.ppl],
+        [
+            "Fuel Difference (L)",
 
-        ["Meter Number",data.meter],
+            (
+                Number(
+                    data.fuelAfter ||
+                    0
+                ) -
 
-        ["Meter Reading",data.reading],
+                (
+                    Number(
+                        data.fuelBefore ||
+                        0
+                    ) +
 
-        ["Driver",data.driver],
+                    Number(
+                        data.fuelAdded ||
+                        0
+                    )
 
-        ["Vehicle Registration",data.vehicle],
+                )
 
-        ["Comments",data.comments],
+            ).toFixed(1)
 
-        ["",""],
-
-        ["Photos","Captured"],
-
-        ["Before Photo",
-            imgBefore.src ? "YES" : "NO"
         ],
 
-        ["TopUp Photo",
-            imgTopup.src ? "YES" : "NO"
+        [
+            "PPL Connected",
+            data.ppl
         ],
 
-        ["After Photo",
-            imgAfter.src ? "YES" : "NO"
+        [
+            "Meter Number",
+            data.meter
+        ],
+
+        [
+            "Meter Reading",
+            data.reading
+        ],
+
+        [
+            "Driver",
+            data.driver
+        ],
+
+        [
+            "Vehicle Registration",
+            data.vehicle
+        ],
+
+        [
+            "Comments",
+            data.comments
+        ],
+
+        [
+            "",
+            ""
+        ],
+
+        [
+            "Photos",
+            "Captured"
+        ],
+
+        [
+            "Before Photo",
+            imgBefore.src
+                ? "YES"
+                : "NO"
+        ],
+
+        [
+            "TopUp Photo",
+            imgTopup.src
+                ? "YES"
+                : "NO"
+        ],
+
+        [
+            "After Photo",
+            imgAfter.src
+                ? "YES"
+                : "NO"
         ]
 
     ];
 
 
     const worksheet =
-        XLSX.utils.aoa_to_sheet(rows);
+        XLSX.utils.aoa_to_sheet(
+            rows
+        );
 
 
     worksheet["!cols"] = [
 
-        {wch:28},
-        {wch:55}
+        {
+            wch: 28
+        },
+
+        {
+            wch: 55
+        }
 
     ];
 
@@ -1986,6 +2424,7 @@ function downloadExcel(){
 
     XLSX.writeFile(
         workbook,
+
         siteId.value +
         "_" +
         date.value +
@@ -1996,7 +2435,7 @@ function downloadExcel(){
 
 
 /* ============================================================
-   CONVERT BLOB TO BASE64
+   BLOB TO BASE64
 ============================================================ */
 
 function blobToDataURL(blob){
@@ -2007,6 +2446,7 @@ function blobToDataURL(blob){
             const reader =
                 new FileReader();
 
+
             reader.onload =
                 function(){
 
@@ -2016,10 +2456,14 @@ function blobToDataURL(blob){
 
                 };
 
+
             reader.onerror =
                 reject;
 
-            reader.readAsDataURL(blob);
+
+            reader.readAsDataURL(
+                blob
+            );
 
         }
     );
@@ -2028,29 +2472,33 @@ function blobToDataURL(blob){
 
 
 /* ============================================================
-   CREATE PDF BASE64
+   PDF BASE64
 ============================================================ */
 
-function getPDFBase64(){
+async function getPDFBase64(){
 
     const doc =
         generatePDF();
 
 
     const blob =
-        doc.output("blob");
+        doc.output(
+            "blob"
+        );
 
 
-    return blobToDataURL(blob);
+    return await blobToDataURL(
+        blob
+    );
 
 }
 
 
 /* ============================================================
-   CREATE EXCEL BASE64
+   EXCEL BASE64
 ============================================================ */
 
-function getExcelBase64(){
+async function getExcelBase64(){
 
     const workbook =
         createExcel();
@@ -2060,15 +2508,17 @@ function getExcelBase64(){
         XLSX.write(
             workbook,
             {
-                bookType:"xlsx",
-                type:"array"
+                bookType: "xlsx",
+                type: "array"
             }
         );
 
 
     const blob =
         new Blob(
-            [excelArray],
+            [
+                excelArray
+            ],
             {
                 type:
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -2076,7 +2526,9 @@ function getExcelBase64(){
         );
 
 
-    return blobToDataURL(blob);
+    return await blobToDataURL(
+        blob
+    );
 
 }
 
@@ -2087,12 +2539,15 @@ function getExcelBase64(){
 
 form.addEventListener(
     "submit",
+
     async function(event){
 
         event.preventDefault();
 
 
-        /* HTML VALIDATION */
+        /* ====================================================
+           HTML VALIDATION
+        ==================================================== */
 
         if(!form.checkValidity()){
 
@@ -2103,7 +2558,9 @@ form.addEventListener(
         }
 
 
-        /* PHOTO VALIDATION */
+        /* ====================================================
+           PHOTO VALIDATION
+        ==================================================== */
 
         if(
             !imgBefore.src ||
@@ -2120,9 +2577,13 @@ form.addEventListener(
         }
 
 
-        /* PREVENT DOUBLE SEND */
+        /* ====================================================
+           PREVENT DOUBLE SEND
+        ==================================================== */
 
-        sendButton.disabled = true;
+        sendButton.disabled =
+            true;
+
 
         sendButton.textContent =
             "GENERATING REPORT...";
@@ -2134,13 +2595,18 @@ form.addEventListener(
 
         try{
 
-            /* Generate PDF */
+
+            /* =================================================
+               GENERATE PDF
+            ================================================= */
 
             const pdfBase64 =
                 await getPDFBase64();
 
 
-            /* Generate Excel */
+            /* =================================================
+               GENERATE EXCEL
+            ================================================= */
 
             const excelBase64 =
                 await getExcelBase64();
@@ -2157,6 +2623,10 @@ form.addEventListener(
             const data =
                 getReportData();
 
+
+            /* =================================================
+               EMAIL PARAMETERS
+            ================================================= */
 
             const params = {
 
@@ -2226,7 +2696,10 @@ form.addEventListener(
                 comments:
                     data.comments,
 
-                /* ATTACHMENTS */
+
+                /* =============================================
+                   FILE ATTACHMENTS
+                ============================================= */
 
                 pdf_attachment:
                     pdfBase64,
@@ -2246,6 +2719,10 @@ form.addEventListener(
             };
 
 
+            /* =================================================
+               SEND THROUGH EMAILJS
+            ================================================= */
+
             await emailjs.send(
 
                 EMAILJS_SERVICE_ID,
@@ -2257,6 +2734,10 @@ form.addEventListener(
             );
 
 
+            /* =================================================
+               SUCCESS
+            ================================================= */
+
             sendStatus.textContent =
                 "✓ Report sent successfully.";
 
@@ -2266,11 +2747,28 @@ form.addEventListener(
 
 
             alert(
-                "Complete refuelling report sent successfully."
+                "Complete refuelling report sent successfully.\n\n" +
+                "Returning to login page..."
+            );
+
+
+            /* =================================================
+               RETURN TO LOGIN PAGE
+            ================================================= */
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                1000
             );
 
 
         }
+
 
         catch(error){
 
@@ -2288,38 +2786,26 @@ form.addEventListener(
                 "SEND COMPLETE REPORT";
 
 
+            sendButton.disabled =
+                false;
+
+
             alert(
                 "The report could not be sent.\n\n" +
-                "Please check your internet connection and EmailJS configuration."
+                "Please check your internet connection " +
+                "and EmailJS configuration."
             );
 
-
-            sendButton.disabled = false;
 
             return;
 
         }
 
-
-        /* ENABLE AGAIN */
-
-        setTimeout(
-            function(){
-
-                sendButton.disabled =
-                    false;
-
-                sendButton.textContent =
-                    "SEND COMPLETE REPORT";
-
-            },
-            3000
-        );
-
     }
 );
 
 </script>
+
 
 </body>
 </html>
