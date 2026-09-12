@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Vodafone PNG Refuelling System</title>
 
@@ -26,7 +23,7 @@
 
 
 <!-- =========================================================
-     EXCELJS
+     EXCEL
 ========================================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
@@ -38,292 +35,251 @@
     box-sizing: border-box;
 }
 
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f2f4f7;
     margin: 0;
-    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f4f7;
     color: #222;
 }
 
-.container {
-    max-width: 950px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-}
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
+header {
+    background: #e60000;
+    color: white;
+    padding: 18px;
     text-align: center;
-    border-bottom: 3px solid #e60000;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-
-.header h1 {
-    color: #e60000;
-    margin: 0;
-    font-size: 25px;
-}
-
-.header p {
-    margin: 5px 0 0;
-    font-size: 13px;
-    color: #666;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.container {
+    width: 95%;
+    max-width: 1100px;
+    margin: 20px auto;
 }
 
-.section h2 {
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+
+.card h2 {
     margin-top: 0;
     color: #e60000;
-    font-size: 18px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 8px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
 }
 
 
-/* =========================================================
-   ROW
-========================================================= */
-
-.row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
 }
 
-.form-group {
-    flex: 1;
-    min-width: 180px;
-    margin-bottom: 10px;
-}
-
-
-/* =========================================================
-   LABELS
-========================================================= */
 
 label {
-    font-size: 13px;
-    font-weight: bold;
     display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
-
-/* =========================================================
-   INPUTS
-========================================================= */
 
 input,
 select,
 textarea {
     width: 100%;
-    padding: 9px;
-    font-size: 13px;
-    margin-top: 5px;
+    padding: 11px;
     border: 1px solid #bbb;
-    border-radius: 5px;
+    border-radius: 7px;
+    font-size: 15px;
 }
 
+
 textarea {
-    min-height: 80px;
+    min-height: 100px;
     resize: vertical;
 }
 
 
-/* =========================================================
-   BUTTONS
-========================================================= */
-
 button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+.btn-red {
     background: #e60000;
     color: white;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 13px;
-    width: 100%;
 }
 
-button:hover {
-    background: #c90000;
+
+.btn-dark {
+    background: #222;
+    color: white;
 }
 
-button:disabled {
-    background: #999;
-    cursor: not-allowed;
-}
-
-.btn-secondary {
-    background: #555;
-}
-
-.btn-secondary:hover {
-    background: #333;
-}
 
 .btn-green {
-    background: #168a35;
-}
-
-.btn-green:hover {
-    background: #106b29;
+    background: #168a16;
+    color: white;
 }
 
 
-/* =========================================================
-   CAMERA
-========================================================= */
+.btn-blue {
+    background: #1769aa;
+    color: white;
+}
 
-#video {
+
+button:hover {
+    opacity: 0.88;
+}
+
+
+.photo-section {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+
+.photo-section h3 {
+    margin-top: 0;
+}
+
+
+.photo-preview {
     width: 100%;
-    max-height: 400px;
-    display: none;
+    max-width: 600px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+.status {
+    padding: 12px;
     border-radius: 8px;
     margin-top: 10px;
+    display: none;
+    font-weight: bold;
+}
+
+
+.status.success {
+    display: block;
+    background: #d9f7df;
+    color: #146b22;
+}
+
+
+.status.error {
+    display: block;
+    background: #ffe0e0;
+    color: #9d0000;
+}
+
+
+.status.info {
+    display: block;
+    background: #e1f0ff;
+    color: #145a92;
+}
+
+
+.small {
+    font-size: 13px;
+    color: #666;
+}
+
+
+.photo-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+
+#cameraModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+
+.camera-box {
+    width: 100%;
+    max-width: 700px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+
+#cameraVideo {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
     background: black;
 }
+
+
+.camera-controls {
+    text-align: center;
+    margin-top: 10px;
+}
+
 
 #canvas {
     display: none;
 }
 
 
-/* =========================================================
-   PHOTO GRID
-========================================================= */
-
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.photo-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
+footer {
     text-align: center;
-}
-
-.photo-card h3 {
-    font-size: 14px;
-    margin-top: 0;
-}
-
-.photo-card img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-    border-radius: 6px;
-    background: #eee;
-}
-
-.photo-status {
-    font-size: 12px;
-    margin: 5px;
-    font-weight: bold;
+    padding: 20px;
+    color: #666;
+    font-size: 13px;
 }
 
 
-/* =========================================================
-   GPS STATUS
-========================================================= */
+@media(max-width:600px) {
 
-.gps-status {
-    background: #f1f1f1;
-    border-radius: 5px;
-    padding: 8px;
-    margin: 8px 0;
-    font-size: 11px;
-    text-align: left;
-    color: #555;
-}
-
-.gps-good {
-    color: #168a35;
-    font-weight: bold;
-}
-
-.gps-error {
-    color: #e60000;
-    font-weight: bold;
-}
-
-
-/* =========================================================
-   SEND AREA
-========================================================= */
-
-.send-area {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f7f7f7;
-    border-radius: 8px;
-}
-
-.send-button {
-    background: #e60000;
-    font-size: 16px;
-    padding: 14px;
-    font-weight: bold;
-}
-
-.status {
-    margin-top: 10px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-    text-align: center;
-    font-size: 12px;
-    margin-top: 25px;
-    color: #777;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:700px) {
-
-    .photo-grid {
-        grid-template-columns: 1fr;
+    header {
+        font-size: 18px;
     }
 
     .container {
-        padding: 12px;
+        width: 98%;
     }
 
-    .header h1 {
-        font-size: 21px;
+    .card {
+        padding: 14px;
+    }
+
+    button {
+        width: 100%;
+        margin: 4px 0;
     }
 
 }
@@ -335,808 +291,814 @@ button:disabled {
 
 <body>
 
+
+<header>
+    Vodafone PNG Refuelling & Genset Site Inspection Report
+</header>
+
+
 <div class="container">
 
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<div class="header">
-
-    <h1>Vodafone PNG Refuelling</h1>
-
-    <p>
-        Genset Refuelling Report
-    </p>
-
-</div>
-
-
-<form id="fuelForm">
+<form id="refuellingForm">
 
 
 <!-- =========================================================
      1. SITE PERSONNEL
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>1. Site Personnel</h2>
+<h2>1. Site Personnel</h2>
 
-    <div class="row">
+<div class="grid">
 
-        <div class="form-group">
+<div>
 
-            <label>Field Engineer *</label>
+<label for="engineer">
+Engineer / Technician
+</label>
 
-            <input
-                type="text"
-                id="engineer"
-                name="engineer"
-                required
-                placeholder="Enter engineer name">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Additional Team</label>
-
-            <input
-                type="text"
-                id="team"
-                name="team"
-                placeholder="Additional team members">
-
-        </div>
-
-    </div>
+<input
+    type="text"
+    id="engineer"
+    required
+>
 
 </div>
+
+
+<div>
+
+<label for="team">
+Team
+</label>
+
+<input
+    type="text"
+    id="team"
+    placeholder="RBS / Power / Field Team"
+>
+
+</div>
+
+</div>
+
+</div>
+
 
 
 <!-- =========================================================
      2. SITE INFORMATION
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>2. Site Information</h2>
+<h2>2. Site Information</h2>
 
-    <div class="row">
-
-        <div class="form-group">
-
-            <label>Date *</label>
-
-            <input
-                type="date"
-                id="date"
-                name="date"
-                required>
-
-        </div>
+<div class="grid">
 
 
-        <div class="form-group">
+<div>
 
-            <label>Time *</label>
+<label for="date">
+Date
+</label>
 
-            <input
-                type="time"
-                id="time"
-                name="time"
-                required>
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-
-        <div class="form-group">
-
-            <label>Site Name *</label>
-
-            <input
-                type="text"
-                id="siteName"
-                name="siteName"
-                required
-                placeholder="Site name">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Site ID *</label>
-
-            <input
-                type="text"
-                id="siteId"
-                name="siteId"
-                required
-                placeholder="Site ID">
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-
-        <div class="form-group">
-
-            <label>Region *</label>
-
-            <select
-                id="region"
-                name="region"
-                onchange="updateProvinces()"
-                required>
-
-                <option value="">
-                    Select Region
-                </option>
-
-                <option value="Momase + EHP">
-                    Momase + EHP
-                </option>
-
-                <option value="Highlands">
-                    Highlands
-                </option>
-
-                <option value="Southern">
-                    Southern
-                </option>
-
-                <option value="NGI">
-                    New Guinea Islands
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Province *</label>
-
-            <select
-                id="province"
-                name="province"
-                required>
-
-                <option value="">
-                    Select Province
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label>Tower Height</label>
-
-        <select
-            id="tower"
-            name="tower">
-
-            <option>23 Meter Monopole</option>
-            <option>30M RDS</option>
-            <option>45M RDS</option>
-            <option>45M Grilliage</option>
-            <option>45M SST</option>
-            <option>60M RDS</option>
-            <option>60M Grilliage</option>
-            <option>60M SST</option>
-            <option>80M Grilliage</option>
-            <option>80M SST</option>
-            <option>100M SST</option>
-            <option>110M SST</option>
-
-        </select>
-
-    </div>
+<input
+    type="date"
+    id="date"
+    required
+>
 
 </div>
+
+
+<div>
+
+<label for="time">
+Time
+</label>
+
+<input
+    type="time"
+    id="time"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label for="siteName">
+Site Name
+</label>
+
+<input
+    type="text"
+    id="siteName"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label for="siteId">
+Site ID
+</label>
+
+<input
+    type="text"
+    id="siteId"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label for="region">
+Region
+</label>
+
+<select id="region" required>
+
+<option value="">
+Select Region
+</option>
+
+<option value="Momase + EHP">
+Momase + EHP
+</option>
+
+<option value="Highlands">
+Highlands
+</option>
+
+<option value="Southern">
+Southern
+</option>
+
+<option value="NGI">
+NGI
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label for="province">
+Province
+</label>
+
+<select id="province" required>
+
+<option value="">
+Select Province
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label for="tower">
+Tower Type / Height
+</label>
+
+<input
+    type="text"
+    id="tower"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- =========================================================
-     3. GENSET INFORMATION
+     3. GENSET
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>3. Genset Information</h2>
+<h2>3. Genset Information</h2>
 
-    <div class="form-group">
-
-        <label>Genset / DG Type *</label>
-
-        <select
-            id="genset"
-            name="genset"
-            required>
-
-            <option>Yanhan 8KVA</option>
-            <option>Yanhan 17KVA</option>
-            <option>Yanhan 24KVA</option>
-            <option>CCTC 11KVA</option>
-            <option>CCTC 17KVA</option>
-            <option>CCTC 24KVA</option>
-            <option>FG Wilson 15KVA</option>
-            <option>Polar Power</option>
-            <option>Sengen 15KVA</option>
-            <option>LEGA</option>
-
-        </select>
-
-    </div>
+<div class="grid">
 
 
-    <div class="row">
+<div>
 
-        <div class="form-group">
+<label for="gensetType">
+Genset Type
+</label>
 
-            <label>Engine Oil Level</label>
+<select id="gensetType">
 
-            <input
-                type="number"
-                step="0.1"
-                id="oilLevel"
-                name="oilLevel"
-                placeholder="Level">
+<option value="">
+Select Genset
+</option>
 
-        </div>
+<option>Yanhan 8KVA</option>
+<option>Yanhan 17KVA</option>
+<option>Yanhan 24KVA</option>
 
+<option>CCTC 11KVA</option>
+<option>CCTC 17KVA</option>
+<option>CCTC 24KVA</option>
 
-        <div class="form-group">
+<option>FG Wilson 15KVA</option>
 
-            <label>Coolant Level</label>
+<option>Polar Power</option>
 
-            <input
-                type="number"
-                step="0.1"
-                id="coolantLevel"
-                name="coolantLevel"
-                placeholder="Level">
+<option>Sengen 15KVA</option>
 
-        </div>
+<option>LEGA</option>
 
-
-        <div class="form-group">
-
-            <label>Engine Speed (RPM)</label>
-
-            <input
-                type="number"
-                id="rpm"
-                name="rpm"
-                placeholder="RPM">
-
-        </div>
-
-    </div>
+</select>
 
 </div>
+
+
+<div>
+
+<label for="engineOil">
+Engine Oil
+</label>
+
+<input
+    type="text"
+    id="engineOil"
+>
+
+</div>
+
+
+<div>
+
+<label for="coolant">
+Coolant
+</label>
+
+<input
+    type="text"
+    id="coolant"
+>
+
+</div>
+
+
+<div>
+
+<label for="rpm">
+RPM
+</label>
+
+<input
+    type="number"
+    id="rpm"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- =========================================================
-     4. REFUELLING DETAILS
+     4. REFUELLING
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>4. Refuelling Details</h2>
+<h2>4. Refuelling Details</h2>
 
-    <div class="row">
-
-        <div class="form-group">
-
-            <label>Fuel Before (L) *</label>
-
-            <input
-                type="number"
-                step="0.1"
-                id="before"
-                name="before"
-                required
-                oninput="calculateFuel()">
-
-        </div>
+<div class="grid">
 
 
-        <div class="form-group">
+<div>
 
-            <label>Fuel TopUp (L) *</label>
+<label for="fuelBefore">
+Fuel Before Refuelling (L)
+</label>
 
-            <input
-                type="number"
-                step="0.1"
-                id="added"
-                name="added"
-                required
-                oninput="calculateFuel()">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Fuel After (L) *</label>
-
-            <input
-                type="number"
-                step="0.1"
-                id="after"
-                name="after"
-                required
-                oninput="calculateFuel()">
-
-        </div>
-
-    </div>
-
-
-    <div id="calc"
-         style="
-         background:#f1f1f1;
-         padding:10px;
-         border-radius:5px;
-         font-size:13px;
-         font-weight:bold;
-         ">
-
-        Expected: 0 L | Difference: 0 L
-
-    </div>
+<input
+    type="number"
+    step="0.01"
+    id="fuelBefore"
+>
 
 </div>
+
+
+<div>
+
+<label for="fuelTopup">
+Fuel Added / Top-Up (L)
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    id="fuelTopup"
+>
+
+</div>
+
+
+<div>
+
+<label for="fuelAfter">
+Fuel After Refuelling (L)
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    id="fuelAfter"
+>
+
+</div>
+
+
+<div>
+
+<label for="expectedFuel">
+Expected Fuel After (L)
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    id="expectedFuel"
+>
+
+</div>
+
+
+<div>
+
+<label for="fuelDifference">
+Difference (L)
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    id="fuelDifference"
+    readonly
+>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- =========================================================
-     5. REFUELLING PHOTOS
+     5. PHOTOS
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>5. Refuelling Photos</h2>
+<h2>5. Refuelling Photos</h2>
 
-    <p style="font-size:12px;color:#666;">
+<p class="small">
 
-        Capture all three photos. The current GPS position,
-        date, site and refuelling information will be printed
-        directly onto each photograph.
+Each photo will automatically contain the Vodafone PNG
+report information, date/time, site, engineer and GPS
+information in red text directly on the photo.
 
-    </p>
+</p>
 
 
-    <div id="gpsMainStatus"
-         class="gps-status">
+<!-- BEFORE -->
 
-        GPS: Waiting for photo capture
+<div class="photo-section">
 
-    </div>
+<h3>
+Before Refuelling
+</h3>
 
 
-    <video
-        id="video"
-        autoplay
-        playsinline>
-    </video>
+<div class="photo-buttons">
 
+<button
+    type="button"
+    class="btn-red"
+    onclick="openCamera('BEFORE')"
+>
 
-    <canvas id="canvas"></canvas>
+📷 Capture Before Photo
 
+</button>
 
-    <div class="photo-grid">
 
+<button
+    type="button"
+    class="btn-dark"
+    onclick="clearPhoto('BEFORE')"
+>
 
-        <!-- =================================================
-             BEFORE
-        ================================================= -->
+Clear
 
-        <div class="photo-card">
-
-            <h3>Before Refuelling</h3>
-
-            <img
-                id="imgBefore"
-                alt="Before photo">
-
-            <div
-                id="statusBefore"
-                class="photo-status">
-
-                Not captured
-
-            </div>
-
-
-            <div
-                id="gpsBefore"
-                class="gps-status">
-
-                GPS: Not captured
-
-            </div>
-
-
-            <button
-                type="button"
-                onclick="openCamera('BEFORE')">
-
-                Capture Before
-
-            </button>
-
-
-            <br>
-            <br>
-
-
-            <button
-                type="button"
-                class="btn-secondary"
-                onclick="resetPhoto('BEFORE')">
-
-                Reset
-
-            </button>
-
-        </div>
-
-
-        <!-- =================================================
-             TOPUP
-        ================================================= -->
-
-        <div class="photo-card">
-
-            <h3>TopUp</h3>
-
-            <img
-                id="imgTopup"
-                alt="TopUp photo">
-
-            <div
-                id="statusTopup"
-                class="photo-status">
-
-                Not captured
-
-            </div>
-
-
-            <div
-                id="gpsTopup"
-                class="gps-status">
-
-                GPS: Not captured
-
-            </div>
-
-
-            <button
-                type="button"
-                onclick="openCamera('TOPUP')">
-
-                Capture TopUp
-
-            </button>
-
-
-            <br>
-            <br>
-
-
-            <button
-                type="button"
-                class="btn-secondary"
-                onclick="resetPhoto('TOPUP')">
-
-                Reset
-
-            </button>
-
-        </div>
-
-
-        <!-- =================================================
-             AFTER
-        ================================================= -->
-
-        <div class="photo-card">
-
-            <h3>After Refuelling</h3>
-
-            <img
-                id="imgAfter"
-                alt="After photo">
-
-            <div
-                id="statusAfter"
-                class="photo-status">
-
-                Not captured
-
-            </div>
-
-
-            <div
-                id="gpsAfter"
-                class="gps-status">
-
-                GPS: Not captured
-
-            </div>
-
-
-            <button
-                type="button"
-                onclick="openCamera('AFTER')">
-
-                Capture After
-
-            </button>
-
-
-            <br>
-            <br>
-
-
-            <button
-                type="button"
-                class="btn-secondary"
-                onclick="resetPhoto('AFTER')">
-
-                Reset
-
-            </button>
-
-        </div>
-
-    </div>
+</button>
 
 </div>
+
+
+<img
+    id="beforePreview"
+    class="photo-preview"
+    alt="Before refuelling photo"
+>
+
+
+<div
+    id="beforeGps"
+    class="small"
+></div>
+
+</div>
+
+
+
+<!-- TOPUP -->
+
+<div class="photo-section">
+
+<h3>
+Refuelling In Progress
+</h3>
+
+
+<div class="photo-buttons">
+
+<button
+    type="button"
+    class="btn-red"
+    onclick="openCamera('TOPUP')"
+>
+
+📷 Capture Top-Up Photo
+
+</button>
+
+
+<button
+    type="button"
+    class="btn-dark"
+    onclick="clearPhoto('TOPUP')"
+>
+
+Clear
+
+</button>
+
+</div>
+
+
+<img
+    id="topupPreview"
+    class="photo-preview"
+    alt="Top-up photo"
+>
+
+
+<div
+    id="topupGps"
+    class="small"
+></div>
+
+</div>
+
+
+
+<!-- AFTER -->
+
+<div class="photo-section">
+
+<h3>
+After Refuelling
+</h3>
+
+
+<div class="photo-buttons">
+
+<button
+    type="button"
+    class="btn-red"
+    onclick="openCamera('AFTER')"
+>
+
+📷 Capture After Photo
+
+</button>
+
+
+<button
+    type="button"
+    class="btn-dark"
+    onclick="clearPhoto('AFTER')"
+>
+
+Clear
+
+</button>
+
+</div>
+
+
+<img
+    id="afterPreview"
+    class="photo-preview"
+    alt="After refuelling photo"
+>
+
+
+<div
+    id="afterGps"
+    class="small"
+></div>
+
+</div>
+
+</div>
+
 
 
 <!-- =========================================================
-     6. POWER INFORMATION
+     6. POWER
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>6. Power Information</h2>
+<h2>6. Power Information</h2>
 
-    <div class="form-group">
-
-        <label>PPL Connected?</label>
-
-        <select
-            id="ppl"
-            name="ppl"
-            onchange="togglePPL()">
-
-            <option value="No">
-                No
-            </option>
-
-            <option value="Yes">
-                Yes
-            </option>
-
-        </select>
-
-    </div>
+<div class="grid">
 
 
-    <div id="pplFields"
-         style="display:none;">
+<div>
 
-        <div class="row">
+<label for="pplConnected">
+PPL Connected?
+</label>
 
-            <div class="form-group">
+<select id="pplConnected">
 
-                <label>Meter Number</label>
+<option value="">
+Select
+</option>
 
-                <input
-                    type="text"
-                    id="meter"
-                    name="meter">
+<option>
+Yes
+</option>
 
-            </div>
+<option>
+No
+</option>
 
-
-            <div class="form-group">
-
-                <label>Meter Reading</label>
-
-                <input
-                    type="number"
-                    step="0.1"
-                    id="reading"
-                    name="reading">
-
-            </div>
-
-        </div>
-
-    </div>
+</select>
 
 </div>
+
+
+<div>
+
+<label for="meterNumber">
+Meter Number
+</label>
+
+<input
+    type="text"
+    id="meterNumber"
+>
+
+</div>
+
+
+<div>
+
+<label for="meterReading">
+Meter Reading
+</label>
+
+<input
+    type="text"
+    id="meterReading"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 
 <!-- =========================================================
-     7. DRIVER & VEHICLE
+     7. DRIVER
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>7. Driver & Vehicle</h2>
+<h2>7. Driver & Vehicle</h2>
 
-    <div class="row">
-
-        <div class="form-group">
-
-            <label>Driver Name</label>
-
-            <input
-                type="text"
-                id="driver"
-                name="driver">
-
-        </div>
+<div class="grid">
 
 
-        <div class="form-group">
+<div>
 
-            <label>Vehicle Registration</label>
+<label for="driver">
+Driver
+</label>
 
-            <input
-                type="text"
-                id="vehicle"
-                name="vehicle">
-
-        </div>
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label>Comments / Observations</label>
-
-        <textarea
-            id="comments"
-            name="comments"
-            placeholder="Enter comments, abnormalities or observations..."></textarea>
-
-    </div>
+<input
+    type="text"
+    id="driver"
+>
 
 </div>
+
+
+<div>
+
+<label for="vehicle">
+Vehicle Registration / ID
+</label>
+
+<input
+    type="text"
+    id="vehicle"
+>
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<label for="comments">
+Comments / Observations
+</label>
+
+<textarea
+    id="comments"
+></textarea>
+
+</div>
+
 
 
 <!-- =========================================================
      8. REPORT
 ========================================================= -->
 
-<div class="section">
+<div class="card">
 
-    <h2>8. Report</h2>
-
-    <div class="row">
-
-        <div class="form-group">
-
-            <button
-                type="button"
-                class="btn-secondary"
-                onclick="downloadPDF()">
-
-                Download PDF
-
-            </button>
-
-        </div>
+<h2>
+8. Report
+</h2>
 
 
-        <div class="form-group">
+<button
+    type="button"
+    class="btn-blue"
+    onclick="downloadPDF()"
+>
 
-            <button
-                type="button"
-                class="btn-secondary"
-                onclick="downloadExcel()">
+📄 Download PDF
 
-                Download Excel
-
-            </button>
-
-        </div>
-
-    </div>
+</button>
 
 
-    <div class="send-area">
+<button
+    type="button"
+    class="btn-green"
+    onclick="downloadExcel()"
+>
 
-        <button
-            type="submit"
-            id="sendButton"
-            class="send-button">
+📊 Download Excel
 
-            SEND COMPLETE REPORT
-
-        </button>
-
-
-        <br>
-        <br>
+</button>
 
 
-        <button
-            type="button"
-            class="btn-secondary"
-            onclick="logout()">
+<button
+    type="button"
+    class="btn-red"
+    onclick="sendReportEmail()"
+>
 
-            Logout
+📧 Send Report by Email
 
-        </button>
+</button>
 
 
-        <div
-            id="sendStatus"
-            class="status">
-
-            Ready to send
-
-        </div>
-
-    </div>
+<div
+    id="status"
+    class="status"
+></div>
 
 </div>
 
 
 </form>
 
-
-<div class="footer">
-
-    Powered by Iso Yawi | System Creator
-
 </div>
 
 
-</div>
+
+<footer>
+
+Vodafone PNG — Refuelling & Genset Site Inspection System
+
+</footer>
 
 
 
 <!-- =========================================================
-     JAVASCRIPT
+     CAMERA MODAL
 ========================================================= -->
+
+<div id="cameraModal">
+
+<div class="camera-box">
+
+
+<video
+    id="cameraVideo"
+    autoplay
+    playsinline
+></video>
+
+
+<div class="camera-controls">
+
+
+<button
+    type="button"
+    class="btn-red"
+    onclick="capturePhoto()"
+>
+
+📸 Take Photo
+
+</button>
+
+
+<button
+    type="button"
+    class="btn-dark"
+    onclick="closeCamera()"
+>
+
+Cancel
+
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<canvas id="canvas"></canvas>
+
+
 
 <script>
 
-
-/* ============================================================
+/* =========================================================
    EMAILJS CONFIGURATION
-============================================================ */
 
-/*
-   ===========================================================
-   REPLACE THESE THREE VALUES
-   ===========================================================
-*/
+   REPLACE ONLY THESE THREE VALUES WITH YOUR
+   REAL EMAILJS VALUES.
+========================================================= */
 
 const EMAILJS_PUBLIC_KEY =
     "YOUR_PUBLIC_KEY";
@@ -1148,128 +1110,112 @@ const EMAILJS_TEMPLATE_ID =
     "YOUR_TEMPLATE_ID";
 
 
-/* ============================================================
+/* =========================================================
    REPORT RECIPIENT
-============================================================ */
+========================================================= */
 
 const REPORT_RECIPIENT_EMAIL =
     "isoyawi7@gmail.com";
 
 
-/* ============================================================
-   INITIALIZE EMAILJS
-============================================================ */
+/* =========================================================
+   EMAILJS INITIALISATION
+========================================================= */
 
-emailjs.init({
-
-    publicKey:
-        EMAILJS_PUBLIC_KEY
-
-});
+let emailJSReady = false;
 
 
+function initialiseEmailJS() {
 
-/* ============================================================
-   ELEMENTS
-============================================================ */
+    if (typeof emailjs === "undefined") {
 
-const form =
-    document.getElementById("fuelForm");
+        console.error(
+            "EmailJS library was not loaded."
+        );
 
-const engineer =
-    document.getElementById("engineer");
+        return false;
+    }
 
-const team =
-    document.getElementById("team");
 
-const date =
-    document.getElementById("date");
+    if (
+        !EMAILJS_PUBLIC_KEY ||
+        EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY"
+    ) {
 
-const time =
-    document.getElementById("time");
+        console.warn(
+            "EmailJS Public Key has not been configured."
+        );
 
-const siteName =
-    document.getElementById("siteName");
+        return false;
+    }
 
-const siteId =
-    document.getElementById("siteId");
 
-const region =
-    document.getElementById("region");
+    try {
 
-const province =
-    document.getElementById("province");
+        emailjs.init({
+            publicKey:
+                EMAILJS_PUBLIC_KEY
+        });
 
-const tower =
-    document.getElementById("tower");
 
-const genset =
-    document.getElementById("genset");
+        emailJSReady = true;
 
-const oilLevel =
-    document.getElementById("oilLevel");
 
-const coolantLevel =
-    document.getElementById("coolantLevel");
+        console.log(
+            "EmailJS initialised successfully."
+        );
 
-const rpm =
-    document.getElementById("rpm");
 
-const before =
-    document.getElementById("before");
+        return true;
 
-const added =
-    document.getElementById("added");
+    } catch (error) {
 
-const after =
-    document.getElementById("after");
+        console.error(
+            "EmailJS initialisation failed:",
+            error
+        );
 
-const ppl =
-    document.getElementById("ppl");
 
-const meter =
-    document.getElementById("meter");
+        emailJSReady = false;
 
-const reading =
-    document.getElementById("reading");
 
-const driver =
-    document.getElementById("driver");
+        return false;
+    }
 
-const vehicle =
-    document.getElementById("vehicle");
+}
 
-const comments =
-    document.getElementById("comments");
 
-const video =
-    document.getElementById("video");
+/* =========================================================
+   INITIALISE EMAILJS AFTER PAGE LOAD
+========================================================= */
 
-const canvas =
-    document.getElementById("canvas");
+window.addEventListener(
+    "load",
+    function() {
 
-const imgBefore =
-    document.getElementById("imgBefore");
+        initialiseEmailJS();
 
-const imgTopup =
-    document.getElementById("imgTopup");
-
-const imgAfter =
-    document.getElementById("imgAfter");
-
-const sendButton =
-    document.getElementById("sendButton");
-
-const sendStatus =
-    document.getElementById("sendStatus");
+    }
+);
 
 
 
-/* ============================================================
-   GPS DATA
-============================================================ */
+/* =========================================================
+   PHOTO STORAGE
+========================================================= */
 
-let gpsData = {
+const photos = {
+
+    BEFORE: null,
+
+    TOPUP: null,
+
+    AFTER: null
+
+};
+
+
+const gpsData = {
 
     BEFORE: null,
 
@@ -1281,240 +1227,416 @@ let gpsData = {
 
 
 
-/* ============================================================
-   CAMERA DATA
-============================================================ */
+/* =========================================================
+   CAMERA VARIABLES
+========================================================= */
 
-let stream = null;
+let cameraStream = null;
 
-let mode = "";
-
-
-
-/* ============================================================
-   CURRENT GPS
-============================================================ */
-
-let currentGPS = null;
+let currentPhotoType = null;
 
 
 
-/* ============================================================
-   DEFAULT DATE/TIME
-============================================================ */
+/* =========================================================
+   DOM ELEMENTS
+========================================================= */
 
-function setCurrentDateTime(){
+const video =
+    document.getElementById(
+        "cameraVideo"
+    );
+
+
+const canvas =
+    document.getElementById(
+        "canvas"
+    );
+
+
+const cameraModal =
+    document.getElementById(
+        "cameraModal"
+    );
+
+
+
+/* =========================================================
+   DATE / TIME
+========================================================= */
+
+function pad(number) {
+
+    return String(number)
+        .padStart(2, "0");
+
+}
+
+
+function setCurrentDateTime() {
 
     const now =
         new Date();
 
-    date.value =
-        now.toISOString()
-            .split("T")[0];
 
-    time.value =
-        now.toTimeString()
-            .slice(0,5);
+    document.getElementById(
+        "date"
+    ).value =
+        `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+
+
+    document.getElementById(
+        "time"
+    ).value =
+        `${pad(now.getHours())}:${pad(now.getMinutes())}`;
 
 }
+
 
 setCurrentDateTime();
 
 
 
-/* ============================================================
-   PPL TOGGLE
-============================================================ */
+/* =========================================================
+   REGION / PROVINCE
+========================================================= */
 
-function togglePPL(){
+const provinces = {
 
-    document.getElementById(
-        "pplFields"
-    ).style.display =
-        ppl.value === "Yes"
-            ? "block"
-            : "none";
+    "Momase + EHP": [
 
-}
+        "Eastern Highlands",
 
+        "Morobe",
 
+        "Madang",
 
-/* ============================================================
-   PROVINCES
-============================================================ */
+        "East Sepik",
 
-function updateProvinces(){
+        "West Sepik (Sandaun)"
 
-    const list = [];
+    ],
 
 
-    if(
-        region.value ===
-        "Momase + EHP"
-    ){
+    "Highlands": [
 
-        list.push(
+        "Western Highlands",
 
-            "Eastern Highlands",
-            "Morobe",
-            "Madang",
-            "East Sepik",
-            "West Sepik (Sandaun)"
+        "Simbu",
 
-        );
+        "Jiwaka",
 
-    }
+        "Enga",
 
+        "Southern Highlands",
 
-    if(
-        region.value ===
-        "Highlands"
-    ){
+        "Hela"
 
-        list.push(
-
-            "Western Highlands",
-            "Simbu",
-            "Jiwaka",
-            "Enga",
-            "Southern Highlands",
-            "Hela"
-
-        );
-
-    }
+    ],
 
 
-    if(
-        region.value ===
-        "Southern"
-    ){
+    "Southern": [
 
-        list.push(
+        "National Capital District",
 
-            "National Capital District",
-            "Central",
-            "Gulf",
-            "Oro (Northern)",
-            "Milne Bay",
-            "Western"
+        "Central",
 
-        );
+        "Gulf",
 
-    }
+        "Oro (Northern)",
+
+        "Milne Bay",
+
+        "Western"
+
+    ],
 
 
-    if(
-        region.value ===
-        "NGI"
-    ){
+    "NGI": [
 
-        list.push(
+        "East New Britain",
 
-            "East New Britain",
-            "West New Britain",
-            "New Ireland",
-            "Autonomous Region of Bougainville",
-            "Manus"
+        "West New Britain",
 
-        );
+        "New Ireland",
 
-    }
+        "AR Bougainville",
 
+        "Manus"
 
-    province.innerHTML =
-        '<option value="">Select Province</option>';
+    ]
+
+};
 
 
-    list.forEach(
-        function(p){
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+document
+.getElementById("region")
+.addEventListener(
+    "change",
+    function() {
 
-            option.value =
-                p;
+        const region =
+            this.value;
 
-            option.textContent =
-                p;
 
-            province.appendChild(
-                option
+        const provinceSelect =
+            document.getElementById(
+                "province"
             );
 
+
+        provinceSelect.innerHTML =
+            '<option value="">Select Province</option>';
+
+
+        if (!provinces[region]) {
+
+            return;
+
         }
-    );
-
-}
 
 
+        provinces[region]
+        .forEach(
+            function(province) {
 
-/* ============================================================
-   FUEL CALCULATION
-============================================================ */
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
-function calculateFuel(){
 
-    const beforeValue =
+                option.value =
+                    province;
+
+
+                option.textContent =
+                    province;
+
+
+                provinceSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   FUEL DIFFERENCE
+========================================================= */
+
+function calculateFuelDifference() {
+
+    const after =
         parseFloat(
-            before.value
-        ) || 0;
-
-
-    const addedValue =
-        parseFloat(
-            added.value
-        ) || 0;
-
-
-    const afterValue =
-        parseFloat(
-            after.value
-        ) || 0;
+            document.getElementById(
+                "fuelAfter"
+            ).value
+        );
 
 
     const expected =
-        beforeValue +
-        addedValue;
+        parseFloat(
+            document.getElementById(
+                "expectedFuel"
+            ).value
+        );
 
 
-    const difference =
-        afterValue -
-        expected;
+    const differenceField =
+        document.getElementById(
+            "fuelDifference"
+        );
 
 
-    document.getElementById(
-        "calc"
-    ).innerHTML =
+    if (
+        !isNaN(after) &&
+        !isNaN(expected)
+    ) {
 
-        `Expected: ${expected.toFixed(1)} L |
-         Difference: ${difference.toFixed(1)} L`;
+        differenceField.value =
+            (
+                after - expected
+            ).toFixed(2);
+
+    } else {
+
+        differenceField.value =
+            "";
+
+    }
+
+}
+
+
+document
+.getElementById("fuelAfter")
+.addEventListener(
+    "input",
+    calculateFuelDifference
+);
+
+
+document
+.getElementById("expectedFuel")
+.addEventListener(
+    "input",
+    calculateFuelDifference
+);
+
+
+
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
+
+function showStatus(
+    message,
+    type
+) {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        message;
+
+
+    status.className =
+        "status " + type;
 
 }
 
 
 
-/* ============================================================
-   GPS LOCATION
-============================================================ */
+/* =========================================================
+   OPEN CAMERA
+========================================================= */
 
-function getGPSLocation(){
+async function openCamera(type) {
+
+    currentPhotoType =
+        type;
+
+
+    try {
+
+        cameraStream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video: {
+
+                    facingMode: {
+
+                        ideal:
+                            "environment"
+
+                    }
+
+                },
+
+                audio: false
+
+            });
+
+
+        video.srcObject =
+            cameraStream;
+
+
+        cameraModal.style.display =
+            "flex";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        alert(
+
+            "Unable to access the camera.\n\n" +
+
+            "Please allow camera permission and make sure " +
+
+            "the website is running over HTTPS."
+
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CLOSE CAMERA
+========================================================= */
+
+function closeCamera() {
+
+    if (cameraStream) {
+
+        cameraStream
+        .getTracks()
+        .forEach(
+            function(track) {
+
+                track.stop();
+
+            }
+        );
+
+
+        cameraStream =
+            null;
+
+    }
+
+
+    video.srcObject =
+        null;
+
+
+    cameraModal.style.display =
+        "none";
+
+
+    currentPhotoType =
+        null;
+
+}
+
+
+
+/* =========================================================
+   GPS
+========================================================= */
+
+function getGPS() {
 
     return new Promise(
+        function(resolve) {
 
-        function(resolve,reject){
+            if (!navigator.geolocation) {
 
-            if(
-                !navigator.geolocation
-            ){
+                resolve({
 
-                reject(
-                    new Error(
-                        "Geolocation is not supported by this browser."
-                    )
-                );
+                    latitude: null,
+
+                    longitude: null,
+
+                    accuracy: null
+
+                });
 
                 return;
 
@@ -1523,9 +1645,9 @@ function getGPSLocation(){
 
             navigator.geolocation.getCurrentPosition(
 
-                function(position){
+                function(position) {
 
-                    const gps = {
+                    resolve({
 
                         latitude:
                             position.coords.latitude,
@@ -1534,71 +1656,24 @@ function getGPSLocation(){
                             position.coords.longitude,
 
                         accuracy:
-                            position.coords.accuracy,
+                            position.coords.accuracy
 
-                        timestamp:
-                            new Date(
-                                position.timestamp
-                            ).toLocaleString()
-
-                    };
-
-
-                    currentGPS =
-                        gps;
-
-
-                    resolve(
-                        gps
-                    );
+                    });
 
                 },
 
 
-                function(error){
+                function() {
 
-                    let message =
-                        "Unable to obtain GPS location.";
+                    resolve({
 
+                        latitude: null,
 
-                    if(
-                        error.code ===
-                        error.PERMISSION_DENIED
-                    ){
+                        longitude: null,
 
-                        message =
-                            "GPS permission was denied.";
+                        accuracy: null
 
-                    }
-
-
-                    if(
-                        error.code ===
-                        error.POSITION_UNAVAILABLE
-                    ){
-
-                        message =
-                            "GPS position is unavailable.";
-
-                    }
-
-
-                    if(
-                        error.code ===
-                        error.TIMEOUT
-                    ){
-
-                        message =
-                            "GPS request timed out.";
-
-                    }
-
-
-                    reject(
-                        new Error(
-                            message
-                        )
-                    );
+                    });
 
                 },
 
@@ -1609,7 +1684,7 @@ function getGPSLocation(){
                         true,
 
                     timeout:
-                        15000,
+                        10000,
 
                     maximumAge:
                         0
@@ -1619,6 +1694,601 @@ function getGPSLocation(){
             );
 
         }
+    );
+
+}
+
+
+
+/* =========================================================
+   DRAW RED TEXT
+========================================================= */
+
+function drawRedText(
+    ctx,
+    text,
+    x,
+    y,
+    fontSize
+) {
+
+    ctx.font =
+        `bold ${fontSize}px Arial`;
+
+
+    ctx.lineWidth =
+        4;
+
+
+    ctx.strokeStyle =
+        "rgba(255,255,255,0.95)";
+
+
+    ctx.fillStyle =
+        "#e60000";
+
+
+    ctx.strokeText(
+        text,
+        x,
+        y
+    );
+
+
+    ctx.fillText(
+        text,
+        x,
+        y
+    );
+
+}
+
+
+
+/* =========================================================
+   CAPTURE PHOTO
+========================================================= */
+
+async function capturePhoto() {
+
+    if (
+        !cameraStream ||
+        !currentPhotoType
+    ) {
+
+        return;
+
+    }
+
+
+    showStatus(
+        "Capturing photo and obtaining GPS location...",
+        "info"
+    );
+
+
+    const gps =
+        await getGPS();
+
+
+    gpsData[
+        currentPhotoType
+    ] =
+        gps;
+
+
+    const width =
+        video.videoWidth || 1280;
+
+
+    const height =
+        video.videoHeight || 720;
+
+
+    const maxWidth =
+        1200;
+
+
+    let outputWidth =
+        width;
+
+
+    let outputHeight =
+        height;
+
+
+    if (width > maxWidth) {
+
+        outputWidth =
+            maxWidth;
+
+
+        outputHeight =
+            Math.round(
+                height *
+                maxWidth /
+                width
+            );
+
+    }
+
+
+    canvas.width =
+        outputWidth;
+
+
+    canvas.height =
+        outputHeight;
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    ctx.drawImage(
+
+        video,
+
+        0,
+
+        0,
+
+        outputWidth,
+
+        outputHeight
+
+    );
+
+
+
+    /* =====================================================
+       REPORT DATA
+    ===================================================== */
+
+    const engineer =
+        document.getElementById(
+            "engineer"
+        ).value ||
+        "N/A";
+
+
+    const siteName =
+        document.getElementById(
+            "siteName"
+        ).value ||
+        "N/A";
+
+
+    const siteId =
+        document.getElementById(
+            "siteId"
+        ).value ||
+        "N/A";
+
+
+    const province =
+        document.getElementById(
+            "province"
+        ).value ||
+        "N/A";
+
+
+    const date =
+        document.getElementById(
+            "date"
+        ).value ||
+        "N/A";
+
+
+    const time =
+        document.getElementById(
+            "time"
+        ).value ||
+        "N/A";
+
+
+    const fuelBefore =
+        document.getElementById(
+            "fuelBefore"
+        ).value ||
+        "N/A";
+
+
+    const fuelTopup =
+        document.getElementById(
+            "fuelTopup"
+        ).value ||
+        "N/A";
+
+
+    const fuelAfter =
+        document.getElementById(
+            "fuelAfter"
+        ).value ||
+        "N/A";
+
+
+
+    let mode = "";
+
+
+    if (
+        currentPhotoType ===
+        "BEFORE"
+    ) {
+
+        mode =
+            "BEFORE REFUELLING";
+
+    }
+
+
+    if (
+        currentPhotoType ===
+        "TOPUP"
+    ) {
+
+        mode =
+            "REFUELLING IN PROGRESS";
+
+    }
+
+
+    if (
+        currentPhotoType ===
+        "AFTER"
+    ) {
+
+        mode =
+            "AFTER REFUELLING";
+
+    }
+
+
+
+    /* =====================================================
+       STAMP POSITION
+    ===================================================== */
+
+    const fontSize =
+        Math.max(
+            20,
+            Math.round(
+                outputWidth *
+                0.023
+            )
+        );
+
+
+    const lineHeight =
+        fontSize *
+        1.35;
+
+
+    const margin =
+        Math.round(
+            outputWidth *
+            0.025
+        );
+
+
+    let y =
+        outputHeight -
+        (lineHeight * 10) -
+        margin;
+
+
+
+    /* =====================================================
+       RED TEXT STAMP
+    ===================================================== */
+
+    drawRedText(
+
+        ctx,
+
+        "Vodafone PNG Refuelling Report",
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        mode,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Date: ${date}  Time: ${time}`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Site: ${siteName}  ID: ${siteId}`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Province: ${province}`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Engineer: ${engineer}`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Fuel Before: ${fuelBefore} L`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Top-Up: ${fuelTopup} L`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+    drawRedText(
+
+        ctx,
+
+        `Fuel After: ${fuelAfter} L`,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+    y += lineHeight;
+
+
+
+    /* =====================================================
+       GPS
+    ===================================================== */
+
+    let gpsText =
+        "GPS: Not Available";
+
+
+    if (
+
+        gps.latitude !== null &&
+
+        gps.longitude !== null
+
+    ) {
+
+        gpsText =
+
+            `GPS: ${gps.latitude.toFixed(6)}, ${gps.longitude.toFixed(6)}`;
+
+
+        if (
+            gps.accuracy !== null
+        ) {
+
+            gpsText +=
+
+                ` ±${gps.accuracy.toFixed(0)}m`;
+
+        }
+
+    }
+
+
+    drawRedText(
+
+        ctx,
+
+        gpsText,
+
+        margin,
+
+        y,
+
+        fontSize
+
+    );
+
+
+
+    /* =====================================================
+       SAVE PHOTO
+    ===================================================== */
+
+    const imageData =
+        canvas.toDataURL(
+
+            "image/jpeg",
+
+            0.72
+
+        );
+
+
+    photos[
+        currentPhotoType
+    ] =
+        imageData;
+
+
+
+    /* =====================================================
+       SHOW PHOTO
+    ===================================================== */
+
+    if (
+        currentPhotoType ===
+        "BEFORE"
+    ) {
+
+        document.getElementById(
+            "beforePreview"
+        ).src =
+            imageData;
+
+
+        document.getElementById(
+            "beforeGps"
+        ).textContent =
+            formatGPS(gps);
+
+    }
+
+
+    if (
+        currentPhotoType ===
+        "TOPUP"
+    ) {
+
+        document.getElementById(
+            "topupPreview"
+        ).src =
+            imageData;
+
+
+        document.getElementById(
+            "topupGps"
+        ).textContent =
+            formatGPS(gps);
+
+    }
+
+
+    if (
+        currentPhotoType ===
+        "AFTER"
+    ) {
+
+        document.getElementById(
+            "afterPreview"
+        ).src =
+            imageData;
+
+
+        document.getElementById(
+            "afterGps"
+        ).textContent =
+            formatGPS(gps);
+
+    }
+
+
+    closeCamera();
+
+
+    showStatus(
+
+        mode +
+        " photo captured successfully.",
+
+        "success"
 
     );
 
@@ -1626,15 +2296,23 @@ function getGPSLocation(){
 
 
 
-/* ============================================================
+/* =========================================================
    FORMAT GPS
-============================================================ */
+========================================================= */
 
-function formatGPS(gps){
+function formatGPS(gps) {
 
-    if(!gps){
+    if (
 
-        return "GPS unavailable";
+        !gps ||
+
+        gps.latitude === null ||
+
+        gps.longitude === null
+
+    ) {
+
+        return "GPS: Not available";
 
     }
 
@@ -1649,741 +2327,18 @@ function formatGPS(gps){
 
         gps.longitude.toFixed(6) +
 
-        " | ±" +
+        " | Accuracy: " +
 
-        Math.round(
-            gps.accuracy
-        ) +
-
-        " m"
-
-    );
-
-}
-
-
-
-/* ============================================================
-   GPS TEXT
-============================================================ */
-
-function gpsText(gps){
-
-    if(!gps){
-
-        return "GPS unavailable";
-
-    }
-
-
-    return (
-
-        gps.latitude.toFixed(6) +
-
-        ", " +
-
-        gps.longitude.toFixed(6) +
-
-        " (±" +
-
-        Math.round(
-            gps.accuracy
-        ) +
-
-        " m)"
-
-    );
-
-}
-
-
-
-/* ============================================================
-   UPDATE GPS DISPLAY
-============================================================ */
-
-function updateGPSDisplay(
-    type,
-    gps
-){
-
-    let elementId = "";
-
-
-    if(
-        type === "BEFORE"
-    ){
-
-        elementId =
-            "gpsBefore";
-
-    }
-
-
-    if(
-        type === "TOPUP"
-    ){
-
-        elementId =
-            "gpsTopup";
-
-    }
-
-
-    if(
-        type === "AFTER"
-    ){
-
-        elementId =
-            "gpsAfter";
-
-    }
-
-
-    const element =
-        document.getElementById(
-            elementId
-        );
-
-
-    if(!element){
-
-        return;
-
-    }
-
-
-    if(gps){
-
-        element.innerHTML =
-
-            `<span class="gps-good">
-            ✓ ${formatGPS(gps)}
-            </span>`;
-
-    }
-
-    else{
-
-        element.innerHTML =
-
-            `<span class="gps-error">
-            GPS unavailable
-            </span>`;
-
-    }
-
-}
-
-
-
-/* ============================================================
-   OPEN CAMERA
-============================================================ */
-
-async function openCamera(type){
-
-    if(
-        !siteName.value ||
-        !siteId.value ||
-        !engineer.value
-    ){
-
-        alert(
-            "Please enter Site Name, Site ID and Engineer first."
-        );
-
-        return;
-
-    }
-
-
-    mode =
-        type;
-
-
-    document.getElementById(
-        "gpsMainStatus"
-    ).textContent =
-        "GPS: Obtaining current location...";
-
-
-    let gps = null;
-
-
-    try{
-
-        gps =
-            await getGPSLocation();
-
-    }
-
-    catch(error){
-
-        console.error(
-            "GPS ERROR:",
-            error
-        );
-
-
-        const continueWithoutGPS =
-            confirm(
-
-                error.message +
-
-                "\n\n" +
-
-                "Continue without GPS?"
-
-            );
-
-
-        if(!continueWithoutGPS){
-
-            document.getElementById(
-                "gpsMainStatus"
-            ).textContent =
-                "GPS: Capture cancelled";
-
-            return;
-
-        }
-
-    }
-
-
-    gpsData[type] =
-        gps;
-
-
-    updateGPSDisplay(
-        type,
-        gps
-    );
-
-
-    if(gps){
-
-        document.getElementById(
-            "gpsMainStatus"
-        ).innerHTML =
-
-            `<span class="gps-good">
-            ✓ ${formatGPS(gps)}
-            </span>`;
-
-    }
-
-    else{
-
-        document.getElementById(
-            "gpsMainStatus"
-        ).textContent =
-            "GPS: Not available";
-
-    }
-
-
-    /* ========================================================
-       CAMERA
-    ======================================================== */
-
-    try{
-
-        if(
-            !navigator.mediaDevices ||
-            !navigator.mediaDevices.getUserMedia
-        ){
-
-            throw new Error(
-                "Camera is not supported by this browser."
-            );
-
-        }
-
-
-        stream =
-            await navigator.mediaDevices.getUserMedia({
-
-                video: {
-
-                    facingMode: {
-
-                        ideal:
-                            "environment"
-
-                    }
-
-                },
-
-                audio:
-                    false
-
-            });
-
-
-        video.srcObject =
-            stream;
-
-
-        video.style.display =
-            "block";
-
-
-        await video.play();
-
-
-        setTimeout(
-
-            capturePhoto,
-
-            1500
-
-        );
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            "CAMERA ERROR:",
-            error
-        );
-
-
-        alert(
-            "Camera could not be opened.\n\nPlease allow camera access."
-        );
-
-
-        stopCamera();
-
-    }
-
-}
-
-
-
-/* ============================================================
-   CAPTURE PHOTO
-============================================================ */
-
-function capturePhoto(){
-
-    if(
-        !video.videoWidth
-    ){
-
-        alert(
-            "Camera is not ready. Please try again."
-        );
-
-
-        stopCamera();
-
-        return;
-
-    }
-
-
-    canvas.width =
-        video.videoWidth;
-
-
-    canvas.height =
-        video.videoHeight;
-
-
-    const ctx =
-        canvas.getContext(
-            "2d"
-        );
-
-
-    /* ========================================================
-       PHOTO
-    ======================================================== */
-
-    ctx.drawImage(
-
-        video,
-
-        0,
-        0,
-
-        canvas.width,
-        canvas.height
-
-    );
-
-
-    /* ========================================================
-       GPS
-    ======================================================== */
-
-    const gps =
-        gpsData[mode];
-
-
-    /* ========================================================
-       RED PHOTO STAMP
-       
-       NO BLACK BACKGROUND
-       NO BLACK RECTANGLE
-       
-       RED TEXT DIRECTLY ON PHOTO
-    ======================================================== */
-
-    const stamp = [
-
-        "VODAFONE PNG REFUELLING",
-
-        mode === "BEFORE"
-            ? "BEFORE REFUELLING"
-            : mode === "TOPUP"
-                ? "REFUELLING / TOP UP"
-                : "AFTER REFUELLING",
-
-        "Date/Time: " +
-        new Date().toLocaleString(),
-
-        "Site: " +
-        siteName.value +
-        " | " +
-        siteId.value,
-
-        "Province: " +
-        province.value,
-
-        "Engineer: " +
-        engineer.value,
-
-        "Fuel Before: " +
-        (before.value || "0") +
-        " L",
-
-        "Fuel TopUp: " +
-        (added.value || "0") +
-        " L",
-
-        "Fuel After: " +
-        (after.value || "0") +
-        " L"
-
-    ];
-
-
-    if(gps){
-
-        stamp.push(
-
-            "GPS: " +
-            gps.latitude.toFixed(6) +
-            ", " +
-            gps.longitude.toFixed(6)
-
-        );
-
-
-        stamp.push(
-
-            "Accuracy: ±" +
-            Math.round(
-                gps.accuracy
-            ) +
-            " m"
-
-        );
-
-    }
-
-    else{
-
-        stamp.push(
-            "GPS: UNAVAILABLE"
-        );
-
-    }
-
-
-    /* ========================================================
-       STAMP POSITION
-    ======================================================== */
-
-    const fontSize =
-        Math.max(
-            16,
-            Math.round(
-                canvas.width / 65
-            )
-        );
-
-
-    const lineHeight =
-        Math.round(
-            fontSize * 1.45
-        );
-
-
-    const padding =
-        Math.round(
-            canvas.width * 0.015
-        );
-
-
-    /*
-       Put the stamp near the bottom-left,
-       but WITHOUT a background box.
-    */
-
-    let startY =
-        canvas.height -
         (
-            stamp.length *
-            lineHeight
-        ) -
-        padding;
 
+            gps.accuracy !== null
 
-    if(
-        startY < padding
-    ){
+                ? gps.accuracy.toFixed(0) +
+                  " m"
 
-        startY =
-            padding +
-            fontSize;
+                : "N/A"
 
-    }
-
-
-    /* ========================================================
-       RED TEXT
-    ======================================================== */
-
-    ctx.font =
-        "bold " +
-        fontSize +
-        "px Arial";
-
-
-    ctx.textBaseline =
-        "top";
-
-
-    /*
-       White shadow first.
-       This keeps red writing readable
-       over dark areas of the photograph.
-    */
-
-    ctx.fillStyle =
-        "rgba(255,255,255,0.95)";
-
-
-    stamp.forEach(
-
-        function(text,index){
-
-            const x =
-                padding + 2;
-
-            const y =
-                startY +
-                (
-                    index *
-                    lineHeight
-                ) +
-                2;
-
-
-            ctx.fillText(
-                text,
-                x,
-                y
-            );
-
-        }
-
-    );
-
-
-    /*
-       Red writing.
-    */
-
-    ctx.fillStyle =
-        "#e60000";
-
-
-    stamp.forEach(
-
-        function(text,index){
-
-            const x =
-                padding;
-
-            const y =
-                startY +
-                (
-                    index *
-                    lineHeight
-                );
-
-
-            ctx.fillText(
-                text,
-                x,
-                y
-            );
-
-        }
-
-    );
-
-
-    /* ========================================================
-       RESIZE / COMPRESS
-    ======================================================== */
-
-    const image =
-        resizeCanvas(
-
-            canvas,
-
-            1200,
-
-            0.78
-
-        );
-
-
-    /* ========================================================
-       SAVE PHOTO
-    ======================================================== */
-
-    if(
-        mode ===
-        "BEFORE"
-    ){
-
-        imgBefore.src =
-            image;
-
-
-        document.getElementById(
-            "statusBefore"
-        ).textContent =
-            "✓ Captured";
-
-    }
-
-
-    if(
-        mode ===
-        "TOPUP"
-    ){
-
-        imgTopup.src =
-            image;
-
-
-        document.getElementById(
-            "statusTopup"
-        ).textContent =
-            "✓ Captured";
-
-    }
-
-
-    if(
-        mode ===
-        "AFTER"
-    ){
-
-        imgAfter.src =
-            image;
-
-
-        document.getElementById(
-            "statusAfter"
-        ).textContent =
-            "✓ Captured";
-
-    }
-
-
-    stopCamera();
-
-}
-
-
-
-/* ============================================================
-   RESIZE IMAGE
-============================================================ */
-
-function resizeCanvas(
-    sourceCanvas,
-    maxWidth,
-    quality
-){
-
-    const scale =
-        Math.min(
-
-            1,
-
-            maxWidth /
-            sourceCanvas.width
-
-        );
-
-
-    const newCanvas =
-        document.createElement(
-            "canvas"
-        );
-
-
-    newCanvas.width =
-        Math.round(
-            sourceCanvas.width *
-            scale
-        );
-
-
-    newCanvas.height =
-        Math.round(
-            sourceCanvas.height *
-            scale
-        );
-
-
-    const ctx =
-        newCanvas.getContext(
-            "2d"
-        );
-
-
-    ctx.drawImage(
-
-        sourceCanvas,
-
-        0,
-        0,
-
-        newCanvas.width,
-        newCanvas.height
-
-    );
-
-
-    return newCanvas.toDataURL(
-
-        "image/jpeg",
-
-        quality
+        )
 
     );
 
@@ -2391,127 +2346,73 @@ function resizeCanvas(
 
 
 
-/* ============================================================
-   STOP CAMERA
-============================================================ */
+/* =========================================================
+   CLEAR PHOTO
+========================================================= */
 
-function stopCamera(){
+function clearPhoto(type) {
 
-    if(stream){
-
-        stream
-            .getTracks()
-            .forEach(
-
-                function(track){
-
-                    track.stop();
-
-                }
-
-            );
-
-
-        stream =
-            null;
-
-    }
-
-
-    video.srcObject =
+    photos[type] =
         null;
 
 
-    video.style.display =
-        "none";
-
-}
+    gpsData[type] =
+        null;
 
 
+    if (
+        type === "BEFORE"
+    ) {
 
-/* ============================================================
-   RESET PHOTO
-============================================================ */
-
-function resetPhoto(type){
-
-    if(
-        type ===
-        "BEFORE"
-    ){
-
-        imgBefore.removeAttribute(
+        document.getElementById(
+            "beforePreview"
+        ).removeAttribute(
             "src"
         );
 
-        gpsData.BEFORE =
-            null;
-
 
         document.getElementById(
-            "statusBefore"
+            "beforeGps"
         ).textContent =
-            "Not captured";
-
-
-        document.getElementById(
-            "gpsBefore"
-        ).textContent =
-            "GPS: Not captured";
+            "";
 
     }
 
 
-    if(
-        type ===
-        "TOPUP"
-    ){
+    if (
+        type === "TOPUP"
+    ) {
 
-        imgTopup.removeAttribute(
+        document.getElementById(
+            "topupPreview"
+        ).removeAttribute(
             "src"
         );
 
-        gpsData.TOPUP =
-            null;
-
 
         document.getElementById(
-            "statusTopup"
+            "topupGps"
         ).textContent =
-            "Not captured";
-
-
-        document.getElementById(
-            "gpsTopup"
-        ).textContent =
-            "GPS: Not captured";
+            "";
 
     }
 
 
-    if(
-        type ===
-        "AFTER"
-    ){
+    if (
+        type === "AFTER"
+    ) {
 
-        imgAfter.removeAttribute(
+        document.getElementById(
+            "afterPreview"
+        ).removeAttribute(
             "src"
         );
 
-        gpsData.AFTER =
-            null;
-
 
         document.getElementById(
-            "statusAfter"
+            "afterGps"
         ).textContent =
-            "Not captured";
-
-
-        document.getElementById(
-            "gpsAfter"
-        ).textContent =
-            "GPS: Not captured";
+            "";
 
     }
 
@@ -2519,106 +2420,156 @@ function resetPhoto(type){
 
 
 
-/* ============================================================
-   PHOTO VALIDATION
-============================================================ */
+/* =========================================================
+   COLLECT FORM DATA
+========================================================= */
 
-function photosReady(){
-
-    return (
-
-        imgBefore.getAttribute("src") &&
-        imgTopup.getAttribute("src") &&
-        imgAfter.getAttribute("src")
-
-    );
-
-}
-
-
-
-/* ============================================================
-   REPORT DATA
-============================================================ */
-
-function getReportData(){
+function getFormData() {
 
     return {
 
         engineer:
-            engineer.value,
+            document.getElementById(
+                "engineer"
+            ).value,
+
 
         team:
-            team.value,
+            document.getElementById(
+                "team"
+            ).value,
+
 
         date:
-            date.value,
+            document.getElementById(
+                "date"
+            ).value,
+
 
         time:
-            time.value,
+            document.getElementById(
+                "time"
+            ).value,
+
 
         siteName:
-            siteName.value,
+            document.getElementById(
+                "siteName"
+            ).value,
+
 
         siteId:
-            siteId.value,
+            document.getElementById(
+                "siteId"
+            ).value,
+
 
         region:
-            region.value,
+            document.getElementById(
+                "region"
+            ).value,
+
 
         province:
-            province.value,
+            document.getElementById(
+                "province"
+            ).value,
+
 
         tower:
-            tower.value,
+            document.getElementById(
+                "tower"
+            ).value,
 
-        genset:
-            genset.value,
 
-        oilLevel:
-            oilLevel.value,
+        gensetType:
+            document.getElementById(
+                "gensetType"
+            ).value,
 
-        coolantLevel:
-            coolantLevel.value,
+
+        engineOil:
+            document.getElementById(
+                "engineOil"
+            ).value,
+
+
+        coolant:
+            document.getElementById(
+                "coolant"
+            ).value,
+
 
         rpm:
-            rpm.value,
+            document.getElementById(
+                "rpm"
+            ).value,
+
 
         fuelBefore:
-            before.value,
+            document.getElementById(
+                "fuelBefore"
+            ).value,
 
-        fuelAdded:
-            added.value,
+
+        fuelTopup:
+            document.getElementById(
+                "fuelTopup"
+            ).value,
+
 
         fuelAfter:
-            after.value,
+            document.getElementById(
+                "fuelAfter"
+            ).value,
 
-        ppl:
-            ppl.value,
 
-        meter:
-            meter.value,
+        expectedFuel:
+            document.getElementById(
+                "expectedFuel"
+            ).value,
 
-        reading:
-            reading.value,
+
+        fuelDifference:
+            document.getElementById(
+                "fuelDifference"
+            ).value,
+
+
+        pplConnected:
+            document.getElementById(
+                "pplConnected"
+            ).value,
+
+
+        meterNumber:
+            document.getElementById(
+                "meterNumber"
+            ).value,
+
+
+        meterReading:
+            document.getElementById(
+                "meterReading"
+            ).value,
+
 
         driver:
-            driver.value,
+            document.getElementById(
+                "driver"
+            ).value,
+
 
         vehicle:
-            vehicle.value,
+            document.getElementById(
+                "vehicle"
+            ).value,
+
 
         comments:
-            comments.value,
-
-        gpsBefore:
-            gpsData.BEFORE,
-
-        gpsTopup:
-            gpsData.TOPUP,
-
-        gpsAfter:
-            gpsData.AFTER
+            document.getElementById(
+                "comments"
+            ).value
 
     };
 
@@ -2626,11 +2577,88 @@ function getReportData(){
 
 
 
-/* ============================================================
-   GENERATE PDF
-============================================================ */
+/* =========================================================
+   VALIDATE REPORT
+========================================================= */
 
-function generatePDF(){
+function validateReport() {
+
+    const form =
+        document.getElementById(
+            "refuellingForm"
+        );
+
+
+    if (
+        !form.checkValidity()
+    ) {
+
+        form.reportValidity();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =========================================================
+   GPS SUMMARY
+========================================================= */
+
+function gpsSummary(type) {
+
+    const gps =
+        gpsData[type];
+
+
+    if (
+
+        !gps ||
+
+        gps.latitude === null ||
+
+        gps.longitude === null
+
+    ) {
+
+        return "Not available";
+
+    }
+
+
+    return (
+
+        `${gps.latitude.toFixed(6)}, ` +
+
+        `${gps.longitude.toFixed(6)} ` +
+
+        `(Accuracy: ${
+
+            gps.accuracy !== null
+
+                ? gps.accuracy.toFixed(1) +
+                  " m"
+
+                : "N/A"
+
+        })`
+
+    );
+
+}
+
+
+
+/* =========================================================
+   PDF GENERATION
+========================================================= */
+
+async function createPDF() {
 
     const {
         jsPDF
@@ -2638,465 +2666,536 @@ function generatePDF(){
         window.jspdf;
 
 
-    const doc =
-        new jsPDF();
+    const data =
+        getFormData();
+
+
+    const pdf =
+        new jsPDF(
+            "p",
+            "mm",
+            "a4"
+        );
 
 
     let y =
         15;
 
 
-    const data =
-        getReportData();
-
-
-    doc.setFontSize(
+    pdf.setFontSize(
         18
     );
 
 
-    doc.text(
-        "Vodafone PNG Refuelling Report",
-        10,
-        y
+    pdf.setTextColor(
+        230,
+        0,
+        0
     );
 
 
-    y +=
-        12;
+    pdf.text(
+
+        "Vodafone PNG Refuelling Report",
+
+        15,
+
+        y
+
+    );
 
 
-    doc.setFontSize(
+    y += 10;
+
+
+    pdf.setTextColor(
+        0,
+        0,
+        0
+    );
+
+
+    pdf.setFontSize(
         10
     );
 
 
-    const lines = [
 
-        "Engineer: " +
-        data.engineer,
+    function addLine(
+        label,
+        value
+    ) {
 
-        "Additional Team: " +
-        data.team,
+        if (y > 280) {
 
-        "Date: " +
-        data.date +
-        " " +
-        data.time,
+            pdf.addPage();
 
-        "Site: " +
-        data.siteName +
-        " | " +
-        data.siteId,
-
-        "Region: " +
-        data.region,
-
-        "Province: " +
-        data.province,
-
-        "Tower: " +
-        data.tower,
-
-        "Genset: " +
-        data.genset,
-
-        "Fuel Before: " +
-        data.fuelBefore +
-        " L",
-
-        "Fuel TopUp: " +
-        data.fuelAdded +
-        " L",
-
-        "Fuel After: " +
-        data.fuelAfter +
-        " L",
-
-        "Engine Oil: " +
-        data.oilLevel,
-
-        "Coolant: " +
-        data.coolantLevel,
-
-        "RPM: " +
-        data.rpm,
-
-        "PPL Connected: " +
-        data.ppl
-
-    ];
-
-
-    lines.forEach(
-
-        function(line){
-
-            if(y > 280){
-
-                doc.addPage();
-
-                y =
-                    15;
-
-            }
-
-
-            doc.text(
-                line,
-                10,
-                y
-            );
-
-
-            y +=
-                7;
+            y = 15;
 
         }
 
-    );
 
-
-    if(
-        data.ppl ===
-        "Yes"
-    ){
-
-        doc.text(
-            "Meter Number: " +
-            data.meter,
-            10,
-            y
+        pdf.setFont(
+            undefined,
+            "bold"
         );
 
 
-        y +=
-            7;
+        pdf.text(
 
+            label + ":",
 
-        doc.text(
-            "Meter Reading: " +
-            data.reading,
-            10,
+            15,
+
             y
+
         );
 
 
-        y +=
-            7;
+        pdf.setFont(
+            undefined,
+            "normal"
+        );
+
+
+        pdf.text(
+
+            String(
+                value ||
+                "N/A"
+            ),
+
+            55,
+
+            y
+
+        );
+
+
+        y += 6;
 
     }
 
 
-    doc.text(
-        "Driver: " +
-        data.driver,
-        10,
-        y
+
+    addLine(
+        "Engineer",
+        data.engineer
     );
 
 
-    y +=
-        7;
-
-
-    doc.text(
-        "Vehicle: " +
-        data.vehicle,
-        10,
-        y
+    addLine(
+        "Team",
+        data.team
     );
 
 
-    y +=
-        7;
-
-
-    doc.text(
-        "Comments:",
-        10,
-        y
+    addLine(
+        "Date",
+        data.date
     );
 
 
-    y +=
-        6;
+    addLine(
+        "Time",
+        data.time
+    );
+
+
+    addLine(
+        "Site Name",
+        data.siteName
+    );
+
+
+    addLine(
+        "Site ID",
+        data.siteId
+    );
+
+
+    addLine(
+        "Region",
+        data.region
+    );
+
+
+    addLine(
+        "Province",
+        data.province
+    );
+
+
+    addLine(
+        "Tower",
+        data.tower
+    );
+
+
+    addLine(
+        "Genset",
+        data.gensetType
+    );
+
+
+    addLine(
+        "Engine Oil",
+        data.engineOil
+    );
+
+
+    addLine(
+        "Coolant",
+        data.coolant
+    );
+
+
+    addLine(
+        "RPM",
+        data.rpm
+    );
+
+
+    addLine(
+        "Fuel Before",
+        data.fuelBefore + " L"
+    );
+
+
+    addLine(
+        "Fuel Top-Up",
+        data.fuelTopup + " L"
+    );
+
+
+    addLine(
+        "Fuel After",
+        data.fuelAfter + " L"
+    );
+
+
+    addLine(
+        "Expected Fuel",
+        data.expectedFuel + " L"
+    );
+
+
+    addLine(
+        "Fuel Difference",
+        data.fuelDifference + " L"
+    );
+
+
+    addLine(
+        "PPL Connected",
+        data.pplConnected
+    );
+
+
+    addLine(
+        "Meter Number",
+        data.meterNumber
+    );
+
+
+    addLine(
+        "Meter Reading",
+        data.meterReading
+    );
+
+
+    addLine(
+        "Driver",
+        data.driver
+    );
+
+
+    addLine(
+        "Vehicle",
+        data.vehicle
+    );
+
+
+    y += 4;
+
+
+    pdf.setFont(
+        undefined,
+        "bold"
+    );
+
+
+    pdf.text(
+
+        "Comments / Observations:",
+
+        15,
+
+        y
+
+    );
+
+
+    y += 6;
+
+
+    pdf.setFont(
+        undefined,
+        "normal"
+    );
 
 
     const commentLines =
-        doc.splitTextToSize(
+        pdf.splitTextToSize(
 
             data.comments ||
-            "None",
+            "N/A",
 
             180
 
         );
 
 
-    doc.text(
+    pdf.text(
+
         commentLines,
-        10,
+
+        15,
+
         y
+
     );
 
 
     y +=
         (
             commentLines.length *
-            6
+            5
         ) +
-        10;
+        8;
 
 
-    /* ========================================================
+
+    /* =====================================================
        GPS
-    ======================================================== */
+    ===================================================== */
 
-    if(
-        y > 250
-    ){
-
-        doc.addPage();
-
-        y =
-            15;
-
-    }
-
-
-    doc.setFontSize(
-        11
+    pdf.setFont(
+        undefined,
+        "bold"
     );
 
 
-    doc.text(
-        "GPS Locations:",
-        10,
+    pdf.text(
+        "GPS Information",
+        15,
         y
     );
 
 
-    y +=
-        7;
+    y += 7;
 
 
-    doc.setFontSize(
-        9
+    pdf.setFont(
+        undefined,
+        "normal"
     );
 
 
-    doc.text(
-        "Before: " +
-        gpsText(
-            data.gpsBefore
-        ),
-        10,
-        y
+    addLine(
+        "Before Photo GPS",
+        gpsSummary("BEFORE")
     );
 
 
-    y +=
-        6;
-
-
-    doc.text(
-        "TopUp: " +
-        gpsText(
-            data.gpsTopup
-        ),
-        10,
-        y
+    addLine(
+        "Top-Up Photo GPS",
+        gpsSummary("TOPUP")
     );
 
 
-    y +=
-        6;
-
-
-    doc.text(
-        "After: " +
-        gpsText(
-            data.gpsAfter
-        ),
-        10,
-        y
+    addLine(
+        "After Photo GPS",
+        gpsSummary("AFTER")
     );
 
 
-    y +=
-        10;
 
-
-    /* ========================================================
+    /* =====================================================
        PHOTOS
-    ======================================================== */
+    ===================================================== */
 
-    const photos = [
+    const photoList = [
 
         {
             title:
                 "Before Refuelling",
 
-            src:
-                imgBefore.getAttribute(
-                    "src"
-                )
+            data:
+                photos.BEFORE
 
         },
+
 
         {
             title:
-                "TopUp",
+                "Refuelling In Progress",
 
-            src:
-                imgTopup.getAttribute(
-                    "src"
-                )
+            data:
+                photos.TOPUP
 
         },
+
 
         {
             title:
                 "After Refuelling",
 
-            src:
-                imgAfter.getAttribute(
-                    "src"
-                )
+            data:
+                photos.AFTER
 
         }
 
     ];
 
 
-    photos.forEach(
 
-        function(photo){
+    for (
+        const photo of photoList
+    ) {
 
-            if(
-                !photo.src
-            ){
+        if (!photo.data) {
 
-                return;
-
-            }
-
-
-            if(
-                y > 210
-            ){
-
-                doc.addPage();
-
-                y =
-                    15;
-
-            }
-
-
-            doc.setFontSize(
-                12
-            );
-
-
-            doc.text(
-                photo.title,
-                10,
-                y
-            );
-
-
-            y +=
-                5;
-
-
-            doc.addImage(
-
-                photo.src,
-
-                "JPEG",
-
-                10,
-
-                y,
-
-                90,
-
-                60
-
-            );
-
-
-            y +=
-                70;
+            continue;
 
         }
 
-    );
+
+        pdf.addPage();
 
 
-    return doc;
+        pdf.setFontSize(
+            14
+        );
+
+
+        pdf.setTextColor(
+            230,
+            0,
+            0
+        );
+
+
+        pdf.text(
+
+            photo.title,
+
+            15,
+
+            15
+
+        );
+
+
+        pdf.setTextColor(
+            0,
+            0,
+            0
+        );
+
+
+        pdf.addImage(
+
+            photo.data,
+
+            "JPEG",
+
+            10,
+
+            22,
+
+            190,
+
+            0
+
+        );
+
+    }
+
+
+    return pdf;
 
 }
 
 
 
-/* ============================================================
+/* =========================================================
    DOWNLOAD PDF
-============================================================ */
+========================================================= */
 
-function downloadPDF(){
+async function downloadPDF() {
 
-    if(
-        !photosReady()
-    ){
-
-        alert(
-            "Please capture all three photos first."
-        );
+    if (
+        !validateReport()
+    ) {
 
         return;
 
     }
 
 
-    try{
+    try {
 
-        const doc =
-            generatePDF();
+        showStatus(
 
+            "Generating PDF...",
 
-        doc.save(
-
-            (
-                siteId.value ||
-                "SITE"
-            ) +
-
-            "_" +
-
-            (
-                date.value ||
-                "DATE"
-            ) +
-
-            "_Refuelling_Report.pdf"
+            "info"
 
         );
 
-    }
 
-    catch(error){
+        const pdf =
+            await createPDF();
+
+
+        const data =
+            getFormData();
+
+
+        const fileName =
+
+            `Vodafone_Refuelling_${data.siteId || "Report"}_${data.date || ""}.pdf`;
+
+
+        pdf.save(
+            fileName
+        );
+
+
+        showStatus(
+
+            "PDF downloaded successfully.",
+
+            "success"
+
+        );
+
+
+    } catch (error) {
 
         console.error(
-            "PDF ERROR:",
             error
         );
 
 
-        alert(
-            "Could not create PDF. Please try again."
+        showStatus(
+
+            "PDF generation failed: " +
+            error.message,
+
+            "error"
+
         );
 
     }
@@ -3105,595 +3204,246 @@ function downloadPDF(){
 
 
 
-/* ============================================================
-   CREATE EXCEL
-============================================================ */
+/* =========================================================
+   EXCEL
+========================================================= */
 
-async function createExcelBlob(){
-
-    const data =
-        getReportData();
-
+async function createExcel() {
 
     const workbook =
         new ExcelJS.Workbook();
 
 
-    /* ========================================================
-       REPORT SHEET
-    ======================================================== */
-
-    const sheet =
+    const worksheet =
         workbook.addWorksheet(
-            "Refuelling Report"
+            "Report"
         );
 
 
-    sheet.columns = [
+    const data =
+        getFormData();
+
+
+
+    worksheet.columns = [
 
         {
+
+            header:
+                "Field",
+
+            key:
+                "field",
+
             width:
-                32
+                28
+
         },
 
+
         {
+
+            header:
+                "Value",
+
+            key:
+                "value",
+
             width:
-                55
+                50
+
         }
 
     ];
 
 
-    sheet.mergeCells(
-        "A1:B1"
-    );
-
-
-    sheet.getCell(
-        "A1"
-    ).value =
-        "VODAFONE PNG REFUELLING REPORT";
-
-
-    sheet.getCell(
-        "A1"
-    ).font = {
-
-        bold:
-            true,
-
-        size:
-            16
-
-    };
-
-
-    sheet.getCell(
-        "A1"
-    ).alignment = {
-
-        horizontal:
-            "center",
-
-        vertical:
-            "middle"
-
-    };
-
-
-    sheet.getRow(
-        1
-    ).height =
-        30;
-
-
-    const expectedFuel =
-
-        Number(
-            data.fuelBefore ||
-            0
-        )
-
-        +
-
-        Number(
-            data.fuelAdded ||
-            0
-        );
-
-
-    const fuelDifference =
-
-        Number(
-            data.fuelAfter ||
-            0
-        )
-
-        -
-
-        expectedFuel;
-
 
     const rows = [
 
         [
-            "Field Engineer",
+            "Engineer",
             data.engineer
         ],
 
+
         [
-            "Additional Team",
+            "Team",
             data.team
         ],
+
 
         [
             "Date",
             data.date
         ],
 
+
         [
             "Time",
             data.time
         ],
+
 
         [
             "Site Name",
             data.siteName
         ],
 
+
         [
             "Site ID",
             data.siteId
         ],
+
 
         [
             "Region",
             data.region
         ],
 
+
         [
             "Province",
             data.province
         ],
 
+
         [
-            "Tower Height",
+            "Tower",
             data.tower
         ],
 
+
         [
             "Genset Type",
-            data.genset
+            data.gensetType
         ],
 
-        [
-            "Engine Oil Level",
-            data.oilLevel
-        ],
 
         [
-            "Coolant Level",
-            data.coolantLevel
+            "Engine Oil",
+            data.engineOil
         ],
 
+
         [
-            "Engine Speed RPM",
+            "Coolant",
+            data.coolant
+        ],
+
+
+        [
+            "RPM",
             data.rpm
         ],
+
 
         [
             "Fuel Before (L)",
             data.fuelBefore
         ],
 
+
         [
-            "Fuel TopUp (L)",
-            data.fuelAdded
+            "Fuel Top-Up (L)",
+            data.fuelTopup
         ],
+
 
         [
             "Fuel After (L)",
             data.fuelAfter
         ],
 
+
         [
             "Expected Fuel (L)",
-            expectedFuel.toFixed(1)
+            data.expectedFuel
         ],
+
 
         [
             "Fuel Difference (L)",
-            fuelDifference.toFixed(1)
+            data.fuelDifference
         ],
+
 
         [
             "PPL Connected",
-            data.ppl
+            data.pplConnected
         ],
+
 
         [
             "Meter Number",
-            data.meter
+            data.meterNumber
         ],
+
 
         [
             "Meter Reading",
-            data.reading
+            data.meterReading
         ],
+
 
         [
             "Driver",
             data.driver
         ],
 
+
         [
-            "Vehicle Registration",
+            "Vehicle",
             data.vehicle
         ],
+
 
         [
             "Comments",
             data.comments
-        ]
+        ],
 
-    ];
-
-
-    rows.forEach(
-
-        function(rowData){
-
-            const row =
-                sheet.addRow(
-                    rowData
-                );
-
-
-            row.getCell(
-                1
-            ).font = {
-
-                bold:
-                    true
-
-            };
-
-        }
-
-    );
-
-
-    /* ========================================================
-       GPS
-    ======================================================== */
-
-    sheet.addRow([]);
-
-
-    const gpsHeader =
-        sheet.addRow(
-
-            [
-                "GPS PHOTO LOCATIONS",
-                ""
-
-            ]
-
-        );
-
-
-    gpsHeader.getCell(
-        1
-    ).font = {
-
-        bold:
-            true,
-
-        size:
-            13
-
-    };
-
-
-    sheet.addRow(
 
         [
             "Before GPS",
-            gpsText(
-                data.gpsBefore
-            )
-        ]
+            gpsSummary("BEFORE")
+        ],
 
-    );
-
-
-    sheet.addRow(
 
         [
-            "TopUp GPS",
-            gpsText(
-                data.gpsTopup
-            )
-        ]
+            "Top-Up GPS",
+            gpsSummary("TOPUP")
+        ],
 
-    );
-
-
-    sheet.addRow(
 
         [
             "After GPS",
-            gpsText(
-                data.gpsAfter
-            )
+            gpsSummary("AFTER")
         ]
-
-    );
-
-
-    /* ========================================================
-       PHOTO SHEET
-    ======================================================== */
-
-    const photoSheet =
-        workbook.addWorksheet(
-            "Photos"
-        );
-
-
-    photoSheet.columns = [
-
-        {
-            width:
-                5
-        },
-
-        {
-            width:
-                28
-        },
-
-        {
-            width:
-                28
-        },
-
-        {
-            width:
-                28
-        },
-
-        {
-            width:
-                28
-        }
 
     ];
 
 
-    photoSheet.mergeCells(
-        "B1:E1"
-    );
 
+    rows.forEach(
+        function(row) {
 
-    photoSheet.getCell(
-        "B1"
-    ).value =
-        "VODAFONE PNG REFUELLING PHOTOS";
+            worksheet.addRow({
 
+                field:
+                    row[0],
 
-    photoSheet.getCell(
-        "B1"
-    ).font = {
+                value:
+                    row[1]
 
-        bold:
-            true,
-
-        size:
-            16
-
-    };
-
-
-    photoSheet.getCell(
-        "B1"
-    ).alignment = {
-
-        horizontal:
-            "center"
-
-    };
-
-
-    /* ========================================================
-       BEFORE
-    ======================================================== */
-
-    addExcelPhoto(
-
-        workbook,
-
-        photoSheet,
-
-        imgBefore.getAttribute("src"),
-
-        "BEFORE REFUELLING",
-
-        data.gpsBefore,
-
-        3,
-        4
-
-    );
-
-
-    /* ========================================================
-       TOPUP
-    ======================================================== */
-
-    addExcelPhoto(
-
-        workbook,
-
-        photoSheet,
-
-        imgTopup.getAttribute("src"),
-
-        "TOPUP",
-
-        data.gpsTopup,
-
-        22,
-        23
-
-    );
-
-
-    /* ========================================================
-       AFTER
-    ======================================================== */
-
-    addExcelPhoto(
-
-        workbook,
-
-        photoSheet,
-
-        imgAfter.getAttribute("src"),
-
-        "AFTER REFUELLING",
-
-        data.gpsAfter,
-
-        41,
-        42
-
-    );
-
-
-    /* ========================================================
-       WRITE
-    ======================================================== */
-
-    const buffer =
-        await workbook.xlsx.writeBuffer();
-
-
-    return new Blob(
-
-        [
-            buffer
-        ],
-
-        {
-
-            type:
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            });
 
         }
-
-    );
-
-}
-
-
-
-/* ============================================================
-   ADD PHOTO TO EXCEL
-============================================================ */
-
-function addExcelPhoto(
-
-    workbook,
-    sheet,
-    src,
-    title,
-    gps,
-    titleRow,
-    imageRow
-
-){
-
-    if(
-        !src
-    ){
-
-        return;
-
-    }
-
-
-    sheet.getCell(
-        `B${titleRow}`
-    ).value =
-        title;
-
-
-    sheet.getCell(
-        `B${titleRow}`
-    ).font = {
-
-        bold:
-            true,
-
-        size:
-            14
-
-    };
-
-
-    const image =
-        workbook.addImage({
-
-            base64:
-                src,
-
-            extension:
-                "jpeg"
-
-        });
-
-
-    sheet.addImage(
-
-        image,
-
-        {
-
-            tl: {
-
-                col:
-                    1,
-
-                row:
-                    imageRow
-
-            },
-
-            ext: {
-
-                width:
-                    600,
-
-                height:
-                    400
-
-            }
-
-        }
-
     );
 
 
-    sheet.getCell(
-        `D${titleRow}`
-    ).value =
-        "GPS";
 
-
-    sheet.getCell(
-        `D${titleRow}`
-    ).font = {
+    worksheet.getRow(1).font = {
 
         bold:
             true
@@ -3701,37 +3451,352 @@ function addExcelPhoto(
     };
 
 
-    sheet.getCell(
-        `D${imageRow}`
-    ).value =
-        gpsText(
-            gps
+
+    /* =====================================================
+       PHOTOS SHEET
+    ===================================================== */
+
+    const photoSheet =
+        workbook.addWorksheet(
+            "Photos"
         );
+
+
+    photoSheet.getColumn(
+        1
+    ).width =
+        25;
+
+
+    photoSheet.getColumn(
+        2
+    ).width =
+        25;
+
+
+    photoSheet.getColumn(
+        3
+    ).width =
+        40;
+
+
+
+    photoSheet.addRow([
+
+        "Photo",
+
+        "GPS",
+
+        "Image"
+
+    ]);
+
+
+
+    photoSheet.getRow(1).font = {
+
+        bold:
+            true
+
+    };
+
+
+
+    async function addPhoto(
+
+        name,
+
+        imageData,
+
+        gps
+
+    ) {
+
+        if (!imageData) {
+
+            return;
+
+        }
+
+
+        const base64 =
+            imageData.split(",")[1];
+
+
+        const imageId =
+            workbook.addImage({
+
+                base64:
+                    base64,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        const rowNumber =
+            photoSheet.rowCount + 1;
+
+
+        photoSheet.addRow([
+
+            name,
+
+            gpsSummary(gps)
+
+        ]);
+
+
+        photoSheet.addImage(
+
+            imageId,
+
+            {
+
+                tl: {
+
+                    col:
+                        2,
+
+                    row:
+                        rowNumber - 1
+
+                },
+
+
+                ext: {
+
+                    width:
+                        500,
+
+                    height:
+                        300
+
+                }
+
+            }
+
+        );
+
+
+        photoSheet.getRow(
+            rowNumber
+        ).height =
+            230;
+
+    }
+
+
+
+    await addPhoto(
+
+        "Before Refuelling",
+
+        photos.BEFORE,
+
+        "BEFORE"
+
+    );
+
+
+    await addPhoto(
+
+        "Refuelling In Progress",
+
+        photos.TOPUP,
+
+        "TOPUP"
+
+    );
+
+
+    await addPhoto(
+
+        "After Refuelling",
+
+        photos.AFTER,
+
+        "AFTER"
+
+    );
+
+
+    return workbook;
 
 }
 
 
 
-/* ============================================================
-   BLOB TO DATA URL
-============================================================ */
+/* =========================================================
+   DOWNLOAD EXCEL
+========================================================= */
 
-function blobToDataURL(blob){
+async function downloadExcel() {
+
+    if (
+        !validateReport()
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        showStatus(
+
+            "Generating Excel report...",
+
+            "info"
+
+        );
+
+
+        const workbook =
+            await createExcel();
+
+
+        const buffer =
+            await workbook.xlsx.writeBuffer();
+
+
+        const blob =
+            new Blob(
+
+                [buffer],
+
+                {
+
+                    type:
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+                }
+
+            );
+
+
+        const data =
+            getFormData();
+
+
+        const fileName =
+
+            `Vodafone_Refuelling_${data.siteId || "Report"}_${data.date || ""}.xlsx`;
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            fileName;
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+
+        showStatus(
+
+            "Excel report downloaded successfully.",
+
+            "success"
+
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+
+        showStatus(
+
+            "Excel generation failed: " +
+            error.message,
+
+            "error"
+
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   BLOB TO BASE64
+========================================================= */
+
+function blobToBase64(blob) {
 
     return new Promise(
-
-        function(resolve,reject){
+        function(resolve, reject) {
 
             const reader =
                 new FileReader();
 
 
-            reader.onload =
-                function(){
+            reader.onloadend =
+                function() {
 
-                    resolve(
-                        reader.result
-                    );
+                    const result =
+                        reader.result;
+
+
+                    if (
+                        typeof result ===
+                        "string"
+                    ) {
+
+                        resolve(
+
+                            result.split(
+                                ","
+                            )[1]
+
+                        );
+
+                    } else {
+
+                        reject(
+
+                            new Error(
+                                "Unable to convert file."
+                            )
+
+                        );
+
+                    }
 
                 };
 
@@ -3745,6 +3810,36 @@ function blobToDataURL(blob){
             );
 
         }
+    );
+
+}
+
+
+
+/* =========================================================
+   CREATE EXCEL BLOB
+========================================================= */
+
+async function createExcelBlob() {
+
+    const workbook =
+        await createExcel();
+
+
+    const buffer =
+        await workbook.xlsx.writeBuffer();
+
+
+    return new Blob(
+
+        [buffer],
+
+        {
+
+            type:
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+        }
 
     );
 
@@ -3752,135 +3847,496 @@ function blobToDataURL(blob){
 
 
 
-/* ============================================================
-   PDF BASE64
-============================================================ */
+/* =========================================================
+   SEND EMAIL
+========================================================= */
 
-async function getPDFBase64(){
+async function sendReportEmail() {
 
-    const doc =
-        generatePDF();
-
-
-    const blob =
-        doc.output(
-            "blob"
-        );
-
-
-    return await blobToDataURL(
-        blob
-    );
-
-}
-
-
-
-/* ============================================================
-   EXCEL BASE64
-============================================================ */
-
-async function getExcelBase64(){
-
-    const blob =
-        await createExcelBlob();
-
-
-    return await blobToDataURL(
-        blob
-    );
-
-}
-
-
-
-/* ============================================================
-   DOWNLOAD EXCEL
-============================================================ */
-
-async function downloadExcel(){
-
-    if(
-        !photosReady()
-    ){
-
-        alert(
-            "Please capture BEFORE, TOPUP and AFTER photos first."
-        );
+    if (
+        !validateReport()
+    ) {
 
         return;
 
     }
 
 
-    try{
 
-        const blob =
-            await createExcelBlob();
+    /* =====================================================
+       CHECK EMAILJS CONFIGURATION
+    ===================================================== */
 
+    if (
 
-        const url =
-            URL.createObjectURL(
-                blob
-            );
+        EMAILJS_PUBLIC_KEY ===
+            "YOUR_PUBLIC_KEY" ||
 
+        EMAILJS_SERVICE_ID ===
+            "YOUR_SERVICE_ID" ||
 
-        const a =
-            document.createElement(
-                "a"
-            );
+        EMAILJS_TEMPLATE_ID ===
+            "YOUR_TEMPLATE_ID"
 
+    ) {
 
-        a.href =
-            url;
+        showStatus(
 
+            "EmailJS is not configured. Please enter your Public Key, Service ID and Template ID at the top of this HTML file.",
 
-        a.download =
+            "error"
 
-            (
-                siteId.value ||
-                "SITE"
-            ) +
-
-            "_" +
-
-            (
-                date.value ||
-                "DATE"
-            ) +
-
-            "_Refuelling_Report.xlsx";
-
-
-        document.body.appendChild(
-            a
         );
 
 
-        a.click();
-
-
-        document.body.removeChild(
-            a
-        );
-
-
-        URL.revokeObjectURL(
-            url
-        );
+        return;
 
     }
 
-    catch(error){
 
-        console.error(
-            "EXCEL ERROR:",
-            error
+
+    /* =====================================================
+       CHECK EMAILJS INITIALISATION
+    ===================================================== */
+
+    if (!emailJSReady) {
+
+        const ready =
+            initialiseEmailJS();
+
+
+        if (!ready) {
+
+            showStatus(
+
+                "EmailJS could not be initialised. Please check your Public Key and internet connection.",
+
+                "error"
+
+            );
+
+
+            return;
+
+        }
+
+    }
+
+
+
+    try {
+
+
+        /* =================================================
+           PREPARE REPORT
+        ================================================= */
+
+        showStatus(
+
+            "Preparing PDF and Excel attachments...",
+
+            "info"
+
+        );
+
+
+
+        /* =================================================
+           CREATE PDF
+        ================================================= */
+
+        const pdf =
+            await createPDF();
+
+
+        const pdfBlob =
+            pdf.output(
+                "blob"
+            );
+
+
+        const pdfBase64 =
+            await blobToBase64(
+                pdfBlob
+            );
+
+
+
+        /* =================================================
+           CREATE EXCEL
+        ================================================= */
+
+        const excelBlob =
+            await createExcelBlob();
+
+
+        const excelBase64 =
+            await blobToBase64(
+                excelBlob
+            );
+
+
+
+        /* =================================================
+           FORM DATA
+        ================================================= */
+
+        const data =
+            getFormData();
+
+
+
+        /* =================================================
+           EMAILJS PARAMETERS
+        ================================================= */
+
+        const params = {
+
+
+            /* ---------------------------------------------
+               EMAIL
+            --------------------------------------------- */
+
+            to_email:
+                REPORT_RECIPIENT_EMAIL,
+
+
+            subject:
+
+                `Vodafone PNG Refuelling Report - ${data.siteName || "Site"} - ${data.date || ""}`,
+
+
+
+            /* ---------------------------------------------
+               SITE PERSONNEL
+            --------------------------------------------- */
+
+            engineer:
+                data.engineer,
+
+
+            team:
+                data.team,
+
+
+
+            /* ---------------------------------------------
+               SITE INFORMATION
+            --------------------------------------------- */
+
+            date:
+                data.date,
+
+
+            time:
+                data.time,
+
+
+            site_name:
+                data.siteName,
+
+
+            site_id:
+                data.siteId,
+
+
+            region:
+                data.region,
+
+
+            province:
+                data.province,
+
+
+            tower:
+                data.tower,
+
+
+
+            /* ---------------------------------------------
+               GENSET
+            --------------------------------------------- */
+
+            genset_type:
+                data.gensetType,
+
+
+            engine_oil:
+                data.engineOil,
+
+
+            coolant:
+                data.coolant,
+
+
+            rpm:
+                data.rpm,
+
+
+
+            /* ---------------------------------------------
+               REFUELLING
+            --------------------------------------------- */
+
+            fuel_before:
+                data.fuelBefore,
+
+
+            fuel_topup:
+                data.fuelTopup,
+
+
+            fuel_after:
+                data.fuelAfter,
+
+
+            expected_fuel:
+                data.expectedFuel,
+
+
+            fuel_difference:
+                data.fuelDifference,
+
+
+
+            /* ---------------------------------------------
+               POWER
+            --------------------------------------------- */
+
+            ppl_connected:
+                data.pplConnected,
+
+
+            meter_number:
+                data.meterNumber,
+
+
+            meter_reading:
+                data.meterReading,
+
+
+
+            /* ---------------------------------------------
+               DRIVER / VEHICLE
+            --------------------------------------------- */
+
+            driver:
+                data.driver,
+
+
+            vehicle:
+                data.vehicle,
+
+
+            comments:
+                data.comments,
+
+
+
+            /* ---------------------------------------------
+               GPS
+            --------------------------------------------- */
+
+            before_gps:
+                gpsSummary("BEFORE"),
+
+
+            topup_gps:
+                gpsSummary("TOPUP"),
+
+
+            after_gps:
+                gpsSummary("AFTER"),
+
+
+
+            /* =================================================
+               EMAILJS VARIABLE ATTACHMENTS
+
+               The EmailJS template must contain Variable
+               Attachments using these exact parameter names.
+
+               PDF:
+               pdf_attachment
+
+               EXCEL:
+               excel_attachment
+
+               BEFORE PHOTO:
+               before_photo
+
+               TOP-UP PHOTO:
+               topup_photo
+
+               AFTER PHOTO:
+               after_photo
+            ================================================= */
+
+            pdf_attachment:
+                pdfBase64,
+
+
+            excel_attachment:
+                excelBase64
+
+        };
+
+
+
+        /* =================================================
+           BEFORE PHOTO
+        ================================================= */
+
+        if (photos.BEFORE) {
+
+            params.before_photo =
+                photos.BEFORE.split(",")[1];
+
+        }
+
+
+
+        /* =================================================
+           TOP-UP PHOTO
+        ================================================= */
+
+        if (photos.TOPUP) {
+
+            params.topup_photo =
+                photos.TOPUP.split(",")[1];
+
+        }
+
+
+
+        /* =================================================
+           AFTER PHOTO
+        ================================================= */
+
+        if (photos.AFTER) {
+
+            params.after_photo =
+                photos.AFTER.split(",")[1];
+
+        }
+
+
+
+        /* =================================================
+           SEND THROUGH EMAILJS
+        ================================================= */
+
+        showStatus(
+
+            "Sending report to " +
+            REPORT_RECIPIENT_EMAIL +
+            "...",
+
+            "info"
+
+        );
+
+
+        const response =
+            await emailjs.send(
+
+                EMAILJS_SERVICE_ID,
+
+                EMAILJS_TEMPLATE_ID,
+
+                params
+
+            );
+
+
+        console.log(
+
+            "EmailJS response:",
+
+            response
+
+        );
+
+
+
+        /* =================================================
+           SUCCESS
+        ================================================= */
+
+        showStatus(
+
+            "SUCCESS — Report sent to " +
+            REPORT_RECIPIENT_EMAIL,
+
+            "success"
+
         );
 
 
         alert(
-            "Could not create Excel file. Please try again."
+
+            "Report sent successfully to " +
+            REPORT_RECIPIENT_EMAIL
+
+        );
+
+
+
+    } catch (error) {
+
+
+        /* =================================================
+           ERROR
+        ================================================= */
+
+        console.error(
+
+            "EmailJS Error:",
+
+            error
+
+        );
+
+
+        let message =
+            "Failed to send report.";
+
+
+        if (
+            error &&
+            error.text
+        ) {
+
+            message +=
+                " " +
+                error.text;
+
+        }
+
+
+        if (
+            error &&
+            error.message
+        ) {
+
+            message +=
+                " " +
+                error.message;
+
+        }
+
+
+        showStatus(
+
+            message,
+
+            "error"
+
+        );
+
+
+        alert(
+            message
         );
 
     }
@@ -3889,572 +4345,45 @@ async function downloadExcel(){
 
 
 
-/* ============================================================
-   LOGOUT
-============================================================ */
+/* =========================================================
+   FORM SUBMIT
+========================================================= */
 
-function logout(){
-
-    stopCamera();
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-
-/* ============================================================
-   SEND COMPLETE REPORT
-============================================================ */
-
-form.addEventListener(
-
+document
+.getElementById(
+    "refuellingForm"
+)
+.addEventListener(
     "submit",
-
-    async function(event){
+    function(event) {
 
         event.preventDefault();
 
+    }
+);
 
-        /* ====================================================
-           VALIDATE FORM
-        ==================================================== */
 
-        if(
-            !form.checkValidity()
-        ){
 
-            form.reportValidity();
+/* =========================================================
+   PAGE CLEANUP
+========================================================= */
 
-            return;
+window.addEventListener(
 
-        }
+    "beforeunload",
 
+    function() {
 
-        /* ====================================================
-           VALIDATE PHOTOS
-        ==================================================== */
+        if (cameraStream) {
 
-        if(
-            !photosReady()
-        ){
+            cameraStream
+            .getTracks()
+            .forEach(
+                function(track) {
 
-            alert(
+                    track.stop();
 
-                "Please capture Before, TopUp and After photos."
-
-            );
-
-            return;
-
-        }
-
-
-        /* ====================================================
-           GPS WARNING
-        ==================================================== */
-
-        if(
-
-            !gpsData.BEFORE ||
-            !gpsData.TOPUP ||
-            !gpsData.AFTER
-
-        ){
-
-            const continueWithoutGPS =
-                confirm(
-
-                    "One or more photos do not contain GPS data." +
-
-                    "\n\n" +
-
-                    "Do you want to send the report anyway?"
-
-                );
-
-
-            if(
-                !continueWithoutGPS
-            ){
-
-                return;
-
-            }
-
-        }
-
-
-        /* ====================================================
-           CHECK EMAILJS CONFIGURATION
-        ==================================================== */
-
-        if(
-
-            EMAILJS_PUBLIC_KEY ===
-                "YOUR_PUBLIC_KEY" ||
-
-            EMAILJS_SERVICE_ID ===
-                "YOUR_SERVICE_ID" ||
-
-            EMAILJS_TEMPLATE_ID ===
-                "YOUR_TEMPLATE_ID"
-
-        ){
-
-            alert(
-
-                "EmailJS is not configured yet.\n\n" +
-
-                "Please enter your Public Key, Service ID " +
-                "and Template ID in the code."
-
-            );
-
-            return;
-
-        }
-
-
-        /* ====================================================
-           DISABLE SEND
-        ==================================================== */
-
-        sendButton.disabled =
-            true;
-
-
-        sendButton.textContent =
-            "GENERATING REPORT...";
-
-
-        sendStatus.textContent =
-            "Preparing PDF and Excel files...";
-
-
-        try{
-
-
-            /* =================================================
-               GET DATA
-            ================================================= */
-
-            const data =
-                getReportData();
-
-
-            /* =================================================
-               CREATE PDF
-            ================================================= */
-
-            const pdfBase64 =
-                await getPDFBase64();
-
-
-            /* =================================================
-               CREATE EXCEL
-            ================================================= */
-
-            sendStatus.textContent =
-                "Preparing Excel report...";
-
-
-            const excelBase64 =
-                await getExcelBase64();
-
-
-            /* =================================================
-               EMAIL PARAMETERS
-            ================================================= */
-
-            const params = {
-
-                /* =============================================
-                   RECIPIENT
-                ============================================= */
-
-                to_email:
-                    REPORT_RECIPIENT_EMAIL,
-
-
-                /* =============================================
-                   SUBJECT
-                ============================================= */
-
-                subject:
-
-                    "Vodafone PNG Refuelling Report - " +
-
-                    data.siteId,
-
-
-                /* =============================================
-                   PERSONNEL
-                ============================================= */
-
-                engineer:
-                    data.engineer,
-
-                team:
-                    data.team,
-
-
-                /* =============================================
-                   SITE
-                ============================================= */
-
-                date:
-                    data.date,
-
-                time:
-                    data.time,
-
-                siteName:
-                    data.siteName,
-
-                siteId:
-                    data.siteId,
-
-                region:
-                    data.region,
-
-                province:
-                    data.province,
-
-                tower:
-                    data.tower,
-
-
-                /* =============================================
-                   GENSET
-                ============================================= */
-
-                genset:
-                    data.genset,
-
-                oilLevel:
-                    data.oilLevel,
-
-                coolantLevel:
-                    data.coolantLevel,
-
-                rpm:
-                    data.rpm,
-
-
-                /* =============================================
-                   FUEL
-                ============================================= */
-
-                fuelBefore:
-                    data.fuelBefore,
-
-                fuelAdded:
-                    data.fuelAdded,
-
-                fuelAfter:
-                    data.fuelAfter,
-
-
-                expectedFuel:
-
-                    (
-
-                        Number(
-                            data.fuelBefore ||
-                            0
-                        )
-
-                        +
-
-                        Number(
-                            data.fuelAdded ||
-                            0
-                        )
-
-                    ).toFixed(1),
-
-
-                fuelDifference:
-
-                    (
-
-                        Number(
-                            data.fuelAfter ||
-                            0
-                        )
-
-                        -
-
-                        (
-
-                            Number(
-                                data.fuelBefore ||
-                                0
-                            )
-
-                            +
-
-                            Number(
-                                data.fuelAdded ||
-                                0
-                            )
-
-                        )
-
-                    ).toFixed(1),
-
-
-                /* =============================================
-                   POWER
-                ============================================= */
-
-                ppl:
-                    data.ppl,
-
-                meter:
-                    data.meter,
-
-                reading:
-                    data.reading,
-
-
-                /* =============================================
-                   DRIVER
-                ============================================= */
-
-                driver:
-                    data.driver,
-
-                vehicle:
-                    data.vehicle,
-
-
-                /* =============================================
-                   COMMENTS
-                ============================================= */
-
-                comments:
-                    data.comments || "None",
-
-
-                /* =============================================
-                   GPS
-                ============================================= */
-
-                gps_before:
-                    gpsText(
-                        data.gpsBefore
-                    ),
-
-                gps_topup:
-                    gpsText(
-                        data.gpsTopup
-                    ),
-
-                gps_after:
-                    gpsText(
-                        data.gpsAfter
-                    ),
-
-
-                /* =============================================
-                   ATTACHMENT 1
-                   PDF
-                ============================================= */
-
-                pdf_attachment:
-                    pdfBase64,
-
-
-                /* =============================================
-                   ATTACHMENT 2
-                   EXCEL
-                ============================================= */
-
-                excel_attachment:
-                    excelBase64,
-
-
-                /* =============================================
-                   ATTACHMENT 3
-                   BEFORE PHOTO
-                ============================================= */
-
-                before_photo:
-
-                    imgBefore.getAttribute(
-                        "src"
-                    ),
-
-
-                /* =============================================
-                   ATTACHMENT 4
-                   TOPUP PHOTO
-                ============================================= */
-
-                topup_photo:
-
-                    imgTopup.getAttribute(
-                        "src"
-                    ),
-
-
-                /* =============================================
-                   ATTACHMENT 5
-                   AFTER PHOTO
-                ============================================= */
-
-                after_photo:
-
-                    imgAfter.getAttribute(
-                        "src"
-                    )
-
-            };
-
-
-            /* =================================================
-               SEND EMAILJS
-            ================================================= */
-
-            sendStatus.textContent =
-                "Sending report by email...";
-
-
-            sendButton.textContent =
-                "SENDING...";
-
-
-            console.log(
-                "EmailJS parameters:",
-                params
-            );
-
-
-            const response =
-                await emailjs.send(
-
-                    EMAILJS_SERVICE_ID,
-
-                    EMAILJS_TEMPLATE_ID,
-
-                    params
-
-                );
-
-
-            console.log(
-                "EMAILJS SUCCESS:",
-                response
-            );
-
-
-            /* =================================================
-               SUCCESS
-            ================================================= */
-
-            sendStatus.textContent =
-                "✓ Report sent successfully.";
-
-
-            sendButton.textContent =
-                "REPORT SENT ✓";
-
-
-            alert(
-
-                "Complete refuelling report sent successfully."
-
-            );
-
-
-            setTimeout(
-
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-
-                1200
-
-            );
-
-        }
-
-
-        catch(error){
-
-            console.error(
-                "EMAILJS ERROR:",
-                error
-            );
-
-
-            sendStatus.textContent =
-                "✗ Failed to send report.";
-
-
-            sendButton.textContent =
-                "SEND COMPLETE REPORT";
-
-
-            sendButton.disabled =
-                false;
-
-
-            let errorMessage =
-                "The report could not be sent.";
-
-
-            if(
-                error &&
-                error.text
-            ){
-
-                errorMessage +=
-
-                    "\n\nEmailJS: " +
-                    error.text;
-
-            }
-
-
-            if(
-                error &&
-                error.status
-            ){
-
-                errorMessage +=
-
-                    "\nStatus: " +
-                    error.status;
-
-            }
-
-
-            errorMessage +=
-
-                "\n\nPlease check:" +
-
-                "\n1. EmailJS Public Key" +
-
-                "\n2. EmailJS Service ID" +
-
-                "\n3. EmailJS Template ID" +
-
-                "\n4. EmailJS template configuration" +
-
-                "\n5. EmailJS attachment settings" +
-
-                "\n6. Internet connection";
-
-
-            alert(
-                errorMessage
+                }
             );
 
         }
@@ -4463,10 +4392,7 @@ form.addEventListener(
 
 );
 
-
 </script>
 
-
 </body>
-
 </html>
