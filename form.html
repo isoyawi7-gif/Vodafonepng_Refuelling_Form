@@ -247,7 +247,7 @@ footer {
 <body>
 
 <header>
-    Vodafone PNG Refuelling & Genset Site Inspection Report
+    Vodafone PNG Refuelling Report
 </header>
 
 <div class="container">
@@ -635,20 +635,15 @@ Vodafone PNG — Refuelling & Genset Site Inspection System
 
 /* =========================================================
    EMAILJS CONFIGURATION
-   =========================================================
-   Replace these three values after creating/configuring
-   your EmailJS service and template.
+
+   REPLACE ONLY THESE THREE VALUES
 ========================================================= */
 
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 
-
-/* =========================================================
-   REPORT RECIPIENT
-========================================================= */
-
+/* Fixed report recipient */
 const REPORT_RECIPIENT_EMAIL = "isoyawi7@gmail.com";
 
 
@@ -656,64 +651,14 @@ const REPORT_RECIPIENT_EMAIL = "isoyawi7@gmail.com";
    EMAILJS INITIALISATION
 ========================================================= */
 
-let emailJSReady = false;
-
-function initialiseEmailJS() {
-
-    if (typeof emailjs === "undefined") {
-
-        console.error("EmailJS library was not loaded.");
-
-        return false;
-    }
-
-    if (
-        !EMAILJS_PUBLIC_KEY ||
-        EMAILJS_PUBLIC_KEY === "YOUR_PUBLIC_KEY"
-    ) {
-
-        console.warn(
-            "EmailJS Public Key has not been configured."
-        );
-
-        return false;
-    }
-
-    try {
-
-        emailjs.init({
-            publicKey: EMAILJS_PUBLIC_KEY
-        });
-
-        emailJSReady = true;
-
-        console.log("EmailJS initialised successfully.");
-
-        return true;
-
-    } catch (error) {
-
-        console.error(
-            "EmailJS initialisation failed:",
-            error
-        );
-
-        return false;
-    }
+if (
+    EMAILJS_PUBLIC_KEY !== "YOUR_PUBLIC_KEY" &&
+    typeof emailjs !== "undefined"
+) {
+    emailjs.init({
+        publicKey: EMAILJS_PUBLIC_KEY
+    });
 }
-
-
-
-
-/* =========================================================
-   INITIALISE EMAILJS AFTER PAGE LOAD
-========================================================= */
-
-window.addEventListener("load", function() {
-
-    initialiseEmailJS();
-
-});
 
 
 /* =========================================================
@@ -2344,27 +2289,23 @@ async function sendReportEmail() {
         }
 
 
- /* =================================================
-   SEND THROUGH EMAILJS
-================================================= */
+        /* =================================================
+           SEND THROUGH EMAILJS
+        ================================================= */
 
-showStatus(
-    "Sending report to " +
-    REPORT_RECIPIENT_EMAIL +
-    "...",
-    "info"
-);
+        showStatus(
+            "Sending report to " +
+            REPORT_RECIPIENT_EMAIL +
+            "...",
+            "info"
+        );
 
-const response = await emailjs.send(
-    EMAILJS_SERVICE_ID,
-    EMAILJS_TEMPLATE_ID,
-    params
-);
 
-console.log(
-    "EmailJS response:",
-    response
-);
+        await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_TEMPLATE_ID,
+            params
+        );
 
 
         /* =================================================
