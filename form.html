@@ -3007,6 +3007,10 @@ async function createExcelBlob(){
         );
 
 
+    /* ========================================================
+       COLUMN WIDTHS
+    ======================================================== */
+
     sheet.columns = [
 
         {
@@ -3015,13 +3019,29 @@ async function createExcelBlob(){
 
         {
             width: 55
+        },
+
+        {
+            width: 3
+        },
+
+        {
+            width: 28
+        },
+
+        {
+            width: 28
         }
 
     ];
 
 
+    /* ========================================================
+       TITLE
+    ======================================================== */
+
     sheet.mergeCells(
-        "A1:B1"
+        "A1:E1"
     );
 
 
@@ -3036,6 +3056,7 @@ async function createExcelBlob(){
     ).font = {
 
         bold: true,
+
         size: 16
 
     };
@@ -3152,15 +3173,13 @@ async function createExcelBlob(){
             (
 
                 Number(
-                    data.fuelBefore ||
-                    0
+                    data.fuelBefore || 0
                 )
 
                 +
 
                 Number(
-                    data.fuelAdded ||
-                    0
+                    data.fuelAdded || 0
                 )
 
             ).toFixed(1)
@@ -3173,8 +3192,7 @@ async function createExcelBlob(){
             (
 
                 Number(
-                    data.fuelAfter ||
-                    0
+                    data.fuelAfter || 0
                 )
 
                 -
@@ -3182,15 +3200,13 @@ async function createExcelBlob(){
                 (
 
                     Number(
-                        data.fuelBefore ||
-                        0
+                        data.fuelBefore || 0
                     )
 
                     +
 
                     Number(
-                        data.fuelAdded ||
-                        0
+                        data.fuelAdded || 0
                     )
 
                 )
@@ -3232,6 +3248,10 @@ async function createExcelBlob(){
     ];
 
 
+    /* ========================================================
+       ADD REPORT DATA
+    ======================================================== */
+
     rows.forEach(
 
         function(rowData){
@@ -3251,6 +3271,29 @@ async function createExcelBlob(){
 
             };
 
+
+            row.getCell(
+                1
+            ).alignment = {
+
+                vertical:
+                    "top"
+
+            };
+
+
+            row.getCell(
+                2
+            ).alignment = {
+
+                vertical:
+                    "top",
+
+                wrapText:
+                    true
+
+            };
+
         }
 
     );
@@ -3260,18 +3303,25 @@ async function createExcelBlob(){
        GPS INFORMATION
     ======================================================== */
 
-    sheet.addRow(
-        []
-    );
+    sheet.addRow([]);
 
 
     const gpsHeader =
         sheet.addRow(
+
             [
                 "GPS PHOTO LOCATIONS",
                 ""
             ]
+
         );
+
+
+    sheet.mergeCells(
+
+        `A${gpsHeader.number}:B${gpsHeader.number}`
+
+    );
 
 
     gpsHeader.getCell(
@@ -3324,66 +3374,45 @@ async function createExcelBlob(){
 
 
     /* ========================================================
-       PHOTO SHEET
+       PHOTO SECTION IN MAIN REPORT SHEET
     ======================================================== */
 
-    const photoSheet =
-        workbook.addWorksheet(
-            "Photos"
+    sheet.addRow([]);
+
+
+    const photoHeaderRow =
+        sheet.addRow(
+
+            [
+                "REFUELLING PHOTOS",
+                ""
+            ]
+
         );
 
 
-    photoSheet.columns = [
+    sheet.mergeCells(
 
-        {
-            width: 5
-        },
+        `A${photoHeaderRow.number}:E${photoHeaderRow.number}`
 
-        {
-            width: 28
-        },
-
-        {
-            width: 28
-        },
-
-        {
-            width: 28
-        },
-
-        {
-            width: 28
-        }
-
-    ];
-
-
-    photoSheet.mergeCells(
-        "B1:E1"
     );
 
 
-    photoSheet.getCell(
-        "B1"
-    ).value =
-        "VODAFONE PNG REFUELLING PHOTOS";
-
-
-    photoSheet.getCell(
-        "B1"
+    photoHeaderRow.getCell(
+        1
     ).font = {
 
         bold:
             true,
 
         size:
-            16
+            14
 
     };
 
 
-    photoSheet.getCell(
-        "B1"
+    photoHeaderRow.getCell(
+        1
     ).alignment = {
 
         horizontal:
@@ -3393,28 +3422,38 @@ async function createExcelBlob(){
 
 
     /* ========================================================
-       BEFORE PHOTO
+       PHOTO 1 - BEFORE
     ======================================================== */
 
     if(
         imgBefore.src
     ){
 
-        photoSheet.getCell(
-            "B3"
-        ).value =
-            "BEFORE REFUELLING";
+        const row =
+            sheet.addRow(
+
+                [
+                    "BEFORE REFUELLING",
+                    "",
+                    "",
+                    "GPS",
+                    gpsText(
+                        data.gpsBefore
+                    )
+                ]
+
+            );
 
 
-        photoSheet.getCell(
-            "B3"
+        row.getCell(
+            1
         ).font = {
 
             bold:
                 true,
 
             size:
-                14
+                12
 
         };
 
@@ -3431,7 +3470,7 @@ async function createExcelBlob(){
             });
 
 
-        photoSheet.addImage(
+        sheet.addImage(
 
             beforeImage,
 
@@ -3440,20 +3479,20 @@ async function createExcelBlob(){
                 tl: {
 
                     col:
-                        1,
+                        0,
 
                     row:
-                        4
+                        row.number
 
                 },
 
                 ext: {
 
                     width:
-                        600,
+                        500,
 
                     height:
-                        400
+                        330
 
                 }
 
@@ -3462,444 +3501,14 @@ async function createExcelBlob(){
         );
 
 
-        photoSheet.getCell(
-            "D3"
-        ).value =
-            "GPS";
-
-
-        photoSheet.getCell(
-            "D3"
-        ).font = {
-
-            bold:
-                true
-
-        };
-
-
-        photoSheet.getCell(
-            "D4"
-        ).value =
-            gpsText(
-                data.gpsBefore
-            );
-
-    }
-
-
-    /* ========================================================
-       TOPUP PHOTO
-    ======================================================== */
-
-    if(
-        imgTopup.src
-    ){
-
-        photoSheet.getCell(
-            "B22"
-        ).value =
-            "TOPUP";
-
-
-        photoSheet.getCell(
-            "B22"
-        ).font = {
-
-            bold:
-                true,
-
-            size:
-                14
-
-        };
-
-
-        const topupImage =
-            workbook.addImage({
-
-                base64:
-                    imgTopup.src,
-
-                extension:
-                    "jpeg"
-
-            });
-
-
-        photoSheet.addImage(
-
-            topupImage,
-
-            {
-
-                tl: {
-
-                    col:
-                        1,
-
-                    row:
-                        23
-
-                },
-
-                ext: {
-
-                    width:
-                        600,
-
-                    height:
-                        400
-
-                }
-
-            }
-
-        );
-
-
-        photoSheet.getCell(
-            "D22"
-        ).value =
-            "GPS";
-
-
-        photoSheet.getCell(
-            "D22"
-        ).font = {
-
-            bold:
-                true
-
-        };
-
-
-        photoSheet.getCell(
-            "D23"
-        ).value =
-            gpsText(
-                data.gpsTopup
-            );
-
-    }
-
-
-    /* ========================================================
-       AFTER PHOTO
-    ======================================================== */
-
-    if(
-        imgAfter.src
-    ){
-
-        photoSheet.getCell(
-            "B41"
-        ).value =
-            "AFTER REFUELLING";
-
-
-        photoSheet.getCell(
-            "B41"
-        ).font = {
-
-            bold:
-                true,
-
-            size:
-                14
-
-        };
-
-
-        const afterImage =
-            workbook.addImage({
-
-                base64:
-                    imgAfter.src,
-
-                extension:
-                    "jpeg"
-
-            });
-
-
-        photoSheet.addImage(
-
-            afterImage,
-
-            {
-
-                tl: {
-
-                    col:
-                        1,
-
-                    row:
-                        42
-
-                },
-
-                ext: {
-
-                    width:
-                        600,
-
-                    height:
-                        400
-
-                }
-
-            }
-
-        );
-
-
-        photoSheet.getCell(
-            "D41"
-        ).value =
-            "GPS";
-
-
-        photoSheet.getCell(
-            "D41"
-        ).font = {
-
-            bold:
-                true
-
-        };
-
-
-        photoSheet.getCell(
-            "D42"
-        ).value =
-            gpsText(
-                data.gpsAfter
-            );
-
-    }
-
-
-    /* ========================================================
-       GENERATE XLSX
-    ======================================================== */
-
-    const buffer =
-        await workbook.xlsx.writeBuffer();
-
-
-    return new Blob(
-
-        [
-            buffer
-        ],
-
-        {
-
-            type:
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
-        }
-
-    );
-
-}
-
-
-/* ============================================================
-   BLOB TO BASE64
-============================================================ */
-
-function blobToDataURL(blob){
-
-    return new Promise(
-
-        function(resolve,reject){
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                function(){
-
-                    resolve(
-                        reader.result
-                    );
-
-                };
-
-
-            reader.onerror =
-                reject;
-
-
-            reader.readAsDataURL(
-                blob
-            );
-
-        }
-
-    );
-
-}
-
-
-/* ============================================================
-   PDF BASE64
-============================================================ */
-
-async function getPDFBase64(){
-
-    const doc =
-        generatePDF();
-
-
-    const blob =
-        doc.output(
-            "blob"
-        );
-
-
-    return await blobToDataURL(
-        blob
-    );
-
-}
-
-
-/* ============================================================
-   EXCEL BASE64
-============================================================ */
-
-async function getExcelBase64(){
-
-    const blob =
-        await createExcelBlob();
-
-
-    return await blobToDataURL(
-        blob
-    );
-
-}
-
-
-/* ============================================================
-   DOWNLOAD EXCEL
-============================================================ */
-
-async function downloadExcel(){
-
-    if(
-        !imgBefore.src ||
-        !imgTopup.src ||
-        !imgAfter.src
-    ){
-
-        alert(
-            "Please capture BEFORE, TOPUP and AFTER photos first."
-        );
-
-
-        return;
-
-    }
-
-
-    try{
-
-        const blob =
-            await createExcelBlob();
-
-
-        const url =
-            URL.createObjectURL(
-                blob
-            );
-
-
-        const a =
-            document.createElement(
-                "a"
-            );
-
-
-        a.href =
-            url;
-
-
-        a.download =
-
-            siteId.value +
-            "_" +
-            date.value +
-            "_Refuelling_Report.xlsx";
-
-
-        document.body.appendChild(
-            a
-        );
-
-
-        a.click();
-
-
-        document.body.removeChild(
-            a
-        );
-
-
-        URL.revokeObjectURL(
-            url
-        );
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            "EXCEL ERROR:",
-            error
-        );
-
-
-        alert(
-            "Could not create Excel file. Please try again."
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   SEND COMPLETE REPORT
-============================================================ */
-
-form.addEventListener(
-
-    "submit",
-
-    async function(event){
-
-        event.preventDefault();
-
-
-        /* ====================================================
-           HTML VALIDATION
-        ==================================================== */
-
-        if(
-            !form.checkValidity()
+        /* Make enough rows for image */
+
+        for(
+            let i = 0;
+            i < 18;
+            i++
         ){
 
-            form.reportValidity();
-
-            return;
-
-        }
 
 
         /* ====================================================
