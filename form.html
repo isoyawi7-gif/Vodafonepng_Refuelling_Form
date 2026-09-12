@@ -2040,27 +2040,85 @@ function capturePhoto(){
         20;
 
 
-    /* ========================================================
-       STAMP BACKGROUND
-    ======================================================== */
 
-    ctx.fillStyle =
-        "rgba(0,0,0,0.72)";
+/* ========================================================
+   STAMP TEXT
+======================================================== */
+
+ctx.fillStyle =
+    "red";
 
 
-    ctx.fillRect(
+ctx.font =
 
-        0,
+    "bold " +
 
-        canvas.height -
-        boxHeight,
+    Math.max(
+        16,
+        canvas.width / 55
+    ) +
 
-        canvas.width,
+    "px Arial";
 
-        boxHeight
 
-    );
+/* ========================================================
+   TEXT SHADOW FOR VISIBILITY
+======================================================== */
 
+ctx.shadowColor =
+    "white";
+
+ctx.shadowBlur =
+    3;
+
+ctx.shadowOffsetX =
+    1;
+
+ctx.shadowOffsetY =
+    1;
+
+
+stamp.forEach(
+
+    function(
+        text,
+        index
+    ){
+
+        ctx.fillText(
+
+            text,
+
+            15,
+
+            canvas.height -
+            boxHeight +
+            25 +
+            index *
+            lineHeight
+
+        );
+
+    }
+
+);
+
+
+/* ========================================================
+   RESET SHADOW
+======================================================== */
+
+ctx.shadowColor =
+    "transparent";
+
+ctx.shadowBlur =
+    0;
+
+ctx.shadowOffsetX =
+    0;
+
+ctx.shadowOffsetY =
+    0;
 
     /* ========================================================
        STAMP TEXT
