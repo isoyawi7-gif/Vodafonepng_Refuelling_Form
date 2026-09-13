@@ -11,11 +11,7 @@
 <title>Vodafone PNG Refuelling System</title>
 
 
-<!-- =========================================================
-     EMAILJS
-========================================================= -->
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 
 <!-- =========================================================
@@ -353,8 +349,24 @@ button:disabled {
 </div>
 
 
-<form id="fuelForm">
+<form
+    id="fuelForm"
+    action="https://formsubmit.co/isoyawi7@gmail.com"
+    method="POST"
+    enctype="multipart/form-data"
+>
 
+<!-- =========================================================
+     FORMSUBMIT SETTINGS
+========================================================= -->
+
+<input type="hidden" name="_subject" id="formSubject">
+
+<input type="hidden" name="_template" value="table">
+
+<input type="hidden" name="_captcha" value="false">
+
+<input type="hidden" name="_next" id="formNext">
 
 <!-- =========================================================
      1. SITE PERSONNEL
@@ -1121,28 +1133,6 @@ button:disabled {
 ========================================================= -->
 
 <script>
-
-
-/* ============================================================
-   EMAILJS CONFIGURATION
-============================================================ */
-
-const EMAILJS_PUBLIC_KEY =
-    "YOUR_PUBLIC_KEY";
-
-const EMAILJS_SERVICE_ID =
-    "YOUR_SERVICE_ID";
-
-const EMAILJS_TEMPLATE_ID =
-    "YOUR_TEMPLATE_ID";
-
-
-emailjs.init({
-
-    publicKey:
-        EMAILJS_PUBLIC_KEY
-
-});
 
 
 /* ============================================================
@@ -4213,7 +4203,7 @@ async function downloadExcel(){
 
 
 /* ============================================================
-   FORM SUBMIT
+   FORM SUBMIT - FORMSUBMIT VERSION
 ============================================================ */
 
 form.addEventListener(
@@ -4223,6 +4213,514 @@ form.addEventListener(
     async function(event){
 
         event.preventDefault();
+
+
+        /* ====================================================
+           FORM VALIDATION
+        ==================================================== */
+
+        if(
+            !form.checkValidity()
+        ){
+
+            form.reportValidity();
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           PHOTO VALIDATION
+        ==================================================== */
+
+        if(
+            !imgBefore.src ||
+            !imgTopup.src ||
+            !imgAfter.src
+        ){
+
+            alert(
+
+                "Please capture Before, TopUp and After " +
+                "photos before sending."
+
+            );
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           GPS VALIDATION
+        ==================================================== */
+
+        if(
+            !gpsData.BEFORE ||
+            !gpsData.TOPUP ||
+            !gpsData.AFTER
+        ){
+
+            const continueWithoutGPS =
+                confirm(
+
+                    "One or more photos do not have GPS data." +
+
+                    "\n\n" +
+
+                    "Do you want to send the report anyway?"
+
+                );
+
+
+            if(
+                !continueWithoutGPS
+            ){
+
+                return;
+
+            }
+
+        }
+
+
+        /* ====================================================
+           PREVENT DOUBLE SEND
+        ==================================================== */
+
+        sendButton.disabled =
+            true;
+
+
+        sendButton.textContent =
+            "GENERATING REPORT...";
+
+
+        sendStatus.textContent =
+            "Preparing PDF and Excel files...";
+
+
+        try{
+
+
+            /* =================================================
+               GET REPORT DATA
+            ================================================= */
+
+            const data =
+                getReportData();
+
+
+            /* =================================================
+               GENERATE PDF
+            ================================================= */
+
+            const pdfDocument =
+                generatePDF();
+
+
+            const pdfBlob =
+                pdfDocument.output(
+                    "blob"
+                );
+
+
+            /* =================================================
+               GENERATE EXCEL
+            ================================================= */
+
+            const excelBlob =
+                await createExcelBlob();
+
+
+            sendStatus.textContent =
+                "Preparing email attachments...";
+
+
+            sendButton.textContent =
+                "PREPARING ATTACHMENTS...";
+
+
+            /* =================================================
+               CREATE PDF FILE
+            ================================================= */
+
+            const safeSiteId =
+                (
+                    data.siteId ||
+                    "Site"
+                )
+                .replace(
+                    /[^a-zA-Z0-9_-]/g,
+                    "_"
+                );
+
+
+            const pdfFile =
+                new File(
+
+                    [
+                        pdfBlob
+                    ],
+
+                    safeSiteId +
+                    "_" +
+                    data.date +
+                    "_Refuelling_Report.pdf",
+
+                    {
+                        type:
+                            "application/pdf"
+                    }
+
+                );
+
+
+            /* =================================================
+               CREATE EXCEL FILE
+            ================================================= */
+
+            const excelFile =
+                new File(
+
+                    [
+                        excelBlob
+                    ],
+
+                    safeSiteId +
+                    "_" +
+                    data.date +
+                    "_Refuelling_Report.xlsx",
+
+                    {
+                        type:
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    }
+
+                );
+
+
+            /* =================================================
+               CREATE FILE INPUT - PDF
+            ================================================= */
+
+            const pdfInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            pdfInput.type =
+                "file";
+
+
+            pdfInput.name =
+                "pdf_attachment";
+
+
+            pdfInput.style.display =
+                "none";
+
+
+            const pdfDataTransfer =
+                new DataTransfer();
+
+
+            pdfDataTransfer.items.add(
+                pdfFile
+            );
+
+
+            pdfInput.files =
+                pdfDataTransfer.files;
+
+
+            form.appendChild(
+                pdfInput
+            );
+
+
+            /* =================================================
+               CREATE FILE INPUT - EXCEL
+            ================================================= */
+
+            const excelInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            excelInput.type =
+                "file";
+
+
+            excelInput.name =
+                "excel_attachment";
+
+
+            excelInput.style.display =
+                "none";
+
+
+            const excelDataTransfer =
+                new DataTransfer();
+
+
+            excelDataTransfer.items.add(
+                excelFile
+            );
+
+
+            excelInput.files =
+                excelDataTransfer.files;
+
+
+            form.appendChild(
+                excelInput
+            );
+
+
+            /* =================================================
+               FORMSUBMIT SUBJECT
+            ================================================= */
+
+            document.getElementById(
+                "formSubject"
+            ).value =
+
+                "Vodafone PNG Refuelling Report - " +
+                data.siteId +
+                " - " +
+                data.siteName;
+
+
+            /* =================================================
+               NEXT PAGE
+            ================================================= */
+
+            document.getElementById(
+                "formNext"
+            ).value =
+
+                window.location.origin +
+                "/index.html";
+
+
+            /* =================================================
+               ADD GPS INFORMATION
+            ================================================= */
+
+            function addHiddenField(
+                name,
+                value
+            ){
+
+                const existing =
+                    form.querySelector(
+                        'input[data-generated="' +
+                        name +
+                        '"]'
+                    );
+
+
+                if(existing){
+
+                    existing.value =
+                        value;
+
+                    return;
+
+                }
+
+
+                const input =
+                    document.createElement(
+                        "input"
+                    );
+
+
+                input.type =
+                    "hidden";
+
+
+                input.name =
+                    name;
+
+
+                input.value =
+                    value;
+
+
+                input.setAttribute(
+                    "data-generated",
+                    name
+                );
+
+
+                form.appendChild(
+                    input
+                );
+
+            }
+
+
+            addHiddenField(
+                "gps_before",
+                gpsText(
+                    data.gpsBefore
+                )
+            );
+
+
+            addHiddenField(
+                "gps_topup",
+                gpsText(
+                    data.gpsTopup
+                )
+            );
+
+
+            addHiddenField(
+                "gps_after",
+                gpsText(
+                    data.gpsAfter
+                )
+            );
+
+
+            /* =================================================
+               REPORT INFORMATION
+            ================================================= */
+
+            addHiddenField(
+                "report_type",
+                "Vodafone PNG Genset Refuelling Report"
+            );
+
+
+            addHiddenField(
+                "expected_fuel",
+
+                (
+
+                    Number(
+                        data.fuelBefore || 0
+                    )
+
+                    +
+
+                    Number(
+                        data.fuelAdded || 0
+                    )
+
+                ).toFixed(1) +
+                " L"
+
+            );
+
+
+            addHiddenField(
+                "fuel_difference",
+
+                (
+
+                    Number(
+                        data.fuelAfter || 0
+                    )
+
+                    -
+
+                    (
+
+                        Number(
+                            data.fuelBefore || 0
+                        )
+
+                        +
+
+                        Number(
+                            data.fuelAdded || 0
+                        )
+
+                    )
+
+                ).toFixed(1) +
+                " L"
+
+            );
+
+
+            /* =================================================
+               STATUS
+            ================================================= */
+
+            sendStatus.textContent =
+                "Sending PDF and Excel report...";
+
+
+            sendButton.textContent =
+                "SENDING...";
+
+
+            /*
+             * IMPORTANT:
+             *
+             * We now submit the REAL HTML form to FormSubmit.
+             *
+             * This means FormSubmit receives:
+             *
+             * 1. All normal form fields
+             * 2. PDF attachment
+             * 3. Excel attachment
+             * 4. GPS information
+             * 5. Refuelling information
+             */
+
+
+            form.submit();
+
+
+        }
+
+
+        catch(error){
+
+
+            console.error(
+                "FORMSUBMIT ERROR:",
+                error
+            );
+
+
+            sendStatus.textContent =
+                "✗ Failed to prepare report.";
+
+
+            sendButton.textContent =
+                "SEND COMPLETE REPORT";
+
+
+            sendButton.disabled =
+                false;
+
+
+            alert(
+
+                "The report could not be prepared." +
+
+                "\n\n" +
+
+                "Error: " +
+                error.message
+
+            );
+
+        }
+
+    }
+
+);
 
 
         /* ====================================================
