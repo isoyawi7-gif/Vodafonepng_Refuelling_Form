@@ -1380,7 +1380,7 @@ function updateProvinces(){
         '<option value="">Select Province</option>';
 
 
-    list.forEach(
+       list.forEach(
         function(p){
 
             const option =
@@ -1388,14 +1388,11 @@ function updateProvinces(){
                     "option"
                 );
 
-
             option.value =
                 p;
 
-
             option.textContent =
                 p;
-
 
             province.appendChild(
                 option
@@ -1405,7 +1402,7 @@ function updateProvinces(){
     );
 
 }
-
+      
 
 /* ============================================================
    FUEL CALCULATION
@@ -4721,21 +4718,6 @@ form.addEventListener(
     }
 
 );
-
-
-        /* ====================================================
-           FORM VALIDATION
-        ==================================================== */
-
-        if(
-            !form.checkValidity()
-        ){
-
-            form.reportValidity();
-
-            return;
-
-        }
 
 
         /* ====================================================
