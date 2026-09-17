@@ -1,0 +1,3994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vodafone PNG Fuel Collection Dashboard</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f4f6;
+    color:#111827;
+}
+
+.header{
+    background:#e60000;
+    color:#fff;
+    padding:24px;
+}
+
+.header h1{
+    margin:0;
+    font-size:28px;
+}
+
+.header p{
+    margin:8px 0 0;
+    opacity:.9;
+}
+
+.container{
+    max-width:1500px;
+    margin:auto;
+    padding:20px;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    background:#fff;
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h2{
+    margin-top:0;
+    margin-bottom:18px;
+}
+
+/* ================= KPI ================= */
+
+.kpis{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:14px;
+    margin-bottom:20px;
+}
+
+.kpi{
+    background:#fff;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 3px 10px rgba(0,0,0,.07);
+}
+
+.kpi-title{
+    color:#6b7280;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.kpi-value{
+    font-size:30px;
+    font-weight:900;
+    margin-top:7px;
+}
+
+.red{
+    color:#e60000;
+}
+
+.green{
+    color:#15803d;
+}
+
+.blue{
+    color:#2563eb;
+}
+
+.orange{
+    color:#d97706;
+}
+
+/* ================= LAYOUT ================= */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:20px;
+}
+
+/* ================= FORMS ================= */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+input,
+select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:14px;
+    background:#fff;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#e60000;
+    box-shadow:0 0 0 2px rgba(230,0,0,.08);
+}
+
+.two{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+/* ================= BUTTONS ================= */
+
+button{
+    border:none;
+    border-radius:8px;
+    padding:11px 14px;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.btn-red{
+    background:#e60000;
+    color:#fff;
+}
+
+.btn-black{
+    background:#111827;
+    color:#fff;
+}
+
+.btn-green{
+    background:#15803d;
+    color:#fff;
+}
+
+.btn-blue{
+    background:#2563eb;
+    color:#fff;
+}
+
+.btn-gray{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.btn-danger{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.full{
+    width:100%;
+    margin-top:7px;
+}
+
+/* ================= SITE ASSIGNMENTS ================= */
+
+.site-row{
+    display:grid;
+    grid-template-columns:1fr 90px 70px;
+    gap:7px;
+    margin-bottom:9px;
+    align-items:center;
+}
+
+.site-row input{
+    min-width:0;
+}
+
+.remove-site{
+    background:#fee2e2;
+    color:#991b1b;
+    padding:10px 5px;
+    font-size:12px;
+}
+
+.site-total{
+    margin-top:8px;
+    padding:11px;
+    background:#f3f4f6;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.site-total span{
+    color:#e60000;
+    font-size:16px;
+}
+
+/* ================= MESSAGES ================= */
+
+.message{
+    display:none;
+    margin-top:12px;
+    padding:11px;
+    border-radius:8px;
+    font-size:13px;
+}
+
+.message.show{
+    display:block;
+}
+
+.message.success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.message.error{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* ================= ZONES ================= */
+
+.zone-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+.zone{
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:15px;
+}
+
+.zone-name{
+    color:#6b7280;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.zone-number{
+    font-size:27px;
+    font-weight:900;
+    margin-top:5px;
+}
+
+/* ================= TEAM ================= */
+
+.team-row{
+    margin-bottom:17px;
+}
+
+.team-line{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-size:13px;
+}
+
+.progress{
+    height:10px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:#e60000;
+}
+
+/* ================= REPORT ================= */
+
+.report-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+}
+
+.report-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:12px;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+    width:100%;
+    overflow:auto;
+    max-height:550px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+th,
+td{
+    padding:10px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+    vertical-align:top;
+}
+
+th{
+    background:#f9fafb;
+    position:sticky;
+    top:0;
+    z-index:1;
+}
+
+td strong{
+    color:#e60000;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    text-align:center;
+    color:#6b7280;
+    font-size:12px;
+    padding:25px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:1200px){
+
+    .kpis{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:900px){
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+
+    .zone-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .container{
+        padding:10px;
+    }
+
+    .kpis{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .two,
+    .report-grid,
+    .report-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .site-row{
+        grid-template-columns:1fr 75px 65px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<div class="header">
+
+    <h1>
+        Vodafone PNG Fuel Collection Dashboard
+    </h1>
+
+    <p>
+        Lae Zone Fuel Collection • Team Accountability •
+        Vodafone PNG Site Allocation
+    </p>
+
+</div>
+
+
+<div class="container">
+
+<!-- =========================================================
+     KPI DASHBOARD
+========================================================= -->
+
+<div class="kpis">
+
+    <div class="kpi">
+
+        <div class="kpi-title">
+            Total Stock
+        </div>
+
+        <div
+            class="kpi-value blue"
+            id="totalStock"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-title">
+            Total Collected
+        </div>
+
+        <div
+            class="kpi-value green"
+            id="totalCollected"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-title">
+            Total Assigned
+        </div>
+
+        <div
+            class="kpi-value orange"
+            id="totalAssigned"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-title">
+            Remaining
+        </div>
+
+        <div
+            class="kpi-value red"
+            id="remainingStock"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-title">
+            Sites Supplied
+        </div>
+
+        <div
+            class="kpi-value"
+            id="sitesSupplied"
+        >
+            0
+        </div>
+
+    </div>
+
+
+    <div class="kpi">
+
+        <div class="kpi-title">
+            Records
+        </div>
+
+        <div
+            class="kpi-value"
+            id="recordCount"
+        >
+            0
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN GRID
+========================================================= -->
+
+<div class="main-grid">
+
+
+<!-- =========================================================
+     LEFT COLUMN
+========================================================= -->
+
+<div>
+
+
+<!-- =========================================================
+     FUEL STOCK
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Fuel Stock
+    </h2>
+
+    <div class="form-group">
+
+        <label>
+            Total Fuel Drums Available
+        </label>
+
+        <input
+            type="number"
+            id="stockInput"
+            min="0"
+            step="1"
+            placeholder="Example: 100"
+        >
+
+    </div>
+
+
+    <button
+        type="button"
+        id="setStockButton"
+        class="btn-red full"
+    >
+        Set / Update Fuel Stock
+    </button>
+
+
+    <div
+        id="stockMessage"
+        class="message"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     COLLECTION FORM
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Record Fuel Collection
+    </h2>
+
+
+    <!-- TEAM -->
+
+    <div class="form-group">
+
+        <label>
+            Team Member
+        </label>
+
+        <select id="teamMember">
+
+            <option value="">
+                Select Team Member
+            </option>
+
+            <option>
+                Terrence Nikasivai
+            </option>
+
+            <option>
+                Terence Kamkem
+            </option>
+
+            <option>
+                Druschilda Banduru
+            </option>
+
+            <option>
+                Chris Kinakap
+            </option>
+
+            <option>
+                Shivness Reddy
+            </option>
+
+            <option>
+                Robert Waninara
+            </option>
+
+            <option>
+                Woni Gaora
+            </option>
+
+            <option>
+                Iso Yawi
+            </option>
+
+            <option value="OTHER">
+                Other
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- OTHER TEAM MEMBER -->
+
+    <div class="form-group">
+
+        <label>
+            Other Team Member
+        </label>
+
+        <input
+            type="text"
+            id="otherTeamMember"
+            placeholder="Use only if Other is selected"
+        >
+
+    </div>
+
+
+    <!-- DATE + DRUMS -->
+
+    <div class="two">
+
+        <div class="form-group">
+
+            <label>
+                Collection Date
+            </label>
+
+            <input
+                type="date"
+                id="collectionDate"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Fuel Drums Collected
+            </label>
+
+            <input
+                type="number"
+                id="collectionDrums"
+                min="1"
+                step="1"
+                placeholder="Example: 10"
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- ZONE -->
+
+    <div class="form-group">
+
+        <label>
+            Lae Zone
+        </label>
+
+        <select id="laeZone">
+
+            <option value="">
+                Select Zone
+            </option>
+
+            <option>
+                Lae Zone 1
+            </option>
+
+            <option>
+                Lae Zone 2
+            </option>
+
+            <option>
+                Lae Zone 3
+            </option>
+
+            <option>
+                Lae Zone 4
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- VEHICLE -->
+
+    <div class="form-group">
+
+        <label>
+            Vehicle / Truck
+        </label>
+
+        <input
+            type="text"
+            id="vehicle"
+            placeholder="Vehicle registration"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         SITE ASSIGNMENTS
+    ====================================================== -->
+
+    <div class="form-group">
+
+        <label>
+            Vodafone PNG Site Assignment
+        </label>
+
+        <div id="siteAssignments"></div>
+
+
+        <div class="site-total">
+
+            Site Allocation Total:
+
+            <span id="siteAllocationTotal">
+                0
+            </span>
+
+            drums
+
+        </div>
+
+    </div>
+
+
+    <!-- ADD SITE -->
+
+    <button
+        type="button"
+        id="addSiteButton"
+        class="btn-black full"
+    >
+        + Add Vodafone Site
+    </button>
+
+
+    <!-- RECORD -->
+
+    <button
+        type="button"
+        id="recordButton"
+        class="btn-red full"
+    >
+        Record Fuel Collection
+    </button>
+
+
+    <div
+        id="collectionMessage"
+        class="message"
+    ></div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+     RIGHT COLUMN
+========================================================= -->
+
+<div>
+
+
+<!-- =========================================================
+     REPORTS
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Reports
+    </h2>
+
+
+    <div class="report-grid">
+
+        <div>
+
+            <label>
+                Report Type
+            </label>
+
+            <select id="reportType">
+
+                <option value="daily">
+                    Daily
+                </option>
+
+                <option value="weekly">
+                    Weekly
+                </option>
+
+                <option value="monthly">
+                    Monthly
+                </option>
+
+                <option value="selected-month">
+                    Selected Month
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Report Date
+            </label>
+
+            <input
+                type="date"
+                id="reportDate"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Report Month
+            </label>
+
+            <input
+                type="month"
+                id="reportMonth"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="report-buttons">
+
+        <button
+            type="button"
+            id="downloadCSV"
+            class="btn-blue"
+        >
+            Download CSV
+        </button>
+
+
+        <button
+            type="button"
+            id="downloadReport"
+            class="btn-green"
+        >
+            Download Report
+        </button>
+
+
+        <button
+            type="button"
+            id="printReport"
+            class="btn-black"
+        >
+            Print Report
+        </button>
+
+    </div>
+
+
+    <div
+        id="reportPreview"
+        style="margin-top:15px;color:#6b7280;font-size:13px"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     ZONE DASHBOARD
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Lae Zone Dashboard
+    </h2>
+
+    <div
+        class="zone-grid"
+        id="zoneSummary"
+    ></div>
+
+</div>
+
+
+<!-- =========================================================
+     TEAM ACCOUNTABILITY
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Team Collection Accountability
+    </h2>
+
+    <div id="teamSummary"></div>
+
+</div>
+
+
+<!-- =========================================================
+     COLLECTION REGISTER
+========================================================= -->
+
+<div class="card">
+
+    <h2>
+        Fuel Collection Register
+    </h2>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Team
+                    </th>
+
+                    <th>
+                        Zone
+                    </th>
+
+                    <th>
+                        Vehicle
+                    </th>
+
+                    <th>
+                        Drums
+                    </th>
+
+                    <th>
+                        Vodafone PNG Sites
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="history"></tbody>
+
+        </table>
+
+    </div>
+
+
+    <button
+        type="button"
+        id="clearData"
+        class="btn-danger full"
+    >
+        Clear All Dashboard Data
+    </button>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<div class="footer">
+
+    Vodafone PNG Fuel Collection Control Dashboard
+
+    <br>
+
+    Fuel Stock • Team Accountability • Site Allocation •
+    Lae Zones
+
+    <br><br>
+
+    <strong>
+        Together We Can
+    </strong>
+
+</div>
+
+
+<script>
+
+/* ============================================================
+   DATABASE
+============================================================ */
+
+const STORAGE_KEY =
+    "VODAFONE_PNG_FUEL_DASHBOARD";
+
+
+let database = {
+
+    stock: 0,
+
+    collections: []
+
+};
+
+
+/* ============================================================
+   LOAD DATABASE
+============================================================ */
+
+function loadDatabase(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
+
+        if(saved){
+
+            const data =
+                JSON.parse(saved);
+
+
+            database.stock =
+                Number(data.stock) || 0;
+
+
+            database.collections =
+                Array.isArray(
+                    data.collections
+                )
+                ? data.collections
+                : [];
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Load error:",
+            error
+        );
+
+        database = {
+
+            stock:0,
+
+            collections:[]
+
+        };
+
+    }
+
+}
+
+
+/* ============================================================
+   SAVE DATABASE
+============================================================ */
+
+function saveDatabase(){
+
+    try{
+
+        localStorage.setItem(
+
+            STORAGE_KEY,
+
+            JSON.stringify(database)
+
+        );
+
+        return true;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Save error:",
+            error
+        );
+
+        alert(
+            "The browser could not save the dashboard data."
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* ============================================================
+   TODAY
+============================================================ */
+
+function getToday(){
+
+    const date =
+        new Date();
+
+
+    const y =
+        date.getFullYear();
+
+
+    const m =
+        String(
+            date.getMonth()+1
+        ).padStart(2,"0");
+
+
+    const d =
+        String(
+            date.getDate()
+        ).padStart(2,"0");
+
+
+    return `${y}-${m}-${d}`;
+
+}
+
+
+/* ============================================================
+   CURRENT MONTH
+============================================================ */
+
+function getCurrentMonth(){
+
+    return getToday().substring(0,7);
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* ============================================================
+   TOTAL COLLECTED
+============================================================ */
+
+function getTotalCollected(){
+
+    return database.collections.reduce(
+
+        function(total,record){
+
+            return total +
+                Number(
+                    record.collectedDrums || 0
+                );
+
+        },
+
+        0
+
+    );
+
+}
+
+
+/* ============================================================
+   REMAINING STOCK
+============================================================ */
+
+function getRemainingStock(){
+
+    return Math.max(
+
+        0,
+
+        Number(database.stock || 0)
+        -
+        getTotalCollected()
+
+    );
+
+}
+
+
+/* ============================================================
+   TOTAL ASSIGNED
+============================================================ */
+
+function getTotalAssigned(){
+
+    let total = 0;
+
+
+    database.collections.forEach(
+
+        function(record){
+
+            if(
+                !Array.isArray(record.sites)
+            ){
+
+                return;
+
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    total +=
+                        Number(
+                            site.drums || 0
+                        );
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    return total;
+
+}
+
+
+/* ============================================================
+   UNIQUE SITES
+============================================================ */
+
+function getUniqueSites(){
+
+    const sites =
+        new Set();
+
+
+    database.collections.forEach(
+
+        function(record){
+
+            if(
+                !Array.isArray(record.sites)
+            ){
+
+                return;
+
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    if(site.siteId){
+
+                        sites.add(
+                            site.siteId
+                        );
+
+                    }
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    return sites.size;
+
+}
+
+
+/* ============================================================
+   UPDATE SITE TOTAL
+============================================================ */
+
+function updateSiteAllocationTotal(){
+
+    const rows =
+        document.querySelectorAll(
+            ".site-row"
+        );
+
+
+    let total = 0;
+
+
+    rows.forEach(
+
+        function(row){
+
+            const input =
+                row.querySelector(
+                    ".site-drums"
+                );
+
+
+            const value =
+                Number(
+                    input
+                    ? input.value
+                    : 0
+                );
+
+
+            if(
+                Number.isFinite(value)
+            ){
+
+                total += value;
+
+            }
+
+        }
+
+    );
+
+
+    document.getElementById(
+        "siteAllocationTotal"
+    ).textContent =
+        total;
+
+}
+
+
+/* ============================================================
+   ADD VODAFONE SITE
+============================================================ */
+
+function addSite(
+    siteId = "",
+    drums = ""
+){
+
+    const container =
+        document.getElementById(
+            "siteAssignments"
+        );
+
+
+    if(!container){
+
+        console.error(
+            "siteAssignments container not found."
+        );
+
+        return;
+
+    }
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+
+    row.className =
+        "site-row";
+
+
+    row.innerHTML = `
+
+        <input
+            type="text"
+            class="site-id"
+            placeholder="Site ID e.g. VP1066"
+            value="${escapeHTML(siteId)}"
+        >
+
+
+        <input
+            type="number"
+            class="site-drums"
+            placeholder="Drums"
+            min="1"
+            step="1"
+            value="${escapeHTML(drums)}"
+        >
+
+
+        <button
+            type="button"
+            class="remove-site"
+        >
+            Remove
+        </button>
+
+    `;
+
+
+    container.appendChild(
+        row
+    );
+
+
+    const quantity =
+        row.querySelector(
+            ".site-drums"
+        );
+
+
+    quantity.addEventListener(
+        "input",
+        updateSiteAllocationTotal
+    );
+
+
+    const remove =
+        row.querySelector(
+            ".remove-site"
+        );
+
+
+    remove.addEventListener(
+        "click",
+
+        function(){
+
+            const rows =
+                container.querySelectorAll(
+                    ".site-row"
+                );
+
+
+            /*
+               Keep at least one row.
+            */
+
+            if(
+                rows.length === 1
+            ){
+
+                row.querySelector(
+                    ".site-id"
+                ).value = "";
+
+
+                row.querySelector(
+                    ".site-drums"
+                ).value = "";
+
+
+                updateSiteAllocationTotal();
+
+                return;
+
+            }
+
+
+            row.remove();
+
+            updateSiteAllocationTotal();
+
+        }
+
+    );
+
+
+    updateSiteAllocationTotal();
+
+}
+
+
+/* ============================================================
+   GET SITE ASSIGNMENTS
+============================================================ */
+
+function getSiteAssignments(){
+
+    const rows =
+        document.querySelectorAll(
+            ".site-row"
+        );
+
+
+    const sites = [];
+
+
+    rows.forEach(
+
+        function(row){
+
+            const siteIdInput =
+                row.querySelector(
+                    ".site-id"
+                );
+
+
+            const drumsInput =
+                row.querySelector(
+                    ".site-drums"
+                );
+
+
+            const siteId =
+                siteIdInput
+                ? siteIdInput.value.trim()
+                : "";
+
+
+            const drums =
+                parseInt(
+                    drumsInput
+                    ? drumsInput.value
+                    : "0",
+                    10
+                );
+
+
+            /*
+               Ignore completely empty row.
+            */
+
+            if(
+                !siteId &&
+                (!drums || drums <= 0)
+            ){
+
+                return;
+
+            }
+
+
+            sites.push({
+
+                siteId: siteId,
+
+                drums: drums
+
+            });
+
+        }
+
+    );
+
+
+    return sites;
+
+}
+
+
+/* ============================================================
+   GET TEAM
+============================================================ */
+
+function getTeamMember(){
+
+    const select =
+        document.getElementById(
+            "teamMember"
+        );
+
+
+    let team =
+        select
+        ? select.value.trim()
+        : "";
+
+
+    if(team === "OTHER"){
+
+        const other =
+            document.getElementById(
+                "otherTeamMember"
+            );
+
+
+        team =
+            other
+            ? other.value.trim()
+            : "";
+
+    }
+
+
+    return team;
+
+}
+
+
+/* ============================================================
+   SET STOCK
+============================================================ */
+
+function setStock(){
+
+    const input =
+        document.getElementById(
+            "stockInput"
+        );
+
+
+    const value =
+        parseInt(
+            input.value,
+            10
+        );
+
+
+    const messageBox =
+        document.getElementById(
+            "stockMessage"
+        );
+
+
+    if(
+        !Number.isInteger(value)
+        ||
+        value < 0
+    ){
+
+        showMessage(
+
+            messageBox,
+
+            "Please enter a valid whole number of fuel drums.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    const collected =
+        getTotalCollected();
+
+
+    if(
+        value < collected
+    ){
+
+        showMessage(
+
+            messageBox,
+
+            "Stock cannot be lower than fuel already collected (" +
+            collected +
+            " drums).",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    database.stock =
+        value;
+
+
+    saveDatabase();
+
+    renderDashboard();
+
+
+    showMessage(
+
+        messageBox,
+
+        "Fuel stock successfully updated to " +
+        value +
+        " drums.",
+
+        "success"
+
+    );
+
+}
+
+
+/* ============================================================
+   RECORD FUEL COLLECTION
+============================================================ */
+
+function recordFuelCollection(){
+
+    console.log(
+        "Record Fuel Collection clicked."
+    );
+
+
+    const messageBox =
+        document.getElementById(
+            "collectionMessage"
+        );
+
+
+    /* --------------------------------------------------------
+       GET INPUTS
+    -------------------------------------------------------- */
+
+    const team =
+        getTeamMember();
+
+
+    const date =
+        document.getElementById(
+            "collectionDate"
+        ).value;
+
+
+    const drums =
+        parseInt(
+            document.getElementById(
+                "collectionDrums"
+            ).value,
+            10
+        );
+
+
+    const zone =
+        document.getElementById(
+            "laeZone"
+        ).value;
+
+
+    const vehicle =
+        document.getElementById(
+            "vehicle"
+        ).value.trim();
+
+
+    /* --------------------------------------------------------
+       VALIDATION
+    -------------------------------------------------------- */
+
+    if(!team){
+
+        showMessage(
+
+            messageBox,
+
+            "Please select the team member.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    if(!date){
+
+        showMessage(
+
+            messageBox,
+
+            "Please select the collection date.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !Number.isInteger(drums)
+        ||
+        drums <= 0
+    ){
+
+        showMessage(
+
+            messageBox,
+
+            "Please enter a valid number of fuel drums collected.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    if(!zone){
+
+        showMessage(
+
+            messageBox,
+
+            "Please select one of the four Lae Zones.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    /* --------------------------------------------------------
+       STOCK CHECK
+    -------------------------------------------------------- */
+
+    const remaining =
+        getRemainingStock();
+
+
+    if(
+        drums > remaining
+    ){
+
+        showMessage(
+
+            messageBox,
+
+            "Not enough fuel stock. Remaining stock: " +
+            remaining +
+            " drums.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    /* --------------------------------------------------------
+       GET SITES
+    -------------------------------------------------------- */
+
+    const sites =
+        getSiteAssignments();
+
+
+    if(
+        sites.length === 0
+    ){
+
+        showMessage(
+
+            messageBox,
+
+            "Please add at least one Vodafone PNG site.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    /* --------------------------------------------------------
+       VALIDATE EACH SITE
+    -------------------------------------------------------- */
+
+    let siteTotal = 0;
+
+
+    for(
+        let i = 0;
+        i < sites.length;
+        i++
+    ){
+
+        const site =
+            sites[i];
+
+
+        if(!site.siteId){
+
+            showMessage(
+
+                messageBox,
+
+                "Please enter a Vodafone Site ID for every site.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isInteger(site.drums)
+            ||
+            site.drums <= 0
+        ){
+
+            showMessage(
+
+                messageBox,
+
+                "Please enter a valid drum quantity for " +
+                site.siteId +
+                ".",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        siteTotal +=
+            site.drums;
+
+    }
+
+
+    /* --------------------------------------------------------
+       SITE TOTAL MUST MATCH COLLECTION
+    -------------------------------------------------------- */
+
+    if(
+        siteTotal !== drums
+    ){
+
+        showMessage(
+
+            messageBox,
+
+            "Fuel collected = " +
+            drums +
+            " drums, but site allocation = " +
+            siteTotal +
+            " drums. These amounts must be equal.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+    /* --------------------------------------------------------
+       CREATE RECORD
+    -------------------------------------------------------- */
+
+    const record = {
+
+        id:
+            Date.now().toString() +
+            "_" +
+            Math.random()
+            .toString(36)
+            .substring(2,9),
+
+        date: date,
+
+        team: team,
+
+        zone: zone,
+
+        vehicle:
+            vehicle || "Not entered",
+
+        collectedDrums:
+            drums,
+
+        sites:
+            sites,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    /* --------------------------------------------------------
+       ADD TO DATABASE
+    -------------------------------------------------------- */
+
+    database.collections.push(
+        record
+    );
+
+
+    /* --------------------------------------------------------
+       SAVE
+    -------------------------------------------------------- */
+
+    const saved =
+        saveDatabase();
+
+
+    if(!saved){
+
+        return;
+
+    }
+
+
+    console.log(
+        "Fuel collection saved:",
+        record
+    );
+
+
+    /* --------------------------------------------------------
+       UPDATE DASHBOARD IMMEDIATELY
+    -------------------------------------------------------- */
+
+    renderDashboard();
+
+
+    /* --------------------------------------------------------
+       RESET FORM
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "collectionDrums"
+    ).value = "";
+
+
+    document.getElementById(
+        "vehicle"
+    ).value = "";
+
+
+    document.getElementById(
+        "siteAssignments"
+    ).innerHTML = "";
+
+
+    /*
+       Start the next collection with
+       one blank site row.
+    */
+
+    addSite();
+
+
+    /* --------------------------------------------------------
+       SUCCESS
+    -------------------------------------------------------- */
+
+    showMessage(
+
+        messageBox,
+
+        "SUCCESS: " +
+        drums +
+        " fuel drums recorded against " +
+        team +
+        " in " +
+        zone +
+        ". Remaining stock: " +
+        getRemainingStock() +
+        " drums.",
+
+        "success"
+
+    );
+
+}
+
+
+/* ============================================================
+   DELETE RECORD
+============================================================ */
+
+function deleteRecord(id){
+
+    const record =
+        database.collections.find(
+
+            function(item){
+
+                return item.id === id;
+
+            }
+
+        );
+
+
+    if(!record){
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            "Delete this fuel collection record?\n\n" +
+
+            "Team: " +
+            record.team +
+            "\n" +
+
+            "Drums: " +
+            record.collectedDrums
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    database.collections =
+        database.collections.filter(
+
+            function(item){
+
+                return item.id !== id;
+
+            }
+
+        );
+
+
+    saveDatabase();
+
+    renderDashboard();
+
+}
+
+
+/* ============================================================
+   CLEAR ALL
+============================================================ */
+
+function clearAllData(){
+
+    const confirmed =
+        confirm(
+
+            "WARNING!\n\n" +
+
+            "This will permanently delete all fuel stock " +
+            "and collection records stored in this browser.\n\n" +
+
+            "Continue?"
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    database = {
+
+        stock:0,
+
+        collections:[]
+
+    };
+
+
+    saveDatabase();
+
+    renderDashboard();
+
+
+    document.getElementById(
+        "stockInput"
+    ).value = "";
+
+}
+
+
+/* ============================================================
+   MESSAGE
+============================================================ */
+
+function showMessage(
+    element,
+    text,
+    type
+){
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    element.textContent =
+        text;
+
+
+    element.className =
+        "message show " +
+        type;
+
+
+    /*
+       Automatically hide success messages.
+    */
+
+    if(type === "success"){
+
+        setTimeout(
+
+            function(){
+
+                element.className =
+                    "message";
+
+            },
+
+            5000
+
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   RENDER KPI
+============================================================ */
+
+function renderKPI(){
+
+    const collected =
+        getTotalCollected();
+
+
+    const assigned =
+        getTotalAssigned();
+
+
+    const remaining =
+        getRemainingStock();
+
+
+    const sites =
+        getUniqueSites();
+
+
+    document.getElementById(
+        "totalStock"
+    ).textContent =
+        database.stock;
+
+
+    document.getElementById(
+        "totalCollected"
+    ).textContent =
+        collected;
+
+
+    document.getElementById(
+        "totalAssigned"
+    ).textContent =
+        assigned;
+
+
+    document.getElementById(
+        "remainingStock"
+    ).textContent =
+        remaining;
+
+
+    document.getElementById(
+        "sitesSupplied"
+    ).textContent =
+        sites;
+
+
+    document.getElementById(
+        "recordCount"
+    ).textContent =
+        database.collections.length;
+
+
+    document.getElementById(
+        "stockInput"
+    ).value =
+        database.stock || "";
+
+}
+
+
+/* ============================================================
+   RENDER ZONES
+============================================================ */
+
+function renderZones(){
+
+    const container =
+        document.getElementById(
+            "zoneSummary"
+        );
+
+
+    const zones = [
+
+        "Lae Zone 1",
+
+        "Lae Zone 2",
+
+        "Lae Zone 3",
+
+        "Lae Zone 4"
+
+    ];
+
+
+    container.innerHTML = "";
+
+
+    zones.forEach(
+
+        function(zone){
+
+            const records =
+                database.collections.filter(
+
+                    function(record){
+
+                        return record.zone === zone;
+
+                    }
+
+                );
+
+
+            const total =
+                records.reduce(
+
+                    function(sum,record){
+
+                        return sum +
+                            Number(
+                                record.collectedDrums || 0
+                            );
+
+                    },
+
+                    0
+
+                );
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "zone";
+
+
+            div.innerHTML = `
+
+                <div class="zone-name">
+                    ${escapeHTML(zone)}
+                </div>
+
+                <div class="zone-number">
+                    ${total}
+                </div>
+
+                <div
+                    style="
+                    font-size:12px;
+                    color:#6b7280;
+                    margin-top:3px;
+                    "
+                >
+                    fuel drums collected
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   RENDER TEAM SUMMARY
+============================================================ */
+
+function renderTeams(){
+
+    const container =
+        document.getElementById(
+            "teamSummary"
+        );
+
+
+    const totals = {};
+
+
+    database.collections.forEach(
+
+        function(record){
+
+            const team =
+                record.team;
+
+
+            if(!totals[team]){
+
+                totals[team] = 0;
+
+            }
+
+
+            totals[team] +=
+                Number(
+                    record.collectedDrums || 0
+                );
+
+        }
+
+    );
+
+
+    container.innerHTML = "";
+
+
+    const names =
+        Object.keys(totals);
+
+
+    if(names.length === 0){
+
+        container.innerHTML = `
+
+            <div
+                style="
+                color:#6b7280;
+                "
+            >
+                No fuel collection records yet.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let maximum = 0;
+
+
+    names.forEach(
+
+        function(name){
+
+            if(
+                totals[name] > maximum
+            ){
+
+                maximum =
+                    totals[name];
+
+            }
+
+        }
+
+    );
+
+
+    names
+    .sort(
+
+        function(a,b){
+
+            return totals[b] -
+                   totals[a];
+
+        }
+
+    )
+    .forEach(
+
+        function(name){
+
+            const amount =
+                totals[name];
+
+
+            const percentage =
+                maximum > 0
+
+                ? (amount / maximum) * 100
+
+                : 0;
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "team-row";
+
+
+            div.innerHTML = `
+
+                <div class="team-line">
+
+                    <strong>
+                        ${escapeHTML(name)}
+                    </strong>
+
+                    <span>
+                        ${amount} drums
+                    </span>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="
+                        width:${percentage}%;
+                        "
+                    ></div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   RENDER HISTORY
+============================================================ */
+
+function renderHistory(){
+
+    const table =
+        document.getElementById(
+            "history"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if(
+        database.collections.length === 0
+    ){
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    style="
+                    text-align:center;
+                    padding:30px;
+                    color:#6b7280;
+                    "
+                >
+
+                    No fuel collection records yet.
+
+                    <br><br>
+
+                    Use the form on the left to record
+                    the first fuel collection.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    const records =
+        [...database.collections]
+        .reverse();
+
+
+    records.forEach(
+
+        function(record){
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            let siteHTML = "";
+
+
+            if(
+                Array.isArray(record.sites)
+            ){
+
+                record.sites.forEach(
+
+                    function(site){
+
+                        siteHTML += `
+
+                            <div
+                                style="
+                                margin-bottom:5px;
+                                "
+                            >
+
+                                <strong>
+                                    ${escapeHTML(
+                                        site.siteId
+                                    )}
+                                </strong>
+
+                                :
+                                ${site.drums}
+                                drums
+
+                            </div>
+
+                        `;
+
+                    }
+
+                );
+
+            }
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${escapeHTML(
+                        record.date
+                    )}
+                </td>
+
+                <td>
+                    <strong>
+                        ${escapeHTML(
+                            record.team
+                        )}
+                    </strong>
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        record.zone
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        record.vehicle
+                    )}
+                </td>
+
+                <td>
+                    <strong>
+                        ${record.collectedDrums}
+                    </strong>
+                </td>
+
+                <td>
+                    ${siteHTML}
+                </td>
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="btn-danger delete-record"
+                        style="
+                        padding:7px 10px;
+                        "
+                    >
+                        Delete
+                    </button>
+
+                </td>
+
+            `;
+
+
+            row.querySelector(
+                ".delete-record"
+            ).addEventListener(
+
+                "click",
+
+                function(){
+
+                    deleteRecord(
+                        record.id
+                    );
+
+                }
+
+            );
+
+
+            table.appendChild(
+                row
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   REPORT FILTER
+============================================================ */
+
+function getReportRecords(){
+
+    const type =
+        document.getElementById(
+            "reportType"
+        ).value;
+
+
+    const date =
+        document.getElementById(
+            "reportDate"
+        ).value;
+
+
+    const month =
+        document.getElementById(
+            "reportMonth"
+        ).value;
+
+
+    /* DAILY */
+
+    if(type === "daily"){
+
+        return database.collections.filter(
+
+            function(record){
+
+                return record.date === date;
+
+            }
+
+        );
+
+    }
+
+
+    /* MONTHLY */
+
+    if(
+        type === "monthly"
+        ||
+        type === "selected-month"
+    ){
+
+        return database.collections.filter(
+
+            function(record){
+
+                return record.date.startsWith(
+                    month
+                );
+
+            }
+
+        );
+
+    }
+
+
+    /* WEEKLY */
+
+    const selected =
+        new Date(
+            date + "T00:00:00"
+        );
+
+
+    const day =
+        selected.getDay();
+
+
+    const monday =
+        new Date(
+            selected
+        );
+
+
+    monday.setDate(
+
+        selected.getDate()
+        -
+        (
+            day === 0
+            ? 6
+            : day - 1
+        )
+
+    );
+
+
+    const sunday =
+        new Date(
+            monday
+        );
+
+
+    sunday.setDate(
+        monday.getDate() + 6
+    );
+
+
+    const start =
+        formatDate(
+            monday
+        );
+
+
+    const end =
+        formatDate(
+            sunday
+        );
+
+
+    return database.collections.filter(
+
+        function(record){
+
+            return (
+
+                record.date >= start
+                &&
+                record.date <= end
+
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   FORMAT DATE
+============================================================ */
+
+function formatDate(date){
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(
+            date.getMonth()+1
+        ).padStart(2,"0");
+
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(2,"0");
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+/* ============================================================
+   REPORT PREVIEW
+============================================================ */
+
+function updateReportPreview(){
+
+    const records =
+        getReportRecords();
+
+
+    const drums =
+        records.reduce(
+
+            function(sum,record){
+
+                return sum +
+                    Number(
+                        record.collectedDrums || 0
+                    );
+
+            },
+
+            0
+
+        );
+
+
+    document.getElementById(
+        "reportPreview"
+    ).innerHTML = `
+
+        <strong>
+            ${records.length}
+        </strong>
+        collection records
+
+        &nbsp; • &nbsp;
+
+        <strong>
+            ${drums}
+        </strong>
+        fuel drums
+
+    `;
+
+}
+
+
+/* ============================================================
+   CSV DOWNLOAD
+============================================================ */
+
+function downloadCSV(){
+
+    const records =
+        getReportRecords();
+
+
+    let csv =
+        "Date,Team,Zone,Vehicle,Collected Drums,Vodafone Site,Site Drums\n";
+
+
+    records.forEach(
+
+        function(record){
+
+            if(
+                !record.sites ||
+                record.sites.length === 0
+            ){
+
+                csv += [
+
+                    record.date,
+                    record.team,
+                    record.zone,
+                    record.vehicle,
+                    record.collectedDrums,
+                    "",
+                    ""
+
+                ]
+                .map(csvEscape)
+                .join(",");
+
+
+                csv += "\n";
+
+                return;
+
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    csv += [
+
+                        record.date,
+                        record.team,
+                        record.zone,
+                        record.vehicle,
+                        record.collectedDrums,
+                        site.siteId,
+                        site.drums
+
+                    ]
+                    .map(csvEscape)
+                    .join(",");
+
+
+                    csv += "\n";
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    downloadFile(
+
+        csv,
+
+        "Vodafone_PNG_Fuel_Report.csv",
+
+        "text/csv"
+
+    );
+
+}
+
+
+/* ============================================================
+   CSV ESCAPE
+============================================================ */
+
+function csvEscape(value){
+
+    return '"' +
+        String(value ?? "")
+        .replace(
+            /"/g,
+            '""'
+        ) +
+        '"';
+
+}
+
+
+/* ============================================================
+   DOWNLOAD HTML REPORT
+============================================================ */
+
+function downloadReport(){
+
+    const records =
+        getReportRecords();
+
+
+    let rows = "";
+
+
+    records.forEach(
+
+        function(record){
+
+            if(
+                !record.sites ||
+                record.sites.length === 0
+            ){
+
+                rows += `
+
+                    <tr>
+
+                        <td>
+                            ${escapeHTML(record.date)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(record.team)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(record.zone)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(record.vehicle)}
+                        </td>
+
+                        <td>
+                            ${record.collectedDrums}
+                        </td>
+
+                        <td>
+                            -
+                        </td>
+
+                        <td>
+                            -
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    rows += `
+
+                        <tr>
+
+                            <td>
+                                ${escapeHTML(record.date)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(record.team)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(record.zone)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(record.vehicle)}
+                            </td>
+
+                            <td>
+                                ${record.collectedDrums}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(site.siteId)}
+                            </td>
+
+                            <td>
+                                ${site.drums}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    const html = `
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Vodafone PNG Fuel Collection Report
+</title>
+
+<style>
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    padding:30px;
+    color:#111;
+}
+
+h1{
+    color:#e60000;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    border:1px solid #bbb;
+    padding:8px;
+}
+
+th{
+    background:#eee;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>
+Vodafone PNG Fuel Collection Report
+</h1>
+
+<p>
+Generated:
+${new Date().toLocaleString()}
+</p>
+
+<p>
+Total Records:
+${records.length}
+</p>
+
+<p>
+Total Fuel Collected:
+${records.reduce(
+    (sum,r)=>
+        sum +
+        Number(r.collectedDrums || 0),
+    0
+)}
+ drums
+</p>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+<th>Team</th>
+<th>Zone</th>
+<th>Vehicle</th>
+<th>Collected Drums</th>
+<th>Vodafone Site</th>
+<th>Site Drums</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${rows}
+
+</tbody>
+
+</table>
+
+</body>
+
+</html>
+
+`;
+
+
+    downloadFile(
+
+        html,
+
+        "Vodafone_PNG_Fuel_Report.html",
+
+        "text/html"
+
+    );
+
+}
+
+
+/* ============================================================
+   DOWNLOAD FILE
+============================================================ */
+
+function downloadFile(
+    content,
+    filename,
+    mime
+){
+
+    const blob =
+        new Blob(
+
+            [content],
+
+            {
+                type:mime
+            }
+
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        filename;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    setTimeout(
+
+        function(){
+
+            URL.revokeObjectURL(
+                url
+            );
+
+        },
+
+        100
+
+    );
+
+}
+
+
+/* ============================================================
+   PRINT REPORT
+============================================================ */
+
+function printReport(){
+
+    const records =
+        getReportRecords();
+
+
+    let rows = "";
+
+
+    records.forEach(
+
+        function(record){
+
+            if(
+                !record.sites ||
+                record.sites.length === 0
+            ){
+
+                rows += `
+
+                    <tr>
+
+                        <td>${escapeHTML(record.date)}</td>
+
+                        <td>${escapeHTML(record.team)}</td>
+
+                        <td>${escapeHTML(record.zone)}</td>
+
+                        <td>${record.collectedDrums}</td>
+
+                        <td>-</td>
+
+                        <td>-</td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    rows += `
+
+                        <tr>
+
+                            <td>
+                                ${escapeHTML(record.date)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(record.team)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(record.zone)}
+                            </td>
+
+                            <td>
+                                ${record.collectedDrums}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(site.siteId)}
+                            </td>
+
+                            <td>
+                                ${site.drums}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    const printWindow =
+        window.open(
+            "",
+            "_blank"
+        );
+
+
+    if(!printWindow){
+
+        alert(
+            "Please allow pop-ups in your browser to print the report."
+        );
+
+        return;
+
+    }
+
+
+    printWindow.document.write(`
+
+        <!DOCTYPE html>
+
+        <html>
+
+        <head>
+
+        <title>
+            Vodafone PNG Fuel Report
+        </title>
+
+        <style>
+
+        body{
+            font-family:Arial;
+            padding:25px;
+        }
+
+        h1{
+            color:#e60000;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th,
+        td{
+            border:1px solid #999;
+            padding:8px;
+        }
+
+        th{
+            background:#eee;
+        }
+
+        </style>
+
+        </head>
+
+        <body>
+
+        <h1>
+            Vodafone PNG Fuel Collection Report
+        </h1>
+
+        <p>
+            Generated:
+            ${new Date().toLocaleString()}
+        </p>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th>Date</th>
+        <th>Team</th>
+        <th>Zone</th>
+        <th>Collected</th>
+        <th>Vodafone Site</th>
+        <th>Site Drums</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        ${rows}
+
+        </tbody>
+
+        </table>
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+
+    printWindow.focus();
+
+
+    setTimeout(
+
+        function(){
+
+            printWindow.print();
+
+        },
+
+        500
+
+    );
+
+}
+
+
+/* ============================================================
+   RENDER EVERYTHING
+============================================================ */
+
+function renderDashboard(){
+
+    renderKPI();
+
+    renderZones();
+
+    renderTeams();
+
+    renderHistory();
+
+    updateReportPreview();
+
+}
+
+
+/* ============================================================
+   INITIALISE APPLICATION
+============================================================ */
+
+function initialise(){
+
+    console.log(
+        "Initializing Vodafone PNG Fuel Dashboard..."
+    );
+
+
+    loadDatabase();
+
+
+    /* --------------------------------------------------------
+       DEFAULT DATES
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "collectionDate"
+    ).value =
+        getToday();
+
+
+    document.getElementById(
+        "reportDate"
+    ).value =
+        getToday();
+
+
+    document.getElementById(
+        "reportMonth"
+    ).value =
+        getCurrentMonth();
+
+
+    /* --------------------------------------------------------
+       ADD SITE BUTTON
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "addSiteButton"
+    ).addEventListener(
+
+        "click",
+
+        function(event){
+
+            event.preventDefault();
+
+            console.log(
+                "Add Vodafone Site clicked."
+            );
+
+            addSite();
+
+        }
+
+    );
+
+
+    /* --------------------------------------------------------
+       RECORD BUTTON
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "recordButton"
+    ).addEventListener(
+
+        "click",
+
+        function(event){
+
+            event.preventDefault();
+
+            console.log(
+                "Record Fuel Collection clicked."
+            );
+
+            recordFuelCollection();
+
+        }
+
+    );
+
+
+    /* --------------------------------------------------------
+       STOCK BUTTON
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "setStockButton"
+    ).addEventListener(
+
+        "click",
+
+        function(event){
+
+            event.preventDefault();
+
+            setStock();
+
+        }
+
+    );
+
+
+    /* --------------------------------------------------------
+       REPORT BUTTONS
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "downloadCSV"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            downloadCSV();
+
+        }
+
+    );
+
+
+    document.getElementById(
+        "downloadReport"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            downloadReport();
+
+        }
+
+    );
+
+
+    document.getElementById(
+        "printReport"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            printReport();
+
+        }
+
+    );
+
+
+    /* --------------------------------------------------------
+       CLEAR DATA
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "clearData"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            clearAllData();
+
+        }
+
+    );
+
+
+    /* --------------------------------------------------------
+       REPORT FILTERS
+    -------------------------------------------------------- */
+
+    document.getElementById(
+        "reportType"
+    ).addEventListener(
+
+        "change",
+
+        updateReportPreview
+
+    );
+
+
+    document.getElementById(
+        "reportDate"
+    ).addEventListener(
+
+        "change",
+
+        updateReportPreview
+
+    );
+
+
+    document.getElementById(
+        "reportMonth"
+    ).addEventListener(
+
+        "change",
+
+        updateReportPreview
+
+    );
+
+
+    /* --------------------------------------------------------
+       CREATE FIRST SITE ROW
+    -------------------------------------------------------- */
+
+    addSite();
+
+
+    /* --------------------------------------------------------
+       DRAW DASHBOARD
+    -------------------------------------------------------- */
+
+    renderDashboard();
+
+
+    console.log(
+        "Dashboard ready."
+    );
+
+}
+
+
+/* ============================================================
+   START
+============================================================ */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    initialise
+
+);
+
+</script>
+
+</body>
+</html>
