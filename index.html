@@ -6,125 +6,467 @@
 <title>Login - Vodafone PNG</title>
 
 <style>
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #e60000, #111);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    min-height: 100vh;
     margin: 0;
 }
 
-/* GLASS LOGIN BOX */
+
+/* =========================================
+   LOGIN CONTAINER
+========================================= */
+
 .login-container {
-    width: 340px;
+    width: 380px;
     padding: 35px;
+
     text-align: center;
 
-    /* Glass effect */
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.10);
+
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
 
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35);
+
     color: white;
 }
+
+
+/* =========================================
+   LOGO
+========================================= */
 
 .logo {
     width: 110px;
+    height: auto;
+
     margin-bottom: 15px;
+
+    border-radius: 8px;
 }
 
+
+/* =========================================
+   TITLE
+========================================= */
+
 h2 {
-    margin-bottom: 20px;
+    margin: 0 0 10px 0;
+
     color: white;
+
     letter-spacing: 1px;
 }
 
+
+/* =========================================
+   SUBTITLE
+========================================= */
+
+.subtitle {
+    margin-bottom: 20px;
+
+    color: rgba(255,255,255,0.80);
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   USERNAME & PASSWORD
+========================================= */
+
 input {
+    display: block;
+
     width: 100%;
-    padding: 12px;
+    height: 46px;
+
+    padding: 12px 14px;
+
     margin: 10px 0;
 
     border-radius: 10px;
+
     border: none;
+
     outline: none;
 
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
+
     color: white;
+
+    font-size: 15px;
 }
+
 
 input::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.70);
 }
 
+
+input:focus {
+    background: rgba(255,255,255,0.22);
+
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.25);
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
 button {
+    display: block;
+
     width: 100%;
+    height: 46px;
+
     padding: 12px;
 
+    margin-top: 12px;
+
     background: #e60000;
+
     color: white;
+
     border: none;
+
     border-radius: 10px;
 
     cursor: pointer;
+
+    font-size: 15px;
+
     font-weight: bold;
+
     transition: 0.3s;
-    margin-top: 10px;
 }
+
 
 button:hover {
     background: #ff1a1a;
-    transform: scale(1.03);
+
+    transform: scale(1.02);
 }
 
+
+button:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
 .error {
+    min-height: 20px;
+
+    margin-top: 12px;
+
     color: #ff8080;
-    margin-top: 10px;
+
     font-size: 14px;
 }
+
+
+/* =========================================
+   SYSTEM INFORMATION
+========================================= */
+
+.system-info {
+    margin-top: 20px;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.55);
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .login-container {
+        width: calc(100% - 30px);
+
+        padding: 30px 25px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================================
+     LOGIN BOX
+========================================= -->
 
 <div class="login-container">
 
-    <!-- Replace with your Vodafone PNG logo -->
-    <img src="Logo.jpg" class="logo" alt="Logo">
 
-    <h2>Vodafone PNG Login</h2>
-    <p1> update in progress..</p1>
+    <!-- LOGO -->
 
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+    <img
+        src="Logo.jpg"
+        class="logo"
+        alt="Vodafone PNG Logo"
+    >
 
-    <button onclick="login()">Login</button>
 
-    <div class="error" id="error"></div>
+    <!-- TITLE -->
+
+    <h2>
+        Vodafone PNG Login
+    </h2>
+
+
+    <!-- SUBTITLE -->
+
+    <div class="subtitle">
+        Enter your system credentials
+    </div>
+
+
+    <!-- USERNAME -->
+
+    <input
+        type="text"
+        id="username"
+        placeholder="Username"
+        autocomplete="username"
+    >
+
+
+    <!-- PASSWORD -->
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        autocomplete="current-password"
+    >
+
+
+    <!-- LOGIN BUTTON -->
+
+    <button onclick="login()">
+        Login
+    </button>
+
+
+    <!-- ERROR -->
+
+    <div
+        class="error"
+        id="error">
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="system-info">
+        Vodafone PNG Fuel & Warehouse Management System
+    </div>
+
 
 </div>
 
+
 <script>
+
+
+/* =========================================
+   LOGIN FUNCTION
+========================================= */
+
 function login() {
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
-    const error = document.getElementById("error");
 
-    if (user === "Admin" && pass === "Admin") {
-        localStorage.setItem("loggedIn", "true");
+    const user =
+        document
+        .getElementById("username")
+        .value
+        .trim();
 
-        // go to next page
-        window.location.href = "form.html";
-    } else {
-        error.innerText = "Invalid username or password";
+
+    const pass =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const error =
+        document
+        .getElementById("error");
+
+
+    /* Clear previous error */
+
+    error.innerText = "";
+
+
+    /* =====================================
+       ADMIN LOGIN
+       
+       Username: Admin
+       Password: Admin
+       
+       Opens:
+       form.html
+    ===================================== */
+
+    if (
+        user === "Admin" &&
+        pass === "Admin"
+    ) {
+
+        localStorage.setItem(
+            "loggedIn",
+            "true"
+        );
+
+
+        localStorage.setItem(
+            "userRole",
+            "Admin"
+        );
+
+
+        localStorage.setItem(
+            "username",
+            user
+        );
+
+
+        window.location.href =
+            "form.html";
+
+
+        return;
     }
+
+
+    /* =====================================
+       WAREHOUSE LOGIN
+       
+       Username: Warehouse
+       Password: Warehouse
+       
+       Opens:
+       Warehousedashboard.html
+    ===================================== */
+
+    if (
+        user === "Warehouse" &&
+        pass === "Warehouse"
+    ) {
+
+        localStorage.setItem(
+            "loggedIn",
+            "true"
+        );
+
+
+        localStorage.setItem(
+            "userRole",
+            "Warehouse"
+        );
+
+
+        localStorage.setItem(
+            "username",
+            user
+        );
+
+
+        window.location.href =
+            "Warehousedashboard.html";
+
+
+        return;
+    }
+
+
+    /* =====================================
+       INVALID LOGIN
+    ===================================== */
+
+    error.innerText =
+        "Invalid username or password";
+
 }
+
+
+/* =========================================
+   ENTER KEY LOGIN
+========================================= */
+
+document
+    .getElementById("password")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                login();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   USERNAME ENTER KEY
+========================================= */
+
+document
+    .getElementById("username")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                login();
+
+            }
+
+        }
+    );
+
+
 </script>
+
 
 </body>
 </html>
