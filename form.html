@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - Vodafone PNG</title>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Vodafone PNG Refuelling System</title>
+
+
+
+
+
+<!-- =========================================================
+     PDF
+========================================================= -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.2.5.1.umd.min.js"></script>
+
+
+<!-- =========================================================
+     EXCELJS
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+
 
 <style>
 
@@ -13,460 +36,4697 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e60000, #111);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-height: 100vh;
+    background: #f2f4f7;
     margin: 0;
+    padding: 10px;
+    color: #222;
+}
+
+.container {
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
 }
 
 
-/* =========================================
-   LOGIN CONTAINER
-========================================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
-.login-container {
-    width: 380px;
-    padding: 35px;
-
+.header {
     text-align: center;
+    border-bottom: 3px solid #e60000;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
 
-    background: rgba(255, 255, 255, 0.10);
+.header h1 {
+    color: #e60000;
+    margin: 0;
+    font-size: 25px;
+}
 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-
-    border-radius: 20px;
-
-    border: 1px solid rgba(255, 255, 255, 0.20);
-
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.35);
-
-    color: white;
+.header p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #666;
 }
 
 
-/* =========================================
-   LOGO
-========================================= */
+/* =========================================================
+   SECTIONS
+========================================================= */
 
-.logo {
-    width: 110px;
-    height: auto;
-
-    margin-bottom: 15px;
-
+.section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
     border-radius: 8px;
 }
 
-
-/* =========================================
-   TITLE
-========================================= */
-
-h2 {
-    margin: 0 0 10px 0;
-
-    color: white;
-
-    letter-spacing: 1px;
+.section h2 {
+    margin-top: 0;
+    color: #e60000;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
 }
 
 
-/* =========================================
-   SUBTITLE
-========================================= */
+/* =========================================================
+   ROW
+========================================================= */
 
-.subtitle {
-    margin-bottom: 20px;
+.row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
-    color: rgba(255,255,255,0.80);
-
-    font-size: 14px;
+.form-group {
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 10px;
 }
 
 
-/* =========================================
-   USERNAME & PASSWORD
-========================================= */
+/* =========================================================
+   LABELS
+========================================================= */
 
-input {
+label {
+    font-size: 13px;
+    font-weight: bold;
     display: block;
+}
 
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+select,
+textarea {
     width: 100%;
-    height: 46px;
+    padding: 9px;
+    font-size: 13px;
+    margin-top: 5px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
 
-    padding: 12px 14px;
-
-    margin: 10px 0;
-
-    border-radius: 10px;
-
-    border: none;
-
-    outline: none;
-
-    background: rgba(255,255,255,0.15);
-
-    color: white;
-
-    font-size: 15px;
+textarea {
+    min-height: 80px;
+    resize: vertical;
 }
 
 
-input::placeholder {
-    color: rgba(255,255,255,0.70);
-}
-
-
-input:focus {
-    background: rgba(255,255,255,0.22);
-
-    box-shadow:
-        0 0 0 2px rgba(255,255,255,0.25);
-}
-
-
-/* =========================================
-   LOGIN BUTTON
-========================================= */
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 button {
-    display: block;
-
-    width: 100%;
-    height: 46px;
-
-    padding: 12px;
-
-    margin-top: 12px;
-
     background: #e60000;
-
     color: white;
-
     border: none;
-
-    border-radius: 10px;
-
+    padding: 10px 14px;
+    border-radius: 5px;
     cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    transition: 0.3s;
+    font-size: 13px;
+    width: 100%;
 }
-
 
 button:hover {
-    background: #ff1a1a;
+    background: #c90000;
+}
 
-    transform: scale(1.02);
+button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #555;
+}
+
+.btn-secondary:hover {
+    background: #333;
+}
+
+.btn-green {
+    background: #168a35;
+}
+
+.btn-green:hover {
+    background: #106b29;
 }
 
 
-button:active {
-    transform: scale(0.98);
+/* =========================================================
+   CAMERA
+========================================================= */
+
+#video {
+    width: 100%;
+    max-height: 400px;
+    display: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    background: black;
+}
+
+#canvas {
+    display: none;
 }
 
 
-/* =========================================
-   ERROR MESSAGE
-========================================= */
+/* =========================================================
+   PHOTO GRID
+========================================================= */
 
-.error {
-    min-height: 20px;
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
 
-    margin-top: 12px;
+.photo-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
 
-    color: #ff8080;
+.photo-card h3 {
+    font-size: 14px;
+    margin-top: 0;
+}
 
+.photo-card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #eee;
+}
+
+.photo-status {
+    font-size: 12px;
+    margin: 5px;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   GPS STATUS
+========================================================= */
+
+.gps-status {
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 8px 0;
+    font-size: 11px;
+    text-align: left;
+    color: #555;
+}
+
+.gps-good {
+    color: #168a35;
+    font-weight: bold;
+}
+
+.gps-error {
+    color: #e60000;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   SEND AREA
+========================================================= */
+
+.send-area {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7f7f7;
+    border-radius: 8px;
+}
+
+.send-button {
+    background: #e60000;
+    font-size: 16px;
+    padding: 14px;
+    font-weight: bold;
+}
+
+.status {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
     font-size: 14px;
 }
 
 
-/* =========================================
-   SYSTEM INFORMATION
-========================================= */
+/* =========================================================
+   FOOTER
+========================================================= */
 
-.system-info {
-    margin-top: 20px;
-
-    font-size: 11px;
-
-    color: rgba(255,255,255,0.55);
-
-    line-height: 1.5;
+.footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 25px;
+    color: #777;
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
-@media (max-width: 450px) {
+@media(max-width:700px) {
 
-    .login-container {
-        width: calc(100% - 30px);
+    .photo-grid {
+        grid-template-columns: 1fr;
+    }
 
-        padding: 30px 25px;
+    .container {
+        padding: 12px;
+    }
+
+    .header h1 {
+        font-size: 21px;
     }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-
-<!-- =========================================
-     LOGIN BOX
-========================================= -->
-
-<div class="login-container">
+<div class="container">
 
 
-    <!-- LOGO -->
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-    <img
-        src="Logo.jpg"
-        class="logo"
-        alt="Vodafone PNG Logo"
-    >
+<div class="header">
+
+    <h1>Vodafone PNG Refuelling</h1>
+
+    <p>
+        Genset Refuelling Report
+    </p>
+
+</div>
 
 
-    <!-- TITLE -->
+<form
+    id="fuelForm"
+    action="https://formsubmit.co/isoyawi7@gmail.com"
+    method="POST"
+    enctype="multipart/form-data"
+>
 
-    <h2>
-        Vodafone PNG Login
-    </h2>
+<!-- =========================================================
+     FORMSUBMIT SETTINGS
+========================================================= -->
+
+<input type="hidden" name="_subject" id="formSubject">
+
+<input type="hidden" name="_template" value="table">
+
+<input type="hidden" name="_captcha" value="false">
+
+<input type="hidden" name="_next" id="formNext">
+
+<!-- =========================================================
+     1. SITE PERSONNEL
+========================================================= -->
+
+<div class="section">
+
+    <h2>1. Site Personnel</h2>
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Field Engineer *</label>
+
+            <input
+                type="text"
+                id="engineer"
+                name="engineer"
+                required
+                placeholder="Enter engineer name">
+
+        </div>
 
 
-    <!-- SUBTITLE -->
+        <div class="form-group">
 
-    <div class="subtitle">
-        Enter your system credentials
+            <label>Additional Team</label>
+
+            <input
+                type="text"
+                id="team"
+                name="team"
+                placeholder="Additional team members">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     2. SITE INFORMATION
+========================================================= -->
+
+<div class="section">
+
+    <h2>2. Site Information</h2>
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Date *</label>
+
+            <input
+                type="date"
+                id="date"
+                name="date"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Time *</label>
+
+            <input
+                type="time"
+                id="time"
+                name="time"
+                required>
+
+        </div>
+
     </div>
 
 
-    <!-- USERNAME -->
+    <div class="row">
 
-    <input
-        type="text"
-        id="username"
-        placeholder="Username"
-        autocomplete="username"
-    >
+        <div class="form-group">
 
+            <label>Site Name *</label>
 
-    <!-- PASSWORD -->
+            <input
+                type="text"
+                id="siteName"
+                name="siteName"
+                required
+                placeholder="Site name">
 
-    <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        autocomplete="current-password"
-    >
+        </div>
 
 
-    <!-- LOGIN BUTTON -->
+        <div class="form-group">
 
-    <button onclick="login()">
-        Login
-    </button>
+            <label>Site ID *</label>
+
+            <input
+                type="text"
+                id="siteId"
+                name="siteId"
+                required
+                placeholder="Site ID">
+
+        </div>
+
+    </div>
 
 
-    <!-- ERROR -->
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Region *</label>
+
+            <select
+                id="region"
+                name="region"
+                onchange="updateProvinces()"
+                required>
+
+                <option value="">
+                    Select Region
+                </option>
+
+                <option value="Momase + EHP">
+                    Momase + EHP
+                </option>
+
+                <option value="Highlands">
+                    Highlands
+                </option>
+
+                <option value="Southern">
+                    Southern
+                </option>
+
+                <option value="NGI">
+                    New Guinea Islands
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Province *</label>
+
+            <select
+                id="province"
+                name="province"
+                required>
+
+                <option value="">
+                    Select Province
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>Tower Height</label>
+
+        <select
+            id="tower"
+            name="tower">
+
+            <option>23 Meter Monopole</option>
+            <option>30M RDS</option>
+            <option>45M RDS</option>
+            <option>45M Grilliage</option>
+            <option>45M SST</option>
+            <option>60M RDS</option>
+            <option>60M Grilliage</option>
+            <option>60M SST</option>
+            <option>80M Grilliage</option>
+            <option>80M SST</option>
+            <option>100M SST</option>
+            <option>110M SST</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     3. GENSET INFORMATION
+========================================================= -->
+
+<div class="section">
+
+    <h2>3. Genset Information</h2>
+
+    <div class="form-group">
+
+        <label>Genset / DG Type *</label>
+
+        <select
+            id="genset"
+            name="genset"
+            required>
+
+            <option>Yanhan 8KVA</option>
+            <option>Yanhan 17KVA</option>
+            <option>Yanhan 24KVA</option>
+            <option>CCTC 11KVA</option>
+            <option>CCTC 17KVA</option>
+            <option>CCTC 24KVA</option>
+            <option>FG Wilson 15KVA</option>
+            <option>Polar Power</option>
+            <option>Sengen 15KVA</option>
+            <option>LEGA</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Engine Oil Level</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="oilLevel"
+                name="oilLevel"
+                placeholder="Level">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Coolant Level</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="coolantLevel"
+                name="coolantLevel"
+                placeholder="Level">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Engine Speed (RPM)</label>
+
+            <input
+                type="number"
+                id="rpm"
+                name="rpm"
+                placeholder="RPM">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     4. REFUELLING DETAILS
+========================================================= -->
+
+<div class="section">
+
+    <h2>4. Refuelling Details</h2>
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Fuel Before (L) *</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="before"
+                name="before"
+                required
+                oninput="calculateFuel()">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Fuel TopUp (L) *</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="added"
+                name="added"
+                required
+                oninput="calculateFuel()">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Fuel After (L) *</label>
+
+            <input
+                type="number"
+                step="0.1"
+                id="after"
+                name="after"
+                required
+                oninput="calculateFuel()">
+
+        </div>
+
+    </div>
+
 
     <div
-        class="error"
-        id="error">
+        id="calc"
+        style="
+        background:#f1f1f1;
+        padding:10px;
+        border-radius:5px;
+        font-size:13px;
+        font-weight:bold;
+        ">
+
+        Expected: 0 L | Difference: 0 L
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     5. REFUELLING PHOTOS
+========================================================= -->
+
+<div class="section">
+
+    <h2>5. Refuelling Photos</h2>
+
+    <p style="font-size:12px;color:#666;">
+
+        Capture all three photos. The system records the current
+        GPS position and stamps the location directly onto each photo.
+
+    </p>
+
+
+    <div
+        id="gpsMainStatus"
+        class="gps-status">
+
+        GPS: Waiting for photo capture
+
     </div>
 
 
-    <!-- FOOTER -->
+    <video
+        id="video"
+        autoplay
+        playsinline>
+    </video>
 
-    <div class="system-info">
-        Vodafone PNG Fuel Management System
+
+    <canvas id="canvas"></canvas>
+
+
+    <div class="photo-grid">
+
+
+        <!-- BEFORE -->
+
+        <div class="photo-card">
+
+            <h3>Before Refuelling</h3>
+
+            <img
+                id="imgBefore"
+                alt="Before photo">
+
+            <div
+                id="statusBefore"
+                class="photo-status">
+
+                Not captured
+
+            </div>
+
+
+            <div
+                id="gpsBefore"
+                class="gps-status">
+
+                GPS: Not captured
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openCamera('BEFORE')">
+
+                Capture Before
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="resetPhoto('BEFORE')">
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+        <!-- TOPUP -->
+
+        <div class="photo-card">
+
+            <h3>TopUp</h3>
+
+            <img
+                id="imgTopup"
+                alt="TopUp photo">
+
+            <div
+                id="statusTopup"
+                class="photo-status">
+
+                Not captured
+
+            </div>
+
+
+            <div
+                id="gpsTopup"
+                class="gps-status">
+
+                GPS: Not captured
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openCamera('TOPUP')">
+
+                Capture TopUp
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="resetPhoto('TOPUP')">
+
+                Reset
+
+            </button>
+
+        </div>
+
+
+        <!-- AFTER -->
+
+        <div class="photo-card">
+
+            <h3>After Refuelling</h3>
+
+            <img
+                id="imgAfter"
+                alt="After photo">
+
+            <div
+                id="statusAfter"
+                class="photo-status">
+
+                Not captured
+
+            </div>
+
+
+            <div
+                id="gpsAfter"
+                class="gps-status">
+
+                GPS: Not captured
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="openCamera('AFTER')">
+
+                Capture After
+
+            </button>
+
+
+            <br>
+            <br>
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="resetPhoto('AFTER')">
+
+                Reset
+
+            </button>
+
+        </div>
+
     </div>
+
+</div>
+
+
+<!-- =========================================================
+     6. POWER INFORMATION
+========================================================= -->
+
+<div class="section">
+
+    <h2>6. Power Information</h2>
+
+    <div class="form-group">
+
+        <label>PPL Connected?</label>
+
+        <select
+            id="ppl"
+            name="ppl"
+            onchange="togglePPL()">
+
+            <option value="No">
+                No
+            </option>
+
+            <option value="Yes">
+                Yes
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        id="pplFields"
+        style="display:none;">
+
+        <div class="row">
+
+            <div class="form-group">
+
+                <label>Meter Number</label>
+
+                <input
+                    type="text"
+                    id="meter"
+                    name="meter">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Meter Reading</label>
+
+                <input
+                    type="number"
+                    step="0.1"
+                    id="reading"
+                    name="reading">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     7. DRIVER & VEHICLE
+========================================================= -->
+
+<div class="section">
+
+    <h2>7. Driver & Vehicle</h2>
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <label>Driver Name</label>
+
+            <input
+                type="text"
+                id="driver"
+                name="driver">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Vehicle Registration</label>
+
+            <input
+                type="text"
+                id="vehicle"
+                name="vehicle">
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>Comments / Observations</label>
+
+        <textarea
+            id="comments"
+            name="comments"
+            placeholder="Enter comments, abnormalities or observations..."></textarea>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     8. REPORT
+========================================================= -->
+
+<div class="section">
+
+    <h2>8. Report</h2>
+
+    <div class="row">
+
+        <div class="form-group">
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="downloadPDF()">
+
+                Download PDF
+
+            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <button
+                type="button"
+                class="btn-secondary"
+                onclick="downloadExcel()">
+
+                Download Excel
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="send-area">
+
+        <button
+            type="submit"
+            id="sendButton"
+            class="send-button">
+
+            SEND COMPLETE REPORT
+
+        </button>
+
+
+        <br>
+        <br>
+
+
+        <button
+            type="button"
+            class="btn-secondary"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+
+        <div
+            id="sendStatus"
+            class="status">
+
+            Ready to send
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</form>
+
+
+<div class="footer">
+
+    Powered by Iso Yawi | System Creator
+
+</div>
 
 
 </div>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
 
-/* =========================================
-   LOGIN FUNCTION
-========================================= */
+/* ============================================================
+   ELEMENTS
+============================================================ */
 
-function login() {
+const form =
+    document.getElementById("fuelForm");
 
-    const user =
-        document
-        .getElementById("username")
-        .value
-        .trim();
+const engineer =
+    document.getElementById("engineer");
 
+const team =
+    document.getElementById("team");
 
-    const pass =
-        document
-        .getElementById("password")
-        .value;
+const date =
+    document.getElementById("date");
 
+const time =
+    document.getElementById("time");
 
-    const error =
-        document
-        .getElementById("error");
+const siteName =
+    document.getElementById("siteName");
 
+const siteId =
+    document.getElementById("siteId");
 
-    /* Clear previous error */
+const region =
+    document.getElementById("region");
 
-    error.innerText = "";
+const province =
+    document.getElementById("province");
 
+const tower =
+    document.getElementById("tower");
 
-    /* =====================================
-       ADMIN LOGIN
-       
-       Username: Admin
-       Password: Admin
-       
-       Opens:
-       form.html
-    ===================================== */
+const genset =
+    document.getElementById("genset");
 
-    if (
-        user === "Admin" &&
-        pass === "Admin"
-    ) {
+const oilLevel =
+    document.getElementById("oilLevel");
 
-        localStorage.setItem(
-            "loggedIn",
-            "true"
-        );
+const coolantLevel =
+    document.getElementById("coolantLevel");
 
+const rpm =
+    document.getElementById("rpm");
 
-        localStorage.setItem(
-            "userRole",
-            "Admin"
-        );
+const before =
+    document.getElementById("before");
 
+const added =
+    document.getElementById("added");
 
-        localStorage.setItem(
-            "username",
-            user
-        );
+const after =
+    document.getElementById("after");
 
+const ppl =
+    document.getElementById("ppl");
 
-        window.location.href =
-            "form.html";
+const meter =
+    document.getElementById("meter");
 
+const reading =
+    document.getElementById("reading");
 
-        return;
-    }
+const driver =
+    document.getElementById("driver");
 
+const vehicle =
+    document.getElementById("vehicle");
 
-    /* =====================================
-       WAREHOUSE LOGIN
-       
-       Username: Warehouse
-       Password: Warehouse
-       
-       Opens:
-       Warehousedashboard.html
-    ===================================== */
+const comments =
+    document.getElementById("comments");
 
-    if (
-        user === "Warehouse" &&
-        pass === "Warehouse"
-    ) {
+const video =
+    document.getElementById("video");
 
-        localStorage.setItem(
-            "loggedIn",
-            "true"
-        );
+const canvas =
+    document.getElementById("canvas");
 
+const imgBefore =
+    document.getElementById("imgBefore");
 
-        localStorage.setItem(
-            "userRole",
-            "Warehouse"
-        );
+const imgTopup =
+    document.getElementById("imgTopup");
+
+const imgAfter =
+    document.getElementById("imgAfter");
+
+const sendButton =
+    document.getElementById("sendButton");
+
+const sendStatus =
+    document.getElementById("sendStatus");
 
 
-        localStorage.setItem(
-            "username",
-            user
-        );
+/* ============================================================
+   GPS DATA
+============================================================ */
+
+let gpsData = {
+
+    BEFORE: null,
+
+    TOPUP: null,
+
+    AFTER: null
+
+};
 
 
-        window.location.href =
-            "Warehousedashboard.html";
+/* ============================================================
+   CURRENT GPS POSITION
+============================================================ */
+
+let currentGPS = null;
 
 
-        return;
-    }
+/* ============================================================
+   DEFAULT DATE / TIME
+============================================================ */
+
+function setCurrentDateTime(){
+
+    const now =
+        new Date();
 
 
-    /* =====================================
-       INVALID LOGIN
-    ===================================== */
+    date.value =
+        now.toISOString()
+            .split("T")[0];
 
-    error.innerText =
-        "Invalid username or password";
+
+    time.value =
+        now.toTimeString()
+            .slice(0,5);
 
 }
 
 
-/* =========================================
-   ENTER KEY LOGIN
-========================================= */
+setCurrentDateTime();
 
-document
-    .getElementById("password")
-    .addEventListener(
-        "keydown",
-        function(event) {
 
-            if (event.key === "Enter") {
+/* ============================================================
+   PPL TOGGLE
+============================================================ */
 
-                login();
+function togglePPL(){
 
-            }
+    document.getElementById(
+        "pplFields"
+    ).style.display =
+        ppl.value === "Yes"
+            ? "block"
+            : "none";
+
+}
+
+
+/* ============================================================
+   PROVINCES
+============================================================ */
+
+function updateProvinces(){
+
+    const list = [];
+
+
+    if(
+        region.value ===
+        "Momase + EHP"
+    ){
+
+        list.push(
+
+            "Eastern Highlands",
+            "Morobe",
+            "Madang",
+            "East Sepik",
+            "West Sepik (Sandaun)"
+
+        );
+
+    }
+
+
+    if(
+        region.value ===
+        "Highlands"
+    ){
+
+        list.push(
+
+            "Western Highlands",
+            "Simbu",
+            "Jiwaka",
+            "Enga",
+            "Southern Highlands",
+            "Hela"
+
+        );
+
+    }
+
+
+    if(
+        region.value ===
+        "Southern"
+    ){
+
+        list.push(
+
+            "National Capital District",
+            "Central",
+            "Gulf",
+            "Oro (Northern)",
+            "Milne Bay",
+            "Western"
+
+        );
+
+    }
+
+
+    if(
+        region.value ===
+        "NGI"
+    ){
+
+        list.push(
+
+            "East New Britain",
+            "West New Britain",
+            "New Ireland",
+            "Autonomous Region of Bougainville",
+            "Manus"
+
+        );
+
+    }
+
+
+    province.innerHTML =
+        '<option value="">Select Province</option>';
+
+
+    list.forEach(
+        function(p){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                p;
+
+            option.textContent =
+                p;
+
+            province.appendChild(
+                option
+            );
 
         }
     );
 
+}
 
-/* =========================================
-   USERNAME ENTER KEY
-========================================= */
 
-document
-    .getElementById("username")
-    .addEventListener(
-        "keydown",
-        function(event) {
+/* ============================================================
+   FUEL CALCULATION
+============================================================ */
 
-            if (event.key === "Enter") {
+function calculateFuel(){
 
-                login();
+    const beforeValue =
+        parseFloat(
+            before.value
+        ) || 0;
+
+
+    const addedValue =
+        parseFloat(
+            added.value
+        ) || 0;
+
+
+    const afterValue =
+        parseFloat(
+            after.value
+        ) || 0;
+
+
+    const expected =
+        beforeValue +
+        addedValue;
+
+
+    const difference =
+        afterValue -
+        expected;
+
+
+    document.getElementById(
+        "calc"
+    ).innerHTML =
+
+        `Expected: ${expected.toFixed(1)} L |
+         Difference: ${difference.toFixed(1)} L`;
+
+}
+
+
+/* ============================================================
+   GET GPS LOCATION
+============================================================ */
+
+function getGPSLocation(){
+
+    return new Promise(
+        function(resolve,reject){
+
+            if(
+                !navigator.geolocation
+            ){
+
+                reject(
+                    new Error(
+                        "Geolocation is not supported by this browser."
+                    )
+                );
+
+                return;
 
             }
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position){
+
+                    const gps = {
+
+                        latitude:
+                            position.coords.latitude,
+
+                        longitude:
+                            position.coords.longitude,
+
+                        accuracy:
+                            position.coords.accuracy,
+
+                        timestamp:
+                            new Date(
+                                position.timestamp
+                            ).toLocaleString()
+
+                    };
+
+
+                    currentGPS =
+                        gps;
+
+
+                    resolve(
+                        gps
+                    );
+
+                },
+
+
+                function(error){
+
+                    let message =
+                        "Unable to obtain GPS location.";
+
+
+                    if(
+                        error.code ===
+                        error.PERMISSION_DENIED
+                    ){
+
+                        message =
+                            "GPS permission was denied.";
+
+                    }
+
+
+                    if(
+                        error.code ===
+                        error.POSITION_UNAVAILABLE
+                    ){
+
+                        message =
+                            "GPS position is unavailable.";
+
+                    }
+
+
+                    if(
+                        error.code ===
+                        error.TIMEOUT
+                    ){
+
+                        message =
+                            "GPS request timed out.";
+
+                    }
+
+
+                    reject(
+                        new Error(
+                            message
+                        )
+                    );
+
+                },
+
+
+                {
+
+                    enableHighAccuracy:
+                        true,
+
+                    timeout:
+                        15000,
+
+                    maximumAge:
+                        0
+
+                }
+
+            );
 
         }
     );
 
+}
+
+
+/* ============================================================
+   FORMAT GPS
+============================================================ */
+
+function formatGPS(gps){
+
+    if(!gps){
+
+        return "GPS unavailable";
+
+    }
+
+
+    return (
+
+        "GPS: " +
+
+        gps.latitude.toFixed(6) +
+
+        ", " +
+
+        gps.longitude.toFixed(6) +
+
+        " | ±" +
+
+        Math.round(
+            gps.accuracy
+        ) +
+
+        " m"
+
+    );
+
+}
+
+
+/* ============================================================
+   UPDATE GPS DISPLAY
+============================================================ */
+
+function updateGPSDisplay(
+    type,
+    gps
+){
+
+    let elementId = "";
+
+
+    if(type === "BEFORE"){
+
+        elementId =
+            "gpsBefore";
+
+    }
+
+
+    if(type === "TOPUP"){
+
+        elementId =
+            "gpsTopup";
+
+    }
+
+
+    if(type === "AFTER"){
+
+        elementId =
+            "gpsAfter";
+
+    }
+
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if(!element){
+
+        return;
+
+    }
+
+
+    if(gps){
+
+        element.innerHTML =
+
+            `<span class="gps-good">
+            ✓ ${formatGPS(gps)}
+            </span>`;
+
+    }
+
+
+    else{
+
+        element.innerHTML =
+
+            `<span class="gps-error">
+            GPS unavailable
+            </span>`;
+
+    }
+
+}
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+let stream = null;
+
+let mode = "";
+
+
+/* ============================================================
+   OPEN CAMERA
+============================================================ */
+
+async function openCamera(type){
+
+    if(
+        !siteName.value ||
+        !siteId.value ||
+        !engineer.value
+    ){
+
+        alert(
+            "Please enter Site Name, Site ID and Engineer first."
+        );
+
+        return;
+
+    }
+
+
+    mode =
+        type;
+
+
+    document.getElementById(
+        "gpsMainStatus"
+    ).textContent =
+        "GPS: Obtaining current location...";
+
+
+    let gps;
+
+
+    try{
+
+        gps =
+            await getGPSLocation();
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            "GPS ERROR:",
+            error
+        );
+
+
+        const continueWithoutGPS =
+            confirm(
+
+                error.message +
+
+                "\n\n" +
+
+                "The photo cannot contain a verified GPS position " +
+                "unless location permission is allowed." +
+
+                "\n\n" +
+
+                "Continue without GPS?"
+
+            );
+
+
+        if(!continueWithoutGPS){
+
+            document.getElementById(
+                "gpsMainStatus"
+            ).textContent =
+                "GPS: Capture cancelled";
+
+            return;
+
+        }
+
+
+        gps =
+            null;
+
+    }
+
+
+    if(gps){
+
+        gpsData[type] =
+            gps;
+
+
+        updateGPSDisplay(
+            type,
+            gps
+        );
+
+
+        document.getElementById(
+            "gpsMainStatus"
+        ).textContent =
+            "✓ " +
+            formatGPS(gps);
+
+    }
+
+
+    else{
+
+        gpsData[type] =
+            null;
+
+
+        document.getElementById(
+            "gpsMainStatus"
+        ).textContent =
+            "GPS: Not available";
+
+    }
+
+
+    try{
+
+        stream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video: {
+
+                    facingMode: {
+
+                        ideal:
+                            "environment"
+
+                    }
+
+                },
+
+                audio:
+                    false
+
+            });
+
+
+        video.srcObject =
+            stream;
+
+
+        video.style.display =
+            "block";
+
+
+        setTimeout(
+
+            capturePhoto,
+
+            1500
+
+        );
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            "Camera could not be opened. Please allow camera access."
+        );
+
+
+        stopCamera();
+
+    }
+
+}
+
+
+/* ============================================================
+   CAPTURE PHOTO
+============================================================ */
+
+function capturePhoto(){
+
+    if(
+        !video.videoWidth
+    ){
+
+        alert(
+            "Camera is not ready. Please try again."
+        );
+
+
+        stopCamera();
+
+
+        return;
+
+    }
+
+
+    canvas.width =
+        video.videoWidth;
+
+
+    canvas.height =
+        video.videoHeight;
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    ctx.drawImage(
+
+        video,
+
+        0,
+        0,
+
+        canvas.width,
+        canvas.height
+
+    );
+
+
+    const gps =
+        gpsData[mode];
+
+
+    const stamp = [
+
+        "Vodafone PNG Refuelling Report",
+
+        mode === "BEFORE"
+            ? "BEFORE REFUELLING"
+            : mode === "TOPUP"
+                ? "REFUELLING IN PROGRESS"
+                : "AFTER REFUELLING",
+
+        "Date/Time: " +
+        new Date().toLocaleString(),
+
+        "Site: " +
+        siteName.value +
+        " | " +
+        siteId.value,
+
+        "Province: " +
+        province.value,
+
+        "Engineer: " +
+        engineer.value,
+
+        "Fuel Before: " +
+        (before.value || "0") +
+        " L",
+
+        "Fuel TopUp: " +
+        (added.value || "0") +
+        " L",
+
+        "Fuel After: " +
+        (after.value || "0") +
+        " L"
+
+    ];
+
+
+    if(gps){
+
+        stamp.push(
+
+            "GPS: " +
+            gps.latitude.toFixed(6) +
+            ", " +
+            gps.longitude.toFixed(6)
+
+        );
+
+
+        stamp.push(
+
+            "GPS Accuracy: ±" +
+            Math.round(
+                gps.accuracy
+            ) +
+            " m"
+
+        );
+
+    }
+
+
+    else{
+
+        stamp.push(
+            "GPS: UNAVAILABLE"
+        );
+
+    }
+
+
+    const lineHeight =
+        26;
+
+
+    const boxHeight =
+        stamp.length *
+        lineHeight +
+        20;
+
+
+/* ========================================================
+   STAMP TEXT
+======================================================== */
+
+ctx.fillStyle =
+    "red";
+
+
+ctx.font =
+
+    "bold " +
+
+    Math.max(
+        16,
+        canvas.width / 55
+    ) +
+
+    "px Arial";
+
+
+ctx.shadowColor =
+    "white";
+
+ctx.shadowBlur =
+    3;
+
+ctx.shadowOffsetX =
+    1;
+
+ctx.shadowOffsetY =
+    1;
+
+
+stamp.forEach(
+
+    function(
+        text,
+        index
+    ){
+
+        ctx.fillText(
+
+            text,
+
+            15,
+
+            canvas.height -
+            boxHeight +
+            25 +
+            index *
+            lineHeight
+
+        );
+
+    }
+
+);
+
+
+ctx.shadowColor =
+    "transparent";
+
+ctx.shadowBlur =
+    0;
+
+ctx.shadowOffsetX =
+    0;
+
+ctx.shadowOffsetY =
+    0;
+
+
+/* ========================================================
+   ORIGINAL WHITE TEXT PASS
+======================================================== */
+
+ctx.fillStyle =
+    "white";
+
+
+ctx.font =
+
+    Math.max(
+        16,
+        canvas.width / 55
+    ) +
+
+    "px Arial";
+
+
+stamp.forEach(
+
+    function(
+        text,
+        index
+    ){
+
+        ctx.fillText(
+
+            text,
+
+            15,
+
+            canvas.height -
+            boxHeight +
+            25 +
+            index *
+            lineHeight
+
+        );
+
+    }
+
+);
+
+
+/* ========================================================
+   RESIZE / COMPRESS
+======================================================== */
+
+const image =
+    resizeCanvas(
+
+        canvas,
+
+        1200,
+
+        0.75
+
+    );
+
+
+/* ========================================================
+   SAVE PHOTO
+======================================================== */
+
+if(
+    mode ===
+    "BEFORE"
+){
+
+    imgBefore.src =
+        image;
+
+
+    document.getElementById(
+        "statusBefore"
+    ).textContent =
+        "✓ Captured";
+
+}
+
+
+if(
+    mode ===
+    "TOPUP"
+){
+
+    imgTopup.src =
+        image;
+
+
+    document.getElementById(
+        "statusTopup"
+    ).textContent =
+        "✓ Captured";
+
+}
+
+
+if(
+    mode ===
+    "AFTER"
+){
+
+    imgAfter.src =
+        image;
+
+
+    document.getElementById(
+        "statusAfter"
+    ).textContent =
+        "✓ Captured";
+
+}
+
+
+stopCamera();
+
+}
+
+
+/* ============================================================
+   RESIZE IMAGE
+============================================================ */
+
+function resizeCanvas(
+    sourceCanvas,
+    maxWidth,
+    quality
+){
+
+    const scale =
+        Math.min(
+
+            1,
+
+            maxWidth /
+            sourceCanvas.width
+
+        );
+
+
+    const newCanvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    newCanvas.width =
+        sourceCanvas.width *
+        scale;
+
+
+    newCanvas.height =
+        sourceCanvas.height *
+        scale;
+
+
+    const ctx =
+        newCanvas.getContext(
+            "2d"
+        );
+
+
+    ctx.drawImage(
+
+        sourceCanvas,
+
+        0,
+        0,
+
+        newCanvas.width,
+        newCanvas.height
+
+    );
+
+
+    return newCanvas.toDataURL(
+
+        "image/jpeg",
+
+        quality
+
+    );
+
+}
+
+
+/* ============================================================
+   STOP CAMERA
+============================================================ */
+
+function stopCamera(){
+
+    if(stream){
+
+        stream
+            .getTracks()
+            .forEach(
+
+                track =>
+                    track.stop()
+
+            );
+
+
+        stream =
+            null;
+
+    }
+
+
+    video.srcObject =
+        null;
+
+
+    video.style.display =
+        "none";
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+    stopCamera();
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* ============================================================
+   RESET PHOTO
+============================================================ */
+
+function resetPhoto(type){
+
+    if(
+        type ===
+        "BEFORE"
+    ){
+
+        imgBefore.src =
+            "";
+
+        gpsData.BEFORE =
+            null;
+
+
+        document.getElementById(
+            "statusBefore"
+        ).textContent =
+            "Not captured";
+
+
+        document.getElementById(
+            "gpsBefore"
+        ).textContent =
+            "GPS: Not captured";
+
+    }
+
+
+    if(
+        type ===
+        "TOPUP"
+    ){
+
+        imgTopup.src =
+            "";
+
+        gpsData.TOPUP =
+            null;
+
+
+        document.getElementById(
+            "statusTopup"
+        ).textContent =
+            "Not captured";
+
+
+        document.getElementById(
+            "gpsTopup"
+        ).textContent =
+            "GPS: Not captured";
+
+    }
+
+
+    if(
+        type ===
+        "AFTER"
+    ){
+
+        imgAfter.src =
+            "";
+
+        gpsData.AFTER =
+            null;
+
+
+        document.getElementById(
+            "statusAfter"
+        ).textContent =
+            "Not captured";
+
+
+        document.getElementById(
+            "gpsAfter"
+        ).textContent =
+            "GPS: Not captured";
+
+    }
+
+}
+
+
+/* ============================================================
+   GET REPORT DATA
+============================================================ */
+
+function getReportData(){
+
+    return {
+
+        engineer:
+            engineer.value,
+
+        team:
+            team.value,
+
+        date:
+            date.value,
+
+        time:
+            time.value,
+
+        siteName:
+            siteName.value,
+
+        siteId:
+            siteId.value,
+
+        region:
+            region.value,
+
+        province:
+            province.value,
+
+        tower:
+            tower.value,
+
+        genset:
+            genset.value,
+
+        oilLevel:
+            oilLevel.value,
+
+        coolantLevel:
+            coolantLevel.value,
+
+        rpm:
+            rpm.value,
+
+        fuelBefore:
+            before.value,
+
+        fuelAdded:
+            added.value,
+
+        fuelAfter:
+            after.value,
+
+        ppl:
+            ppl.value,
+
+        meter:
+            meter.value,
+
+        reading:
+            reading.value,
+
+        driver:
+            driver.value,
+
+        vehicle:
+            vehicle.value,
+
+        comments:
+            comments.value,
+
+        gpsBefore:
+            gpsData.BEFORE,
+
+        gpsTopup:
+            gpsData.TOPUP,
+
+        gpsAfter:
+            gpsData.AFTER
+
+    };
+
+}
+
+
+/* ============================================================
+   GPS TEXT
+============================================================ */
+
+function gpsText(gps){
+
+    if(!gps){
+
+        return "GPS unavailable";
+
+    }
+
+
+    return (
+
+        gps.latitude.toFixed(6) +
+
+        ", " +
+
+        gps.longitude.toFixed(6) +
+
+        " (±" +
+
+        Math.round(
+            gps.accuracy
+        ) +
+
+        " m)"
+
+    );
+
+}
+
+
+/* ============================================================
+   GENERATE PDF
+============================================================ */
+
+function generatePDF(){
+
+    const {
+        jsPDF
+    } =
+        window.jspdf;
+
+
+    const doc =
+        new jsPDF();
+
+
+    let y =
+        15;
+
+
+    doc.setFontSize(
+        18
+    );
+
+
+    doc.text(
+        "Vodafone PNG Refuelling Report",
+        10,
+        y
+    );
+
+
+    y +=
+        12;
+
+
+    doc.setFontSize(
+        10
+    );
+
+
+    const data =
+        getReportData();
+
+
+    const lines = [
+
+        "Engineer: " +
+        data.engineer,
+
+        "Additional Team: " +
+        data.team,
+
+        "Date: " +
+        data.date +
+        " " +
+        data.time,
+
+        "Site: " +
+        data.siteName +
+        " | " +
+        data.siteId,
+
+        "Region: " +
+        data.region,
+
+        "Province: " +
+        data.province,
+
+        "Tower: " +
+        data.tower,
+
+        "Genset: " +
+        data.genset,
+
+        "Fuel Before: " +
+        data.fuelBefore +
+        " L",
+
+        "Fuel TopUp: " +
+        data.fuelAdded +
+        " L",
+
+        "Fuel After: " +
+        data.fuelAfter +
+        " L",
+
+        "Engine Oil: " +
+        data.oilLevel,
+
+        "Coolant: " +
+        data.coolantLevel,
+
+        "RPM: " +
+        data.rpm,
+
+        "PPL Connected: " +
+        data.ppl
+
+    ];
+
+
+    lines.forEach(
+
+        function(line){
+
+            doc.text(
+                line,
+                10,
+                y
+            );
+
+
+            y +=
+                7;
+
+        }
+
+    );
+
+
+    if(
+        data.ppl ===
+        "Yes"
+    ){
+
+        doc.text(
+            "Meter Number: " +
+            data.meter,
+            10,
+            y
+        );
+
+
+        y +=
+            7;
+
+
+        doc.text(
+            "Meter Reading: " +
+            data.reading,
+            10,
+            y
+        );
+
+
+        y +=
+            7;
+
+    }
+
+
+    doc.text(
+        "Driver: " +
+        data.driver,
+        10,
+        y
+    );
+
+
+    y +=
+        7;
+
+
+    doc.text(
+        "Vehicle: " +
+        data.vehicle,
+        10,
+        y
+    );
+
+
+    y +=
+        7;
+
+
+    doc.text(
+        "Comments:",
+        10,
+        y
+    );
+
+
+    y +=
+        6;
+
+
+    const commentLines =
+        doc.splitTextToSize(
+
+            data.comments ||
+            "None",
+
+            180
+
+        );
+
+
+    doc.text(
+        commentLines,
+        10,
+        y
+    );
+
+
+    y +=
+        commentLines.length *
+        6 +
+        10;
+
+
+    /* ========================================================
+       GPS SUMMARY
+    ======================================================== */
+
+    doc.setFontSize(
+        11
+    );
+
+
+    doc.text(
+        "GPS Locations:",
+        10,
+        y
+    );
+
+
+    y +=
+        7;
+
+
+    doc.setFontSize(
+        9
+    );
+
+
+    doc.text(
+        "Before: " +
+        gpsText(data.gpsBefore),
+        10,
+        y
+    );
+
+
+    y +=
+        6;
+
+
+    doc.text(
+        "TopUp: " +
+        gpsText(data.gpsTopup),
+        10,
+        y
+    );
+
+
+    y +=
+        6;
+
+
+    doc.text(
+        "After: " +
+        gpsText(data.gpsAfter),
+        10,
+        y
+    );
+
+
+    y +=
+        10;
+
+
+    /* ========================================================
+       PHOTOS
+    ======================================================== */
+
+    const photos = [
+
+        {
+            title:
+                "Before Refuelling",
+
+            src:
+                imgBefore.src
+
+        },
+
+        {
+            title:
+                "TopUp",
+
+            src:
+                imgTopup.src
+
+        },
+
+        {
+            title:
+                "After Refuelling",
+
+            src:
+                imgAfter.src
+
+        }
+
+    ];
+
+
+    photos.forEach(
+
+        function(photo){
+
+            if(
+                !photo.src
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                y > 210
+            ){
+
+                doc.addPage();
+
+                y =
+                    15;
+
+            }
+
+
+            doc.setFontSize(
+                12
+            );
+
+
+            doc.text(
+                photo.title,
+                10,
+                y
+            );
+
+
+            y +=
+                5;
+
+
+            doc.addImage(
+
+                photo.src,
+
+                "JPEG",
+
+                10,
+
+                y,
+
+                90,
+
+                60
+
+            );
+
+
+            y +=
+                70;
+
+        }
+
+    );
+
+
+    return doc;
+
+}
+
+
+/* ============================================================
+   DOWNLOAD PDF
+============================================================ */
+
+function downloadPDF(){
+
+    if(
+        !imgBefore.src ||
+        !imgTopup.src ||
+        !imgAfter.src
+    ){
+
+        alert(
+            "Please capture all three photos first."
+        );
+
+
+        return;
+
+    }
+
+
+    const doc =
+        generatePDF();
+
+
+    doc.save(
+
+        siteId.value +
+        "_" +
+        date.value +
+        "_Refuelling_Report.pdf"
+
+    );
+
+}
+
+
+/* ============================================================
+   CREATE EXCEL WITH PHOTOS + GPS
+============================================================ */
+
+async function createExcelBlob(){
+
+    const data =
+        getReportData();
+
+
+    const workbook =
+        new ExcelJS.Workbook();
+
+
+    /* ========================================================
+       MAIN REPORT SHEET
+    ======================================================== */
+
+    const sheet =
+        workbook.addWorksheet(
+            "Refuelling Report"
+        );
+
+
+    sheet.columns = [
+
+        {
+            width: 32
+        },
+
+        {
+            width: 55
+        },
+
+        {
+            width: 3
+        },
+
+        {
+            width: 28
+        },
+
+        {
+            width: 28
+        }
+
+    ];
+
+
+    /* ========================================================
+       TITLE
+    ======================================================== */
+
+    sheet.mergeCells(
+        "A1:E1"
+    );
+
+
+    sheet.getCell(
+        "A1"
+    ).value =
+        "VODAFONE PNG REFUELLING REPORT";
+
+
+    sheet.getCell(
+        "A1"
+    ).font = {
+
+        bold: true,
+
+        size: 16
+
+    };
+
+
+    sheet.getCell(
+        "A1"
+    ).alignment = {
+
+        horizontal:
+            "center",
+
+        vertical:
+            "middle"
+
+    };
+
+
+    sheet.getRow(
+        1
+    ).height =
+        30;
+
+
+    /* ========================================================
+       REPORT DATA
+    ======================================================== */
+
+    const rows = [
+
+        [
+            "Field Engineer",
+            data.engineer
+        ],
+
+        [
+            "Additional Team",
+            data.team
+        ],
+
+        [
+            "Date",
+            data.date
+        ],
+
+        [
+            "Time",
+            data.time
+        ],
+
+        [
+            "Site Name",
+            data.siteName
+        ],
+
+        [
+            "Site ID",
+            data.siteId
+        ],
+
+        [
+            "Region",
+            data.region
+        ],
+
+        [
+            "Province",
+            data.province
+        ],
+
+        [
+            "Tower Height",
+            data.tower
+        ],
+
+        [
+            "Genset Type",
+            data.genset
+        ],
+
+        [
+            "Engine Oil Level",
+            data.oilLevel
+        ],
+
+        [
+            "Coolant Level",
+            data.coolantLevel
+        ],
+
+        [
+            "Engine Speed RPM",
+            data.rpm
+        ],
+
+        [
+            "Fuel Before (L)",
+            data.fuelBefore
+        ],
+
+        [
+            "Fuel TopUp (L)",
+            data.fuelAdded
+        ],
+
+        [
+            "Fuel After (L)",
+            data.fuelAfter
+        ],
+
+        [
+            "Expected Fuel (L)",
+
+            (
+
+                Number(
+                    data.fuelBefore || 0
+                )
+
+                +
+
+                Number(
+                    data.fuelAdded || 0
+                )
+
+            ).toFixed(1)
+
+        ],
+
+        [
+            "Fuel Difference (L)",
+
+            (
+
+                Number(
+                    data.fuelAfter || 0
+                )
+
+                -
+
+                (
+
+                    Number(
+                        data.fuelBefore || 0
+                    )
+
+                    +
+
+                    Number(
+                        data.fuelAdded || 0
+                    )
+
+                )
+
+            ).toFixed(1)
+
+        ],
+
+        [
+            "PPL Connected",
+            data.ppl
+        ],
+
+        [
+            "Meter Number",
+            data.meter
+        ],
+
+        [
+            "Meter Reading",
+            data.reading
+        ],
+
+        [
+            "Driver",
+            data.driver
+        ],
+
+        [
+            "Vehicle Registration",
+            data.vehicle
+        ],
+
+        [
+            "Comments",
+            data.comments
+        ]
+
+    ];
+
+
+    rows.forEach(
+
+        function(rowData){
+
+            const row =
+                sheet.addRow(
+                    rowData
+                );
+
+
+            row.getCell(
+                1
+            ).font = {
+
+                bold:
+                    true
+
+            };
+
+
+            row.getCell(
+                1
+            ).alignment = {
+
+                vertical:
+                    "top"
+
+            };
+
+
+            row.getCell(
+                2
+            ).alignment = {
+
+                vertical:
+                    "top",
+
+                wrapText:
+                    true
+
+            };
+
+        }
+
+    );
+
+
+    /* ========================================================
+       GPS INFORMATION
+    ======================================================== */
+
+    sheet.addRow([]);
+
+
+    const gpsHeader =
+        sheet.addRow(
+
+            [
+                "GPS PHOTO LOCATIONS",
+                ""
+            ]
+
+        );
+
+
+    sheet.mergeCells(
+
+        `A${gpsHeader.number}:B${gpsHeader.number}`
+
+    );
+
+
+    gpsHeader.getCell(
+        1
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            13
+
+    };
+
+
+    const beforeGPSRow =
+        sheet.addRow(
+
+            [
+                "Before GPS",
+                gpsText(
+                    data.gpsBefore
+                )
+            ]
+
+        );
+
+
+    const topupGPSRow =
+        sheet.addRow(
+
+            [
+                "TopUp GPS",
+                gpsText(
+                    data.gpsTopup
+                )
+            ]
+
+        );
+
+
+    const afterGPSRow =
+        sheet.addRow(
+
+            [
+                "After GPS",
+                gpsText(
+                    data.gpsAfter
+                )
+            ]
+
+        );
+
+
+    [
+        beforeGPSRow,
+        topupGPSRow,
+        afterGPSRow
+    ].forEach(
+
+        function(row){
+
+            row.getCell(2).alignment = {
+
+                wrapText:
+                    true,
+
+                vertical:
+                    "top"
+
+            };
+
+        }
+
+    );
+
+
+    /* ========================================================
+       PHOTO HEADER
+    ======================================================== */
+
+    sheet.addRow([]);
+
+
+    const photoHeaderRow =
+        sheet.addRow(
+
+            [
+                "REFUELLING PHOTOS",
+                "",
+                "",
+                "",
+                ""
+            ]
+
+        );
+
+
+    sheet.mergeCells(
+
+        `A${photoHeaderRow.number}:E${photoHeaderRow.number}`
+
+    );
+
+
+    photoHeaderRow.getCell(
+        1
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            14
+
+    };
+
+
+    photoHeaderRow.getCell(
+        1
+    ).alignment = {
+
+        horizontal:
+            "center"
+
+    };
+
+
+    /* ========================================================
+       FUNCTION TO ADD PHOTO TO MAIN SHEET
+    ======================================================== */
+
+    function addMainPhoto(
+        title,
+        imageSrc,
+        gps,
+        startRow
+    ){
+
+        if(!imageSrc){
+
+            return;
+
+        }
+
+
+        const titleRow =
+            sheet.getRow(
+                startRow
+            );
+
+
+        titleRow.getCell(
+            1
+        ).value =
+            title;
+
+
+        titleRow.getCell(
+            1
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                12
+
+        };
+
+
+        titleRow.getCell(
+            4
+        ).value =
+            "GPS";
+
+
+        titleRow.getCell(
+            4
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        titleRow.getCell(
+            5
+        ).value =
+            gpsText(
+                gps
+            );
+
+
+        titleRow.getCell(
+            5
+        ).alignment = {
+
+            wrapText:
+                true,
+
+            vertical:
+                "top"
+
+        };
+
+
+        const image =
+            workbook.addImage({
+
+                base64:
+                    imageSrc,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        sheet.addImage(
+
+            image,
+
+            {
+
+                tl: {
+
+                    col:
+                        0,
+
+                    row:
+                        startRow - 1
+
+                },
+
+                ext: {
+
+                    width:
+                        500,
+
+                    height:
+                        330
+
+                }
+
+            }
+
+        );
+
+
+        for(
+
+            let r =
+                startRow + 1;
+
+            r <=
+                startRow + 18;
+
+            r++
+
+        ){
+
+            sheet.getRow(
+                r
+            ).height =
+                22;
+
+        }
+
+    }
+
+
+    /* ========================================================
+       ADD THREE PHOTOS
+    ======================================================== */
+
+    let photoRow =
+        photoHeaderRow.number + 2;
+
+
+    addMainPhoto(
+
+        "BEFORE REFUELLING",
+
+        imgBefore.src,
+
+        data.gpsBefore,
+
+        photoRow
+
+    );
+
+
+    photoRow +=
+        20;
+
+
+    addMainPhoto(
+
+        "TOPUP",
+
+        imgTopup.src,
+
+        data.gpsTopup,
+
+        photoRow
+
+    );
+
+
+    photoRow +=
+        20;
+
+
+    addMainPhoto(
+
+        "AFTER REFUELLING",
+
+        imgAfter.src,
+
+        data.gpsAfter,
+
+        photoRow
+
+    );
+
+
+    /* ========================================================
+       SEPARATE PHOTOS SHEET
+    ======================================================== */
+
+    const photoSheet =
+        workbook.addWorksheet(
+            "Photos"
+        );
+
+
+    photoSheet.columns = [
+
+        {
+            width:
+                5
+        },
+
+        {
+            width:
+                28
+        },
+
+        {
+            width:
+                28
+        },
+
+        {
+            width:
+                28
+        },
+
+        {
+            width:
+                28
+        }
+
+    ];
+
+
+    photoSheet.mergeCells(
+        "B1:E1"
+    );
+
+
+    photoSheet.getCell(
+        "B1"
+    ).value =
+        "VODAFONE PNG REFUELLING PHOTOS";
+
+
+    photoSheet.getCell(
+        "B1"
+    ).font = {
+
+        bold:
+            true,
+
+        size:
+            16
+
+    };
+
+
+    photoSheet.getCell(
+        "B1"
+    ).alignment = {
+
+        horizontal:
+            "center"
+
+    };
+
+
+    /* ========================================================
+       BEFORE PHOTO
+    ======================================================== */
+
+    if(
+        imgBefore.src
+    ){
+
+        photoSheet.getCell(
+            "B3"
+        ).value =
+            "BEFORE REFUELLING";
+
+
+        photoSheet.getCell(
+            "B3"
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                14
+
+        };
+
+
+        photoSheet.getCell(
+            "D3"
+        ).value =
+            "GPS";
+
+
+        photoSheet.getCell(
+            "D3"
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        photoSheet.getCell(
+            "D4"
+        ).value =
+            gpsText(
+                data.gpsBefore
+            );
+
+
+        photoSheet.getCell(
+            "D4"
+        ).alignment = {
+
+            wrapText:
+                true,
+
+            vertical:
+                "top"
+
+        };
+
+
+        const beforeImage =
+            workbook.addImage({
+
+                base64:
+                    imgBefore.src,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        photoSheet.addImage(
+
+            beforeImage,
+
+            {
+
+                tl: {
+
+                    col:
+                        1,
+
+                    row:
+                        3
+
+                },
+
+                ext: {
+
+                    width:
+                        600,
+
+                    height:
+                        400
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+    /* ========================================================
+       TOPUP PHOTO
+    ======================================================== */
+
+    if(
+        imgTopup.src
+    ){
+
+        photoSheet.getCell(
+            "B22"
+        ).value =
+            "TOPUP";
+
+
+        photoSheet.getCell(
+            "B22"
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                14
+
+        };
+
+
+        photoSheet.getCell(
+            "D22"
+        ).value =
+            "GPS";
+
+
+        photoSheet.getCell(
+            "D22"
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        photoSheet.getCell(
+            "D23"
+        ).value =
+            gpsText(
+                data.gpsTopup
+            );
+
+
+        photoSheet.getCell(
+            "D23"
+        ).alignment = {
+
+            wrapText:
+                true,
+
+            vertical:
+                "top"
+
+        };
+
+
+        const topupImage =
+            workbook.addImage({
+
+                base64:
+                    imgTopup.src,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        photoSheet.addImage(
+
+            topupImage,
+
+            {
+
+                tl: {
+
+                    col:
+                        1,
+
+                    row:
+                        22
+
+                },
+
+                ext: {
+
+                    width:
+                        600,
+
+                    height:
+                        400
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+    /* ========================================================
+       AFTER PHOTO
+    ======================================================== */
+
+    if(
+        imgAfter.src
+    ){
+
+        photoSheet.getCell(
+            "B41"
+        ).value =
+            "AFTER REFUELLING";
+
+
+        photoSheet.getCell(
+            "B41"
+        ).font = {
+
+            bold:
+                true,
+
+            size:
+                14
+
+        };
+
+
+        photoSheet.getCell(
+            "D41"
+        ).value =
+            "GPS";
+
+
+        photoSheet.getCell(
+            "D41"
+        ).font = {
+
+            bold:
+                true
+
+        };
+
+
+        photoSheet.getCell(
+            "D42"
+        ).value =
+            gpsText(
+                data.gpsAfter
+            );
+
+
+        photoSheet.getCell(
+            "D42"
+        ).alignment = {
+
+            wrapText:
+                true,
+
+            vertical:
+                "top"
+
+        };
+
+
+        const afterImage =
+            workbook.addImage({
+
+                base64:
+                    imgAfter.src,
+
+                extension:
+                    "jpeg"
+
+            });
+
+
+        photoSheet.addImage(
+
+            afterImage,
+
+            {
+
+                tl: {
+
+                    col:
+                        1,
+
+                    row:
+                        41
+
+                },
+
+                ext: {
+
+                    width:
+                        600,
+
+                    height:
+                        400
+
+                }
+
+            }
+
+        );
+
+    }
+
+
+    /* ========================================================
+       CREATE EXCEL BUFFER
+    ======================================================== */
+
+    const buffer =
+        await workbook.xlsx.writeBuffer();
+
+
+    return new Blob(
+
+        [
+            buffer
+        ],
+
+        {
+
+            type:
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   GET PDF BASE64
+============================================================ */
+
+async function getPDFBase64(){
+
+    const doc =
+        generatePDF();
+
+
+    const pdfOutput =
+        doc.output(
+            "datauristring"
+        );
+
+
+    return pdfOutput.split(
+        ","
+    )[1];
+
+}
+
+
+/* ============================================================
+   GET EXCEL BASE64
+============================================================ */
+
+async function getExcelBase64(){
+
+    const blob =
+        await createExcelBlob();
+
+
+    return new Promise(
+
+        function(
+            resolve,
+            reject
+        ){
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(){
+
+                    const result =
+                        reader.result;
+
+
+                    resolve(
+
+                        result.split(
+                            ","
+                        )[1]
+
+                    );
+
+                };
+
+
+            reader.onerror =
+                function(error){
+
+                    reject(
+                        error
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                blob
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   DOWNLOAD EXCEL
+============================================================ */
+
+async function downloadExcel(){
+
+    if(
+        !imgBefore.src ||
+        !imgTopup.src ||
+        !imgAfter.src
+    ){
+
+        alert(
+            "Please capture all three photos first."
+        );
+
+
+        return;
+
+    }
+
+
+    try{
+
+        const blob =
+            await createExcelBlob();
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+            siteId.value +
+            "_" +
+            date.value +
+            "_Refuelling_Report.xlsx";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        document.body.removeChild(
+            link
+        );
+
+
+        URL.revokeObjectURL(
+            url
+        );
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            "EXCEL ERROR:",
+            error
+        );
+
+
+        alert(
+            "Unable to generate the Excel report."
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   FORM SUBMIT - FORMSUBMIT VERSION
+============================================================ */
+
+form.addEventListener(
+
+    "submit",
+
+    async function(event){
+
+        event.preventDefault();
+
+
+        /* ====================================================
+           FORM VALIDATION
+        ==================================================== */
+
+        if(
+            !form.checkValidity()
+        ){
+
+            form.reportValidity();
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           PHOTO VALIDATION
+        ==================================================== */
+
+        if(
+            !imgBefore.src ||
+            !imgTopup.src ||
+            !imgAfter.src
+        ){
+
+            alert(
+
+                "Please capture Before, TopUp and After " +
+                "photos before sending."
+
+            );
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           GPS VALIDATION
+        ==================================================== */
+
+        if(
+            !gpsData.BEFORE ||
+            !gpsData.TOPUP ||
+            !gpsData.AFTER
+        ){
+
+            const continueWithoutGPS =
+                confirm(
+
+                    "One or more photos do not have GPS data." +
+
+                    "\n\n" +
+
+                    "Do you want to send the report anyway?"
+
+                );
+
+
+            if(
+                !continueWithoutGPS
+            ){
+
+                return;
+
+            }
+
+        }
+
+
+        /* ====================================================
+           PREVENT DOUBLE SEND
+        ==================================================== */
+
+        sendButton.disabled =
+            true;
+
+
+        sendButton.textContent =
+            "GENERATING REPORT...";
+
+
+        sendStatus.textContent =
+            "Preparing PDF and Excel files...";
+
+
+        try{
+
+
+            /* =================================================
+               GET REPORT DATA
+            ================================================= */
+
+            const data =
+                getReportData();
+
+
+            /* =================================================
+               GENERATE PDF
+            ================================================= */
+
+            const pdfDocument =
+                generatePDF();
+
+
+            const pdfBlob =
+                pdfDocument.output(
+                    "blob"
+                );
+
+
+            /* =================================================
+               GENERATE EXCEL
+            ================================================= */
+
+            const excelBlob =
+                await createExcelBlob();
+
+
+            sendStatus.textContent =
+                "Preparing email attachments...";
+
+
+            sendButton.textContent =
+                "PREPARING ATTACHMENTS...";
+
+
+            /* =================================================
+               CREATE PDF FILE
+            ================================================= */
+
+            const safeSiteId =
+                (
+                    data.siteId ||
+                    "Site"
+                )
+                .replace(
+                    /[^a-zA-Z0-9_-]/g,
+                    "_"
+                );
+
+
+            const pdfFile =
+                new File(
+
+                    [
+                        pdfBlob
+                    ],
+
+                    safeSiteId +
+                    "_" +
+                    data.date +
+                    "_Refuelling_Report.pdf",
+
+                    {
+                        type:
+                            "application/pdf"
+                    }
+
+                );
+
+
+            /* =================================================
+               CREATE EXCEL FILE
+            ================================================= */
+
+            const excelFile =
+                new File(
+
+                    [
+                        excelBlob
+                    ],
+
+                    safeSiteId +
+                    "_" +
+                    data.date +
+                    "_Refuelling_Report.xlsx",
+
+                    {
+                        type:
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    }
+
+                );
+
+
+            /* =================================================
+               CREATE FILE INPUT - PDF
+            ================================================= */
+
+            const pdfInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            pdfInput.type =
+                "file";
+
+
+            pdfInput.name =
+                "pdf_attachment";
+
+
+            pdfInput.style.display =
+                "none";
+
+
+            const pdfDataTransfer =
+                new DataTransfer();
+
+
+            pdfDataTransfer.items.add(
+                pdfFile
+            );
+
+
+            pdfInput.files =
+                pdfDataTransfer.files;
+
+
+            form.appendChild(
+                pdfInput
+            );
+
+
+            /* =================================================
+               CREATE FILE INPUT - EXCEL
+            ================================================= */
+
+            const excelInput =
+                document.createElement(
+                    "input"
+                );
+
+
+            excelInput.type =
+                "file";
+
+
+            excelInput.name =
+                "excel_attachment";
+
+
+            excelInput.style.display =
+                "none";
+
+
+            const excelDataTransfer =
+                new DataTransfer();
+
+
+            excelDataTransfer.items.add(
+                excelFile
+            );
+
+
+            excelInput.files =
+                excelDataTransfer.files;
+
+
+            form.appendChild(
+                excelInput
+            );
+
+
+            /* =================================================
+               FORMSUBMIT SUBJECT
+            ================================================= */
+
+            document.getElementById(
+                "formSubject"
+            ).value =
+
+                "Vodafone PNG Refuelling Report - " +
+                data.siteId +
+                " - " +
+                data.siteName;
+
+
+            /* =================================================
+               NEXT PAGE
+            ================================================= */
+
+            document.getElementById(
+                "formNext"
+            ).value =
+
+                window.location.origin +
+                "/index.html";
+
+
+            /* =================================================
+               ADD GPS INFORMATION
+            ================================================= */
+
+            function addHiddenField(
+                name,
+                value
+            ){
+
+                const existing =
+                    form.querySelector(
+                        'input[data-generated="' +
+                        name +
+                        '"]'
+                    );
+
+
+                if(existing){
+
+                    existing.value =
+                        value;
+
+                    return;
+
+                }
+
+
+                const input =
+                    document.createElement(
+                        "input"
+                    );
+
+
+                input.type =
+                    "hidden";
+
+
+                input.name =
+                    name;
+
+
+                input.value =
+                    value;
+
+
+                input.setAttribute(
+                    "data-generated",
+                    name
+                );
+
+
+                form.appendChild(
+                    input
+                );
+
+            }
+
+
+            addHiddenField(
+                "gps_before",
+                gpsText(
+                    data.gpsBefore
+                )
+            );
+
+
+            addHiddenField(
+                "gps_topup",
+                gpsText(
+                    data.gpsTopup
+                )
+            );
+
+
+            addHiddenField(
+                "gps_after",
+                gpsText(
+                    data.gpsAfter
+                )
+            );
+
+
+            /* =================================================
+               REPORT INFORMATION
+            ================================================= */
+
+            addHiddenField(
+                "report_type",
+                "Vodafone PNG Genset Refuelling Report"
+            );
+
+
+            addHiddenField(
+                "expected_fuel",
+
+                (
+
+                    Number(
+                        data.fuelBefore || 0
+                    )
+
+                    +
+
+                    Number(
+                        data.fuelAdded || 0
+                    )
+
+                ).toFixed(1) +
+                " L"
+
+            );
+
+
+            addHiddenField(
+                "fuel_difference",
+
+                (
+
+                    Number(
+                        data.fuelAfter || 0
+                    )
+
+                    -
+
+                    (
+
+                        Number(
+                            data.fuelBefore || 0
+                        )
+
+                        +
+
+                        Number(
+                            data.fuelAdded || 0
+                        )
+
+                    )
+
+                ).toFixed(1) +
+                " L"
+
+            );
+
+
+            /* =================================================
+               STATUS
+            ================================================= */
+
+            sendStatus.textContent =
+                "Sending PDF and Excel report...";
+
+
+            sendButton.textContent =
+                "SENDING...";
+
+
+            /*
+             * IMPORTANT:
+             *
+             * We now submit the REAL HTML form to FormSubmit.
+             *
+             * This means FormSubmit receives:
+             *
+             * 1. All normal form fields
+             * 2. PDF attachment
+             * 3. Excel attachment
+             * 4. GPS information
+             * 5. Refuelling information
+             */
+
+
+            form.submit();
+
+
+        }
+
+
+        catch(error){
+
+
+            console.error(
+                "FORMSUBMIT ERROR:",
+                error
+            );
+
+
+            sendStatus.textContent =
+                "✗ Failed to prepare report.";
+
+
+            sendButton.textContent =
+                "SEND COMPLETE REPORT";
+
+
+            sendButton.disabled =
+                false;
+
+
+            alert(
+
+                "The report could not be prepared." +
+
+                "\n\n" +
+
+                "Error: " +
+                error.message
+
+            );
+
+        }
+
+    }
+
+);
+
+
+/* ============================================================
+   END OF JAVASCRIPT
+============================================================ */
 
 </script>
 
 
 </body>
+
 </html>
