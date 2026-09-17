@@ -6,7 +6,12 @@
 
 <title>Vodafone PNG Fuel Collection Dashboard</title>
 
+<!-- jsPDF for PDF reports -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -18,10 +23,21 @@ body{
     color:#111827;
 }
 
+/* ================= HEADER ================= */
+
 .header{
     background:#e60000;
     color:#fff;
-    padding:24px;
+    padding:20px 24px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.header-left{
+    flex:1;
 }
 
 .header h1{
@@ -33,6 +49,26 @@ body{
     margin:8px 0 0;
     opacity:.9;
 }
+
+/* ================= LOGOUT ================= */
+
+.logout-btn{
+    background:#111827;
+    color:#fff;
+    border:none;
+    border-radius:9px;
+    padding:11px 18px;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.logout-btn:hover{
+    background:#000;
+}
+
+/* ================= CONTAINER ================= */
 
 .container{
     max-width:1500px;
@@ -315,7 +351,7 @@ button:hover{
 
 .report-buttons{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:1fr 1fr;
     gap:10px;
     margin-top:12px;
 }
@@ -362,6 +398,10 @@ td strong{
     padding:25px;
 }
 
+.footer strong{
+    color:#111827;
+}
+
 /* ================= MOBILE ================= */
 
 @media(max-width:1200px){
@@ -386,6 +426,16 @@ td strong{
 
 @media(max-width:600px){
 
+    .header{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
+
     .container{
         padding:10px;
     }
@@ -405,6 +455,7 @@ td strong{
     }
 
 }
+
 </style>
 </head>
 
@@ -416,14 +467,28 @@ td strong{
 
 <div class="header">
 
-    <h1>
-        Vodafone PNG Fuel Collection Dashboard
-    </h1>
+    <div class="header-left">
 
-    <p>
-        Lae Zone Fuel Collection • Team Accountability •
-        Vodafone PNG Site Allocation
-    </p>
+        <h1>
+            Vodafone PNG Fuel Collection Dashboard
+        </h1>
+
+        <p>
+            Lae Zone Fuel Collection • Team Accountability •
+            Vodafone PNG Site Allocation
+        </p>
+
+    </div>
+
+    <!-- LOGOUT -->
+
+    <button
+        type="button"
+        class="logout-btn"
+        onclick="logout()"
+    >
+        Logout
+    </button>
 
 </div>
 
@@ -603,8 +668,6 @@ td strong{
     </h2>
 
 
-    <!-- TEAM -->
-
     <div class="form-group">
 
         <label>
@@ -658,8 +721,6 @@ td strong{
     </div>
 
 
-    <!-- OTHER TEAM MEMBER -->
-
     <div class="form-group">
 
         <label>
@@ -674,8 +735,6 @@ td strong{
 
     </div>
 
-
-    <!-- DATE + DRUMS -->
 
     <div class="two">
 
@@ -712,8 +771,6 @@ td strong{
     </div>
 
 
-    <!-- ZONE -->
-
     <div class="form-group">
 
         <label>
@@ -747,8 +804,6 @@ td strong{
     </div>
 
 
-    <!-- VEHICLE -->
-
     <div class="form-group">
 
         <label>
@@ -764,9 +819,7 @@ td strong{
     </div>
 
 
-    <!-- =====================================================
-         SITE ASSIGNMENTS
-    ====================================================== -->
+    <!-- SITE ASSIGNMENTS -->
 
     <div class="form-group">
 
@@ -792,8 +845,6 @@ td strong{
     </div>
 
 
-    <!-- ADD SITE -->
-
     <button
         type="button"
         id="addSiteButton"
@@ -802,8 +853,6 @@ td strong{
         + Add Vodafone Site
     </button>
 
-
-    <!-- RECORD -->
 
     <button
         type="button"
@@ -839,7 +888,7 @@ td strong{
 <div class="card">
 
     <h2>
-        Reports
+        Download Reports
     </h2>
 
 
@@ -904,6 +953,8 @@ td strong{
     </div>
 
 
+    <!-- ONLY CSV AND PDF -->
+
     <div class="report-buttons">
 
         <button
@@ -917,19 +968,10 @@ td strong{
 
         <button
             type="button"
-            id="downloadReport"
+            id="downloadPDF"
             class="btn-green"
         >
-            Download Report
-        </button>
-
-
-        <button
-            type="button"
-            id="printReport"
-            class="btn-black"
-        >
-            Print Report
+            Download PDF
         </button>
 
     </div>
@@ -937,7 +979,11 @@ td strong{
 
     <div
         id="reportPreview"
-        style="margin-top:15px;color:#6b7280;font-size:13px"
+        style="
+        margin-top:15px;
+        color:#6b7280;
+        font-size:13px
+        "
     ></div>
 
 </div>
@@ -1069,13 +1115,83 @@ td strong{
     <br><br>
 
     <strong>
-        Together We Can
+        Powered by Iso Yawi
     </strong>
 
 </div>
 
 
 <script>
+
+/* ============================================================
+   LOGIN / SESSION PROTECTION
+============================================================ */
+
+/*
+   Only allow the Warehouse account to access
+   this dashboard.
+
+   If someone directly enters:
+   Warehousedashboard.html
+
+   without logging in, they are returned
+   to index.html.
+*/
+
+(function(){
+
+    const loggedIn =
+        localStorage.getItem("loggedIn");
+
+    const role =
+        localStorage.getItem("userRole");
+
+    if(
+        loggedIn !== "true" ||
+        role !== "Warehouse"
+    ){
+
+        window.location.href =
+            "index.html";
+
+    }
+
+})();
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to logout?"
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+    /*
+       Clear login session.
+       Dashboard fuel data is NOT deleted.
+    */
+
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("username");
+
+    /*
+       Return to login page.
+    */
+
+    window.location.href =
+        "index.html";
+
+}
+
 
 /* ============================================================
    DATABASE
@@ -1224,7 +1340,10 @@ function getToday(){
 
 function getCurrentMonth(){
 
-    return getToday().substring(0,7);
+    return getToday().substring(
+        0,
+        7
+    );
 
 }
 
@@ -1326,9 +1445,7 @@ function getTotalAssigned(){
             if(
                 !Array.isArray(record.sites)
             ){
-
                 return;
-
             }
 
 
@@ -1372,9 +1489,7 @@ function getUniqueSites(){
             if(
                 !Array.isArray(record.sites)
             ){
-
                 return;
-
             }
 
 
@@ -1459,7 +1574,7 @@ function updateSiteAllocationTotal(){
 
 
 /* ============================================================
-   ADD VODAFONE SITE
+   ADD SITE
 ============================================================ */
 
 function addSite(
@@ -1503,7 +1618,6 @@ function addSite(
             value="${escapeHTML(siteId)}"
         >
 
-
         <input
             type="number"
             class="site-drums"
@@ -1512,7 +1626,6 @@ function addSite(
             step="1"
             value="${escapeHTML(drums)}"
         >
-
 
         <button
             type="button"
@@ -1548,6 +1661,7 @@ function addSite(
 
 
     remove.addEventListener(
+
         "click",
 
         function(){
@@ -1557,10 +1671,6 @@ function addSite(
                     ".site-row"
                 );
 
-
-            /*
-               Keep at least one row.
-            */
 
             if(
                 rows.length === 1
@@ -1643,10 +1753,6 @@ function getSiteAssignments(){
                 );
 
 
-            /*
-               Ignore completely empty row.
-            */
-
             if(
                 !siteId &&
                 (!drums || drums <= 0)
@@ -1676,7 +1782,7 @@ function getSiteAssignments(){
 
 
 /* ============================================================
-   GET TEAM
+   GET TEAM MEMBER
 ============================================================ */
 
 function getTeamMember(){
@@ -1815,20 +1921,11 @@ function setStock(){
 
 function recordFuelCollection(){
 
-    console.log(
-        "Record Fuel Collection clicked."
-    );
-
-
     const messageBox =
         document.getElementById(
             "collectionMessage"
         );
 
-
-    /* --------------------------------------------------------
-       GET INPUTS
-    -------------------------------------------------------- */
 
     const team =
         getTeamMember();
@@ -1861,20 +1958,12 @@ function recordFuelCollection(){
         ).value.trim();
 
 
-    /* --------------------------------------------------------
-       VALIDATION
-    -------------------------------------------------------- */
-
     if(!team){
 
         showMessage(
-
             messageBox,
-
             "Please select the team member.",
-
             "error"
-
         );
 
         return;
@@ -1885,13 +1974,9 @@ function recordFuelCollection(){
     if(!date){
 
         showMessage(
-
             messageBox,
-
             "Please select the collection date.",
-
             "error"
-
         );
 
         return;
@@ -1906,13 +1991,9 @@ function recordFuelCollection(){
     ){
 
         showMessage(
-
             messageBox,
-
             "Please enter a valid number of fuel drums collected.",
-
             "error"
-
         );
 
         return;
@@ -1923,23 +2004,15 @@ function recordFuelCollection(){
     if(!zone){
 
         showMessage(
-
             messageBox,
-
             "Please select one of the four Lae Zones.",
-
             "error"
-
         );
 
         return;
 
     }
 
-
-    /* --------------------------------------------------------
-       STOCK CHECK
-    -------------------------------------------------------- */
 
     const remaining =
         getRemainingStock();
@@ -1950,25 +2023,17 @@ function recordFuelCollection(){
     ){
 
         showMessage(
-
             messageBox,
-
             "Not enough fuel stock. Remaining stock: " +
             remaining +
             " drums.",
-
             "error"
-
         );
 
         return;
 
     }
 
-
-    /* --------------------------------------------------------
-       GET SITES
-    -------------------------------------------------------- */
 
     const sites =
         getSiteAssignments();
@@ -1979,23 +2044,15 @@ function recordFuelCollection(){
     ){
 
         showMessage(
-
             messageBox,
-
             "Please add at least one Vodafone PNG site.",
-
             "error"
-
         );
 
         return;
 
     }
 
-
-    /* --------------------------------------------------------
-       VALIDATE EACH SITE
-    -------------------------------------------------------- */
 
     let siteTotal = 0;
 
@@ -2013,13 +2070,9 @@ function recordFuelCollection(){
         if(!site.siteId){
 
             showMessage(
-
                 messageBox,
-
                 "Please enter a Vodafone Site ID for every site.",
-
                 "error"
-
             );
 
             return;
@@ -2034,15 +2087,11 @@ function recordFuelCollection(){
         ){
 
             showMessage(
-
                 messageBox,
-
                 "Please enter a valid drum quantity for " +
                 site.siteId +
                 ".",
-
                 "error"
-
             );
 
             return;
@@ -2055,10 +2104,6 @@ function recordFuelCollection(){
 
     }
 
-
-    /* --------------------------------------------------------
-       SITE TOTAL MUST MATCH COLLECTION
-    -------------------------------------------------------- */
 
     if(
         siteTotal !== drums
@@ -2082,10 +2127,6 @@ function recordFuelCollection(){
 
     }
 
-
-    /* --------------------------------------------------------
-       CREATE RECORD
-    -------------------------------------------------------- */
 
     const record = {
 
@@ -2117,46 +2158,22 @@ function recordFuelCollection(){
     };
 
 
-    /* --------------------------------------------------------
-       ADD TO DATABASE
-    -------------------------------------------------------- */
-
     database.collections.push(
         record
     );
 
-
-    /* --------------------------------------------------------
-       SAVE
-    -------------------------------------------------------- */
 
     const saved =
         saveDatabase();
 
 
     if(!saved){
-
         return;
-
     }
 
 
-    console.log(
-        "Fuel collection saved:",
-        record
-    );
-
-
-    /* --------------------------------------------------------
-       UPDATE DASHBOARD IMMEDIATELY
-    -------------------------------------------------------- */
-
     renderDashboard();
 
-
-    /* --------------------------------------------------------
-       RESET FORM
-    -------------------------------------------------------- */
 
     document.getElementById(
         "collectionDrums"
@@ -2173,17 +2190,8 @@ function recordFuelCollection(){
     ).innerHTML = "";
 
 
-    /*
-       Start the next collection with
-       one blank site row.
-    */
-
     addSite();
 
-
-    /* --------------------------------------------------------
-       SUCCESS
-    -------------------------------------------------------- */
 
     showMessage(
 
@@ -2225,9 +2233,7 @@ function deleteRecord(id){
 
 
     if(!record){
-
         return;
-
     }
 
 
@@ -2247,9 +2253,7 @@ function deleteRecord(id){
 
 
     if(!confirmed){
-
         return;
-
     }
 
 
@@ -2273,7 +2277,7 @@ function deleteRecord(id){
 
 
 /* ============================================================
-   CLEAR ALL
+   CLEAR ALL DATA
 ============================================================ */
 
 function clearAllData(){
@@ -2292,9 +2296,7 @@ function clearAllData(){
 
 
     if(!confirmed){
-
         return;
-
     }
 
 
@@ -2330,9 +2332,7 @@ function showMessage(
 ){
 
     if(!element){
-
         return;
-
     }
 
 
@@ -2344,10 +2344,6 @@ function showMessage(
         "message show " +
         type;
 
-
-    /*
-       Automatically hide success messages.
-    */
 
     if(type === "success"){
 
@@ -2450,11 +2446,8 @@ function renderZones(){
     const zones = [
 
         "Lae Zone 1",
-
         "Lae Zone 2",
-
         "Lae Zone 3",
-
         "Lae Zone 4"
 
     ];
@@ -2591,11 +2584,7 @@ function renderTeams(){
 
         container.innerHTML = `
 
-            <div
-                style="
-                color:#6b7280;
-                "
-            >
+            <div style="color:#6b7280;">
                 No fuel collection records yet.
             </div>
 
@@ -3184,7 +3173,7 @@ function downloadCSV(){
 
         "Vodafone_PNG_Fuel_Report.csv",
 
-        "text/csv"
+        "text/csv;charset=utf-8"
 
     );
 
@@ -3209,16 +3198,195 @@ function csvEscape(value){
 
 
 /* ============================================================
-   DOWNLOAD HTML REPORT
+   PDF DOWNLOAD
 ============================================================ */
 
-function downloadReport(){
+function downloadPDF(){
 
     const records =
         getReportRecords();
 
 
-    let rows = "";
+    if(records.length === 0){
+
+        alert(
+            "There are no collection records for the selected report period."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !window.jspdf ||
+        !window.jspdf.jsPDF
+    ){
+
+        alert(
+            "PDF library could not be loaded. Please check your internet connection and try again."
+        );
+
+        return;
+
+    }
+
+
+    const {
+        jsPDF
+    } = window.jspdf;
+
+
+    const doc =
+        new jsPDF(
+            "landscape",
+            "mm",
+            "a4"
+        );
+
+
+    /* --------------------------------------------------------
+       REPORT TITLE
+    -------------------------------------------------------- */
+
+    doc.setFontSize(18);
+
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+    doc.text(
+        "Vodafone PNG Fuel Collection Report",
+        14,
+        15
+    );
+
+
+    /* --------------------------------------------------------
+       REPORT INFORMATION
+    -------------------------------------------------------- */
+
+    const reportType =
+        document.getElementById(
+            "reportType"
+        ).value;
+
+
+    const reportDate =
+        document.getElementById(
+            "reportDate"
+        ).value;
+
+
+    const reportMonth =
+        document.getElementById(
+            "reportMonth"
+        ).value;
+
+
+    doc.setFontSize(10);
+
+    doc.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    doc.text(
+        "Report Type: " +
+        reportType,
+        14,
+        23
+    );
+
+
+    if(reportType === "daily"){
+
+        doc.text(
+            "Date: " +
+            reportDate,
+            14,
+            29
+        );
+
+    }
+
+
+    if(
+        reportType === "monthly" ||
+        reportType === "selected-month"
+    ){
+
+        doc.text(
+            "Month: " +
+            reportMonth,
+            14,
+            29
+        );
+
+    }
+
+
+    if(reportType === "weekly"){
+
+        doc.text(
+            "Week based on: " +
+            reportDate,
+            14,
+            29
+        );
+
+    }
+
+
+    const totalDrums =
+        records.reduce(
+
+            function(sum,record){
+
+                return sum +
+                    Number(
+                        record.collectedDrums || 0
+                    );
+
+            },
+
+            0
+
+        );
+
+
+    doc.text(
+        "Total Records: " +
+        records.length,
+        14,
+        35
+    );
+
+
+    doc.text(
+        "Total Fuel Collected: " +
+        totalDrums +
+        " drums",
+        14,
+        41
+    );
+
+
+    doc.text(
+        "Generated: " +
+        new Date().toLocaleString(),
+        14,
+        47
+    );
+
+
+    /* --------------------------------------------------------
+       TABLE DATA
+    -------------------------------------------------------- */
+
+    const tableData = [];
 
 
     records.forEach(
@@ -3230,41 +3398,17 @@ function downloadReport(){
                 record.sites.length === 0
             ){
 
-                rows += `
+                tableData.push([
 
-                    <tr>
+                    record.date,
+                    record.team,
+                    record.zone,
+                    record.vehicle,
+                    record.collectedDrums,
+                    "-",
+                    "-"
 
-                        <td>
-                            ${escapeHTML(record.date)}
-                        </td>
-
-                        <td>
-                            ${escapeHTML(record.team)}
-                        </td>
-
-                        <td>
-                            ${escapeHTML(record.zone)}
-                        </td>
-
-                        <td>
-                            ${escapeHTML(record.vehicle)}
-                        </td>
-
-                        <td>
-                            ${record.collectedDrums}
-                        </td>
-
-                        <td>
-                            -
-                        </td>
-
-                        <td>
-                            -
-                        </td>
-
-                    </tr>
-
-                `;
+                ]);
 
                 return;
 
@@ -3275,41 +3419,17 @@ function downloadReport(){
 
                 function(site){
 
-                    rows += `
+                    tableData.push([
 
-                        <tr>
+                        record.date,
+                        record.team,
+                        record.zone,
+                        record.vehicle,
+                        record.collectedDrums,
+                        site.siteId,
+                        site.drums
 
-                            <td>
-                                ${escapeHTML(record.date)}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(record.team)}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(record.zone)}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(record.vehicle)}
-                            </td>
-
-                            <td>
-                                ${record.collectedDrums}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(site.siteId)}
-                            </td>
-
-                            <td>
-                                ${site.drums}
-                            </td>
-
-                        </tr>
-
-                    `;
+                    ]);
 
                 }
 
@@ -3320,119 +3440,107 @@ function downloadReport(){
     );
 
 
-    const html = `
+    /* --------------------------------------------------------
+       PDF TABLE
+    -------------------------------------------------------- */
 
-<!DOCTYPE html>
+    doc.autoTable({
 
-<html>
+        startY: 53,
 
-<head>
+        head: [[
 
-<meta charset="UTF-8">
+            "Date",
+            "Team",
+            "Zone",
+            "Vehicle",
+            "Collected Drums",
+            "Vodafone Site",
+            "Site Drums"
 
-<title>
-Vodafone PNG Fuel Collection Report
-</title>
+        ]],
 
-<style>
+        body: tableData,
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    padding:30px;
-    color:#111;
-}
+        theme:"grid",
 
-h1{
-    color:#e60000;
-}
+        styles:{
 
-table{
-    width:100%;
-    border-collapse:collapse;
-}
+            fontSize:8,
 
-th,
-td{
-    border:1px solid #bbb;
-    padding:8px;
-}
+            cellPadding:3
 
-th{
-    background:#eee;
-}
+        },
 
-</style>
+        headStyles:{
 
-</head>
+            fontStyle:"bold"
 
-<body>
+        },
 
-<h1>
-Vodafone PNG Fuel Collection Report
-</h1>
+        margin:{
 
-<p>
-Generated:
-${new Date().toLocaleString()}
-</p>
+            left:14,
 
-<p>
-Total Records:
-${records.length}
-</p>
+            right:14
 
-<p>
-Total Fuel Collected:
-${records.reduce(
-    (sum,r)=>
-        sum +
-        Number(r.collectedDrums || 0),
-    0
-)}
- drums
-</p>
+        }
 
-<table>
-
-<thead>
-
-<tr>
-
-<th>Date</th>
-<th>Team</th>
-<th>Zone</th>
-<th>Vehicle</th>
-<th>Collected Drums</th>
-<th>Vodafone Site</th>
-<th>Site Drums</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${rows}
-
-</tbody>
-
-</table>
-
-</body>
-
-</html>
-
-`;
+    });
 
 
-    downloadFile(
+    /* --------------------------------------------------------
+       FOOTER
+    -------------------------------------------------------- */
 
-        html,
+    const pageCount =
+        doc.internal.getNumberOfPages();
 
-        "Vodafone_PNG_Fuel_Report.html",
 
-        "text/html"
+    for(
+        let i = 1;
+        i <= pageCount;
+        i++
+    ){
 
+        doc.setPage(i);
+
+
+        const pageHeight =
+            doc.internal.pageSize.height;
+
+
+        doc.setFontSize(8);
+
+
+        doc.text(
+
+            "Powered by Iso Yawi | Vodafone PNG Fuel Collection Dashboard | Page " +
+            i +
+            " of " +
+            pageCount,
+
+            14,
+
+            pageHeight - 8
+
+        );
+
+    }
+
+
+    /* --------------------------------------------------------
+       DOWNLOAD
+    -------------------------------------------------------- */
+
+    const filename =
+        "Vodafone_PNG_Fuel_Report_" +
+        getToday() +
+        ".pdf";
+
+
+    doc.save(
+        filename
     );
 
 }
@@ -3509,222 +3617,6 @@ function downloadFile(
 
 
 /* ============================================================
-   PRINT REPORT
-============================================================ */
-
-function printReport(){
-
-    const records =
-        getReportRecords();
-
-
-    let rows = "";
-
-
-    records.forEach(
-
-        function(record){
-
-            if(
-                !record.sites ||
-                record.sites.length === 0
-            ){
-
-                rows += `
-
-                    <tr>
-
-                        <td>${escapeHTML(record.date)}</td>
-
-                        <td>${escapeHTML(record.team)}</td>
-
-                        <td>${escapeHTML(record.zone)}</td>
-
-                        <td>${record.collectedDrums}</td>
-
-                        <td>-</td>
-
-                        <td>-</td>
-
-                    </tr>
-
-                `;
-
-                return;
-
-            }
-
-
-            record.sites.forEach(
-
-                function(site){
-
-                    rows += `
-
-                        <tr>
-
-                            <td>
-                                ${escapeHTML(record.date)}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(record.team)}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(record.zone)}
-                            </td>
-
-                            <td>
-                                ${record.collectedDrums}
-                            </td>
-
-                            <td>
-                                ${escapeHTML(site.siteId)}
-                            </td>
-
-                            <td>
-                                ${site.drums}
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                }
-
-            );
-
-        }
-
-    );
-
-
-    const printWindow =
-        window.open(
-            "",
-            "_blank"
-        );
-
-
-    if(!printWindow){
-
-        alert(
-            "Please allow pop-ups in your browser to print the report."
-        );
-
-        return;
-
-    }
-
-
-    printWindow.document.write(`
-
-        <!DOCTYPE html>
-
-        <html>
-
-        <head>
-
-        <title>
-            Vodafone PNG Fuel Report
-        </title>
-
-        <style>
-
-        body{
-            font-family:Arial;
-            padding:25px;
-        }
-
-        h1{
-            color:#e60000;
-        }
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
-
-        th,
-        td{
-            border:1px solid #999;
-            padding:8px;
-        }
-
-        th{
-            background:#eee;
-        }
-
-        </style>
-
-        </head>
-
-        <body>
-
-        <h1>
-            Vodafone PNG Fuel Collection Report
-        </h1>
-
-        <p>
-            Generated:
-            ${new Date().toLocaleString()}
-        </p>
-
-        <table>
-
-        <thead>
-
-        <tr>
-
-        <th>Date</th>
-        <th>Team</th>
-        <th>Zone</th>
-        <th>Collected</th>
-        <th>Vodafone Site</th>
-        <th>Site Drums</th>
-
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-        ${rows}
-
-        </tbody>
-
-        </table>
-
-        </body>
-
-        </html>
-
-    `);
-
-
-    printWindow.document.close();
-
-
-    printWindow.focus();
-
-
-    setTimeout(
-
-        function(){
-
-            printWindow.print();
-
-        },
-
-        500
-
-    );
-
-}
-
-
-/* ============================================================
    RENDER EVERYTHING
 ============================================================ */
 
@@ -3749,17 +3641,10 @@ function renderDashboard(){
 
 function initialise(){
 
-    console.log(
-        "Initializing Vodafone PNG Fuel Dashboard..."
-    );
-
-
     loadDatabase();
 
 
-    /* --------------------------------------------------------
-       DEFAULT DATES
-    -------------------------------------------------------- */
+    /* DEFAULT DATES */
 
     document.getElementById(
         "collectionDate"
@@ -3779,9 +3664,7 @@ function initialise(){
         getCurrentMonth();
 
 
-    /* --------------------------------------------------------
-       ADD SITE BUTTON
-    -------------------------------------------------------- */
+    /* ADD SITE */
 
     document.getElementById(
         "addSiteButton"
@@ -3793,10 +3676,6 @@ function initialise(){
 
             event.preventDefault();
 
-            console.log(
-                "Add Vodafone Site clicked."
-            );
-
             addSite();
 
         }
@@ -3804,9 +3683,7 @@ function initialise(){
     );
 
 
-    /* --------------------------------------------------------
-       RECORD BUTTON
-    -------------------------------------------------------- */
+    /* RECORD */
 
     document.getElementById(
         "recordButton"
@@ -3818,10 +3695,6 @@ function initialise(){
 
             event.preventDefault();
 
-            console.log(
-                "Record Fuel Collection clicked."
-            );
-
             recordFuelCollection();
 
         }
@@ -3829,9 +3702,7 @@ function initialise(){
     );
 
 
-    /* --------------------------------------------------------
-       STOCK BUTTON
-    -------------------------------------------------------- */
+    /* STOCK */
 
     document.getElementById(
         "setStockButton"
@@ -3850,9 +3721,7 @@ function initialise(){
     );
 
 
-    /* --------------------------------------------------------
-       REPORT BUTTONS
-    -------------------------------------------------------- */
+    /* CSV */
 
     document.getElementById(
         "downloadCSV"
@@ -3869,39 +3738,24 @@ function initialise(){
     );
 
 
+    /* PDF */
+
     document.getElementById(
-        "downloadReport"
+        "downloadPDF"
     ).addEventListener(
 
         "click",
 
         function(){
 
-            downloadReport();
+            downloadPDF();
 
         }
 
     );
 
 
-    document.getElementById(
-        "printReport"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            printReport();
-
-        }
-
-    );
-
-
-    /* --------------------------------------------------------
-       CLEAR DATA
-    -------------------------------------------------------- */
+    /* CLEAR DATA */
 
     document.getElementById(
         "clearData"
@@ -3918,9 +3772,7 @@ function initialise(){
     );
 
 
-    /* --------------------------------------------------------
-       REPORT FILTERS
-    -------------------------------------------------------- */
+    /* REPORT FILTERS */
 
     document.getElementById(
         "reportType"
@@ -3955,23 +3807,14 @@ function initialise(){
     );
 
 
-    /* --------------------------------------------------------
-       CREATE FIRST SITE ROW
-    -------------------------------------------------------- */
+    /* FIRST SITE */
 
     addSite();
 
 
-    /* --------------------------------------------------------
-       DRAW DASHBOARD
-    -------------------------------------------------------- */
+    /* DASHBOARD */
 
     renderDashboard();
-
-
-    console.log(
-        "Dashboard ready."
-    );
 
 }
 
