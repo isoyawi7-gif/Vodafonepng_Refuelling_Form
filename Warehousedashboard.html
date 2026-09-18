@@ -6,171 +6,55 @@
 
 <title>Vodafone PNG Fuel Collection Dashboard</title>
 
-<!-- =========================================================
-     jsPDF
-========================================================= -->
+<!-- PDF LIBRARIES -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 
 <style>
-
 /* =========================================================
-   THEME VARIABLES
-========================================================= */
+   VODAFONE PNG FUEL COLLECTION DASHBOARD
+   ========================================================= */
 
 :root{
-
     --bg:#f3f4f6;
-    --surface:#ffffff;
-    --surface2:#f9fafb;
+    --card:#ffffff;
+    --card2:#f8fafc;
     --text:#111827;
     --muted:#6b7280;
     --border:#e5e7eb;
-    --input-border:#d1d5db;
-
+    --input:#ffffff;
     --primary:#e60000;
     --primary-dark:#b90000;
-
-    --black:#111827;
-
-    --green:#15803d;
-    --blue:#2563eb;
-    --orange:#d97706;
-
-    --danger-bg:#fee2e2;
-    --danger-text:#991b1b;
-
-    --success-bg:#dcfce7;
-    --success-text:#166534;
-
-    --shadow:0 3px 12px rgba(0,0,0,.08);
-
-    --header-gradient:linear-gradient(
-        135deg,
-        #e60000,
-        #b90000
-    );
+    --success:#16a34a;
+    --warning:#d97706;
+    --danger:#dc2626;
+    --info:#2563eb;
+    --shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
-
-/* =========================================================
-   DARK THEME
-========================================================= */
-
-[data-theme="dark"]{
-
-    --bg:#0f172a;
-    --surface:#1e293b;
-    --surface2:#263449;
-
-    --text:#f8fafc;
-    --muted:#94a3b8;
-
-    --border:#334155;
-    --input-border:#475569;
-
-    --primary:#ef4444;
-    --primary-dark:#dc2626;
-
-    --black:#020617;
-
-    --danger-bg:#451a1a;
-    --danger-text:#fecaca;
-
-    --success-bg:#052e16;
-    --success-text:#bbf7d0;
-
-    --shadow:0 4px 18px rgba(0,0,0,.35);
-
-    --header-gradient:linear-gradient(
-        135deg,
-        #991b1b,
-        #450a0a
-    );
+body[data-theme="dark"]{
+    --bg:#0b0f14;
+    --card:#141a22;
+    --card2:#1a222d;
+    --text:#f3f4f6;
+    --muted:#9ca3af;
+    --border:#2b3542;
+    --input:#111820;
+    --shadow:0 8px 25px rgba(0,0,0,.35);
 }
 
-
-/* =========================================================
-   VODAFONE THEME
-========================================================= */
-
-[data-theme="vodafone"]{
-
-    --bg:#f5f5f5;
-    --surface:#ffffff;
-    --surface2:#fafafa;
-
-    --text:#111111;
-    --muted:#666666;
-
-    --border:#dddddd;
-    --input-border:#cccccc;
-
+body[data-theme="vodafone"]{
+    --bg:#090909;
+    --card:#151515;
+    --card2:#202020;
+    --text:#ffffff;
+    --muted:#c2c2c2;
+    --border:#333333;
+    --input:#101010;
     --primary:#e60000;
-    --primary-dark:#b00000;
-
-    --black:#000000;
-
-    --danger-bg:#ffe5e5;
-    --danger-text:#a00000;
-
-    --success-bg:#e5f7eb;
-    --success-text:#116b32;
-
-    --shadow:0 4px 15px rgba(0,0,0,.10);
-
-    --header-gradient:linear-gradient(
-        135deg,
-        #e60000,
-        #8b0000
-    );
+    --primary-dark:#b80000;
+    --shadow:0 8px 30px rgba(230,0,0,.12);
 }
-
-
-/* =========================================================
-   SYSTEM THEME
-========================================================= */
-
-@media(prefers-color-scheme:dark){
-
-    [data-theme="system"]{
-
-        --bg:#0f172a;
-        --surface:#1e293b;
-        --surface2:#263449;
-
-        --text:#f8fafc;
-        --muted:#94a3b8;
-
-        --border:#334155;
-        --input-border:#475569;
-
-        --primary:#ef4444;
-        --primary-dark:#dc2626;
-
-        --black:#020617;
-
-        --danger-bg:#451a1a;
-        --danger-text:#fecaca;
-
-        --success-bg:#052e16;
-        --success-text:#bbf7d0;
-
-        --shadow:0 4px 18px rgba(0,0,0,.35);
-
-        --header-gradient:linear-gradient(
-            135deg,
-            #991b1b,
-            #450a0a
-        );
-    }
-
-}
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 *{
     box-sizing:border-box;
@@ -181,1782 +65,1191 @@ html{
 }
 
 body{
-
     margin:0;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
     background:var(--bg);
-
     color:var(--text);
-
-    transition:
-        background .25s ease,
-        color .25s ease;
-
+    transition:.25s ease;
 }
-
 
 /* =========================================================
    HEADER
-========================================================= */
+   ========================================================= */
 
 .header{
-
-    background:var(--header-gradient);
-
-    color:#fff;
-
+    background:linear-gradient(135deg,#e60000,#b40000);
+    color:white;
     padding:18px 24px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
 
+.header-inner{
+    max-width:1500px;
+    margin:auto;
     display:flex;
-
+    align-items:center;
     justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-
-    box-shadow:
-        0 3px 12px rgba(0,0,0,.20);
-
+    gap:15px;
 }
 
-.header-left{
-    flex:1;
-}
-
-.header h1{
-
-    margin:0;
-
-    font-size:28px;
-
-}
-
-.header p{
-
-    margin:8px 0 0;
-
-    opacity:.9;
-
-}
-
-
-/* =========================================================
-   HEADER CONTROLS
-========================================================= */
-
-.header-controls{
-
+.brand{
     display:flex;
-
     align-items:center;
+    gap:14px;
+}
 
+.logo{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:white;
+    color:#e60000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:25px;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+.brand h1{
+    margin:0;
+    font-size:21px;
+}
+
+.brand p{
+    margin:4px 0 0;
+    opacity:.9;
+    font-size:12px;
+}
+
+.header-actions{
+    display:flex;
     gap:8px;
-
+    align-items:center;
     flex-wrap:wrap;
-
-    justify-content:flex-end;
-
 }
 
-
-/* =========================================================
-   THEME SELECT
-========================================================= */
-
-.theme-select{
-
-    background:rgba(255,255,255,.15);
-
-    color:#fff;
-
-    border:1px solid rgba(255,255,255,.35);
-
-    border-radius:9px;
-
-    padding:10px 12px;
-
-    font-size:13px;
-
-    font-weight:bold;
-
+.header-btn{
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(255,255,255,.12);
+    color:white;
+    padding:9px 12px;
+    border-radius:8px;
     cursor:pointer;
-
-    min-width:140px;
-
+    font-weight:700;
 }
 
-.theme-select option{
-
-    background:#fff;
-
-    color:#111827;
-
+.header-btn:hover{
+    background:rgba(255,255,255,.22);
 }
-
 
 /* =========================================================
-   LOGOUT
-========================================================= */
-
-.logout-btn{
-
-    background:#111827;
-
-    color:#fff;
-
-    border:none;
-
-    border-radius:9px;
-
-    padding:11px 18px;
-
-    font-size:14px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    white-space:nowrap;
-
-}
-
-.logout-btn:hover{
-
-    background:#000;
-
-    transform:translateY(-1px);
-
-}
-
-
-/* =========================================================
-   CONTAINER
-========================================================= */
+   MAIN
+   ========================================================= */
 
 .container{
-
     max-width:1500px;
-
     margin:auto;
-
-    padding:20px;
-
+    padding:22px;
 }
-
-
-/* =========================================================
-   CARDS
-========================================================= */
-
-.card{
-
-    background:var(--surface);
-
-    color:var(--text);
-
-    border-radius:14px;
-
-    padding:20px;
-
-    margin-bottom:20px;
-
-    box-shadow:var(--shadow);
-
-    border:1px solid var(--border);
-
-    transition:
-        background .25s ease,
-        color .25s ease,
-        border .25s ease;
-
-}
-
-.card h2{
-
-    margin-top:0;
-
-    margin-bottom:18px;
-
-}
-
 
 /* =========================================================
    KPI
-========================================================= */
+   ========================================================= */
 
-.kpis{
-
+.kpi-grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(6,1fr);
-
-    gap:14px;
-
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
     margin-bottom:20px;
-
 }
 
 .kpi{
-
-    background:var(--surface);
-
-    border-radius:12px;
-
-    padding:18px;
-
-    box-shadow:var(--shadow);
-
+    background:var(--card);
     border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+}
 
+.kpi::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:var(--primary);
 }
 
 .kpi-title{
-
-    color:var(--muted);
-
     font-size:12px;
-
-    font-weight:bold;
-
+    color:var(--muted);
     text-transform:uppercase;
-
+    font-weight:bold;
 }
 
 .kpi-value{
-
     font-size:30px;
-
     font-weight:900;
-
-    margin-top:7px;
-
+    margin-top:8px;
 }
 
-.red{
-    color:var(--primary);
+.kpi-small{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:4px;
 }
-
-.green{
-    color:var(--green);
-}
-
-.blue{
-    color:var(--blue);
-}
-
-.orange{
-    color:var(--orange);
-}
-
 
 /* =========================================================
-   MAIN GRID
-========================================================= */
+   CARDS
+   ========================================================= */
 
-.main-grid{
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+}
 
+.card h2{
+    margin:0 0 5px;
+    font-size:18px;
+}
+
+.card-subtitle{
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.two-col{
     display:grid;
-
-    grid-template-columns:
-        380px 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:20px;
-
 }
 
+.three-col{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
 
 /* =========================================================
-   FORMS
-========================================================= */
+   FORM
+   ========================================================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
 
 .form-group{
-    margin-bottom:15px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
 }
 
 label{
-
-    display:block;
-
-    font-size:13px;
-
-    font-weight:bold;
-
-    margin-bottom:6px;
-
-    color:var(--text);
-
+    font-size:12px;
+    font-weight:700;
+    color:var(--muted);
 }
 
 input,
 select{
-
     width:100%;
-
     padding:11px 12px;
-
-    border:
-        1px solid
-        var(--input-border);
-
     border-radius:8px;
-
-    font-size:14px;
-
-    background:var(--surface);
-
+    border:1px solid var(--border);
+    background:var(--input);
     color:var(--text);
-
-    transition:.2s;
-
-}
-
-input::placeholder{
-    color:var(--muted);
+    outline:none;
+    font-size:14px;
 }
 
 input:focus,
 select:focus{
-
-    outline:none;
-
     border-color:var(--primary);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(230,0,0,.10);
-
+    box-shadow:0 0 0 2px rgba(230,0,0,.12);
 }
-
-.two{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:10px;
-
-}
-
 
 /* =========================================================
    BUTTONS
-========================================================= */
+   ========================================================= */
 
 button{
+    font-family:inherit;
+}
 
-    border:none;
-
+.btn{
+    border:0;
     border-radius:8px;
-
-    padding:11px 14px;
-
-    font-size:14px;
-
-    font-weight:bold;
-
+    padding:11px 15px;
     cursor:pointer;
-
-    transition:
-        opacity .2s,
-        transform .15s;
-
+    font-weight:700;
+    transition:.2s;
 }
 
-button:hover{
-
-    opacity:.9;
-
+.btn:hover{
     transform:translateY(-1px);
-
 }
 
-button:active{
-
-    transform:translateY(0);
-
-}
-
-.btn-red{
-
+.btn-primary{
     background:var(--primary);
-
     color:#fff;
-
 }
 
-.btn-black{
-
-    background:var(--black);
-
-    color:#fff;
-
+.btn-primary:hover{
+    background:var(--primary-dark);
 }
 
-.btn-green{
-
-    background:var(--green);
-
-    color:#fff;
-
+.btn-secondary{
+    background:#374151;
+    color:white;
 }
 
-.btn-blue{
-
-    background:var(--blue);
-
-    color:#fff;
-
+.btn-success{
+    background:var(--success);
+    color:white;
 }
 
-.btn-gray{
-
-    background:#6b7280;
-
-    color:#fff;
-
+.btn-warning{
+    background:var(--warning);
+    color:white;
 }
 
 .btn-danger{
-
-    background:var(--danger-bg);
-
-    color:var(--danger-text);
-
+    background:var(--danger);
+    color:white;
 }
 
-.full{
-
-    width:100%;
-
-    margin-top:7px;
-
+.btn-info{
+    background:var(--info);
+    color:white;
 }
 
+.btn-light{
+    background:var(--card2);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.button-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:15px;
+}
+
+/* =========================================================
+   STOCK
+   ========================================================= */
+
+.stock-box{
+    display:flex;
+    gap:10px;
+    align-items:end;
+}
+
+.stock-box .form-group{
+    flex:1;
+}
 
 /* =========================================================
    SITE ASSIGNMENTS
-========================================================= */
+   ========================================================= */
+
+.site-add{
+    display:grid;
+    grid-template-columns:1fr 150px 110px;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.site-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    max-height:280px;
+    overflow:auto;
+}
 
 .site-row{
-
     display:grid;
-
-    grid-template-columns:
-        1fr 90px 70px;
-
-    gap:7px;
-
-    margin-bottom:9px;
-
+    grid-template-columns:1fr 100px 80px;
+    gap:8px;
     align-items:center;
-
+    padding:10px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    border-radius:8px;
 }
 
 .site-row input{
-    min-width:0;
-}
-
-.remove-site{
-
-    background:var(--danger-bg);
-
-    color:var(--danger-text);
-
-    padding:10px 5px;
-
-    font-size:12px;
-
+    padding:8px;
 }
 
 .site-total{
-
-    margin-top:8px;
-
-    padding:11px;
-
-    background:var(--surface2);
-
-    border:1px solid var(--border);
-
+    margin-top:10px;
+    padding:12px;
     border-radius:8px;
-
-    font-size:13px;
-
-    font-weight:bold;
-
+    background:var(--card2);
+    font-weight:800;
 }
-
-.site-total span{
-
-    color:var(--primary);
-
-    font-size:16px;
-
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-.message{
-
-    display:none;
-
-    margin-top:12px;
-
-    padding:11px;
-
-    border-radius:8px;
-
-    font-size:13px;
-
-}
-
-.message.show{
-    display:block;
-}
-
-.message.success{
-
-    background:var(--success-bg);
-
-    color:var(--success-text);
-
-}
-
-.message.error{
-
-    background:var(--danger-bg);
-
-    color:var(--danger-text);
-
-}
-
 
 /* =========================================================
    ZONES
-========================================================= */
+   ========================================================= */
 
 .zone-grid{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:12px;
-
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
-.zone{
-
-    background:var(--surface2);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:10px;
-
-    padding:15px;
-
+.zone-card{
+    border:1px solid var(--border);
+    background:var(--card2);
+    border-radius:12px;
+    padding:16px;
 }
 
-.zone-name{
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    font-weight:bold;
-
+.zone-card h3{
+    margin:0 0 10px;
 }
 
 .zone-number{
-
-    font-size:27px;
-
+    font-size:28px;
     font-weight:900;
-
-    margin-top:5px;
-
 }
 
+.zone-meta{
+    font-size:12px;
+    color:var(--muted);
+}
 
 /* =========================================================
-   TEAM
-========================================================= */
+   PROGRESS
+   ========================================================= */
 
-.team-row{
-    margin-bottom:17px;
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
 }
 
-.team-line{
+.team-card{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px;
+    background:var(--card2);
+}
 
+.team-top{
     display:flex;
-
     justify-content:space-between;
-
-    margin-bottom:6px;
-
-    font-size:13px;
-
+    gap:10px;
+    margin-bottom:8px;
 }
 
 .progress{
-
+    width:100%;
     height:10px;
-
-    background:var(--border);
-
     border-radius:20px;
-
+    background:var(--border);
     overflow:hidden;
-
 }
 
 .progress-bar{
-
     height:100%;
-
     background:var(--primary);
-
-    transition:width .4s ease;
-
+    width:0%;
+    transition:.4s;
 }
-
-
-/* =========================================================
-   REPORT
-========================================================= */
-
-.report-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr 1fr;
-
-    gap:10px;
-
-}
-
-.report-buttons{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:10px;
-
-    margin-top:12px;
-
-}
-
-.report-preview{
-
-    margin-top:15px;
-
-    color:var(--muted);
-
-    font-size:13px;
-
-}
-
 
 /* =========================================================
    TABLE
-========================================================= */
+   ========================================================= */
 
 .table-wrap{
-
-    width:100%;
-
     overflow:auto;
-
-    max-height:550px;
-
 }
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
-    font-size:13px;
-
+    min-width:900px;
 }
 
 th,
 td{
-
+    border-bottom:1px solid var(--border);
     padding:10px;
-
-    border-bottom:
-        1px solid
-        var(--border);
-
     text-align:left;
-
-    vertical-align:top;
-
+    font-size:12px;
 }
 
 th{
-
-    background:var(--surface2);
-
-    color:var(--text);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1;
-
+    background:var(--card2);
+    color:var(--muted);
+    text-transform:uppercase;
+    font-size:11px;
 }
 
-td strong{
-
-    color:var(--primary);
-
+tr:hover td{
+    background:rgba(127,127,127,.04);
 }
 
+/* =========================================================
+   REPORT
+   ========================================================= */
+
+.report-controls{
+    display:grid;
+    grid-template-columns:180px 180px 180px auto;
+    gap:10px;
+    align-items:end;
+}
+
+.report-preview{
+    margin-top:15px;
+    padding:15px;
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:10px;
+}
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.message{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    max-width:380px;
+    padding:14px 17px;
+    border-radius:10px;
+    background:#111827;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    z-index:9999;
+    display:none;
+}
+
+.message.success{
+    background:#15803d;
+}
+
+.message.error{
+    background:#b91c1c;
+}
+
+.message.warning{
+    background:#b45309;
+}
+
+.message.info{
+    background:#1d4ed8;
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty{
+    padding:25px;
+    text-align:center;
+    color:var(--muted);
+}
 
 /* =========================================================
    FOOTER
-========================================================= */
+   ========================================================= */
 
-.footer{
-
+footer{
     text-align:center;
-
-    color:var(--muted);
-
-    font-size:12px;
-
     padding:25px;
-
+    color:var(--muted);
+    font-size:12px;
 }
-
-.footer strong{
-
-    color:var(--text);
-
-}
-
 
 /* =========================================================
-   MOBILE
-========================================================= */
+   RESPONSIVE
+   ========================================================= */
 
 @media(max-width:1200px){
-
-    .kpis{
-
-        grid-template-columns:
-            repeat(3,1fr);
-
+    .kpi-grid{
+        grid-template-columns:repeat(3,1fr);
     }
 
-}
-
-@media(max-width:900px){
-
-    .main-grid{
-
-        grid-template-columns:1fr;
-
+    .form-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .zone-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+        grid-template-columns:repeat(2,1fr);
     }
-
 }
 
-@media(max-width:600px){
-
-    .header{
-
+@media(max-width:800px){
+    .header-inner{
+        align-items:flex-start;
         flex-direction:column;
-
-        align-items:stretch;
-
-        text-align:center;
-
     }
 
-    .header-controls{
-
-        justify-content:center;
-
-    }
-
-    .theme-select,
-    .logout-btn{
-
-        width:100%;
-
-    }
-
-    .container{
-
-        padding:10px;
-
-    }
-
-    .kpis{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-    .two,
-    .report-grid,
-    .report-buttons{
-
+    .two-col,
+    .three-col,
+    .team-grid{
         grid-template-columns:1fr;
+    }
 
+    .kpi-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .report-controls{
+        grid-template-columns:1fr;
+    }
+
+    .site-add{
+        grid-template-columns:1fr;
     }
 
     .site-row{
-
-        grid-template-columns:
-            1fr 75px 65px;
-
+        grid-template-columns:1fr;
     }
-
 }
 
+@media(max-width:500px){
+    .container{
+        padding:12px;
+    }
+
+    .kpi-grid{
+        grid-template-columns:1fr;
+    }
+
+    .brand h1{
+        font-size:17px;
+    }
+
+    .header{
+        padding:14px;
+    }
+}
 </style>
 </head>
 
-
 <body>
 
+<!-- =========================================================
+     SECURITY GUARD
+     ========================================================= -->
+
+<script>
+(function(){
+
+    /*
+       SESSION SECURITY
+       ----------------
+       The login page must create:
+       sessionStorage.warehouseSession
+       sessionStorage.userRole = "Warehouse"
+
+       If these are missing, the dashboard immediately
+       returns to index.html.
+    */
+
+    const session = sessionStorage.getItem("warehouseSession");
+    const role = sessionStorage.getItem("userRole");
+
+    if(!session || role !== "Warehouse"){
+        window.location.replace("index.html");
+    }
+
+})();
+</script>
 
 <!-- =========================================================
      HEADER
-========================================================= -->
+     ========================================================= -->
 
-<div class="header">
+<header class="header">
 
-    <div class="header-left">
+    <div class="header-inner">
 
-        <h1>
-            Vodafone PNG Fuel Collection Dashboard
-        </h1>
+        <div class="brand">
 
-        <p>
-            Lae Zone Fuel Collection • Team Accountability •
-            Vodafone PNG Site Allocation
-        </p>
+            <div class="logo">V</div>
 
-    </div>
+            <div>
+                <h1>Vodafone PNG Fuel Collection Dashboard</h1>
 
+                <p>
+                    Lae Zone Fuel Collection • Team Accountability •
+                    Vodafone PNG Site Allocation
+                </p>
+            </div>
 
-    <div class="header-controls">
+        </div>
 
-        <!-- THEME -->
+        <div class="header-actions">
 
-        <select
-            id="themeSelector"
-            class="theme-select"
-            title="Select dashboard theme"
-        >
+            <button class="header-btn" onclick="cycleTheme()">
+                🎨 Theme
+            </button>
 
-            <option value="system">
-                🌓 System
-            </option>
+            <button class="header-btn" onclick="logout()">
+                🚪 Logout
+            </button>
 
-            <option value="light">
-                ☀️ Light
-            </option>
-
-            <option value="dark">
-                🌙 Dark
-            </option>
-
-            <option value="vodafone">
-                🔴 Vodafone
-            </option>
-
-        </select>
-
-
-        <!-- LOGOUT -->
-
-        <button
-            type="button"
-            class="logout-btn"
-            onclick="logout()"
-        >
-            Logout
-        </button>
+        </div>
 
     </div>
 
-</div>
-
-
-<div class="container">
+</header>
 
 
 <!-- =========================================================
-     KPI DASHBOARD
-========================================================= -->
+     MAIN
+     ========================================================= -->
 
-<div class="kpis">
+<main class="container">
 
-    <div class="kpi">
+    <!-- =====================================================
+         KPI
+         ===================================================== -->
 
-        <div class="kpi-title">
-            Total Stock
+    <section class="kpi-grid">
+
+        <div class="kpi">
+            <div class="kpi-title">Total Stock</div>
+            <div class="kpi-value" id="kpiStock">0</div>
+            <div class="kpi-small">Fuel drums</div>
         </div>
 
-        <div
-            class="kpi-value blue"
-            id="totalStock"
-        >
-            0
+        <div class="kpi">
+            <div class="kpi-title">Collected</div>
+            <div class="kpi-value" id="kpiCollected">0</div>
+            <div class="kpi-small">Fuel drums</div>
         </div>
 
-    </div>
-
-
-    <div class="kpi">
-
-        <div class="kpi-title">
-            Total Collected
+        <div class="kpi">
+            <div class="kpi-title">Assigned</div>
+            <div class="kpi-value" id="kpiAssigned">0</div>
+            <div class="kpi-small">Site allocation</div>
         </div>
 
-        <div
-            class="kpi-value green"
-            id="totalCollected"
-        >
-            0
+        <div class="kpi">
+            <div class="kpi-title">Remaining</div>
+            <div class="kpi-value" id="kpiRemaining">0</div>
+            <div class="kpi-small">Available stock</div>
         </div>
 
-    </div>
-
-
-    <div class="kpi">
-
-        <div class="kpi-title">
-            Total Assigned
+        <div class="kpi">
+            <div class="kpi-title">Sites Supplied</div>
+            <div class="kpi-value" id="kpiSites">0</div>
+            <div class="kpi-small">Unique sites</div>
         </div>
 
-        <div
-            class="kpi-value orange"
-            id="totalAssigned"
-        >
-            0
+        <div class="kpi">
+            <div class="kpi-title">Records</div>
+            <div class="kpi-value" id="kpiRecords">0</div>
+            <div class="kpi-small">Collection records</div>
         </div>
 
-    </div>
+    </section>
 
 
-    <div class="kpi">
+    <!-- =====================================================
+         STOCK + COLLECTION
+         ===================================================== -->
 
-        <div class="kpi-title">
-            Remaining
+    <section class="two-col">
+
+        <!-- STOCK -->
+
+        <div class="card">
+
+            <h2>Fuel Stock</h2>
+
+            <div class="card-subtitle">
+                Enter or update the total available fuel stock.
+            </div>
+
+            <div class="stock-box">
+
+                <div class="form-group">
+
+                    <label>Total Fuel Drums</label>
+
+                    <input
+                        type="number"
+                        id="stockInput"
+                        min="0"
+                        step="1"
+                        placeholder="Enter total drums"
+                    >
+
+                </div>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="setStock()"
+                >
+                    Save Stock
+                </button>
+
+            </div>
+
         </div>
 
-        <div
-            class="kpi-value red"
-            id="remainingStock"
-        >
-            0
+
+        <!-- COLLECTION -->
+
+        <div class="card">
+
+            <h2>Record Fuel Collection</h2>
+
+            <div class="card-subtitle">
+                Record fuel collected by each team member.
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Team Member</label>
+
+                    <select id="teamMember">
+                        <option value="">Select team member</option>
+                        <option>Terrence Nikasivai</option>
+                        <option>Druschilda Banduru</option>
+                        <option>Walo Navu</option>
+                        <option>Steven POi</option>
+                        <option>Mathew Walo</option>
+                        <option>Terence Kamkem</option>
+                        <option>Mesack Atiyafa</option>
+                        <option>Abraham Hicks</option>
+                        <option>Manu</option>
+                        <option>Robert Waninara</option>
+                        <option>Iso Yawi</option>
+                        <option>Other</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Other Team Member</label>
+
+                    <input
+                        type="text"
+                        id="otherMember"
+                        placeholder="If Other"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        id="collectionDate"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Fuel Drums</label>
+
+                    <input
+                        type="number"
+                        id="collectionDrums"
+                        min="1"
+                        step="1"
+                        placeholder="Drums"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Zone</label>
+
+                    <select id="collectionZone">
+
+                        <option value="">Select zone</option>
+
+                        <option>Lae Zone 1</option>
+                        <option>Lae Zone 2</option>
+                        <option>Lae Zone 3</option>
+                        <option>Lae Zone 4</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Vehicle</label>
+
+                    <input
+                        type="text"
+                        id="collectionVehicle"
+                        placeholder="Vehicle / registration"
+                    >
+
+                </div>
+
+            </div>
+
         </div>
 
-    </div>
+    </section>
 
 
-    <div class="kpi">
+    <!-- =====================================================
+         SITE ASSIGNMENT
+         ===================================================== -->
 
-        <div class="kpi-title">
-            Sites Supplied
+    <section class="card">
+
+        <h2>Vodafone Site Fuel Allocation</h2>
+
+        <div class="card-subtitle">
+            Add the sites and fuel drums allocated to this collection.
         </div>
 
-        <div
-            class="kpi-value"
-            id="sitesSupplied"
-        >
-            0
-        </div>
-
-    </div>
-
-
-    <div class="kpi">
-
-        <div class="kpi-title">
-            Records
-        </div>
-
-        <div
-            class="kpi-value"
-            id="recordCount"
-        >
-            0
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     MAIN GRID
-========================================================= -->
-
-<div class="main-grid">
-
-
-<!-- =========================================================
-     LEFT COLUMN
-========================================================= -->
-
-<div>
-
-
-<!-- =========================================================
-     FUEL STOCK
-========================================================= -->
-
-<div class="card">
-
-    <h2>
-        Fuel Stock
-    </h2>
-
-    <div class="form-group">
-
-        <label>
-            Total Fuel Drums Available
-        </label>
-
-        <input
-            type="number"
-            id="stockInput"
-            min="0"
-            step="1"
-            placeholder="Example: 100"
-        >
-
-    </div>
-
-
-    <button
-        type="button"
-        id="setStockButton"
-        class="btn-red full"
-    >
-        Set / Update Fuel Stock
-    </button>
-
-
-    <div
-        id="stockMessage"
-        class="message"
-    ></div>
-
-</div>
-
-
-<!-- =========================================================
-     COLLECTION FORM
-========================================================= -->
-
-<div class="card">
-
-    <h2>
-        Record Fuel Collection
-    </h2>
-
-
-    <div class="form-group">
-
-        <label>
-            Team Member
-        </label>
-
-        <select id="teamMember">
-
-            <option value="">
-                Select Team Member
-            </option>
-
-            <option>
-                Terrence Nikasivai
-            </option>
-
-            <option>
-                Druschilda Banduru
-            </option>
-
-            <option>
-                Walo Navu
-            </option>
-
-            <option>
-                Steven POi
-            </option>
-
-            <option>
-                Mathew Walo
-            </option>
-
-            <option>
-                Terence Kamkem
-            </option>
-
-            <option>
-                Mesack Atiyafa
-            </option>
-
-            <option>
-                Abraham Hicks
-            </option>
-
-            <option>
-                Manu
-            </option>
-
-            <option>
-                Robert Waninara
-            </option>
-
-            <option>
-                Iso Yawi
-            </option>
-
-            <option value="OTHER">
-                Other
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label>
-            Other Team Member
-        </label>
-
-        <input
-            type="text"
-            id="otherTeamMember"
-            placeholder="Use only if Other is selected"
-        >
-
-    </div>
-
-
-    <div class="two">
-
-        <div class="form-group">
-
-            <label>
-                Collection Date
-            </label>
+        <div class="site-add">
 
             <input
-                type="date"
-                id="collectionDate"
+                type="text"
+                id="siteIdInput"
+                placeholder="Vodafone Site ID"
             >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>
-                Fuel Drums Collected
-            </label>
 
             <input
                 type="number"
-                id="collectionDrums"
+                id="siteDrumsInput"
                 min="1"
                 step="1"
-                placeholder="Example: 10"
+                placeholder="Drums"
             >
+
+            <button
+                class="btn btn-primary"
+                onclick="addSite()"
+            >
+                + Add Site
+            </button>
 
         </div>
 
-    </div>
-
-
-    <div class="form-group">
-
-        <label>
-            Lae Zone
-        </label>
-
-        <select id="laeZone">
-
-            <option value="">
-                Select Zone
-            </option>
-
-            <option>
-                Lae Zone 1
-            </option>
-
-            <option>
-                Lae Zone 2
-            </option>
-
-            <option>
-                Lae Zone 3
-            </option>
-
-            <option>
-                Lae Zone 4
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label>
-            Vehicle / Truck
-        </label>
-
-        <input
-            type="text"
-            id="vehicle"
-            placeholder="Vehicle registration"
-        >
-
-    </div>
-
-
-    <!-- SITE ASSIGNMENTS -->
-
-    <div class="form-group">
-
-        <label>
-            Vodafone PNG Site Assignment
-        </label>
-
-        <div id="siteAssignments"></div>
-
+        <div id="siteList" class="site-list"></div>
 
         <div class="site-total">
 
-            Site Allocation Total:
-
-            <span id="siteAllocationTotal">
-                0
-            </span>
-
-            drums
+            Total Site Allocation:
+            <span id="siteAllocationTotal">0</span> drums
 
         </div>
 
-    </div>
+        <div class="button-row">
 
-
-    <button
-        type="button"
-        id="addSiteButton"
-        class="btn-black full"
-    >
-        + Add Vodafone Site
-    </button>
-
-
-    <button
-        type="button"
-        id="recordButton"
-        class="btn-red full"
-    >
-        Record Fuel Collection
-    </button>
-
-
-    <div
-        id="collectionMessage"
-        class="message"
-    ></div>
-
-</div>
-
-
-</div>
-
-
-<!-- =========================================================
-     RIGHT COLUMN
-========================================================= -->
-
-<div>
-
-
-<!-- =========================================================
-     REPORTS
-========================================================= -->
-
-<div class="card">
-
-    <h2>
-        Download Reports
-    </h2>
-
-
-    <div class="report-grid">
-
-        <div>
-
-            <label>
-                Report Type
-            </label>
-
-            <select id="reportType">
-
-                <option value="daily">
-                    Daily
-                </option>
-
-                <option value="weekly">
-                    Weekly
-                </option>
-
-                <option value="monthly">
-                    Monthly
-                </option>
-
-                <option value="selected-month">
-                    Selected Month
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div>
-
-            <label>
-                Report Date
-            </label>
-
-            <input
-                type="date"
-                id="reportDate"
+            <button
+                class="btn btn-success"
+                onclick="recordFuelCollection()"
             >
+                ✓ Record Collection
+            </button>
 
-        </div>
-
-
-        <div>
-
-            <label>
-                Report Month
-            </label>
-
-            <input
-                type="month"
-                id="reportMonth"
+            <button
+                class="btn btn-light"
+                onclick="clearSiteAssignments()"
             >
+                Clear Sites
+            </button>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <div class="report-buttons">
+    <!-- =====================================================
+         ZONES
+         ===================================================== -->
+
+    <section class="card">
+
+        <h2>Lae Zone Dashboard</h2>
+
+        <div class="card-subtitle">
+            Fuel collection by Lae operational zone.
+        </div>
+
+        <div id="zoneDashboard" class="zone-grid"></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TEAM ACCOUNTABILITY
+         ===================================================== -->
+
+    <section class="card">
+
+        <h2>Team Accountability</h2>
+
+        <div class="card-subtitle">
+            Collection activity recorded against each team member.
+        </div>
+
+        <div id="teamDashboard" class="team-grid"></div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REPORTS
+         ===================================================== -->
+
+    <section class="card">
+
+        <h2>Reports</h2>
+
+        <div class="card-subtitle">
+            Download daily, weekly, monthly or selected-month
+            collection reports.
+        </div>
+
+        <div class="report-controls">
+
+            <div class="form-group">
+
+                <label>Report Type</label>
+
+                <select id="reportType" onchange="updateReportControls()">
+
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="month">Selected Month</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group" id="reportDateGroup">
+
+                <label>Date</label>
+
+                <input
+                    type="date"
+                    id="reportDate"
+                    onchange="updateReportPreview()"
+                >
+
+            </div>
+
+            <div class="form-group" id="reportMonthGroup">
+
+                <label>Month</label>
+
+                <input
+                    type="month"
+                    id="reportMonth"
+                    onchange="updateReportPreview()"
+                >
+
+            </div>
+
+            <div class="button-row">
+
+                <button
+                    class="btn btn-info"
+                    onclick="updateReportPreview()"
+                >
+                    Preview
+                </button>
+
+                <button
+                    class="btn btn-success"
+                    onclick="downloadCSV()"
+                >
+                    Download CSV
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="downloadPDF()"
+                >
+                    Download PDF
+                </button>
+
+            </div>
+
+        </div>
+
+        <div
+            id="reportPreview"
+            class="report-preview"
+        >
+            Select a report period.
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COLLECTION REGISTER
+         ===================================================== -->
+
+    <section class="card">
+
+        <h2>Collection Register</h2>
+
+        <div class="card-subtitle">
+            Complete history of recorded fuel collections.
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Team Member</th>
+                        <th>Zone</th>
+                        <th>Vehicle</th>
+                        <th>Drums</th>
+                        <th>Sites</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ADMIN
+         ===================================================== -->
+
+    <section class="card">
+
+        <h2>Dashboard Administration</h2>
+
+        <div class="card-subtitle">
+            Use carefully. Clearing dashboard data cannot be undone.
+        </div>
 
         <button
-            type="button"
-            id="downloadCSV"
-            class="btn-blue"
+            class="btn btn-danger"
+            onclick="clearAllData()"
         >
-            Download CSV
+            🗑 Clear All Dashboard Data
         </button>
 
+    </section>
 
-        <button
-            type="button"
-            id="downloadPDF"
-            class="btn-green"
-        >
-            Download PDF
-        </button>
-
-    </div>
+</main>
 
 
-    <div
-        id="reportPreview"
-        class="report-preview"
-    ></div>
-
-</div>
+<footer>
+    Powered by Iso Yawi | Vodafone PNG Fuel Collection Dashboard
+</footer>
 
 
-<!-- =========================================================
-     ZONE DASHBOARD
-========================================================= -->
-
-<div class="card">
-
-    <h2>
-        Lae Zone Dashboard
-    </h2>
-
-    <div
-        class="zone-grid"
-        id="zoneSummary"
-    ></div>
-
-</div>
-
-
-<!-- =========================================================
-     TEAM ACCOUNTABILITY
-========================================================= -->
-
-<div class="card">
-
-    <h2>
-        Team Collection Accountability
-    </h2>
-
-    <div id="teamSummary"></div>
-
-</div>
-
-
-<!-- =========================================================
-     COLLECTION REGISTER
-========================================================= -->
-
-<div class="card">
-
-    <h2>
-        Fuel Collection Register
-    </h2>
-
-
-    <div class="table-wrap">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Date</th>
-
-                    <th>Team</th>
-
-                    <th>Zone</th>
-
-                    <th>Vehicle</th>
-
-                    <th>Drums</th>
-
-                    <th>Vodafone PNG Sites</th>
-
-                    <th>Action</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody id="history"></tbody>
-
-        </table>
-
-    </div>
-
-
-    <button
-        type="button"
-        id="clearData"
-        class="btn-danger full"
-    >
-        Clear All Dashboard Data
-    </button>
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<div class="footer">
-
-    Vodafone PNG Fuel Collection Control Dashboard
-
-    <br>
-
-    Fuel Stock • Team Accountability • Site Allocation •
-    Lae Zones
-
-    <br><br>
-
-    <strong>
-        Powered by Iso Yawi
-    </strong>
-
-</div>
+<div id="message" class="message"></div>
 
 
 <script>
-
-/* ============================================================
-   LOGIN / SESSION PROTECTION
-============================================================ */
-
-/*
-   This dashboard requires:
-
-   localStorage.loggedIn = "true"
-
-   AND
-
-   localStorage.userRole = "Warehouse"
-
-   Otherwise the user is redirected to index.html.
-*/
-
-(function(){
-
-    const loggedIn =
-        localStorage.getItem("loggedIn");
-
-    const role =
-        localStorage.getItem("userRole");
-
-
-    if(
-        loggedIn !== "true" ||
-        role !== "Warehouse"
-    ){
-
-        window.location.replace(
-            "index.html"
-        );
-
-    }
-
-})();
-
-
-/* ============================================================
-   THEME SYSTEM
-============================================================ */
-
-const THEME_KEY =
-    "VODAFONE_FUEL_DASHBOARD_THEME";
-
-
-function applyTheme(theme){
-
-    if(
-        ![
-            "system",
-            "light",
-            "dark",
-            "vodafone"
-        ].includes(theme)
-    ){
-
-        theme = "system";
-
-    }
-
-
-    document.documentElement.setAttribute(
-        "data-theme",
-        theme
-    );
-
-
-    localStorage.setItem(
-        THEME_KEY,
-        theme
-    );
-
-
-    const selector =
-        document.getElementById(
-            "themeSelector"
-        );
-
-
-    if(selector){
-
-        selector.value =
-            theme;
-
-    }
-
-}
-
-
-/* ============================================================
-   LOAD THEME BEFORE DISPLAY
-============================================================ */
-
-(function(){
-
-    const savedTheme =
-        localStorage.getItem(
-            THEME_KEY
-        ) || "system";
-
-
-    applyTheme(
-        savedTheme
-    );
-
-})();
-
-
-/* ============================================================
-   LOGOUT
-============================================================ */
-
-function logout(){
-
-    const confirmed =
-        confirm(
-            "Are you sure you want to logout?"
-        );
-
-
-    if(!confirmed){
-        return;
-    }
-
-
-    /*
-       Clear authentication session.
-
-       Dashboard data remains stored.
-    */
-
-    localStorage.removeItem(
-        "loggedIn"
-    );
-
-    localStorage.removeItem(
-        "userRole"
-    );
-
-    localStorage.removeItem(
-        "username"
-    );
-
-
-    window.location.replace(
-        "index.html"
-    );
-
-}
-
-
-/* ============================================================
+/* =========================================================
    DATABASE
-============================================================ */
+   ========================================================= */
 
-const STORAGE_KEY =
-    "VODAFONE_PNG_FUEL_DASHBOARD";
+const STORAGE_KEY = "VODAFONE_PNG_FUEL_DASHBOARD";
 
-
-let database = {
-
-    stock:0,
-
-    collections:[]
-
+let db = {
+    stock: 0,
+    records: [],
+    siteAssignments: []
 };
 
 
-/* ============================================================
+/* =========================================================
    LOAD DATABASE
-============================================================ */
+   ========================================================= */
 
 function loadDatabase(){
 
     try{
 
-        const saved =
-            localStorage.getItem(
-                STORAGE_KEY
-            );
-
+        const saved = localStorage.getItem(STORAGE_KEY);
 
         if(saved){
 
-            const data =
-                JSON.parse(saved);
+            const parsed = JSON.parse(saved);
 
+            db.stock = Number(parsed.stock) || 0;
 
-            database.stock =
-                Number(data.stock) || 0;
+            db.records = Array.isArray(parsed.records)
+                ? parsed.records
+                : [];
 
-
-            database.collections =
-                Array.isArray(
-                    data.collections
-                )
-                ? data.collections
+            db.siteAssignments =
+                Array.isArray(parsed.siteAssignments)
+                ? parsed.siteAssignments
                 : [];
 
         }
 
-    }
+    }catch(error){
 
-    catch(error){
+        console.error(error);
 
-        console.error(
-            "Load error:",
-            error
-        );
-
-
-        database = {
-
+        db = {
             stock:0,
-
-            collections:[]
-
+            records:[],
+            siteAssignments:[]
         };
 
     }
@@ -1964,1664 +1257,969 @@ function loadDatabase(){
 }
 
 
-/* ============================================================
+/* =========================================================
    SAVE DATABASE
-============================================================ */
+   ========================================================= */
 
 function saveDatabase(){
 
-    try{
-
-        localStorage.setItem(
-
-            STORAGE_KEY,
-
-            JSON.stringify(database)
-
-        );
-
-        return true;
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Save error:",
-            error
-        );
-
-
-        alert(
-            "The browser could not save the dashboard data."
-        );
-
-
-        return false;
-
-    }
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(db)
+    );
 
 }
 
 
-/* ============================================================
-   TODAY
-============================================================ */
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
 function getToday(){
 
-    const date =
-        new Date();
+    const d = new Date();
 
+    const month =
+        String(d.getMonth()+1).padStart(2,"0");
 
-    const y =
-        date.getFullYear();
+    const day =
+        String(d.getDate()).padStart(2,"0");
 
-
-    const m =
-        String(
-            date.getMonth()+1
-        ).padStart(2,"0");
-
-
-    const d =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
-
-
-    return `${y}-${m}-${d}`;
+    return `${d.getFullYear()}-${month}-${day}`;
 
 }
 
-
-/* ============================================================
-   CURRENT MONTH
-============================================================ */
 
 function getCurrentMonth(){
 
-    return getToday().substring(
-        0,
-        7
-    );
+    const d = new Date();
+
+    return `${d.getFullYear()}-${String(
+        d.getMonth()+1
+    ).padStart(2,"0")}`;
 
 }
 
-
-/* ============================================================
-   ESCAPE HTML
-============================================================ */
 
 function escapeHTML(value){
 
-    return String(
-        value ?? ""
-    )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
-
-/* ============================================================
-   TOTAL COLLECTED
-============================================================ */
 
 function getTotalCollected(){
 
-    return database.collections.reduce(
-
-        function(total,record){
-
-            return total +
-                Number(
-                    record.collectedDrums || 0
-                );
-
-        },
-
+    return db.records.reduce(
+        (sum,r)=>sum + Number(r.drums || 0),
         0
-
     );
 
 }
 
 
-/* ============================================================
-   REMAINING STOCK
-============================================================ */
+function getTotalAssigned(){
+
+    return db.siteAssignments.reduce(
+        (sum,s)=>sum + Number(s.drums || 0),
+        0
+    );
+
+}
+
 
 function getRemainingStock(){
 
     return Math.max(
-
         0,
-
-        Number(
-            database.stock || 0
-        )
-        -
-        getTotalCollected()
-
+        Number(db.stock || 0) - getTotalCollected()
     );
 
 }
 
-
-/* ============================================================
-   TOTAL ASSIGNED
-============================================================ */
-
-function getTotalAssigned(){
-
-    let total = 0;
-
-
-    database.collections.forEach(
-
-        function(record){
-
-            if(
-                !Array.isArray(
-                    record.sites
-                )
-            ){
-
-                return;
-
-            }
-
-
-            record.sites.forEach(
-
-                function(site){
-
-                    total +=
-                        Number(
-                            site.drums || 0
-                        );
-
-                }
-
-            );
-
-        }
-
-    );
-
-
-    return total;
-
-}
-
-
-/* ============================================================
-   UNIQUE SITES
-============================================================ */
 
 function getUniqueSites(){
 
-    const sites =
-        new Set();
+    const set = new Set();
 
-
-    database.collections.forEach(
-
-        function(record){
-
-            if(
-                !Array.isArray(
-                    record.sites
-                )
-            ){
-
-                return;
-
-            }
-
-
-            record.sites.forEach(
-
-                function(site){
-
-                    if(site.siteId){
-
-                        sites.add(
-                            site.siteId
-                        );
-
-                    }
-
-                }
-
-            );
-
+    db.siteAssignments.forEach(site=>{
+        if(site.siteId){
+            set.add(site.siteId);
         }
+    });
 
-    );
-
-
-    return sites.size;
+    return set.size;
 
 }
 
 
-/* ============================================================
-   UPDATE SITE TOTAL
-============================================================ */
+/* =========================================================
+   MESSAGE
+   ========================================================= */
 
-function updateSiteAllocationTotal(){
+let messageTimer = null;
 
-    const rows =
-        document.querySelectorAll(
-            ".site-row"
-        );
-
-
-    let total = 0;
-
-
-    rows.forEach(
-
-        function(row){
-
-            const input =
-                row.querySelector(
-                    ".site-drums"
-                );
-
-
-            const value =
-                Number(
-                    input
-                    ? input.value
-                    : 0
-                );
-
-
-            if(
-                Number.isFinite(value)
-            ){
-
-                total += value;
-
-            }
-
-        }
-
-    );
-
-
-    document.getElementById(
-        "siteAllocationTotal"
-    ).textContent =
-        total;
-
-}
-
-
-/* ============================================================
-   ADD SITE
-============================================================ */
-
-function addSite(
-    siteId="",
-    drums=""
+function showMessage(
+    message,
+    type="info"
 ){
 
-    const container =
-        document.getElementById(
-            "siteAssignments"
-        );
+    const el =
+        document.getElementById("message");
+
+    el.textContent = message;
+
+    el.className =
+        "message " + type;
+
+    el.style.display = "block";
+
+    clearTimeout(messageTimer);
+
+    messageTimer = setTimeout(()=>{
+        el.style.display = "none";
+    },3500);
+
+}
 
 
-    if(!container){
+/* =========================================================
+   STOCK
+   ========================================================= */
 
-        console.error(
-            "siteAssignments container not found."
+function setStock(){
+
+    const input =
+        document.getElementById("stockInput");
+
+    const value =
+        Number(input.value);
+
+    if(!Number.isFinite(value) || value < 0){
+
+        showMessage(
+            "Please enter a valid stock quantity.",
+            "error"
         );
 
         return;
+    }
+
+    if(value < getTotalCollected()){
+
+        showMessage(
+            "Stock cannot be lower than fuel already collected.",
+            "error"
+        );
+
+        return;
+    }
+
+    db.stock = value;
+
+    saveDatabase();
+
+    renderDashboard();
+
+    input.value = "";
+
+    showMessage(
+        "Fuel stock updated successfully.",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   SITE ASSIGNMENTS
+   ========================================================= */
+
+function addSite(){
+
+    const siteInput =
+        document.getElementById("siteIdInput");
+
+    const drumsInput =
+        document.getElementById("siteDrumsInput");
+
+    const siteId =
+        siteInput.value.trim();
+
+    const drums =
+        Number(drumsInput.value);
+
+    if(!siteId){
+
+        showMessage(
+            "Enter a Vodafone Site ID.",
+            "error"
+        );
+
+        siteInput.focus();
+
+        return;
+    }
+
+    if(!Number.isFinite(drums) || drums <= 0){
+
+        showMessage(
+            "Enter a valid number of drums.",
+            "error"
+        );
+
+        drumsInput.focus();
+
+        return;
+    }
+
+    db.siteAssignments.push({
+        siteId:siteId,
+        drums:drums
+    });
+
+    saveDatabase();
+
+    siteInput.value = "";
+    drumsInput.value = "";
+
+    renderSiteAssignments();
+
+    showMessage(
+        "Site added successfully.",
+        "success"
+    );
+
+}
+
+
+function deleteSite(index){
+
+    if(index < 0 || index >= db.siteAssignments.length){
+        return;
+    }
+
+    db.siteAssignments.splice(index,1);
+
+    saveDatabase();
+
+    renderSiteAssignments();
+
+}
+
+
+function clearSiteAssignments(){
+
+    if(db.siteAssignments.length === 0){
+        return;
+    }
+
+    if(!confirm(
+        "Clear all current site allocations?"
+    )){
+        return;
+    }
+
+    db.siteAssignments = [];
+
+    saveDatabase();
+
+    renderSiteAssignments();
+
+}
+
+
+function updateSiteDrums(index,value){
+
+    const drums = Number(value);
+
+    if(!Number.isFinite(drums) || drums < 0){
+        return;
+    }
+
+    if(db.siteAssignments[index]){
+
+        db.siteAssignments[index].drums = drums;
+
+        saveDatabase();
+
+        updateSiteAllocationTotal();
+
+        renderKPI();
 
     }
 
+}
 
-    const row =
-        document.createElement(
-            "div"
+
+function updateSiteId(index,value){
+
+    if(db.siteAssignments[index]){
+
+        db.siteAssignments[index].siteId =
+            value.trim();
+
+        saveDatabase();
+
+    }
+
+}
+
+
+function updateSiteAllocationTotal(){
+
+    const total =
+        getTotalAssigned();
+
+    const el =
+        document.getElementById(
+            "siteAllocationTotal"
         );
 
+    if(el){
+        el.textContent = total;
+    }
 
-    row.className =
-        "site-row";
-
-
-    row.innerHTML = `
-
-        <input
-            type="text"
-            class="site-id"
-            placeholder="Site ID e.g. VP1066"
-            value="${escapeHTML(siteId)}"
-        >
-
-        <input
-            type="number"
-            class="site-drums"
-            placeholder="Drums"
-            min="1"
-            step="1"
-            value="${escapeHTML(drums)}"
-        >
-
-        <button
-            type="button"
-            class="remove-site"
-        >
-            Remove
-        </button>
-
-    `;
+}
 
 
-    container.appendChild(
-        row
-    );
+function renderSiteAssignments(){
 
+    const container =
+        document.getElementById("siteList");
 
-    const quantity =
-        row.querySelector(
-            ".site-drums"
-        );
+    if(!db.siteAssignments.length){
 
+        container.innerHTML =
+            `<div class="empty">
+                No sites added yet.
+             </div>`;
 
-    quantity.addEventListener(
-        "input",
-        updateSiteAllocationTotal
-    );
+        updateSiteAllocationTotal();
 
+        return;
+    }
 
-    const remove =
-        row.querySelector(
-            ".remove-site"
-        );
+    container.innerHTML =
+        db.siteAssignments.map(
+            (site,index)=>`
 
+            <div class="site-row">
 
-    remove.addEventListener(
+                <input
+                    type="text"
+                    value="${escapeHTML(site.siteId)}"
+                    onchange="updateSiteId(${index},this.value)"
+                    placeholder="Site ID"
+                >
 
-        "click",
+                <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value="${Number(site.drums || 0)}"
+                    onchange="updateSiteDrums(${index},this.value)"
+                >
 
-        function(){
+                <button
+                    class="btn btn-danger"
+                    onclick="deleteSite(${index})"
+                >
+                    Delete
+                </button>
 
-            const rows =
-                container.querySelectorAll(
-                    ".site-row"
-                );
+            </div>
 
-
-            if(
-                rows.length === 1
-            ){
-
-                row.querySelector(
-                    ".site-id"
-                ).value = "";
-
-
-                row.querySelector(
-                    ".site-drums"
-                ).value = "";
-
-
-                updateSiteAllocationTotal();
-
-                return;
-
-            }
-
-
-            row.remove();
-
-            updateSiteAllocationTotal();
-
-        }
-
-    );
-
+        `
+        ).join("");
 
     updateSiteAllocationTotal();
 
 }
 
 
-/* ============================================================
-   GET SITE ASSIGNMENTS
-============================================================ */
-
-function getSiteAssignments(){
-
-    const rows =
-        document.querySelectorAll(
-            ".site-row"
-        );
-
-
-    const sites = [];
-
-
-    rows.forEach(
-
-        function(row){
-
-            const siteIdInput =
-                row.querySelector(
-                    ".site-id"
-                );
-
-
-            const drumsInput =
-                row.querySelector(
-                    ".site-drums"
-                );
-
-
-            const siteId =
-                siteIdInput
-                ? siteIdInput.value.trim()
-                : "";
-
-
-            const drums =
-                parseInt(
-
-                    drumsInput
-                    ? drumsInput.value
-                    : "0",
-
-                    10
-
-                );
-
-
-            if(
-                !siteId &&
-                (!drums || drums <= 0)
-            ){
-
-                return;
-
-            }
-
-
-            sites.push({
-
-                siteId:siteId,
-
-                drums:drums
-
-            });
-
-        }
-
-    );
-
-
-    return sites;
-
-}
-
-
-/* ============================================================
-   GET TEAM MEMBER
-============================================================ */
+/* =========================================================
+   COLLECTION
+   ========================================================= */
 
 function getTeamMember(){
 
-    const select =
+    const selected =
         document.getElementById(
             "teamMember"
-        );
+        ).value;
 
+    const other =
+        document.getElementById(
+            "otherMember"
+        ).value.trim();
 
-    let team =
-        select
-        ? select.value.trim()
-        : "";
+    if(selected === "Other"){
 
-
-    if(team === "OTHER"){
-
-        const other =
-            document.getElementById(
-                "otherTeamMember"
-            );
-
-
-        team =
-            other
-            ? other.value.trim()
-            : "";
+        return other || "Other";
 
     }
 
-
-    return team;
+    return selected;
 
 }
 
-
-/* ============================================================
-   SET STOCK
-============================================================ */
-
-function setStock(){
-
-    const input =
-        document.getElementById(
-            "stockInput"
-        );
-
-
-    const value =
-        parseInt(
-            input.value,
-            10
-        );
-
-
-    const messageBox =
-        document.getElementById(
-            "stockMessage"
-        );
-
-
-    if(
-        !Number.isInteger(value)
-        ||
-        value < 0
-    ){
-
-        showMessage(
-
-            messageBox,
-
-            "Please enter a valid whole number of fuel drums.",
-
-            "error"
-
-        );
-
-        return;
-
-    }
-
-
-    const collected =
-        getTotalCollected();
-
-
-    if(
-        value < collected
-    ){
-
-        showMessage(
-
-            messageBox,
-
-            "Stock cannot be lower than fuel already collected (" +
-            collected +
-            " drums).",
-
-            "error"
-
-        );
-
-        return;
-
-    }
-
-
-    database.stock =
-        value;
-
-
-    saveDatabase();
-
-    renderDashboard();
-
-
-    showMessage(
-
-        messageBox,
-
-        "Fuel stock successfully updated to " +
-        value +
-        " drums.",
-
-        "success"
-
-    );
-
-}
-
-
-/* ============================================================
-   RECORD FUEL COLLECTION
-============================================================ */
 
 function recordFuelCollection(){
 
-    const messageBox =
-        document.getElementById(
-            "collectionMessage"
-        );
-
-
-    const team =
+    const teamMember =
         getTeamMember();
-
 
     const date =
         document.getElementById(
             "collectionDate"
         ).value;
 
-
     const drums =
-        parseInt(
-
+        Number(
             document.getElementById(
                 "collectionDrums"
-            ).value,
-
-            10
-
+            ).value
         );
-
 
     const zone =
         document.getElementById(
-            "laeZone"
+            "collectionZone"
         ).value;
-
 
     const vehicle =
         document.getElementById(
-            "vehicle"
+            "collectionVehicle"
         ).value.trim();
 
-
-    if(!team){
+    if(!teamMember){
 
         showMessage(
-            messageBox,
-            "Please select the team member.",
+            "Please select a team member.",
             "error"
         );
 
         return;
-
     }
-
 
     if(!date){
 
         showMessage(
-            messageBox,
             "Please select the collection date.",
             "error"
         );
 
         return;
-
     }
 
-
-    if(
-        !Number.isInteger(drums)
-        ||
-        drums <= 0
-    ){
+    if(!Number.isFinite(drums) || drums <= 0){
 
         showMessage(
-            messageBox,
-            "Please enter a valid number of fuel drums collected.",
+            "Please enter a valid number of drums.",
             "error"
         );
 
         return;
-
     }
-
 
     if(!zone){
 
         showMessage(
-            messageBox,
-            "Please select one of the four Lae Zones.",
+            "Please select a Lae zone.",
             "error"
         );
 
         return;
-
     }
-
 
     const remaining =
         getRemainingStock();
 
-
-    if(
-        drums > remaining
-    ){
+    if(drums > remaining){
 
         showMessage(
-
-            messageBox,
-
-            "Not enough fuel stock. Remaining stock: " +
-            remaining +
-            " drums.",
-
+            `Not enough fuel available. Remaining stock: ${remaining} drums.`,
             "error"
-
         );
 
         return;
-
     }
 
-
-    const sites =
-        getSiteAssignments();
-
+    const siteAllocation =
+        getTotalAssigned();
 
     if(
-        sites.length === 0
+        siteAllocation > 0 &&
+        siteAllocation !== drums
     ){
 
-        showMessage(
-
-            messageBox,
-
-            "Please add at least one Vodafone PNG site.",
-
-            "error"
-
-        );
-
-        return;
-
-    }
-
-
-    let siteTotal = 0;
-
-
-    for(
-        let i=0;
-        i<sites.length;
-        i++
-    ){
-
-        const site =
-            sites[i];
-
-
-        if(!site.siteId){
-
-            showMessage(
-
-                messageBox,
-
-                "Please enter a Vodafone Site ID for every site.",
-
-                "error"
-
-            );
-
+        if(!confirm(
+            `Collection is ${drums} drums but site allocation totals ${siteAllocation} drums. Record anyway?`
+        )){
             return;
-
         }
 
-
-        if(
-            !Number.isInteger(site.drums)
-            ||
-            site.drums <= 0
-        ){
-
-            showMessage(
-
-                messageBox,
-
-                "Please enter a valid drum quantity for " +
-                site.siteId +
-                ".",
-
-                "error"
-
-            );
-
-            return;
-
-        }
-
-
-        siteTotal +=
-            site.drums;
-
     }
-
-
-    if(
-        siteTotal !== drums
-    ){
-
-        showMessage(
-
-            messageBox,
-
-            "Fuel collected = " +
-            drums +
-            " drums, but site allocation = " +
-            siteTotal +
-            " drums. These amounts must be equal.",
-
-            "error"
-
-        );
-
-        return;
-
-    }
-
 
     const record = {
 
         id:
             Date.now().toString() +
-            "_" +
+            "-" +
             Math.random()
                 .toString(36)
-                .substring(2,9),
+                .slice(2),
 
         date:date,
 
-        team:team,
+        teamMember:teamMember,
+
+        drums:drums,
 
         zone:zone,
 
-        vehicle:
-            vehicle ||
-            "Not entered",
+        vehicle:vehicle,
 
-        collectedDrums:
-            drums,
-
-        sites:sites,
+        sites:db.siteAssignments.map(
+            site=>({
+                siteId:site.siteId,
+                drums:Number(site.drums || 0)
+            })
+        ),
 
         createdAt:
             new Date().toISOString()
 
     };
 
+    db.records.push(record);
 
-    database.collections.push(
-        record
-    );
+    /*
+       Site assignments belong to the current collection.
+       Once recorded, clear them so the next collection starts
+       fresh.
+    */
 
+    db.siteAssignments = [];
 
-    const saved =
-        saveDatabase();
+    saveDatabase();
 
+    document.getElementById(
+        "teamMember"
+    ).value = "";
 
-    if(!saved){
-        return;
-    }
-
-
-    renderDashboard();
-
+    document.getElementById(
+        "otherMember"
+    ).value = "";
 
     document.getElementById(
         "collectionDrums"
     ).value = "";
 
-
     document.getElementById(
-        "vehicle"
+        "collectionZone"
     ).value = "";
 
+    document.getElementById(
+        "collectionVehicle"
+    ).value = "";
 
     document.getElementById(
-        "siteAssignments"
-    ).innerHTML = "";
+        "collectionDate"
+    ).value = getToday();
 
-
-    addSite();
-
+    renderDashboard();
 
     showMessage(
-
-        messageBox,
-
-        "SUCCESS: " +
-        drums +
-        " fuel drums recorded against " +
-        team +
-        " in " +
-        zone +
-        ". Remaining stock: " +
-        getRemainingStock() +
-        " drums.",
-
+        "Fuel collection recorded successfully.",
         "success"
-
     );
 
 }
 
 
-/* ============================================================
+/* =========================================================
    DELETE RECORD
-============================================================ */
+   ========================================================= */
 
 function deleteRecord(id){
 
     const record =
-        database.collections.find(
-
-            function(item){
-
-                return item.id === id;
-
-            }
-
+        db.records.find(
+            r=>r.id === id
         );
-
 
     if(!record){
         return;
     }
 
-
-    const confirmed =
-        confirm(
-
-            "Delete this fuel collection record?\n\n" +
-
-            "Team: " +
-            record.team +
-            "\n" +
-
-            "Drums: " +
-            record.collectedDrums
-
-        );
-
-
-    if(!confirmed){
+    if(!confirm(
+        `Delete collection record for ${record.teamMember} (${record.drums} drums)?`
+    )){
         return;
     }
 
-
-    database.collections =
-        database.collections.filter(
-
-            function(item){
-
-                return item.id !== id;
-
-            }
-
+    db.records =
+        db.records.filter(
+            r=>r.id !== id
         );
-
 
     saveDatabase();
 
     renderDashboard();
 
+    showMessage(
+        "Record deleted.",
+        "success"
+    );
+
 }
 
 
-/* ============================================================
+/* =========================================================
    CLEAR ALL DATA
-============================================================ */
+   ========================================================= */
 
 function clearAllData(){
 
-    const confirmed =
-        confirm(
-
-            "WARNING!\n\n" +
-
-            "This will permanently delete all fuel stock " +
-            "and collection records stored in this browser.\n\n" +
-
-            "Continue?"
-
-        );
-
-
-    if(!confirmed){
+    if(!confirm(
+        "WARNING: This will permanently clear all fuel stock, records and site data from this browser. Continue?"
+    )){
         return;
     }
 
+    if(!confirm(
+        "Final confirmation: CLEAR ALL DASHBOARD DATA?"
+    )){
+        return;
+    }
 
-    database = {
-
+    db = {
         stock:0,
-
-        collections:[]
-
+        records:[],
+        siteAssignments:[]
     };
-
 
     saveDatabase();
 
     renderDashboard();
 
-
-    document.getElementById(
-        "stockInput"
-    ).value = "";
-
-}
-
-
-/* ============================================================
-   MESSAGE
-============================================================ */
-
-function showMessage(
-    element,
-    text,
-    type
-){
-
-    if(!element){
-        return;
-    }
-
-
-    element.textContent =
-        text;
-
-
-    element.className =
-        "message show " +
-        type;
-
-
-    if(type === "success"){
-
-        setTimeout(
-
-            function(){
-
-                element.className =
-                    "message";
-
-            },
-
-            5000
-
-        );
-
-    }
+    showMessage(
+        "All dashboard data has been cleared.",
+        "success"
+    );
 
 }
 
 
-/* ============================================================
-   RENDER KPI
-============================================================ */
+/* =========================================================
+   KPI
+   ========================================================= */
 
 function renderKPI(){
 
-    const collected =
+    document.getElementById(
+        "kpiStock"
+    ).textContent = db.stock;
+
+    document.getElementById(
+        "kpiCollected"
+    ).textContent =
         getTotalCollected();
 
-
-    const assigned =
+    document.getElementById(
+        "kpiAssigned"
+    ).textContent =
         getTotalAssigned();
 
-
-    const remaining =
+    document.getElementById(
+        "kpiRemaining"
+    ).textContent =
         getRemainingStock();
 
-
-    const sites =
+    document.getElementById(
+        "kpiSites"
+    ).textContent =
         getUniqueSites();
 
-
     document.getElementById(
-        "totalStock"
+        "kpiRecords"
     ).textContent =
-        database.stock;
-
-
-    document.getElementById(
-        "totalCollected"
-    ).textContent =
-        collected;
-
-
-    document.getElementById(
-        "totalAssigned"
-    ).textContent =
-        assigned;
-
-
-    document.getElementById(
-        "remainingStock"
-    ).textContent =
-        remaining;
-
-
-    document.getElementById(
-        "sitesSupplied"
-    ).textContent =
-        sites;
-
-
-    document.getElementById(
-        "recordCount"
-    ).textContent =
-        database.collections.length;
-
-
-    document.getElementById(
-        "stockInput"
-    ).value =
-        database.stock || "";
+        db.records.length;
 
 }
 
 
-/* ============================================================
-   RENDER ZONES
-============================================================ */
+/* =========================================================
+   ZONES
+   ========================================================= */
 
 function renderZones(){
 
-    const container =
-        document.getElementById(
-            "zoneSummary"
-        );
-
-
     const zones = [
-
         "Lae Zone 1",
         "Lae Zone 2",
         "Lae Zone 3",
         "Lae Zone 4"
-
     ];
-
-
-    container.innerHTML = "";
-
-
-    zones.forEach(
-
-        function(zone){
-
-            const records =
-                database.collections.filter(
-
-                    function(record){
-
-                        return record.zone === zone;
-
-                    }
-
-                );
-
-
-            const total =
-                records.reduce(
-
-                    function(sum,record){
-
-                        return sum +
-                            Number(
-                                record.collectedDrums || 0
-                            );
-
-                    },
-
-                    0
-
-                );
-
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "zone";
-
-
-            div.innerHTML = `
-
-                <div class="zone-name">
-                    ${escapeHTML(zone)}
-                </div>
-
-                <div class="zone-number">
-                    ${total}
-                </div>
-
-                <div
-                    style="
-                    font-size:12px;
-                    color:var(--muted);
-                    margin-top:3px;
-                    "
-                >
-                    fuel drums collected
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                div
-            );
-
-        }
-
-    );
-
-}
-
-
-/* ============================================================
-   RENDER TEAM SUMMARY
-============================================================ */
-
-function renderTeams(){
 
     const container =
         document.getElementById(
-            "teamSummary"
+            "zoneDashboard"
         );
 
+    container.innerHTML =
+        zones.map(zone=>{
 
-    const totals = {};
-
-
-    database.collections.forEach(
-
-        function(record){
-
-            const team =
-                record.team;
-
-
-            if(!totals[team]){
-
-                totals[team] = 0;
-
-            }
-
-
-            totals[team] +=
-                Number(
-                    record.collectedDrums || 0
+            const records =
+                db.records.filter(
+                    r=>r.zone === zone
                 );
 
-        }
-
-    );
-
-
-    container.innerHTML = "";
-
-
-    const names =
-        Object.keys(totals);
-
-
-    if(names.length === 0){
-
-        container.innerHTML = `
-
-            <div
-                style="
-                color:var(--muted);
-                "
-            >
-                No fuel collection records yet.
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    let maximum = 0;
-
-
-    names.forEach(
-
-        function(name){
-
-            if(
-                totals[name] > maximum
-            ){
-
-                maximum =
-                    totals[name];
-
-            }
-
-        }
-
-    );
-
-
-    names
-    .sort(
-
-        function(a,b){
-
-            return totals[b] -
-                   totals[a];
-
-        }
-
-    )
-    .forEach(
-
-        function(name){
-
-            const amount =
-                totals[name];
-
-
-            const percentage =
-                maximum > 0
-
-                ? (amount / maximum) * 100
-
-                : 0;
-
-
-            const div =
-                document.createElement(
-                    "div"
+            const drums =
+                records.reduce(
+                    (sum,r)=>
+                        sum + Number(r.drums || 0),
+                    0
                 );
 
+            return `
 
-            div.className =
-                "team-row";
+                <div class="zone-card">
 
+                    <h3>${escapeHTML(zone)}</h3>
 
-            div.innerHTML = `
+                    <div class="zone-number">
+                        ${drums}
+                    </div>
 
-                <div class="team-line">
-
-                    <strong>
-                        ${escapeHTML(name)}
-                    </strong>
-
-                    <span>
-                        ${amount} drums
-                    </span>
-
-                </div>
-
-                <div class="progress">
+                    <div class="zone-meta">
+                        drums collected
+                    </div>
 
                     <div
-                        class="progress-bar"
-                        style="
-                        width:${percentage}%;
-                        "
-                    ></div>
+                        class="zone-meta"
+                        style="margin-top:7px;"
+                    >
+                        ${records.length}
+                        collection record(s)
+                    </div>
 
                 </div>
 
             `;
 
-
-            container.appendChild(
-                div
-            );
-
-        }
-
-    );
+        }).join("");
 
 }
 
 
-/* ============================================================
-   RENDER HISTORY
-============================================================ */
+/* =========================================================
+   TEAM ACCOUNTABILITY
+   ========================================================= */
+
+function renderTeams(){
+
+    const names = [
+
+        "Terrence Nikasivai",
+        "Druschilda Banduru",
+        "Walo Navu",
+        "Steven POi",
+        "Mathew Walo",
+        "Terence Kamkem",
+        "Mesack Atiyafa",
+        "Abraham Hicks",
+        "Manu",
+        "Robert Waninara",
+        "Iso Yawi",
+        "Other"
+
+    ];
+
+    const total =
+        getTotalCollected();
+
+    const container =
+        document.getElementById(
+            "teamDashboard"
+        );
+
+    container.innerHTML =
+        names.map(name=>{
+
+            const records =
+                db.records.filter(
+                    r=>r.teamMember === name
+                );
+
+            const drums =
+                records.reduce(
+                    (sum,r)=>
+                        sum + Number(r.drums || 0),
+                    0
+                );
+
+            const percentage =
+                total > 0
+                ? Math.min(
+                    100,
+                    (drums / total) * 100
+                  )
+                : 0;
+
+            return `
+
+                <div class="team-card">
+
+                    <div class="team-top">
+
+                        <strong>
+                            ${escapeHTML(name)}
+                        </strong>
+
+                        <strong>
+                            ${drums} drums
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:${percentage}%"
+                        ></div>
+
+                    </div>
+
+                    <div
+                        style="
+                        margin-top:7px;
+                        font-size:11px;
+                        color:var(--muted);
+                        "
+                    >
+                        ${records.length}
+                        record(s)
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
 
 function renderHistory(){
 
-    const table =
+    const body =
         document.getElementById(
-            "history"
+            "historyBody"
         );
 
+    if(!db.records.length){
 
-    table.innerHTML = "";
-
-
-    if(
-        database.collections.length === 0
-    ){
-
-        table.innerHTML = `
-
+        body.innerHTML = `
             <tr>
-
                 <td
-                    colspan="7"
-                    style="
-                    text-align:center;
-                    padding:30px;
-                    color:var(--muted);
-                    "
+                    colspan="8"
+                    class="empty"
                 >
-
-                    No fuel collection records yet.
-
-                    <br><br>
-
-                    Use the form on the left to record
-                    the first fuel collection.
-
+                    No collection records yet.
                 </td>
-
             </tr>
-
         `;
 
         return;
-
     }
 
-
     const records =
-        [...database.collections]
-        .reverse();
+        [...db.records].sort(
+            (a,b)=>
+                new Date(b.date) -
+                new Date(a.date)
+        );
 
+    body.innerHTML =
+        records.map(
+            (r,index)=>{
 
-    records.forEach(
+                const siteCount =
+                    Array.isArray(r.sites)
+                    ? r.sites.length
+                    : 0;
 
-        function(record){
+                return `
 
-            const row =
-                document.createElement(
-                    "tr"
-                );
+                    <tr>
 
+                        <td>${index+1}</td>
 
-            let siteHTML = "";
+                        <td>
+                            ${escapeHTML(r.date)}
+                        </td>
 
+                        <td>
+                            <strong>
+                                ${escapeHTML(r.teamMember)}
+                            </strong>
+                        </td>
 
-            if(
-                Array.isArray(
-                    record.sites
-                )
-            ){
+                        <td>
+                            ${escapeHTML(r.zone)}
+                        </td>
 
-                record.sites.forEach(
+                        <td>
+                            ${escapeHTML(r.vehicle || "-")}
+                        </td>
 
-                    function(site){
+                        <td>
+                            <strong>
+                                ${Number(r.drums || 0)}
+                            </strong>
+                        </td>
 
-                        siteHTML += `
+                        <td>
+                            ${siteCount}
+                        </td>
 
-                            <div
-                                style="
-                                margin-bottom:5px;
-                                "
+                        <td>
+
+                            <button
+                                class="btn btn-danger"
+                                style="padding:7px 10px;"
+                                onclick="deleteRecord('${r.id}')"
                             >
+                                Delete
+                            </button>
 
-                                <strong>
-                                    ${escapeHTML(
-                                        site.siteId
-                                    )}
-                                </strong>
+                        </td>
 
-                                :
-                                ${site.drums}
-                                drums
+                    </tr>
 
-                            </div>
-
-                        `;
-
-                    }
-
-                );
+                `;
 
             }
-
-
-            row.innerHTML = `
-
-                <td>
-                    ${escapeHTML(
-                        record.date
-                    )}
-                </td>
-
-                <td>
-                    <strong>
-                        ${escapeHTML(
-                            record.team
-                        )}
-                    </strong>
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        record.zone
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        record.vehicle
-                    )}
-                </td>
-
-                <td>
-                    <strong>
-                        ${record.collectedDrums}
-                    </strong>
-                </td>
-
-                <td>
-                    ${siteHTML}
-                </td>
-
-                <td>
-
-                    <button
-                        type="button"
-                        class="btn-danger delete-record"
-                        style="
-                        padding:7px 10px;
-                        "
-                    >
-                        Delete
-                    </button>
-
-                </td>
-
-            `;
-
-
-            row.querySelector(
-                ".delete-record"
-            ).addEventListener(
-
-                "click",
-
-                function(){
-
-                    deleteRecord(
-                        record.id
-                    );
-
-                }
-
-            );
-
-
-            table.appendChild(
-                row
-            );
-
-        }
-
-    );
+        ).join("");
 
 }
 
 
-/* ============================================================
-   REPORT FILTER
-============================================================ */
+/* =========================================================
+   REPORT FUNCTIONS
+   ========================================================= */
 
 function getReportRecords(){
 
@@ -3630,349 +2228,428 @@ function getReportRecords(){
             "reportType"
         ).value;
 
-
-    const date =
-        document.getElementById(
-            "reportDate"
-        ).value;
-
-
-    const month =
-        document.getElementById(
-            "reportMonth"
-        ).value;
-
-
     if(type === "daily"){
 
-        return database.collections.filter(
+        const date =
+            document.getElementById(
+                "reportDate"
+            ).value;
 
-            function(record){
+        if(!date){
+            return [];
+        }
 
-                return record.date === date;
-
-            }
-
+        return db.records.filter(
+            r=>r.date === date
         );
 
     }
 
 
-    if(
-        type === "monthly"
-        ||
-        type === "selected-month"
-    ){
+    if(type === "weekly"){
 
-        return database.collections.filter(
+        const date =
+            document.getElementById(
+                "reportDate"
+            ).value;
 
-            function(record){
+        if(!date){
+            return [];
+        }
 
-                return record.date.startsWith(
-                    month
-                );
+        const selected =
+            new Date(date + "T00:00:00");
 
-            }
+        const day =
+            selected.getDay();
 
+        const mondayOffset =
+            day === 0 ? -6 : 1-day;
+
+        const monday =
+            new Date(selected);
+
+        monday.setDate(
+            selected.getDate() +
+            mondayOffset
+        );
+
+        const sunday =
+            new Date(monday);
+
+        sunday.setDate(
+            monday.getDate()+6
+        );
+
+        const start =
+            monday.toISOString()
+                .slice(0,10);
+
+        const end =
+            sunday.toISOString()
+                .slice(0,10);
+
+        return db.records.filter(
+            r=>r.date >= start &&
+               r.date <= end
         );
 
     }
 
 
-    const selected =
+    if(type === "monthly"){
+
+        const month =
+            getCurrentMonth();
+
+        return db.records.filter(
+            r=>r.date.startsWith(month)
+        );
+
+    }
+
+
+    if(type === "month"){
+
+        const month =
+            document.getElementById(
+                "reportMonth"
+            ).value;
+
+        if(!month){
+            return [];
+        }
+
+        return db.records.filter(
+            r=>r.date.startsWith(month)
+        );
+
+    }
+
+    return [];
+
+}
+
+
+function formatDate(date){
+
+    if(!date){
+        return "-";
+    }
+
+    const d =
         new Date(
             date + "T00:00:00"
         );
 
-
-    const day =
-        selected.getDay();
-
-
-    const monday =
-        new Date(
-            selected
-        );
-
-
-    monday.setDate(
-
-        selected.getDate()
-        -
-        (
-            day === 0
-            ? 6
-            : day - 1
-        )
-
-    );
-
-
-    const sunday =
-        new Date(
-            monday
-        );
-
-
-    sunday.setDate(
-        monday.getDate() + 6
-    );
-
-
-    const start =
-        formatDate(
-            monday
-        );
-
-
-    const end =
-        formatDate(
-            sunday
-        );
-
-
-    return database.collections.filter(
-
-        function(record){
-
-            return (
-
-                record.date >= start
-                &&
-                record.date <= end
-
-            );
-
+    return d.toLocaleDateString(
+        "en-AU",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
         }
-
     );
 
 }
 
 
-/* ============================================================
-   FORMAT DATE
-============================================================ */
+function updateReportControls(){
 
-function formatDate(date){
+    const type =
+        document.getElementById(
+            "reportType"
+        ).value;
 
-    const year =
-        date.getFullYear();
+    const dateGroup =
+        document.getElementById(
+            "reportDateGroup"
+        );
 
+    const monthGroup =
+        document.getElementById(
+            "reportMonthGroup"
+        );
 
-    const month =
-        String(
-            date.getMonth()+1
-        ).padStart(2,"0");
+    if(type === "daily" || type === "weekly"){
 
+        dateGroup.style.display = "flex";
+        monthGroup.style.display = "none";
 
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2,"0");
+    }
+    else if(type === "month"){
 
+        dateGroup.style.display = "none";
+        monthGroup.style.display = "flex";
 
-    return `${year}-${month}-${day}`;
+    }
+    else{
+
+        dateGroup.style.display = "none";
+        monthGroup.style.display = "none";
+
+    }
+
+    updateReportPreview();
 
 }
 
-
-/* ============================================================
-   REPORT PREVIEW
-============================================================ */
 
 function updateReportPreview(){
+
+    const type =
+        document.getElementById(
+            "reportType"
+        ).value;
 
     const records =
         getReportRecords();
 
-
-    const drums =
+    const total =
         records.reduce(
-
-            function(sum,record){
-
-                return sum +
-                    Number(
-                        record.collectedDrums || 0
-                    );
-
-            },
-
+            (sum,r)=>
+                sum + Number(r.drums || 0),
             0
-
         );
 
+    let period = "";
 
-    document.getElementById(
-        "reportPreview"
-    ).innerHTML = `
+    if(type === "daily"){
+
+        period =
+            document.getElementById(
+                "reportDate"
+            ).value || "Select date";
+
+    }
+    else if(type === "weekly"){
+
+        period =
+            document.getElementById(
+                "reportDate"
+            ).value
+            ? "Week containing " +
+              formatDate(
+                  document.getElementById(
+                      "reportDate"
+                  ).value
+              )
+            : "Select date";
+
+    }
+    else if(type === "monthly"){
+
+        period =
+            new Date().toLocaleString(
+                "en-AU",
+                {
+                    month:"long",
+                    year:"numeric"
+                }
+            );
+
+    }
+    else{
+
+        const month =
+            document.getElementById(
+                "reportMonth"
+            ).value;
+
+        if(month){
+
+            const d =
+                new Date(month + "-01T00:00:00");
+
+            period =
+                d.toLocaleString(
+                    "en-AU",
+                    {
+                        month:"long",
+                        year:"numeric"
+                    }
+                );
+
+        }
+        else{
+
+            period = "Select month";
+
+        }
+
+    }
+
+    const preview =
+        document.getElementById(
+            "reportPreview"
+        );
+
+    preview.innerHTML = `
 
         <strong>
-            ${records.length}
+            Report Period:
         </strong>
-        collection records
+        ${escapeHTML(period)}
 
-        &nbsp; • &nbsp;
+        <br><br>
 
         <strong>
-            ${drums}
+            Collection Records:
         </strong>
-        fuel drums
+        ${records.length}
+
+        &nbsp;&nbsp; | &nbsp;&nbsp;
+
+        <strong>
+            Fuel Collected:
+        </strong>
+        ${total} drums
 
     `;
 
 }
 
 
-/* ============================================================
-   CSV DOWNLOAD
-============================================================ */
+/* =========================================================
+   CSV
+   ========================================================= */
+
+function csvEscape(value){
+
+    const text =
+        String(value ?? "");
+
+    return `"${text.replace(
+        /"/g,
+        '""'
+    )}"`;
+
+}
+
 
 function downloadCSV(){
 
     const records =
         getReportRecords();
 
+    if(!records.length){
 
-    let csv =
-        "Date,Team,Zone,Vehicle,Collected Drums,Vodafone Site,Site Drums\n";
+        showMessage(
+            "No records found for the selected report period.",
+            "warning"
+        );
 
+        return;
+    }
 
-    records.forEach(
+    const rows = [];
 
-        function(record){
+    rows.push([
+        "Date",
+        "Team Member",
+        "Zone",
+        "Vehicle",
+        "Drums",
+        "Site Count",
+        "Sites"
+    ]);
 
-            if(
-                !record.sites ||
-                record.sites.length === 0
-            ){
+    records.forEach(r=>{
 
-                csv += [
+        const sites =
+            Array.isArray(r.sites)
+            ? r.sites.map(
+                s=>`${s.siteId} (${s.drums})`
+              ).join("; ")
+            : "";
 
-                    record.date,
-                    record.team,
-                    record.zone,
-                    record.vehicle,
-                    record.collectedDrums,
-                    "",
-                    ""
+        rows.push([
+            r.date,
+            r.teamMember,
+            r.zone,
+            r.vehicle || "",
+            r.drums,
+            Array.isArray(r.sites)
+                ? r.sites.length
+                : 0,
+            sites
+        ]);
 
-                ]
-                .map(csvEscape)
-                .join(",");
+    });
 
+    const csv =
+        rows.map(
+            row =>
+                row.map(csvEscape).join(",")
+        ).join("\r\n");
 
-                csv += "\n";
-
-                return;
-
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:"text/csv;charset=utf-8;"
             }
+        );
 
+    const url =
+        URL.createObjectURL(blob);
 
-            record.sites.forEach(
+    const a =
+        document.createElement("a");
 
-                function(site){
+    a.href = url;
 
-                    csv += [
+    a.download =
+        "Vodafone_PNG_Fuel_Collection_Report.csv";
 
-                        record.date,
-                        record.team,
-                        record.zone,
-                        record.vehicle,
-                        record.collectedDrums,
-                        site.siteId,
-                        site.drums
+    document.body.appendChild(a);
 
-                    ]
-                    .map(csvEscape)
-                    .join(",");
+    a.click();
 
+    a.remove();
 
-                    csv += "\n";
+    URL.revokeObjectURL(url);
 
-                }
-
-            );
-
-        }
-
-    );
-
-
-    downloadFile(
-
-        csv,
-
-        "Vodafone_PNG_Fuel_Report.csv",
-
-        "text/csv;charset=utf-8"
-
+    showMessage(
+        "CSV report downloaded.",
+        "success"
     );
 
 }
 
 
-/* ============================================================
-   CSV ESCAPE
-============================================================ */
-
-function csvEscape(value){
-
-    return '"' +
-
-        String(
-            value ?? ""
-        )
-        .replace(
-            /"/g,
-            '""'
-        ) +
-
-        '"';
-
-}
-
-
-/* ============================================================
-   PDF DOWNLOAD
-============================================================ */
+/* =========================================================
+   PDF
+   ========================================================= */
 
 function downloadPDF(){
 
     const records =
         getReportRecords();
 
+    if(!records.length){
 
-    if(records.length === 0){
-
-        alert(
-            "There are no collection records for the selected report period."
+        showMessage(
+            "No records found for the selected report period.",
+            "warning"
         );
 
         return;
-
     }
 
+    if(!window.jspdf){
 
-    if(
-        !window.jspdf ||
-        !window.jspdf.jsPDF
-    ){
-
-        alert(
-            "PDF library could not be loaded. Please check your internet connection and try again."
+        showMessage(
+            "PDF library is not loaded. Check your internet connection.",
+            "error"
         );
 
         return;
-
     }
-
 
     const {
         jsPDF
     } = window.jspdf;
-
 
     const doc =
         new jsPDF(
@@ -3981,362 +2658,265 @@ function downloadPDF(){
             "a4"
         );
 
-
-    doc.setFontSize(18);
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-
-    doc.text(
-        "Vodafone PNG Fuel Collection Report",
-        14,
-        15
-    );
-
-
-    const reportType =
-        document.getElementById(
-            "reportType"
-        ).value;
-
-
-    const reportDate =
-        document.getElementById(
-            "reportDate"
-        ).value;
-
-
-    const reportMonth =
-        document.getElementById(
-            "reportMonth"
-        ).value;
-
-
-    doc.setFontSize(10);
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    doc.text(
-        "Report Type: " +
-        reportType,
-        14,
-        23
-    );
-
-
-    if(reportType === "daily"){
-
-        doc.text(
-            "Date: " +
-            reportDate,
-            14,
-            29
-        );
-
-    }
-
-
-    if(
-        reportType === "monthly" ||
-        reportType === "selected-month"
-    ){
-
-        doc.text(
-            "Month: " +
-            reportMonth,
-            14,
-            29
-        );
-
-    }
-
-
-    if(reportType === "weekly"){
-
-        doc.text(
-            "Week based on: " +
-            reportDate,
-            14,
-            29
-        );
-
-    }
-
-
-    const totalDrums =
+    const total =
         records.reduce(
-
-            function(sum,record){
-
-                return sum +
-                    Number(
-                        record.collectedDrums || 0
-                    );
-
-            },
-
+            (sum,r)=>
+                sum + Number(r.drums || 0),
             0
-
         );
 
+    const uniqueSites =
+        new Set();
 
-    doc.text(
-        "Total Records: " +
-        records.length,
-        14,
-        35
-    );
+    records.forEach(r=>{
 
+        if(Array.isArray(r.sites)){
 
-    doc.text(
-        "Total Fuel Collected: " +
-        totalDrums +
-        " drums",
-        14,
-        41
-    );
+            r.sites.forEach(s=>{
 
-
-    doc.text(
-        "Generated: " +
-        new Date().toLocaleString(),
-        14,
-        47
-    );
-
-
-    const tableData = [];
-
-
-    records.forEach(
-
-        function(record){
-
-            if(
-                !record.sites ||
-                record.sites.length === 0
-            ){
-
-                tableData.push([
-
-                    record.date,
-                    record.team,
-                    record.zone,
-                    record.vehicle,
-                    record.collectedDrums,
-                    "-",
-                    "-"
-
-                ]);
-
-                return;
-
-            }
-
-
-            record.sites.forEach(
-
-                function(site){
-
-                    tableData.push([
-
-                        record.date,
-                        record.team,
-                        record.zone,
-                        record.vehicle,
-                        record.collectedDrums,
-                        site.siteId,
-                        site.drums
-
-                    ]);
-
+                if(s.siteId){
+                    uniqueSites.add(s.siteId);
                 }
 
-            );
-
-        }
-
-    );
-
-
-    doc.autoTable({
-
-        startY:53,
-
-        head:[[
-
-            "Date",
-            "Team",
-            "Zone",
-            "Vehicle",
-            "Collected Drums",
-            "Vodafone Site",
-            "Site Drums"
-
-        ]],
-
-        body:tableData,
-
-        theme:"grid",
-
-        styles:{
-
-            fontSize:8,
-
-            cellPadding:3
-
-        },
-
-        headStyles:{
-
-            fontStyle:"bold"
-
-        },
-
-        margin:{
-
-            left:14,
-
-            right:14
+            });
 
         }
 
     });
 
+    doc.setFontSize(18);
 
-    const pageCount =
-        doc.internal.getNumberOfPages();
-
-
-    for(
-        let i=1;
-        i<=pageCount;
-        i++
-    ){
-
-        doc.setPage(i);
-
-
-        const pageHeight =
-            doc.internal.pageSize.height;
-
-
-        doc.setFontSize(8);
-
-
-        doc.text(
-
-            "Powered by Iso Yawi | Vodafone PNG Fuel Collection Dashboard | Page " +
-            i +
-            " of " +
-            pageCount,
-
-            14,
-
-            pageHeight - 8
-
-        );
-
-    }
-
-
-    const filename =
-        "Vodafone_PNG_Fuel_Report_" +
-        getToday() +
-        ".pdf";
-
-
-    doc.save(
-        filename
+    doc.text(
+        "Vodafone PNG Fuel Collection Report",
+        14,
+        16
     );
 
-}
+    doc.setFontSize(10);
 
+    doc.text(
+        `Generated: ${new Date().toLocaleString("en-AU")}`,
+        14,
+        23
+    );
 
-/* ============================================================
-   DOWNLOAD FILE
-============================================================ */
+    doc.text(
+        `Total Records: ${records.length}`,
+        14,
+        30
+    );
 
-function downloadFile(
-    content,
-    filename,
-    mime
-){
+    doc.text(
+        `Total Fuel Collected: ${total} drums`,
+        80,
+        30
+    );
 
-    const blob =
-        new Blob(
+    doc.text(
+        `Unique Sites: ${uniqueSites.size}`,
+        170,
+        30
+    );
 
-            [content],
+    const rows =
+        records.map(
+            r=>{
 
-            {
-                type:mime
+                const sites =
+                    Array.isArray(r.sites)
+                    ? r.sites.map(
+                        s =>
+                            `${s.siteId} (${s.drums})`
+                      ).join(", ")
+                    : "";
+
+                return [
+
+                    formatDate(r.date),
+
+                    r.teamMember,
+
+                    r.zone,
+
+                    r.vehicle || "-",
+
+                    Number(r.drums || 0),
+
+                    Array.isArray(r.sites)
+                        ? r.sites.length
+                        : 0,
+
+                    sites
+
+                ];
+
             }
-
         );
 
+    doc.autoTable({
 
-    const url =
-        URL.createObjectURL(
-            blob
-        );
+        startY:38,
 
+        head:[[
+            "Date",
+            "Team Member",
+            "Zone",
+            "Vehicle",
+            "Drums",
+            "Sites",
+            "Site Allocation"
+        ]],
 
-    const link =
-        document.createElement(
-            "a"
-        );
+        body:rows,
 
-
-    link.href =
-        url;
-
-
-    link.download =
-        filename;
-
-
-    document.body.appendChild(
-        link
-    );
-
-
-    link.click();
-
-
-    link.remove();
-
-
-    setTimeout(
-
-        function(){
-
-            URL.revokeObjectURL(
-                url
-            );
-
+        styles:{
+            fontSize:8,
+            cellPadding:2
         },
 
-        100
+        headStyles:{
+            fontStyle:"bold"
+        },
 
+        didDrawPage:function(){
+
+            const pageCount =
+                doc.internal.getNumberOfPages();
+
+            doc.setFontSize(8);
+
+            doc.text(
+                "Powered by Iso Yawi | Vodafone PNG Fuel Collection Dashboard",
+                14,
+                doc.internal.pageSize.height - 8
+            );
+
+            doc.text(
+                `Page ${pageCount}`,
+                doc.internal.pageSize.width - 25,
+                doc.internal.pageSize.height - 8
+            );
+
+        }
+
+    });
+
+    doc.save(
+        "Vodafone_PNG_Fuel_Collection_Report.pdf"
+    );
+
+    showMessage(
+        "PDF report downloaded.",
+        "success"
     );
 
 }
 
 
-/* ============================================================
-   RENDER EVERYTHING
-============================================================ */
+/* =========================================================
+   THEME
+   ========================================================= */
+
+const THEMES = [
+    "light",
+    "dark",
+    "vodafone"
+];
+
+
+function applyTheme(theme){
+
+    if(!THEMES.includes(theme)){
+        theme = "light";
+    }
+
+    document.body.dataset.theme =
+        theme;
+
+    localStorage.setItem(
+        "VODAFONE_DASHBOARD_THEME",
+        theme
+    );
+
+}
+
+
+function cycleTheme(){
+
+    const current =
+        localStorage.getItem(
+            "VODAFONE_DASHBOARD_THEME"
+        ) || "light";
+
+    const index =
+        THEMES.indexOf(current);
+
+    const next =
+        THEMES[
+            (index + 1) % THEMES.length
+        ];
+
+    applyTheme(next);
+
+    const names = {
+        light:"Light Mode",
+        dark:"Dark Mode",
+        vodafone:"Vodafone Mode"
+    };
+
+    showMessage(
+        `${names[next]} enabled.`,
+        "info"
+    );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+function logout(){
+
+    if(!confirm(
+        "Are you sure you want to logout?"
+    )){
+        return;
+    }
+
+    /*
+       Remove ONLY the authentication session.
+       Theme preference and dashboard data remain.
+    */
+
+    sessionStorage.removeItem(
+        "warehouseSession"
+    );
+
+    sessionStorage.removeItem(
+        "userRole"
+    );
+
+    sessionStorage.removeItem(
+        "username"
+    );
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
+
+/* =========================================================
+   DASHBOARD RENDER
+   ========================================================= */
 
 function renderDashboard(){
 
     renderKPI();
+
+    renderSiteAssignments();
 
     renderZones();
 
@@ -4344,228 +2924,50 @@ function renderDashboard(){
 
     renderHistory();
 
-    updateReportPreview();
+    updateReportControls();
 
 }
 
 
-/* ============================================================
-   INITIALISE APPLICATION
-============================================================ */
+/* =========================================================
+   INITIALISE
+   ========================================================= */
 
 function initialise(){
 
     loadDatabase();
 
+    const savedTheme =
+        localStorage.getItem(
+            "VODAFONE_DASHBOARD_THEME"
+        ) || "light";
 
-    /* THEME */
-
-    const themeSelector =
-        document.getElementById(
-            "themeSelector"
-        );
-
-
-    themeSelector.addEventListener(
-
-        "change",
-
-        function(){
-
-            applyTheme(
-                this.value
-            );
-
-        }
-
-    );
-
-
-    /* DEFAULT DATES */
+    applyTheme(savedTheme);
 
     document.getElementById(
         "collectionDate"
-    ).value =
-        getToday();
-
+    ).value = getToday();
 
     document.getElementById(
         "reportDate"
-    ).value =
-        getToday();
-
+    ).value = getToday();
 
     document.getElementById(
         "reportMonth"
-    ).value =
-        getCurrentMonth();
-
-
-    /* ADD SITE */
-
-    document.getElementById(
-        "addSiteButton"
-    ).addEventListener(
-
-        "click",
-
-        function(event){
-
-            event.preventDefault();
-
-            addSite();
-
-        }
-
-    );
-
-
-    /* RECORD */
-
-    document.getElementById(
-        "recordButton"
-    ).addEventListener(
-
-        "click",
-
-        function(event){
-
-            event.preventDefault();
-
-            recordFuelCollection();
-
-        }
-
-    );
-
-
-    /* STOCK */
-
-    document.getElementById(
-        "setStockButton"
-    ).addEventListener(
-
-        "click",
-
-        function(event){
-
-            event.preventDefault();
-
-            setStock();
-
-        }
-
-    );
-
-
-    /* CSV */
-
-    document.getElementById(
-        "downloadCSV"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            downloadCSV();
-
-        }
-
-    );
-
-
-    /* PDF */
-
-    document.getElementById(
-        "downloadPDF"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            downloadPDF();
-
-        }
-
-    );
-
-
-    /* CLEAR DATA */
-
-    document.getElementById(
-        "clearData"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            clearAllData();
-
-        }
-
-    );
-
-
-    /* REPORT FILTERS */
-
-    document.getElementById(
-        "reportType"
-    ).addEventListener(
-
-        "change",
-
-        updateReportPreview
-
-    );
-
-
-    document.getElementById(
-        "reportDate"
-    ).addEventListener(
-
-        "change",
-
-        updateReportPreview
-
-    );
-
-
-    document.getElementById(
-        "reportMonth"
-    ).addEventListener(
-
-        "change",
-
-        updateReportPreview
-
-    );
-
-
-    /* FIRST SITE */
-
-    addSite();
-
-
-    /* DASHBOARD */
+    ).value = getCurrentMonth();
 
     renderDashboard();
 
 }
 
 
-/* ============================================================
+/* =========================================================
    START
-============================================================ */
+   ========================================================= */
 
 document.addEventListener(
-
     "DOMContentLoaded",
-
     initialise
-
 );
 
 </script>
