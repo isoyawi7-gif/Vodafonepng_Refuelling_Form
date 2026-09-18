@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Login - Vodafone PNG</title>
 
 <style>
@@ -13,14 +15,24 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e60000, #111);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e60000,
+            #111
+        );
 
     display: flex;
+
     justify-content: center;
     align-items: center;
 
     min-height: 100vh;
+
     margin: 0;
+
+    padding: 15px;
 }
 
 
@@ -29,24 +41,31 @@ body {
 ========================================= */
 
 .login-container {
+
     width: 380px;
+
     padding: 35px;
 
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.10);
+    background:
+        rgba(255,255,255,0.10);
 
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
 
     border-radius: 20px;
 
-    border: 1px solid rgba(255, 255, 255, 0.20);
+    border:
+        1px solid
+        rgba(255,255,255,0.20);
 
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.35);
+        0 8px 32px
+        rgba(0,0,0,0.35);
 
     color: white;
+
 }
 
 
@@ -55,12 +74,15 @@ body {
 ========================================= */
 
 .logo {
+
     width: 110px;
+
     height: auto;
 
     margin-bottom: 15px;
 
     border-radius: 8px;
+
 }
 
 
@@ -69,11 +91,14 @@ body {
 ========================================= */
 
 h2 {
-    margin: 0 0 10px 0;
+
+    margin:
+        0 0 10px 0;
 
     color: white;
 
     letter-spacing: 1px;
+
 }
 
 
@@ -82,11 +107,14 @@ h2 {
 ========================================= */
 
 .subtitle {
+
     margin-bottom: 20px;
 
-    color: rgba(255,255,255,0.80);
+    color:
+        rgba(255,255,255,0.80);
 
     font-size: 14px;
+
 }
 
 
@@ -95,14 +123,18 @@ h2 {
 ========================================= */
 
 input {
+
     display: block;
 
     width: 100%;
+
     height: 46px;
 
-    padding: 12px 14px;
+    padding:
+        12px 14px;
 
-    margin: 10px 0;
+    margin:
+        10px 0;
 
     border-radius: 10px;
 
@@ -110,24 +142,33 @@ input {
 
     outline: none;
 
-    background: rgba(255,255,255,0.15);
+    background:
+        rgba(255,255,255,0.15);
 
     color: white;
 
     font-size: 15px;
+
 }
 
 
 input::placeholder {
-    color: rgba(255,255,255,0.70);
+
+    color:
+        rgba(255,255,255,0.70);
+
 }
 
 
 input:focus {
-    background: rgba(255,255,255,0.22);
+
+    background:
+        rgba(255,255,255,0.22);
 
     box-shadow:
-        0 0 0 2px rgba(255,255,255,0.25);
+        0 0 0 2px
+        rgba(255,255,255,0.25);
+
 }
 
 
@@ -136,9 +177,11 @@ input:focus {
 ========================================= */
 
 button {
+
     display: block;
 
     width: 100%;
+
     height: 46px;
 
     padding: 12px;
@@ -160,18 +203,36 @@ button {
     font-weight: bold;
 
     transition: 0.3s;
+
 }
 
 
 button:hover {
+
     background: #ff1a1a;
 
-    transform: scale(1.02);
+    transform:
+        scale(1.02);
+
 }
 
 
 button:active {
-    transform: scale(0.98);
+
+    transform:
+        scale(0.98);
+
+}
+
+
+button:disabled {
+
+    opacity: 0.7;
+
+    cursor: wait;
+
+    transform: none;
+
 }
 
 
@@ -180,6 +241,7 @@ button:active {
 ========================================= */
 
 .error {
+
     min-height: 20px;
 
     margin-top: 12px;
@@ -187,6 +249,7 @@ button:active {
     color: #ff8080;
 
     font-size: 14px;
+
 }
 
 
@@ -195,13 +258,46 @@ button:active {
 ========================================= */
 
 .system-info {
+
     margin-top: 20px;
 
     font-size: 11px;
 
-    color: rgba(255,255,255,0.55);
+    color:
+        rgba(255,255,255,0.55);
 
     line-height: 1.5;
+
+}
+
+
+.system-info p {
+
+    margin: 4px 0;
+
+}
+
+
+/* =========================================
+   SECURITY INFORMATION
+========================================= */
+
+.security-info {
+
+    margin-top: 14px;
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(0,0,0,0.15);
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-size: 10px;
+
 }
 
 
@@ -212,14 +308,19 @@ button:active {
 @media (max-width: 450px) {
 
     .login-container {
-        width: calc(100% - 30px);
 
-        padding: 30px 25px;
+        width:
+            calc(100% - 10px);
+
+        padding:
+            30px 25px;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -233,7 +334,9 @@ button:active {
 <div class="login-container">
 
 
-    <!-- LOGO -->
+    <!-- =====================================
+         LOGO
+    ====================================== -->
 
     <img
         src="Logo.jpg"
@@ -242,31 +345,42 @@ button:active {
     >
 
 
-    <!-- TITLE -->
+    <!-- =====================================
+         TITLE
+    ====================================== -->
 
     <h2>
         Vodafone PNG Login
     </h2>
 
 
-    <!-- SUBTITLE -->
+    <!-- =====================================
+         SUBTITLE
+    ====================================== -->
 
     <div class="subtitle">
+
         Enter your system credentials
+
     </div>
 
 
-    <!-- USERNAME -->
+    <!-- =====================================
+         USERNAME
+    ====================================== -->
 
     <input
         type="text"
         id="username"
         placeholder="Username"
         autocomplete="username"
+        spellcheck="false"
     >
 
 
-    <!-- PASSWORD -->
+    <!-- =====================================
+         PASSWORD
+    ====================================== -->
 
     <input
         type="password"
@@ -276,14 +390,23 @@ button:active {
     >
 
 
-    <!-- LOGIN BUTTON -->
+    <!-- =====================================
+         LOGIN BUTTON
+    ====================================== -->
 
-    <button onclick="login()">
+    <button
+        id="loginButton"
+        onclick="login()"
+    >
+
         Login
+
     </button>
 
 
-    <!-- ERROR -->
+    <!-- =====================================
+         ERROR MESSAGE
+    ====================================== -->
 
     <div
         class="error"
@@ -291,26 +414,137 @@ button:active {
     </div>
 
 
-    <!-- FOOTER -->
+    <!-- =====================================
+         SYSTEM INFORMATION
+    ====================================== -->
 
     <div class="system-info">
-       <p1>Vodafone PNG Fuel Management System</p> <br>
-        <p2>Powered By | Iso Yawi |  System Creator</p2>
-        
+
+        <p>
+            Vodafone PNG Fuel Management System
+        </p>
+
+        <p>
+            Powered By | Iso Yawi | System Creator
+        </p>
+
+    </div>
+
+
+    <!-- =====================================
+         SECURITY INFORMATION
+    ====================================== -->
+
+    <div class="security-info">
+
+        Session-based authentication enabled
+
     </div>
 
 
 </div>
 
 
+
 <script>
 
 
-/* =========================================
+/* =====================================================
+   SESSION SECURITY
+===================================================== */
+
+/*
+   IMPORTANT:
+
+   Authentication information is stored in
+   sessionStorage rather than localStorage.
+
+   sessionStorage normally exists only for the
+   current browser tab/session.
+
+   Old localStorage authentication values are
+   removed so the previous login method cannot
+   continue to authorize access.
+*/
+
+
+(function clearOldAuthentication() {
+
+    try {
+
+        localStorage.removeItem("loggedIn");
+
+        localStorage.removeItem("userRole");
+
+        localStorage.removeItem("username");
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "Unable to clear old authentication data."
+        );
+
+    }
+
+})();
+
+
+
+/* =====================================================
+   CREATE SESSION TOKEN
+===================================================== */
+
+function createSessionToken() {
+
+    /*
+       Use the browser's secure random UUID
+       generator where available.
+    */
+
+    if (
+        window.crypto &&
+        typeof window.crypto.randomUUID === "function"
+    ) {
+
+        return window.crypto.randomUUID();
+
+    }
+
+
+    /*
+       Fallback for older browsers.
+    */
+
+    return (
+
+        Date.now().toString(36) +
+
+        "-" +
+
+        Math.random()
+            .toString(36)
+            .substring(2, 15) +
+
+        "-" +
+
+        Math.random()
+            .toString(36)
+            .substring(2, 15)
+
+    );
+
+}
+
+
+
+/* =====================================================
    LOGIN FUNCTION
-========================================= */
+===================================================== */
 
 function login() {
+
 
     const user =
         document
@@ -330,106 +564,217 @@ function login() {
         .getElementById("error");
 
 
-    /* Clear previous error */
+    const loginButton =
+        document
+        .getElementById("loginButton");
+
+
+    /* ================================================
+       CLEAR PREVIOUS ERROR
+    ================================================ */
 
     error.innerText = "";
 
 
-    /* =====================================
+    /* ================================================
+       CHECK EMPTY FIELDS
+    ================================================ */
+
+    if (
+        user === "" ||
+        pass === ""
+    ) {
+
+        error.innerText =
+            "Please enter your username and password.";
+
+        return;
+
+    }
+
+
+
+    /* ================================================
+       PREVENT DOUBLE CLICK
+    ================================================ */
+
+    loginButton.disabled = true;
+
+    loginButton.innerText =
+        "Checking...";
+
+
+
+    /* =================================================
        ADMIN LOGIN
-       
-       Username: Admin
-       Password: Admin
-       
+
+       Username:
+       Admin
+
+       Password:
+       Admin
+
        Opens:
        form.html
-    ===================================== */
+    ================================================= */
 
     if (
         user === "Admin" &&
         pass === "Admin"
     ) {
 
-        localStorage.setItem(
-            "loggedIn",
-            "true"
+
+        /*
+           Create a new session token.
+        */
+
+        const sessionToken =
+            createSessionToken();
+
+
+        /*
+           Remove any Warehouse session.
+        */
+
+        sessionStorage.removeItem(
+            "warehouseSession"
         );
 
 
-        localStorage.setItem(
+        /*
+           Store Admin session.
+        */
+
+        sessionStorage.setItem(
+            "adminSession",
+            sessionToken
+        );
+
+
+        sessionStorage.setItem(
             "userRole",
             "Admin"
         );
 
 
-        localStorage.setItem(
+        sessionStorage.setItem(
             "username",
             user
         );
 
 
-        window.location.href =
-            "form.html";
+        /*
+           Redirect to Admin dashboard/form.
+        */
+
+        window.location.replace(
+            "form.html"
+        );
 
 
         return;
+
     }
 
 
-    /* =====================================
+
+    /* =================================================
        WAREHOUSE LOGIN
-       
-       Username: Warehouse
-       Password: Warehouse
-       
+
+       Username:
+       Warehouse
+
+       Password:
+       Warehouse
+
        Opens:
        Warehousedashboard.html
-    ===================================== */
+    ================================================= */
 
     if (
         user === "Warehouse" &&
         pass === "Warehouse"
     ) {
 
-        localStorage.setItem(
-            "loggedIn",
-            "true"
+
+        /*
+           Create a new session token.
+        */
+
+        const sessionToken =
+            createSessionToken();
+
+
+        /*
+           Remove any Admin session.
+        */
+
+        sessionStorage.removeItem(
+            "adminSession"
         );
 
 
-        localStorage.setItem(
+        /*
+           Store Warehouse session.
+        */
+
+        sessionStorage.setItem(
+            "warehouseSession",
+            sessionToken
+        );
+
+
+        sessionStorage.setItem(
             "userRole",
             "Warehouse"
         );
 
 
-        localStorage.setItem(
+        sessionStorage.setItem(
             "username",
             user
         );
 
 
-        window.location.href =
-            "Warehousedashboard.html";
+        /*
+           Redirect to Warehouse dashboard.
+        */
+
+        window.location.replace(
+            "Warehousedashboard.html"
+        );
 
 
         return;
+
     }
 
 
-    /* =====================================
+
+    /* =================================================
        INVALID LOGIN
-    ===================================== */
+    ================================================= */
 
     error.innerText =
-        "Invalid username or password";
+        "Invalid username or password.";
+
+
+    /*
+       Re-enable button.
+    */
+
+    loginButton.disabled = false;
+
+    loginButton.innerText =
+        "Login";
 
 }
 
 
-/* =========================================
-   ENTER KEY LOGIN
-========================================= */
+
+/* =====================================================
+   ENTER KEY — PASSWORD
+===================================================== */
 
 document
     .getElementById("password")
@@ -437,7 +782,9 @@ document
         "keydown",
         function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
 
                 login();
 
@@ -447,9 +794,10 @@ document
     );
 
 
-/* =========================================
-   USERNAME ENTER KEY
-========================================= */
+
+/* =====================================================
+   ENTER KEY — USERNAME
+===================================================== */
 
 document
     .getElementById("username")
@@ -457,7 +805,9 @@ document
         "keydown",
         function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
 
                 login();
 
@@ -465,6 +815,23 @@ document
 
         }
     );
+
+
+
+/* =====================================================
+   AUTO FOCUS USERNAME
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        document
+            .getElementById("username")
+            .focus();
+
+    }
+);
 
 
 </script>
