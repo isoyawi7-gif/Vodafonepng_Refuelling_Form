@@ -21,6 +21,93 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     background:#f3f4f6;
     color:#111827;
+    transition:background .25s ease,color .25s ease;
+}
+
+/* ================= DARK THEME ================= */
+
+body.dark-theme{
+    background:#111827;
+    color:#f9fafb;
+}
+
+body.dark-theme .card,
+body.dark-theme .kpi{
+    background:#1f2937;
+    color:#f9fafb;
+    box-shadow:0 3px 12px rgba(0,0,0,.30);
+}
+
+body.dark-theme input,
+body.dark-theme select{
+    background:#374151;
+    color:#f9fafb;
+    border-color:#4b5563;
+}
+
+body.dark-theme input::placeholder{
+    color:#9ca3af;
+}
+
+body.dark-theme input:focus,
+body.dark-theme select:focus{
+    border-color:#e60000;
+    box-shadow:0 0 0 2px rgba(230,0,0,.15);
+}
+
+body.dark-theme .kpi-title,
+body.dark-theme .zone-name,
+body.dark-theme .footer,
+body.dark-theme #reportPreview{
+    color:#9ca3af !important;
+}
+
+body.dark-theme .zone{
+    background:#111827;
+    border-color:#374151;
+}
+
+body.dark-theme .progress{
+    background:#374151;
+}
+
+body.dark-theme .site-total{
+    background:#374151;
+}
+
+body.dark-theme th{
+    background:#374151;
+    color:#f9fafb;
+}
+
+body.dark-theme td,
+body.dark-theme th{
+    border-bottom-color:#4b5563;
+}
+
+body.dark-theme .footer strong{
+    color:#f9fafb;
+}
+
+body.dark-theme .btn-gray{
+    background:#374151;
+    color:#f9fafb;
+}
+
+body.dark-theme .message.success{
+    background:#14532d;
+    color:#dcfce7;
+}
+
+body.dark-theme .message.error{
+    background:#7f1d1d;
+    color:#fee2e2;
+}
+
+body.dark-theme .btn-danger,
+body.dark-theme .remove-site{
+    background:#7f1d1d;
+    color:#fee2e2;
 }
 
 /* ================= HEADER ================= */
@@ -48,6 +135,35 @@ body{
 .header p{
     margin:8px 0 0;
     opacity:.9;
+}
+
+/* ================= HEADER ACTIONS ================= */
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* ================= THEME ================= */
+
+.theme-select{
+    width:auto;
+    min-width:125px;
+    padding:10px 12px;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:9px;
+    background:#fff;
+    color:#111827;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.theme-select:focus{
+    outline:none;
+    border-color:#fff;
+    box-shadow:0 0 0 2px rgba(255,255,255,.25);
 }
 
 /* ================= LOGOUT ================= */
@@ -432,6 +548,15 @@ td strong{
         text-align:center;
     }
 
+    .header-actions{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .theme-select{
+        width:100%;
+    }
+
     .logout-btn{
         width:100%;
     }
@@ -463,12 +588,6 @@ td strong{
 
 <!-- =========================================================
      LOGIN / SESSION GUARD
-     
-     IMPORTANT:
-     This must run before the dashboard application starts.
-     
-     Only a valid Warehouse session from index.html
-     is allowed to access this page.
 ========================================================= -->
 
 <script>
@@ -514,15 +633,41 @@ td strong{
 
     </div>
 
-    <!-- LOGOUT -->
 
-    <button
-        type="button"
-        class="logout-btn"
-        onclick="logout()"
-    >
-        Logout
-    </button>
+    <!-- THEME + LOGOUT -->
+
+    <div class="header-actions">
+
+        <select
+            id="themeSelector"
+            class="theme-select"
+            aria-label="Select dashboard theme"
+        >
+
+            <option value="light">
+                Light
+            </option>
+
+            <option value="dark">
+                Dark
+            </option>
+
+            <option value="system">
+                System
+            </option>
+
+        </select>
+
+
+        <button
+            type="button"
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </div>
 
 </div>
 
@@ -999,8 +1144,6 @@ td strong{
     </div>
 
 
-    <!-- ONLY CSV AND PDF -->
-
     <div class="report-buttons">
 
         <button
@@ -1170,29 +1313,164 @@ td strong{
 <script>
 
 /* ============================================================
-   LOGIN / SESSION PROTECTION
+   THEME
 ============================================================ */
 
-/*
-   Only allow the Warehouse account to access
-   this dashboard.
+const THEME_KEY =
+    "VODAFONE_PNG_DASHBOARD_THEME";
 
-   The login page creates:
 
-       sessionStorage.warehouseSession
-       sessionStorage.userRole = "Warehouse"
+function applyTheme(theme){
 
-   If someone directly enters:
+    const body =
+        document.body;
 
-       Warehousedashboard.html
 
-   without a valid Warehouse session,
-   they are returned to index.html.
+    body.classList.remove(
+        "dark-theme"
+    );
 
-   IMPORTANT:
-   Fuel dashboard data is stored separately in localStorage.
-   Therefore logging out DOES NOT delete fuel records.
-*/
+
+    if(theme === "dark"){
+
+        body.classList.add(
+            "dark-theme"
+        );
+
+        return;
+
+    }
+
+
+    if(theme === "system"){
+
+        if(
+            window.matchMedia &&
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches
+        ){
+
+            body.classList.add(
+                "dark-theme"
+            );
+
+        }
+
+    }
+
+}
+
+
+function loadTheme(){
+
+    let theme =
+        localStorage.getItem(
+            THEME_KEY
+        );
+
+
+    if(
+        theme !== "light" &&
+        theme !== "dark" &&
+        theme !== "system"
+    ){
+
+        theme = "light";
+
+    }
+
+
+    const selector =
+        document.getElementById(
+            "themeSelector"
+        );
+
+
+    if(selector){
+
+        selector.value =
+            theme;
+
+    }
+
+
+    applyTheme(
+        theme
+    );
+
+}
+
+
+function setTheme(theme){
+
+    if(
+        theme !== "light" &&
+        theme !== "dark" &&
+        theme !== "system"
+    ){
+
+        theme = "light";
+
+    }
+
+
+    localStorage.setItem(
+        THEME_KEY,
+        theme
+    );
+
+
+    applyTheme(
+        theme
+    );
+
+}
+
+
+/* ============================================================
+   SYSTEM THEME CHANGE
+============================================================ */
+
+if(
+    window.matchMedia
+){
+
+    const systemTheme =
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        );
+
+
+    systemTheme.addEventListener(
+        "change",
+        function(){
+
+            const currentTheme =
+                localStorage.getItem(
+                    THEME_KEY
+                );
+
+
+            if(
+                currentTheme === "system"
+            ){
+
+                applyTheme(
+                    "system"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   LOGIN / SESSION PROTECTION
+============================================================ */
 
 (function(){
 
@@ -1238,15 +1516,6 @@ function logout(){
     }
 
 
-    /*
-       Remove ONLY authentication/session data.
-
-       DO NOT remove:
-       VODAFONE_PNG_FUEL_DASHBOARD
-
-       This keeps fuel records safe after logout.
-    */
-
     sessionStorage.removeItem(
         "warehouseSession"
     );
@@ -1263,10 +1532,6 @@ function logout(){
         "username"
     );
 
-
-    /*
-       Return to login page.
-    */
 
     window.location.replace(
         "index.html"
@@ -1285,9 +1550,9 @@ const STORAGE_KEY =
 
 let database = {
 
-    stock: 0,
+    stock:0,
 
-    collections: []
+    collections:[]
 
 };
 
@@ -1309,7 +1574,9 @@ function loadDatabase(){
         if(saved){
 
             const data =
-                JSON.parse(saved);
+                JSON.parse(
+                    saved
+                );
 
 
             database.stock =
@@ -1335,6 +1602,7 @@ function loadDatabase(){
             "Load error:",
             error
         );
+
 
         database = {
 
@@ -1367,6 +1635,7 @@ function saveDatabase(){
 
         );
 
+
         return true;
 
     }
@@ -1378,9 +1647,11 @@ function saveDatabase(){
             error
         );
 
+
         alert(
             "The browser could not save the dashboard data."
         );
+
 
         return false;
 
@@ -1766,11 +2037,8 @@ function addSite(
     if(quantity){
 
         quantity.addEventListener(
-
             "input",
-
             updateSiteAllocationTotal
-
         );
 
     }
@@ -3130,8 +3398,6 @@ function getReportRecords(){
         ).value;
 
 
-    /* DAILY */
-
     if(type === "daily"){
 
         return database.collections.filter(
@@ -3146,8 +3412,6 @@ function getReportRecords(){
 
     }
 
-
-    /* MONTHLY */
 
     if(
         type === "monthly"
@@ -3169,8 +3433,6 @@ function getReportRecords(){
 
     }
 
-
-    /* WEEKLY */
 
     const selected =
         new Date(
@@ -3500,10 +3762,6 @@ function downloadPDF(){
         );
 
 
-    /* --------------------------------------------------------
-       REPORT TITLE
-    -------------------------------------------------------- */
-
     doc.setFontSize(
         18
     );
@@ -3524,10 +3782,6 @@ function downloadPDF(){
 
     );
 
-
-    /* --------------------------------------------------------
-       REPORT INFORMATION
-    -------------------------------------------------------- */
 
     const reportType =
         document.getElementById(
@@ -3672,10 +3926,6 @@ function downloadPDF(){
     );
 
 
-    /* --------------------------------------------------------
-       TABLE DATA
-    -------------------------------------------------------- */
-
     const tableData = [];
 
 
@@ -3730,10 +3980,6 @@ function downloadPDF(){
     );
 
 
-    /* --------------------------------------------------------
-       PDF TABLE
-    -------------------------------------------------------- */
-
     doc.autoTable({
 
         startY:53,
@@ -3781,10 +4027,6 @@ function downloadPDF(){
     });
 
 
-    /* --------------------------------------------------------
-       FOOTER
-    -------------------------------------------------------- */
-
     const pageCount =
         doc.internal.getNumberOfPages();
 
@@ -3824,10 +4066,6 @@ function downloadPDF(){
 
     }
 
-
-    /* --------------------------------------------------------
-       DOWNLOAD
-    -------------------------------------------------------- */
 
     const filename =
         "Vodafone_PNG_Fuel_Report_" +
@@ -3936,6 +4174,40 @@ function renderDashboard(){
 ============================================================ */
 
 function initialise(){
+
+    /* LOAD SAVED THEME */
+
+    loadTheme();
+
+
+    /* THEME SELECTOR */
+
+    const themeSelector =
+        document.getElementById(
+            "themeSelector"
+        );
+
+
+    if(themeSelector){
+
+        themeSelector.addEventListener(
+
+            "change",
+
+            function(){
+
+                setTheme(
+                    this.value
+                );
+
+            }
+
+        );
+
+    }
+
+
+    /* LOAD DATABASE */
 
     loadDatabase();
 
