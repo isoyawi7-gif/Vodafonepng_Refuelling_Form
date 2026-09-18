@@ -14,358 +14,383 @@
     Vodafone PNG Fuel Collection Dashboard
 </title>
 
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-</script>
+<!-- =========================================================
+     jsPDF FOR PDF REPORTS
+========================================================= -->
 
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js">
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
 
 <style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 *{
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     margin:0;
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f3f4f6;
     color:#111827;
-    transition:
-        background .25s ease,
-        color .25s ease;
 }
 
-button,
-input,
-select{
-    font:inherit;
-}
 
-button{
-    cursor:pointer;
-    border:0;
-}
-
-.container{
-    width:100%;
-    max-width:1500px;
-    margin:auto;
-    padding:20px;
-}
-
-/* ============================================================
+/* =========================================================
    HEADER
-============================================================ */
+========================================================= */
 
 .header{
-    background:#ffffff;
-    border-bottom:1px solid #e5e7eb;
-    box-shadow:
-        0 2px 10px rgba(0,0,0,.05);
-}
+    background:#e60000;
+    color:#fff;
+    padding:20px 24px;
 
-.header-inner{
-    max-width:1500px;
-    margin:auto;
-    padding:18px 20px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
+
     gap:20px;
 }
 
-.header-title{
+.header-left{
+    flex:1;
+}
+
+.header h1{
     margin:0;
-    font-size:25px;
-    font-weight:800;
+    font-size:28px;
 }
 
-.header-subtitle{
-    margin-top:5px;
-    color:#6b7280;
-    font-size:13px;
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.theme-select{
-    padding:9px 12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    background:#ffffff;
-    color:#111827;
-}
-
-.logout-button{
-    background:#111827;
-    color:#ffffff;
-    padding:10px 15px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.logout-button:hover{
+.header p{
+    margin:8px 0 0;
     opacity:.9;
 }
 
-/* ============================================================
-   KPI
-============================================================ */
 
-.kpi-grid{
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-btn{
+    background:#111827;
+    color:#fff;
+
+    border:none;
+    border-radius:9px;
+
+    padding:11px 18px;
+
+    font-size:14px;
+    font-weight:bold;
+
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.logout-btn:hover{
+    background:#000;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+    max-width:1500px;
+    margin:auto;
+    padding:20px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card{
+    background:#fff;
+
+    border-radius:14px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.08);
+}
+
+.card h2{
+    margin-top:0;
+    margin-bottom:18px;
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.kpis{
     display:grid;
+
     grid-template-columns:
         repeat(6,1fr);
+
     gap:14px;
+
     margin-bottom:20px;
 }
 
-.kpi-card{
-    background:#ffffff;
-    border:1px solid #e5e7eb;
+.kpi{
+    background:#fff;
+
     border-radius:12px;
+
     padding:18px;
+
     box-shadow:
-        0 3px 12px rgba(0,0,0,.04);
+        0 3px 10px rgba(0,0,0,.07);
 }
 
-.kpi-label{
-    font-size:12px;
+.kpi-title{
     color:#6b7280;
+
+    font-size:12px;
+
+    font-weight:bold;
+
     text-transform:uppercase;
-    font-weight:700;
-    letter-spacing:.4px;
 }
 
 .kpi-value{
+    font-size:30px;
+
+    font-weight:900;
+
     margin-top:7px;
-    font-size:28px;
-    font-weight:800;
 }
 
-/* ============================================================
-   MAIN GRID
-============================================================ */
+.red{
+    color:#e60000;
+}
+
+.green{
+    color:#15803d;
+}
+
+.blue{
+    color:#2563eb;
+}
+
+.orange{
+    color:#d97706;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
 
 .main-grid{
     display:grid;
+
     grid-template-columns:
-        minmax(0,1.05fr)
-        minmax(0,.95fr);
+        380px 1fr;
+
     gap:20px;
-    align-items:start;
 }
 
-.card{
-    background:#ffffff;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:
-        0 3px 12px rgba(0,0,0,.04);
-}
 
-.card-title{
-    margin:0 0 5px;
-    font-size:19px;
-    font-weight:800;
-}
-
-.card-description{
-    margin:0 0 18px;
-    color:#6b7280;
-    font-size:13px;
-}
-
-/* ============================================================
+/* =========================================================
    FORMS
-============================================================ */
-
-.form-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-    gap:14px;
-}
+========================================================= */
 
 .form-group{
-    margin-bottom:14px;
-}
-
-.form-group.full{
-    grid-column:1 / -1;
+    margin-bottom:15px;
 }
 
 label{
     display:block;
-    margin-bottom:6px;
+
     font-size:13px;
-    font-weight:700;
-    color:#374151;
+
+    font-weight:bold;
+
+    margin-bottom:6px;
 }
 
 input,
 select{
+
     width:100%;
-    padding:10px 12px;
+
+    padding:11px 12px;
+
     border:1px solid #d1d5db;
+
     border-radius:8px;
-    background:#ffffff;
-    color:#111827;
-    outline:none;
+
+    font-size:14px;
+
+    background:#fff;
 }
 
 input:focus,
 select:focus{
-    border-color:#6b7280;
+
+    outline:none;
+
+    border-color:#e60000;
+
     box-shadow:
-        0 0 0 2px rgba(107,114,128,.12);
+        0 0 0 2px rgba(230,0,0,.08);
 }
 
-.primary-button{
-    width:100%;
-    padding:11px 15px;
-    background:#111827;
-    color:#ffffff;
+.two{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button{
+
+    border:none;
+
     border-radius:8px;
-    font-weight:700;
+
+    padding:11px 14px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
-.primary-button:hover{
+button:hover{
     opacity:.9;
 }
 
-.secondary-button{
-    padding:9px 13px;
+.btn-red{
+    background:#e60000;
+    color:#fff;
+}
+
+.btn-black{
+    background:#111827;
+    color:#fff;
+}
+
+.btn-green{
+    background:#15803d;
+    color:#fff;
+}
+
+.btn-blue{
+    background:#2563eb;
+    color:#fff;
+}
+
+.btn-gray{
     background:#e5e7eb;
     color:#111827;
-    border-radius:8px;
-    font-weight:700;
 }
 
-.danger-button{
-    padding:9px 13px;
-    background:#fee2e2;
-    color:#991b1b;
-    border-radius:8px;
-    font-weight:700;
-}
-
-/* ============================================================
-   STOCK
-============================================================ */
-
-.stock-box{
-    background:#f9fafb;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:15px;
-}
-
-.stock-current{
-    margin-top:10px;
-    font-size:13px;
-    color:#6b7280;
-}
-
-.message{
-    display:none;
-    margin-top:12px;
-    padding:10px 12px;
-    border-radius:8px;
-    font-size:13px;
-}
-
-.message.show{
-    display:block;
-}
-
-.message.success{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.message.error{
+.btn-danger{
     background:#fee2e2;
     color:#991b1b;
 }
 
-.message.info{
-    background:#e0f2fe;
-    color:#075985;
+.full{
+    width:100%;
+    margin-top:7px;
 }
 
-/* ============================================================
-   SITE ASSIGNMENT
-============================================================ */
 
-.site-assignment{
-    margin-top:18px;
-}
-
-.site-assignment-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:10px;
-}
-
-.site-assignment-header strong{
-    font-size:14px;
-}
+/* =========================================================
+   SITE ASSIGNMENTS
+========================================================= */
 
 .site-row{
+
     display:grid;
+
     grid-template-columns:
-        minmax(0,1fr)
-        110px
-        auto;
-    gap:8px;
-    margin-bottom:8px;
+        1fr 90px 70px;
+
+    gap:7px;
+
+    margin-bottom:9px;
+
+    align-items:center;
 }
 
-.site-remove{
+.site-row input{
+    min-width:0;
+}
+
+.remove-site{
+
     background:#fee2e2;
+
     color:#991b1b;
-    border-radius:8px;
-    padding:9px 12px;
+
+    padding:10px 5px;
+
+    font-size:12px;
 }
 
 .site-total{
-    margin-top:10px;
-    padding:10px 12px;
+
+    margin-top:8px;
+
+    padding:11px;
+
     background:#f3f4f6;
+
     border-radius:8px;
-    font-weight:700;
+
     font-size:13px;
+
+    font-weight:bold;
 }
 
-/* ============================================================
+.site-total span{
+
+    color:#e60000;
+
+    font-size:16px;
+}
+
+
+/* =========================================================
    PHOTO
-============================================================ */
+========================================================= */
 
 .photo-section{
+
     margin-top:15px;
+
     padding:14px;
+
     background:#f9fafb;
+
     border:1px solid #e5e7eb;
+
     border-radius:10px;
 }
 
@@ -374,17 +399,26 @@ select:focus{
 }
 
 .photo-input{
+
     width:100%;
+
     padding:10px;
+
     border:1px solid #d1d5db;
+
     border-radius:8px;
+
     background:#fff;
+
     cursor:pointer;
 }
 
 .photo-preview{
+
     display:none;
+
     margin-top:12px;
+
     text-align:center;
 }
 
@@ -393,306 +427,293 @@ select:focus{
 }
 
 .photo-preview img{
+
     max-width:100%;
+
     max-height:260px;
+
     border-radius:10px;
+
     border:1px solid #d1d5db;
+
     object-fit:contain;
+
     background:#fff;
 }
 
 .photo-caption{
+
     margin-top:7px;
+
     color:#6b7280;
+
     font-size:12px;
 }
 
 .photo-remove{
+
     margin-top:8px;
+
     background:#fee2e2;
+
     color:#991b1b;
+
     padding:8px 12px;
+
     font-size:12px;
-    border-radius:8px;
 }
 
-/* ============================================================
-   REPORTS
-============================================================ */
 
-.report-controls{
-    display:grid;
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-    gap:12px;
-}
+/* =========================================================
+   MESSAGES
+========================================================= */
 
-.report-buttons{
-    display:flex;
-    gap:10px;
+.message{
+
+    display:none;
+
     margin-top:12px;
-}
 
-.report-buttons button{
-    flex:1;
-}
+    padding:11px;
 
-.report-preview{
-    margin-top:15px;
-    padding:13px;
-    background:#f9fafb;
-    border:1px solid #e5e7eb;
-    border-radius:9px;
+    border-radius:8px;
+
     font-size:13px;
-    line-height:1.6;
 }
 
-/* ============================================================
+.message.show{
+    display:block;
+}
+
+.message.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+.message.error{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+}
+
+
+/* =========================================================
    ZONES
-============================================================ */
+========================================================= */
 
 .zone-grid{
+
     display:grid;
+
     grid-template-columns:
-        repeat(2,minmax(0,1fr));
+        repeat(4,1fr);
+
     gap:12px;
 }
 
-.zone-card{
+.zone{
+
     background:#f9fafb;
+
     border:1px solid #e5e7eb;
+
     border-radius:10px;
-    padding:14px;
+
+    padding:15px;
 }
 
 .zone-name{
-    font-size:14px;
-    font-weight:800;
-}
 
-.zone-value{
-    margin-top:8px;
-    font-size:23px;
-    font-weight:800;
-}
-
-.zone-sites{
-    margin-top:5px;
-    font-size:12px;
     color:#6b7280;
+
+    font-size:12px;
+
+    font-weight:bold;
 }
 
-/* ============================================================
-   TEAM ACCOUNTABILITY
-============================================================ */
+.zone-number{
 
-.team-list{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
+    font-size:27px;
+
+    font-weight:900;
+
+    margin-top:5px;
 }
+
+
+/* =========================================================
+   TEAM
+========================================================= */
 
 .team-row{
-    display:grid;
-    grid-template-columns:
-        minmax(0,1fr)
-        80px
-        110px;
-    gap:10px;
-    align-items:center;
-    padding:10px;
-    background:#f9fafb;
-    border:1px solid #e5e7eb;
-    border-radius:8px;
+    margin-bottom:17px;
 }
 
-.team-name{
-    font-weight:700;
+.team-line{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:6px;
+
     font-size:13px;
 }
 
-.team-drums{
-    text-align:center;
-    font-weight:800;
+.progress{
+
+    height:10px;
+
+    background:#e5e7eb;
+
+    border-radius:20px;
+
+    overflow:hidden;
 }
 
-.team-sites{
-    text-align:right;
-    color:#6b7280;
-    font-size:12px;
+.progress-bar{
+
+    height:100%;
+
+    background:#e60000;
 }
 
-/* ============================================================
-   HISTORY
-============================================================ */
 
-.history-wrapper{
-    overflow-x:auto;
+/* =========================================================
+   REPORT
+========================================================= */
+
+.report-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap:10px;
 }
 
-.history-table{
+.report-buttons{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+
     width:100%;
+
+    overflow:auto;
+
+    max-height:550px;
+}
+
+table{
+
+    width:100%;
+
     border-collapse:collapse;
-    min-width:950px;
+
+    font-size:13px;
 }
 
-.history-table th,
-.history-table td{
+th,
+td{
+
     padding:10px;
-    border-bottom:1px solid #e5e7eb;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
     text-align:left;
-    vertical-align:middle;
-    font-size:12px;
+
+    vertical-align:top;
 }
 
-.history-table th{
+th{
+
     background:#f9fafb;
-    font-weight:800;
-    color:#374151;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1;
 }
 
-.history-table td{
-    color:#374151;
+td strong{
+    color:#e60000;
 }
 
-.photo-thumb{
+
+/* =========================================================
+   PHOTO REGISTER
+========================================================= */
+
+.register-photo{
+
     width:65px;
+
     height:50px;
+
     object-fit:cover;
+
     border-radius:6px;
+
     border:1px solid #d1d5db;
+
     cursor:pointer;
 }
 
 .no-photo{
+
     color:#9ca3af;
-    font-size:11px;
-}
 
-.delete-record{
-    background:#fee2e2;
-    color:#991b1b;
-    padding:7px 10px;
-    border-radius:7px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.clear-all{
-    margin-top:12px;
-    background:#991b1b;
-    color:#ffffff;
-    padding:10px 14px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-/* ============================================================
-   FOOTER
-============================================================ */
-
-.footer{
-    margin-top:20px;
-    background:#111827;
-    color:#ffffff;
-    padding:25px 20px;
-    text-align:center;
-}
-
-.footer-title{
-    font-weight:800;
-}
-
-.footer-text{
-    margin-top:6px;
-    color:#d1d5db;
     font-size:12px;
 }
 
-.footer-powered{
-    margin-top:8px;
-    color:#9ca3af;
-    font-size:11px;
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:12px;
+
+    padding:25px;
 }
 
-/* ============================================================
-   DARK MODE
-============================================================ */
-
-body.dark{
-    background:#111827;
-    color:#f9fafb;
+.footer strong{
+    color:#111827;
 }
 
-body.dark .header{
-    background:#1f2937;
-    border-color:#374151;
-}
 
-body.dark .header-subtitle{
-    color:#9ca3af;
-}
-
-body.dark .card,
-body.dark .kpi-card{
-    background:#1f2937;
-    border-color:#374151;
-}
-
-body.dark label,
-body.dark .card-title{
-    color:#f9fafb;
-}
-
-body.dark input,
-body.dark select,
-body.dark .theme-select{
-    background:#111827;
-    color:#f9fafb;
-    border-color:#4b5563;
-}
-
-body.dark .stock-box,
-body.dark .photo-section,
-body.dark .report-preview,
-body.dark .zone-card,
-body.dark .team-row,
-body.dark .history-table th,
-body.dark .site-total{
-    background:#111827;
-    border-color:#374151;
-}
-
-body.dark .kpi-label,
-body.dark .card-description,
-body.dark .stock-current,
-body.dark .zone-sites,
-body.dark .team-sites{
-    color:#9ca3af;
-}
-
-body.dark .history-table td,
-body.dark .history-table th{
-    border-color:#374151;
-    color:#e5e7eb;
-}
-
-body.dark .secondary-button{
-    background:#374151;
-    color:#f9fafb;
-}
-
-body.dark .photo-caption{
-    color:#9ca3af;
-}
-
-/* ============================================================
-   RESPONSIVE
-============================================================ */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:1200px){
 
-    .kpi-grid{
+    .kpis{
         grid-template-columns:
             repeat(3,1fr);
     }
@@ -705,199 +726,110 @@ body.dark .photo-caption{
         grid-template-columns:1fr;
     }
 
-}
-
-@media(max-width:700px){
-
-    .header-inner{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-
-    .header-actions{
-        width:100%;
-    }
-
-    .theme-select,
-    .logout-button{
-        flex:1;
-    }
-
-    .kpi-grid{
+    .zone-grid{
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .form-grid,
-    .report-controls{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .site-row{
-        grid-template-columns:
-            1fr 90px auto;
-    }
-
-    .zone-grid{
-        grid-template-columns:1fr;
-    }
-
 }
 
-@media(max-width:450px){
+@media(max-width:600px){
+
+    .header{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        text-align:center;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
 
     .container{
-        padding:12px;
+        padding:10px;
     }
 
-    .header-inner{
-        padding:15px 12px;
+    .kpis{
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
-    .kpi-grid{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-    }
+    .two,
+    .report-grid,
+    .report-buttons{
 
-    .kpi-card{
-        padding:13px;
-    }
-
-    .kpi-value{
-        font-size:22px;
-    }
-
-    .card{
-        padding:14px;
-    }
-
-    .site-row{
         grid-template-columns:1fr;
     }
 
-    .report-buttons{
-        flex-direction:column;
-    }
+    .site-row{
 
-    .team-row{
         grid-template-columns:
-            1fr 65px 80px;
+            1fr 75px 65px;
     }
 
 }
 
 </style>
 
-<script>
-
-/* ============================================================
-   SESSION PROTECTION
-============================================================ */
-
-(function(){
-
-    const session =
-        sessionStorage.getItem(
-            "warehouseSession"
-        );
-
-    const role =
-        sessionStorage.getItem(
-            "userRole"
-        );
-
-    if(
-        !session ||
-        role !== "Warehouse"
-    ){
-
-        window.location.replace(
-            "index.html"
-        );
-
-    }
-
-})();
-
-</script>
-
 </head>
+
 
 <body>
 
-<header class="header">
 
-    <div class="header-inner">
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
-        <div>
+<div class="header">
 
-            <h1 class="header-title">
-                Vodafone PNG Fuel Collection Dashboard
-            </h1>
+    <div class="header-left">
 
-            <div class="header-subtitle">
-                Lae Zone Fuel Collection • Team Accountability • Vodafone PNG Site Allocation
-            </div>
+        <h1>
+            Vodafone PNG Fuel Collection Dashboard
+        </h1>
 
-        </div>
-
-        <div class="header-actions">
-
-            <select
-                id="themeSelector"
-                class="theme-select"
-            >
-
-                <option value="system">
-                    System
-                </option>
-
-                <option value="light">
-                    Light
-                </option>
-
-                <option value="dark">
-                    Dark
-                </option>
-
-            </select>
-
-            <button
-                type="button"
-                class="logout-button"
-                onclick="logout()"
-            >
-                Logout
-            </button>
-
-        </div>
+        <p>
+            Lae Zone Fuel Collection • Team Accountability •
+            Vodafone PNG Site Allocation
+        </p>
 
     </div>
 
-</header>
+
+    <button
+        type="button"
+        class="logout-btn"
+        onclick="logout()"
+    >
+        Logout
+    </button>
+
+</div>
 
 
-<main class="container">
+<div class="container">
 
-<!-- ==========================================================
-     KPI
-=========================================================== -->
 
-<section class="kpi-grid">
+<!-- =========================================================
+     KPI DASHBOARD
+========================================================= -->
 
-    <div class="kpi-card">
+<div class="kpis">
 
-        <div class="kpi-label">
+
+    <div class="kpi">
+
+        <div class="kpi-title">
             Total Stock
         </div>
 
         <div
-            class="kpi-value"
-            id="kpiStock"
+            class="kpi-value blue"
+            id="totalStock"
         >
             0
         </div>
@@ -905,15 +837,15 @@ body.dark .photo-caption{
     </div>
 
 
-    <div class="kpi-card">
+    <div class="kpi">
 
-        <div class="kpi-label">
+        <div class="kpi-title">
             Total Collected
         </div>
 
         <div
-            class="kpi-value"
-            id="kpiCollected"
+            class="kpi-value green"
+            id="totalCollected"
         >
             0
         </div>
@@ -921,15 +853,15 @@ body.dark .photo-caption{
     </div>
 
 
-    <div class="kpi-card">
+    <div class="kpi">
 
-        <div class="kpi-label">
+        <div class="kpi-title">
             Total Assigned
         </div>
 
         <div
-            class="kpi-value"
-            id="kpiAssigned"
+            class="kpi-value orange"
+            id="totalAssigned"
         >
             0
         </div>
@@ -937,15 +869,15 @@ body.dark .photo-caption{
     </div>
 
 
-    <div class="kpi-card">
+    <div class="kpi">
 
-        <div class="kpi-label">
+        <div class="kpi-title">
             Remaining
         </div>
 
         <div
-            class="kpi-value"
-            id="kpiRemaining"
+            class="kpi-value red"
+            id="remainingStock"
         >
             0
         </div>
@@ -953,15 +885,15 @@ body.dark .photo-caption{
     </div>
 
 
-    <div class="kpi-card">
+    <div class="kpi">
 
-        <div class="kpi-label">
+        <div class="kpi-title">
             Sites Supplied
         </div>
 
         <div
             class="kpi-value"
-            id="kpiSites"
+            id="sitesSupplied"
         >
             0
         </div>
@@ -969,169 +901,180 @@ body.dark .photo-caption{
     </div>
 
 
-    <div class="kpi-card">
+    <div class="kpi">
 
-        <div class="kpi-label">
+        <div class="kpi-title">
             Records
         </div>
 
         <div
             class="kpi-value"
-            id="kpiRecords"
+            id="recordCount"
         >
             0
         </div>
 
     </div>
 
-</section>
 
+</div>
+
+
+<!-- =========================================================
+     MAIN GRID
+========================================================= -->
 
 <div class="main-grid">
 
-<!-- ==========================================================
+
+<!-- =========================================================
      LEFT COLUMN
-=========================================================== -->
+========================================================= -->
 
 <div>
 
-<!-- ==========================================================
+
+<!-- =========================================================
      FUEL STOCK
-=========================================================== -->
+========================================================= -->
 
-<section class="card">
+<div class="card">
 
-    <h2 class="card-title">
+    <h2>
         Fuel Stock
     </h2>
 
-    <p class="card-description">
-        Set or update the total fuel drums currently available.
-    </p>
+    <div class="form-group">
 
-    <div class="stock-box">
+        <label>
+            Total Fuel Drums Available
+        </label>
 
-        <div class="form-group">
-
-            <label for="stockInput">
-                Total Fuel Drums Available
-            </label>
-
-            <input
-                type="number"
-                id="stockInput"
-                min="0"
-                step="1"
-                placeholder="Enter total fuel drums"
-            >
-
-        </div>
-
-        <button
-            type="button"
-            class="primary-button"
-            onclick="setStock()"
+        <input
+            type="number"
+            id="stockInput"
+            min="0"
+            step="1"
+            placeholder="Example: 100"
         >
-            Set / Update Fuel Stock
-        </button>
-
-        <div
-            class="stock-current"
-            id="stockCurrent"
-        >
-            Current stock: 0 drums
-        </div>
-
-        <div
-            id="stockMessage"
-            class="message"
-        ></div>
 
     </div>
 
-</section>
+
+    <button
+        type="button"
+        id="setStockButton"
+        class="btn-red full"
+    >
+        Set / Update Fuel Stock
+    </button>
 
 
-<!-- ==========================================================
-     RECORD COLLECTION
-=========================================================== -->
+    <div
+        id="stockMessage"
+        class="message"
+    ></div>
 
-<section class="card">
+</div>
 
-    <h2 class="card-title">
+
+<!-- =========================================================
+     COLLECTION FORM
+========================================================= -->
+
+<div class="card">
+
+    <h2>
         Record Fuel Collection
     </h2>
 
-    <p class="card-description">
-        Record fuel collected by each team member and assign the drums to Vodafone PNG sites.
-    </p>
+
+    <div class="form-group">
+
+        <label>
+            Team Member
+        </label>
+
+        <select id="teamMember">
+
+            <option value="">
+                Select Team Member
+            </option>
+
+            <option>
+                Terrence Nikasivai
+            </option>
+
+            <option>
+                Druschilda Banduru
+            </option>
+
+            <option>
+                Walo Navu
+            </option>
+
+            <option>
+                Steven POi
+            </option>
+
+            <option>
+                Mathew Walo
+            </option>
+
+            <option>
+                Terence Kamkem
+            </option>
+
+            <option>
+                Mesack Atiyafa
+            </option>
+
+            <option>
+                Abraham Hicks
+            </option>
+
+            <option>
+                Manu
+            </option>
+
+            <option>
+                Robert Waninara
+            </option>
+
+            <option>
+                Iso Yawi
+            </option>
+
+            <option value="OTHER">
+                Other
+            </option>
+
+        </select>
+
+    </div>
 
 
-    <div class="form-grid">
+    <div class="form-group">
+
+        <label>
+            Other Team Member
+        </label>
+
+        <input
+            type="text"
+            id="otherTeamMember"
+            placeholder="Use only if Other is selected"
+        >
+
+    </div>
+
+
+    <div class="two">
+
 
         <div class="form-group">
 
-            <label for="teamMember">
-                Team Member
-            </label>
-
-            <select id="teamMember">
-
-                <option value="">
-                    Select Team Member
-                </option>
-
-                <option value="Iso Yawi">
-                    Iso Yawi
-                </option>
-
-                <option value="Ian Pumuye">
-                    Ian Pumuye
-                </option>
-
-                <option value="Newman Lyaki">
-                    Newman Lyaki
-                </option>
-
-                <option value="Team Member 4">
-                    Team Member 4
-                </option>
-
-                <option value="Team Member 5">
-                    Team Member 5
-                </option>
-
-                <option value="Team Member 6">
-                    Team Member 6
-                </option>
-
-                <option value="Other">
-                    Other
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="otherTeamMember">
-                Other Team Member
-            </label>
-
-            <input
-                type="text"
-                id="otherTeamMember"
-                placeholder="Enter name if Other"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="collectionDate">
+            <label>
                 Collection Date
             </label>
 
@@ -1145,202 +1088,200 @@ body.dark .photo-caption{
 
         <div class="form-group">
 
-            <label for="fuelDrums">
+            <label>
                 Fuel Drums Collected
             </label>
 
             <input
                 type="number"
-                id="fuelDrums"
+                id="collectionDrums"
                 min="1"
                 step="1"
-                placeholder="Enter number of drums"
+                placeholder="Example: 10"
             >
 
         </div>
 
 
-        <div class="form-group">
-
-            <label for="laeZone">
-                Lae Zone
-            </label>
-
-            <select id="laeZone">
-
-                <option value="">
-                    Select Zone
-                </option>
-
-                <option value="Zone 1">
-                    Zone 1
-                </option>
-
-                <option value="Zone 2">
-                    Zone 2
-                </option>
-
-                <option value="Zone 3">
-                    Zone 3
-                </option>
-
-                <option value="Zone 4">
-                    Zone 4
-                </option>
-
-            </select>
-
-        </div>
+    </div>
 
 
-        <div class="form-group">
+    <div class="form-group">
 
-            <label for="vehicle">
-                Vehicle / Truck
-            </label>
+        <label>
+            Lae Zone
+        </label>
 
-            <input
-                type="text"
-                id="vehicle"
-                placeholder="Enter vehicle / truck"
+        <select id="laeZone">
+
+            <option value="">
+                Select Zone
+            </option>
+
+            <option>
+                Lae Zone 1
+            </option>
+
+            <option>
+                Lae Zone 2
+            </option>
+
+            <option>
+                Lae Zone 3
+            </option>
+
+            <option>
+                Lae Zone 4
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Vehicle / Truck
+        </label>
+
+        <input
+            type="text"
+            id="vehicle"
+            placeholder="Vehicle registration"
+        >
+
+    </div>
+
+
+    <!-- =====================================================
+         FUEL DRUM PHOTO
+    ====================================================== -->
+
+    <div class="photo-section">
+
+        <label>
+            Photo of Loaded Fuel Drums
+        </label>
+
+        <input
+            type="file"
+            id="fuelDrumPhoto"
+            class="photo-input"
+            accept="image/*"
+            capture="environment"
+        >
+
+        <div
+            id="photoPreview"
+            class="photo-preview"
+        >
+
+            <img
+                id="photoPreviewImage"
+                src=""
+                alt="Fuel loaded drum photo"
             >
+
+            <div class="photo-caption">
+                Photo captured/selected for this fuel collection
+            </div>
+
+            <button
+                type="button"
+                id="removePhotoButton"
+                class="photo-remove"
+            >
+                Remove Photo
+            </button>
 
         </div>
 
     </div>
 
 
-<!-- ==========================================================
-     PHOTO
-=========================================================== -->
+    <!-- =====================================================
+         SITE ASSIGNMENTS
+    ====================================================== -->
 
-<div class="photo-section">
+    <div class="form-group">
 
-    <label>
-        Photo of Loaded Fuel Drums
-    </label>
-
-    <input
-        type="file"
-        id="fuelDrumPhoto"
-        class="photo-input"
-        accept="image/*"
-        capture="environment"
-    >
-
-    <div
-        id="photoPreview"
-        class="photo-preview"
-    >
-
-        <img
-            id="photoPreviewImage"
-            src=""
-            alt="Fuel loaded drum photo"
-        >
-
-        <div class="photo-caption">
-            Photo captured/selected for this fuel collection
-        </div>
-
-        <button
-            type="button"
-            id="removePhotoButton"
-            class="photo-remove"
-        >
-            Remove Photo
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================================
-     SITE ASSIGNMENT
-=========================================================== -->
-
-<div class="site-assignment">
-
-    <div class="site-assignment-header">
-
-        <strong>
+        <label>
             Vodafone PNG Site Assignment
-        </strong>
+        </label>
 
-        <button
-            type="button"
-            class="secondary-button"
-            onclick="addSite()"
-        >
-            Add Vodafone Site
-        </button>
+        <div id="siteAssignments"></div>
+
+
+        <div class="site-total">
+
+            Site Allocation Total:
+
+            <span id="siteAllocationTotal">
+                0
+            </span>
+
+            drums
+
+        </div>
 
     </div>
 
-
-    <div id="siteAssignments"></div>
-
-
-    <div
-        class="site-total"
-        id="siteAllocationTotal"
-    >
-        Site Allocation Total: 0 drums
-    </div>
-
-</div>
-
-
-<div style="margin-top:16px;">
 
     <button
         type="button"
-        class="primary-button"
-        onclick="recordFuelCollection()"
+        id="addSiteButton"
+        class="btn-black full"
+    >
+        + Add Vodafone Site
+    </button>
+
+
+    <button
+        type="button"
+        id="recordButton"
+        class="btn-red full"
     >
         Record Fuel Collection
     </button>
 
+
+    <div
+        id="collectionMessage"
+        class="message"
+    ></div>
+
+
 </div>
 
 
-<div
-    id="collectionMessage"
-    class="message"
-></div>
-
-</section>
-
 </div>
 
 
-<!-- ==========================================================
+<!-- =========================================================
      RIGHT COLUMN
-=========================================================== -->
+========================================================= -->
 
 <div>
 
-<!-- ==========================================================
+
+<!-- =========================================================
      REPORTS
-=========================================================== -->
+========================================================= -->
 
-<section class="card">
+<div class="card">
 
-    <h2 class="card-title">
+    <h2>
         Download Reports
     </h2>
 
-    <p class="card-description">
-        Download daily, weekly, monthly or selected-month collection reports.
-    </p>
+
+    <div class="report-grid">
 
 
-    <div class="report-controls">
+        <div>
 
-        <div class="form-group">
-
-            <label for="reportType">
+            <label>
                 Report Type
             </label>
 
@@ -1367,9 +1308,9 @@ body.dark .photo-caption{
         </div>
 
 
-        <div class="form-group">
+        <div>
 
-            <label for="reportDate">
+            <label>
                 Report Date
             </label>
 
@@ -1381,9 +1322,9 @@ body.dark .photo-caption{
         </div>
 
 
-        <div class="form-group">
+        <div>
 
-            <label for="reportMonth">
+            <label>
                 Report Month
             </label>
 
@@ -1394,105 +1335,94 @@ body.dark .photo-caption{
 
         </div>
 
+
     </div>
 
 
     <div class="report-buttons">
 
+
         <button
             type="button"
-            class="primary-button"
-            onclick="downloadCSV()"
+            id="downloadCSV"
+            class="btn-blue"
         >
             Download CSV
         </button>
 
+
         <button
             type="button"
-            class="primary-button"
-            onclick="downloadPDF()"
+            id="downloadPDF"
+            class="btn-green"
         >
             Download PDF
         </button>
+
 
     </div>
 
 
     <div
         id="reportPreview"
-        class="report-preview"
-    >
-        No report selected.
-    </div>
+        style="
+            margin-top:15px;
+            color:#6b7280;
+            font-size:13px
+        "
+    ></div>
 
-</section>
+
+</div>
 
 
-<!-- ==========================================================
-     ZONES
-=========================================================== -->
+<!-- =========================================================
+     ZONE DASHBOARD
+========================================================= -->
 
-<section class="card">
+<div class="card">
 
-    <h2 class="card-title">
+    <h2>
         Lae Zone Dashboard
     </h2>
 
-    <p class="card-description">
-        Fuel collection accountability across the four Lae zones.
-    </p>
-
     <div
-        id="zoneDashboard"
         class="zone-grid"
+        id="zoneSummary"
     ></div>
 
-</section>
+</div>
 
 
-<!-- ==========================================================
+<!-- =========================================================
      TEAM ACCOUNTABILITY
-=========================================================== -->
+========================================================= -->
 
-<section class="card">
+<div class="card">
 
-    <h2 class="card-title">
+    <h2>
         Team Collection Accountability
     </h2>
 
-    <p class="card-description">
-        Total fuel drums collected by each team member.
-    </p>
-
-    <div
-        id="teamAccountability"
-        class="team-list"
-    ></div>
-
-</section>
-
-</div>
+    <div id="teamSummary"></div>
 
 </div>
 
 
-<!-- ==========================================================
-     HISTORY
-=========================================================== -->
+<!-- =========================================================
+     COLLECTION REGISTER
+========================================================= -->
 
-<section class="card">
+<div class="card">
 
-    <h2 class="card-title">
+    <h2>
         Fuel Collection Register
     </h2>
 
-    <p class="card-description">
-        Complete record of fuel collections, site assignments and loaded-drum photos.
-    </p>
 
-    <div class="history-wrapper">
+    <div class="table-wrap">
 
-        <table class="history-table">
+        <table>
 
             <thead>
 
@@ -1534,7 +1464,8 @@ body.dark .photo-caption{
 
             </thead>
 
-            <tbody id="historyBody"></tbody>
+
+            <tbody id="history"></tbody>
 
         </table>
 
@@ -1543,35 +1474,155 @@ body.dark .photo-caption{
 
     <button
         type="button"
-        class="clear-all"
-        onclick="clearAllData()"
+        id="clearData"
+        class="btn-danger full"
     >
         Clear All Dashboard Data
     </button>
 
-</section>
 
-</main>
+</div>
 
 
-<footer class="footer">
+</div>
 
-    <div class="footer-title">
-        Vodafone PNG Fuel Collection Control Dashboard
-    </div>
+</div>
 
-    <div class="footer-text">
-        Fuel Stock • Team Accountability • Site Allocation • Lae Zones
-    </div>
+</div>
 
-    <div class="footer-powered">
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<div class="footer">
+
+    Vodafone PNG Fuel Collection Control Dashboard
+
+    <br>
+
+    Fuel Stock • Team Accountability • Site Allocation •
+    Lae Zones
+
+    <br><br>
+
+    <strong>
         Powered by Iso Yawi
-    </div>
+    </strong>
 
-</footer>
+</div>
 
 
 <script>
+
+
+/* ============================================================
+   LOGIN / SESSION PROTECTION
+============================================================ */
+
+/*
+   IMPORTANT:
+
+   Login authentication uses sessionStorage.
+
+   Fuel dashboard data uses localStorage.
+
+   Therefore:
+
+   - Login session disappears when the browser session ends.
+   - Logout removes the login session.
+   - Fuel records remain saved.
+   - Direct access without login is blocked.
+*/
+
+
+(function(){
+
+    const warehouseSession =
+        sessionStorage.getItem(
+            "warehouseSession"
+        );
+
+    const role =
+        sessionStorage.getItem(
+            "userRole"
+        );
+
+
+    /*
+       Only Warehouse users may enter
+       this dashboard.
+    */
+
+    if(
+        !warehouseSession ||
+        role !== "Warehouse"
+    ){
+
+        window.location.replace(
+            "index.html"
+        );
+
+    }
+
+})();
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logout(){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to logout?"
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    /*
+       REMOVE LOGIN SESSION ONLY.
+
+       DO NOT DELETE:
+
+       VODAFONE_PNG_FUEL_DASHBOARD
+
+       Fuel records remain available
+       after the next login.
+    */
+
+    sessionStorage.removeItem(
+        "warehouseSession"
+    );
+
+    sessionStorage.removeItem(
+        "userRole"
+    );
+
+    sessionStorage.removeItem(
+        "username"
+    );
+
+    sessionStorage.removeItem(
+        "adminSession"
+    );
+
+
+    /*
+       Return to login page.
+    */
+
+    window.location.replace(
+        "index.html"
+    );
+
+}
+
 
 /* ============================================================
    DATABASE
@@ -1579,6 +1630,7 @@ body.dark .photo-caption{
 
 const STORAGE_KEY =
     "VODAFONE_PNG_FUEL_DASHBOARD";
+
 
 let database = {
 
@@ -1589,11 +1641,15 @@ let database = {
 };
 
 
+/* ============================================================
+   PHOTO VARIABLE
+============================================================ */
+
 let currentFuelDrumPhoto = "";
 
 
 /* ============================================================
-   BASIC FUNCTIONS
+   LOAD DATABASE
 ============================================================ */
 
 function loadDatabase(){
@@ -1605,38 +1661,37 @@ function loadDatabase(){
                 STORAGE_KEY
             );
 
+
         if(saved){
 
-            const parsed =
+            const data =
                 JSON.parse(saved);
 
-            database = {
 
-                stock:
-                    Number(
-                        parsed.stock
-                    ) || 0,
+            database.stock =
+                Number(data.stock) || 0;
 
-                collections:
-                    Array.isArray(
-                        parsed.collections
-                    )
-                    ?
-                    parsed.collections
-                    :
-                    []
 
-            };
+            database.collections =
+                Array.isArray(
+                    data.collections
+                )
+                ?
+                data.collections
+                :
+                [];
 
         }
 
     }
+
     catch(error){
 
         console.error(
-            "Database loading error:",
+            "Load error:",
             error
         );
+
 
         database = {
 
@@ -1651,28 +1706,41 @@ function loadDatabase(){
 }
 
 
+/* ============================================================
+   SAVE DATABASE
+============================================================ */
+
 function saveDatabase(){
 
     try{
 
         localStorage.setItem(
+
             STORAGE_KEY,
-            JSON.stringify(
-                database
-            )
+
+            JSON.stringify(database)
+
         );
 
+
+        return true;
+
     }
+
     catch(error){
 
         console.error(
-            "Database saving error:",
+            "Save error:",
             error
         );
 
+
         alert(
-            "The dashboard could not save the data. Browser storage may be full."
+            "The browser could not save the dashboard data."
         );
+
+
+        return false;
 
     }
 
@@ -1680,51 +1748,46 @@ function saveDatabase(){
 
 
 /* ============================================================
-   DATE FUNCTIONS
+   TODAY
 ============================================================ */
 
 function getToday(){
 
-    const now =
+    const date =
         new Date();
 
-    const year =
-        now.getFullYear();
 
-    const month =
+    const y =
+        date.getFullYear();
+
+
+    const m =
         String(
-            now.getMonth()+1
-        ).padStart(
-            2,
-            "0"
-        );
+            date.getMonth()+1
+        ).padStart(2,"0");
 
-    const day =
+
+    const d =
         String(
-            now.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
+            date.getDate()
+        ).padStart(2,"0");
 
-    return (
-        year +
-        "-" +
-        month +
-        "-" +
-        day
-    );
+
+    return `${y}-${m}-${d}`;
 
 }
 
 
+/* ============================================================
+   CURRENT MONTH
+============================================================ */
+
 function getCurrentMonth(){
 
-    return getToday()
-        .substring(
-            0,
-            7
-        );
+    return getToday().substring(
+        0,
+        7
+    );
 
 }
 
@@ -1735,121 +1798,94 @@ function getCurrentMonth(){
 
 function escapeHTML(value){
 
-    if(
-        value === null ||
-        value === undefined
-    ){
+    return String(
+        value ?? ""
+    )
 
-        return "";
+    .replace(
+        /&/g,
+        "&amp;"
+    )
 
-    }
+    .replace(
+        /</g,
+        "&lt;"
+    )
 
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
 
 /* ============================================================
-   TOTALS
+   TOTAL COLLECTED
 ============================================================ */
 
 function getTotalCollected(){
 
     return database.collections.reduce(
+
         function(total,record){
 
             return total +
-                (
-                    Number(
-                        record.collectedDrums
-                    ) || 0
+                Number(
+                    record.collectedDrums || 0
                 );
 
         },
+
         0
+
     );
 
 }
 
 
-function getTotalAssigned(){
-
-    return database.collections.reduce(
-        function(total,record){
-
-            if(
-                !Array.isArray(
-                    record.sites
-                )
-            ){
-
-                return total;
-
-            }
-
-            return total +
-                record.sites.reduce(
-                    function(siteTotal,site){
-
-                        return siteTotal +
-                            (
-                                Number(
-                                    site.drums
-                                ) || 0
-                            );
-
-                    },
-                    0
-                );
-
-        },
-        0
-    );
-
-}
-
+/* ============================================================
+   REMAINING STOCK
+============================================================ */
 
 function getRemainingStock(){
 
     return Math.max(
+
         0,
-        (
-            Number(
-                database.stock
-            ) || 0
-        ) -
+
+        Number(
+            database.stock || 0
+        )
+        -
         getTotalCollected()
+
     );
 
 }
 
 
-function getUniqueSites(){
+/* ============================================================
+   TOTAL ASSIGNED
+============================================================ */
 
-    const sites =
-        new Set();
+function getTotalAssigned(){
+
+    let total = 0;
+
 
     database.collections.forEach(
+
         function(record){
 
             if(
@@ -1857,34 +1893,76 @@ function getUniqueSites(){
                     record.sites
                 )
             ){
-
                 return;
-
             }
 
+
             record.sites.forEach(
+
                 function(site){
 
-                    if(
-                        site.siteId &&
-                        String(
-                            site.siteId
-                        ).trim()
-                    ){
+                    total +=
+                        Number(
+                            site.drums || 0
+                        );
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    return total;
+
+}
+
+
+/* ============================================================
+   UNIQUE SITES
+============================================================ */
+
+function getUniqueSites(){
+
+    const sites =
+        new Set();
+
+
+    database.collections.forEach(
+
+        function(record){
+
+            if(
+                !Array.isArray(
+                    record.sites
+                )
+            ){
+                return;
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    if(site.siteId){
 
                         sites.add(
-                            String(
-                                site.siteId
-                            ).trim()
+                            site.siteId
                         );
 
                     }
 
                 }
+
             );
 
         }
+
     );
+
 
     return sites.size;
 
@@ -1892,7 +1970,322 @@ function getUniqueSites(){
 
 
 /* ============================================================
-   STOCK
+   UPDATE SITE TOTAL
+============================================================ */
+
+function updateSiteAllocationTotal(){
+
+    const rows =
+        document.querySelectorAll(
+            ".site-row"
+        );
+
+
+    let total = 0;
+
+
+    rows.forEach(
+
+        function(row){
+
+            const input =
+                row.querySelector(
+                    ".site-drums"
+                );
+
+
+            const value =
+                Number(
+                    input
+                    ?
+                    input.value
+                    :
+                    0
+                );
+
+
+            if(
+                Number.isFinite(value)
+            ){
+
+                total += value;
+
+            }
+
+        }
+
+    );
+
+
+    document.getElementById(
+        "siteAllocationTotal"
+    ).textContent =
+        total;
+
+}
+
+
+/* ============================================================
+   ADD SITE
+============================================================ */
+
+function addSite(
+    siteId = "",
+    drums = ""
+){
+
+    const container =
+        document.getElementById(
+            "siteAssignments"
+        );
+
+
+    if(!container){
+
+        console.error(
+            "siteAssignments container not found."
+        );
+
+        return;
+
+    }
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+
+    row.className =
+        "site-row";
+
+
+    row.innerHTML = `
+
+        <input
+            type="text"
+            class="site-id"
+            placeholder="Site ID e.g. VP1066"
+            value="${escapeHTML(siteId)}"
+        >
+
+        <input
+            type="number"
+            class="site-drums"
+            placeholder="Drums"
+            min="1"
+            step="1"
+            value="${escapeHTML(drums)}"
+        >
+
+        <button
+            type="button"
+            class="remove-site"
+        >
+            Remove
+        </button>
+
+    `;
+
+
+    container.appendChild(
+        row
+    );
+
+
+    const quantity =
+        row.querySelector(
+            ".site-drums"
+        );
+
+
+    quantity.addEventListener(
+        "input",
+        updateSiteAllocationTotal
+    );
+
+
+    const remove =
+        row.querySelector(
+            ".remove-site"
+        );
+
+
+    remove.addEventListener(
+
+        "click",
+
+        function(){
+
+            const rows =
+                container.querySelectorAll(
+                    ".site-row"
+                );
+
+
+            if(
+                rows.length === 1
+            ){
+
+                row.querySelector(
+                    ".site-id"
+                ).value = "";
+
+
+                row.querySelector(
+                    ".site-drums"
+                ).value = "";
+
+
+                updateSiteAllocationTotal();
+
+
+                return;
+
+            }
+
+
+            row.remove();
+
+            updateSiteAllocationTotal();
+
+        }
+
+    );
+
+
+    updateSiteAllocationTotal();
+
+}
+
+
+/* ============================================================
+   GET SITE ASSIGNMENTS
+============================================================ */
+
+function getSiteAssignments(){
+
+    const rows =
+        document.querySelectorAll(
+            ".site-row"
+        );
+
+
+    const sites = [];
+
+
+    rows.forEach(
+
+        function(row){
+
+            const siteIdInput =
+                row.querySelector(
+                    ".site-id"
+                );
+
+
+            const drumsInput =
+                row.querySelector(
+                    ".site-drums"
+                );
+
+
+            const siteId =
+                siteIdInput
+                ?
+                siteIdInput.value.trim()
+                :
+                "";
+
+
+            const drums =
+                parseInt(
+
+                    drumsInput
+                    ?
+                    drumsInput.value
+                    :
+                    "0",
+
+                    10
+
+                );
+
+
+            if(
+                !siteId &&
+                (!drums || drums <= 0)
+            ){
+
+                return;
+
+            }
+
+
+            sites.push({
+
+                siteId:siteId,
+
+                drums:drums
+
+            });
+
+        }
+
+    );
+
+
+    return sites;
+
+}
+
+
+/* ============================================================
+   GET TEAM MEMBER
+============================================================ */
+
+function getTeamMember(){
+
+    const select =
+        document.getElementById(
+            "teamMember"
+        );
+
+
+    let team =
+        select
+        ?
+        select.value.trim()
+        :
+        "";
+
+
+    if(team === "OTHER"){
+
+        const other =
+            document.getElementById(
+                "otherTeamMember"
+            );
+
+
+        team =
+            other
+            ?
+            other.value.trim()
+            :
+            "";
+
+    }
+
+
+    return team;
+
+}
+
+
+/* ============================================================
+   SET STOCK
 ============================================================ */
 
 function setStock(){
@@ -1902,20 +2295,34 @@ function setStock(){
             "stockInput"
         );
 
+
     const value =
-        Number(
-            input.value
+        parseInt(
+            input.value,
+            10
         );
 
+
+    const messageBox =
+        document.getElementById(
+            "stockMessage"
+        );
+
+
     if(
-        !Number.isFinite(value) ||
+        !Number.isInteger(value)
+        ||
         value < 0
     ){
 
         showMessage(
-            "stockMessage",
-            "Please enter a valid fuel stock amount.",
+
+            messageBox,
+
+            "Please enter a valid whole number of fuel drums.",
+
             "error"
+
         );
 
         return;
@@ -1927,12 +2334,20 @@ function setStock(){
         getTotalCollected();
 
 
-    if(value < collected){
+    if(
+        value < collected
+    ){
 
         showMessage(
-            "stockMessage",
-            "Fuel stock cannot be lower than total fuel already collected.",
+
+            messageBox,
+
+            "Stock cannot be lower than fuel already collected (" +
+            collected +
+            " drums).",
+
             "error"
+
         );
 
         return;
@@ -1941,250 +2356,34 @@ function setStock(){
 
 
     database.stock =
-        Math.floor(
-            value
-        );
+        value;
 
 
-    saveDatabase();
+    if(!saveDatabase()){
+        return;
+    }
+
 
     renderDashboard();
 
-    input.value = "";
 
     showMessage(
-        "stockMessage",
-        "Fuel stock updated successfully.",
+
+        messageBox,
+
+        "Fuel stock successfully updated to " +
+        value +
+        " drums.",
+
         "success"
+
     );
 
 }
 
 
 /* ============================================================
-   TEAM MEMBER
-============================================================ */
-
-function getTeamMember(){
-
-    const selected =
-        document.getElementById(
-            "teamMember"
-        ).value;
-
-    const other =
-        document.getElementById(
-            "otherTeamMember"
-        ).value.trim();
-
-
-    if(
-        selected === "Other"
-    ){
-
-        return other;
-
-    }
-
-
-    return selected;
-
-}
-
-
-/* ============================================================
-   SITE ALLOCATION
-============================================================ */
-
-function updateSiteAllocationTotal(){
-
-    const rows =
-        document.querySelectorAll(
-            "#siteAssignments .site-row"
-        );
-
-    let total = 0;
-
-
-    rows.forEach(
-        function(row){
-
-            const input =
-                row.querySelector(
-                    ".site-drums"
-                );
-
-            if(input){
-
-                total +=
-                    Number(
-                        input.value
-                    ) || 0;
-
-            }
-
-        }
-    );
-
-
-    const totalElement =
-        document.getElementById(
-            "siteAllocationTotal"
-        );
-
-
-    if(totalElement){
-
-        totalElement.textContent =
-            "Site Allocation Total: " +
-            total +
-            " drums";
-
-    }
-
-}
-
-
-function addSite(){
-
-    const container =
-        document.getElementById(
-            "siteAssignments"
-        );
-
-
-    const row =
-        document.createElement(
-            "div"
-        );
-
-    row.className =
-        "site-row";
-
-
-    row.innerHTML = `
-
-        <input
-            type="text"
-            class="site-id"
-            placeholder="Vodafone PNG Site ID"
-        >
-
-        <input
-            type="number"
-            class="site-drums"
-            min="0"
-            step="1"
-            placeholder="Drums"
-        >
-
-        <button
-            type="button"
-            class="site-remove"
-        >
-            Remove
-        </button>
-
-    `;
-
-
-    const drumsInput =
-        row.querySelector(
-            ".site-drums"
-        );
-
-
-    drumsInput.addEventListener(
-        "input",
-        updateSiteAllocationTotal
-    );
-
-
-    row.querySelector(
-        ".site-remove"
-    ).addEventListener(
-        "click",
-        function(){
-
-            row.remove();
-
-            updateSiteAllocationTotal();
-
-        }
-    );
-
-
-    container.appendChild(
-        row
-    );
-
-
-    updateSiteAllocationTotal();
-
-}
-
-
-function getSiteAssignments(){
-
-    const rows =
-        document.querySelectorAll(
-            "#siteAssignments .site-row"
-        );
-
-    const sites = [];
-
-
-    rows.forEach(
-        function(row){
-
-            const siteId =
-                row.querySelector(
-                    ".site-id"
-                ).value.trim();
-
-
-            const drums =
-                Number(
-                    row.querySelector(
-                        ".site-drums"
-                    ).value
-                );
-
-
-            if(
-                siteId ||
-                drums
-            ){
-
-                sites.push({
-
-                    siteId:
-                        siteId,
-
-                    drums:
-                        Number.isFinite(
-                            drums
-                        )
-                        ?
-                        drums
-                        :
-                        0
-
-                });
-
-            }
-
-        }
-    );
-
-
-    return sites;
-
-}
-
-
-/* ============================================================
-   PHOTO COMPRESSION
+   COMPRESS IMAGE
 ============================================================ */
 
 function compressImage(
@@ -2194,6 +2393,7 @@ function compressImage(
 ){
 
     return new Promise(
+
         function(resolve,reject){
 
             const reader =
@@ -2213,21 +2413,24 @@ function compressImage(
                             let width =
                                 image.width;
 
+
                             let height =
                                 image.height;
 
 
                             if(
-                                width >
-                                maxWidth
+                                width > maxWidth
                             ){
 
                                 height =
                                     Math.round(
+
                                         height *
                                         maxWidth /
                                         width
+
                                     );
+
 
                                 width =
                                     maxWidth;
@@ -2244,6 +2447,7 @@ function compressImage(
                             canvas.width =
                                 width;
 
+
                             canvas.height =
                                 height;
 
@@ -2255,19 +2459,28 @@ function compressImage(
 
 
                             context.drawImage(
+
                                 image,
+
                                 0,
                                 0,
+
                                 width,
                                 height
+
                             );
 
 
                             resolve(
+
                                 canvas.toDataURL(
+
                                     "image/jpeg",
+
                                     quality
+
                                 )
+
                             );
 
                         };
@@ -2277,9 +2490,11 @@ function compressImage(
                         function(){
 
                             reject(
+
                                 new Error(
                                     "Could not load image."
                                 )
+
                             );
 
                         };
@@ -2295,9 +2510,11 @@ function compressImage(
                 function(){
 
                     reject(
+
                         new Error(
                             "Could not read image."
                         )
+
                     );
 
                 };
@@ -2308,13 +2525,14 @@ function compressImage(
             );
 
         }
+
     );
 
 }
 
 
 /* ============================================================
-   PHOTO HANDLER
+   HANDLE FUEL DRUM PHOTO
 ============================================================ */
 
 async function handleFuelDrumPhoto(
@@ -2326,9 +2544,7 @@ async function handleFuelDrumPhoto(
 
 
     if(!file){
-
         return;
-
     }
 
 
@@ -2342,8 +2558,9 @@ async function handleFuelDrumPhoto(
             "Please select an image file."
         );
 
-        event.target.value =
-            "";
+
+        event.target.value = "";
+
 
         return;
 
@@ -2387,6 +2604,7 @@ async function handleFuelDrumPhoto(
         }
 
     }
+
     catch(error){
 
         console.error(
@@ -2400,12 +2618,10 @@ async function handleFuelDrumPhoto(
         );
 
 
-        currentFuelDrumPhoto =
-            "";
+        currentFuelDrumPhoto = "";
 
 
-        event.target.value =
-            "";
+        event.target.value = "";
 
     }
 
@@ -2418,8 +2634,7 @@ async function handleFuelDrumPhoto(
 
 function removeFuelDrumPhoto(){
 
-    currentFuelDrumPhoto =
-        "";
+    currentFuelDrumPhoto = "";
 
 
     const input =
@@ -2441,18 +2656,12 @@ function removeFuelDrumPhoto(){
 
 
     if(input){
-
-        input.value =
-            "";
-
+        input.value = "";
     }
 
 
     if(image){
-
-        image.src =
-            "";
-
+        image.src = "";
     }
 
 
@@ -2473,6 +2682,12 @@ function removeFuelDrumPhoto(){
 
 function recordFuelCollection(){
 
+    const messageBox =
+        document.getElementById(
+            "collectionMessage"
+        );
+
+
     const team =
         getTeamMember();
 
@@ -2484,10 +2699,14 @@ function recordFuelCollection(){
 
 
     const drums =
-        Number(
+        parseInt(
+
             document.getElementById(
-                "fuelDrums"
-            ).value
+                "collectionDrums"
+            ).value,
+
+            10
+
         );
 
 
@@ -2506,9 +2725,13 @@ function recordFuelCollection(){
     if(!team){
 
         showMessage(
-            "collectionMessage",
-            "Please select or enter a team member.",
+
+            messageBox,
+
+            "Please select the team member.",
+
             "error"
+
         );
 
         return;
@@ -2519,9 +2742,13 @@ function recordFuelCollection(){
     if(!date){
 
         showMessage(
-            "collectionMessage",
+
+            messageBox,
+
             "Please select the collection date.",
+
             "error"
+
         );
 
         return;
@@ -2530,16 +2757,19 @@ function recordFuelCollection(){
 
 
     if(
-        !Number.isFinite(
-            drums
-        ) ||
+        !Number.isInteger(drums)
+        ||
         drums <= 0
     ){
 
         showMessage(
-            "collectionMessage",
+
+            messageBox,
+
             "Please enter a valid number of fuel drums collected.",
+
             "error"
+
         );
 
         return;
@@ -2550,9 +2780,13 @@ function recordFuelCollection(){
     if(!zone){
 
         showMessage(
-            "collectionMessage",
-            "Please select a Lae Zone.",
+
+            messageBox,
+
+            "Please select one of the four Lae Zones.",
+
             "error"
+
         );
 
         return;
@@ -2565,16 +2799,19 @@ function recordFuelCollection(){
 
 
     if(
-        drums >
-        remaining
+        drums > remaining
     ){
 
         showMessage(
-            "collectionMessage",
-            "Collection exceeds the remaining fuel stock of " +
+
+            messageBox,
+
+            "Not enough fuel stock. Remaining stock: " +
             remaining +
             " drums.",
+
             "error"
+
         );
 
         return;
@@ -2591,9 +2828,13 @@ function recordFuelCollection(){
     ){
 
         showMessage(
-            "collectionMessage",
-            "Please add at least one Vodafone PNG site assignment.",
+
+            messageBox,
+
+            "Please add at least one Vodafone PNG site.",
+
             "error"
+
         );
 
         return;
@@ -2601,62 +2842,91 @@ function recordFuelCollection(){
     }
 
 
-    const invalidSite =
-        sites.some(
-            function(site){
-
-                return (
-                    !site.siteId ||
-                    site.drums <= 0
-                );
-
-            }
-        );
+    let siteTotal = 0;
 
 
-    if(invalidSite){
+    for(
+        let i = 0;
+        i < sites.length;
+        i++
+    ){
 
-        showMessage(
-            "collectionMessage",
-            "Please enter a valid site ID and number of drums for every site.",
-            "error"
-        );
+        const site =
+            sites[i];
 
-        return;
+
+        if(!site.siteId){
+
+            showMessage(
+
+                messageBox,
+
+                "Please enter a Vodafone Site ID for every site.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isInteger(site.drums)
+            ||
+            site.drums <= 0
+        ){
+
+            showMessage(
+
+                messageBox,
+
+                "Please enter a valid drum quantity for " +
+                site.siteId +
+                ".",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        siteTotal +=
+            site.drums;
 
     }
-
-
-    const allocated =
-        sites.reduce(
-            function(total,site){
-
-                return total +
-                    site.drums;
-
-            },
-            0
-        );
 
 
     if(
-        allocated !== drums
+        siteTotal !== drums
     ){
 
         showMessage(
-            "collectionMessage",
-            "Site allocation must exactly equal the collected drums. Collected: " +
+
+            messageBox,
+
+            "Fuel collected = " +
             drums +
-            " drums. Assigned: " +
-            allocated +
-            " drums.",
+            " drums, but site allocation = " +
+            siteTotal +
+            " drums. These amounts must be equal.",
+
             "error"
+
         );
 
         return;
 
     }
 
+
+    /*
+       CREATE RECORD
+    */
 
     const record = {
 
@@ -2664,11 +2934,11 @@ function recordFuelCollection(){
             Date.now().toString() +
             "_" +
             Math.random()
-                .toString(36)
-                .substring(
-                    2,
-                    9
-                ),
+            .toString(36)
+            .substring(
+                2,
+                9
+            ),
 
         date:
             date,
@@ -2704,43 +2974,55 @@ function recordFuelCollection(){
     );
 
 
-    saveDatabase();
+    const saved =
+        saveDatabase();
+
+
+    if(!saved){
+
+        /*
+           Remove the record again if
+           saving failed.
+        */
+
+        database.collections.pop();
+
+        return;
+
+    }
+
+
+    renderDashboard();
 
 
     document.getElementById(
-        "teamMember"
-    ).value =
-        "";
-
-
-    document.getElementById(
-        "otherTeamMember"
-    ).value =
-        "";
-
-
-    document.getElementById(
-        "fuelDrums"
-    ).value =
-        "";
+        "collectionDrums"
+    ).value = "";
 
 
     document.getElementById(
         "vehicle"
-    ).value =
-        "";
+    ).value = "";
+
+
+    document.getElementById(
+        "teamMember"
+    ).value = "";
+
+
+    document.getElementById(
+        "otherTeamMember"
+    ).value = "";
 
 
     document.getElementById(
         "laeZone"
-    ).value =
-        "";
+    ).value = "";
 
 
     document.getElementById(
         "siteAssignments"
-    ).innerHTML =
-        "";
+    ).innerHTML = "";
 
 
     addSite();
@@ -2749,13 +3031,22 @@ function recordFuelCollection(){
     removeFuelDrumPhoto();
 
 
-    renderDashboard();
-
-
     showMessage(
-        "collectionMessage",
-        "Fuel collection recorded successfully.",
+
+        messageBox,
+
+        "SUCCESS: " +
+        drums +
+        " fuel drums recorded against " +
+        team +
+        " in " +
+        zone +
+        ". Remaining stock: " +
+        getRemainingStock() +
+        " drums.",
+
         "success"
+
     );
 
 }
@@ -2767,26 +3058,52 @@ function recordFuelCollection(){
 
 function deleteRecord(id){
 
+    const record =
+        database.collections.find(
+
+            function(item){
+
+                return item.id === id;
+
+            }
+
+        );
+
+
+    if(!record){
+        return;
+    }
+
+
     const confirmed =
         confirm(
-            "Are you sure you want to delete this fuel collection record?"
+
+            "Delete this fuel collection record?\n\n" +
+
+            "Team: " +
+            record.team +
+            "\n" +
+
+            "Drums: " +
+            record.collectedDrums
+
         );
 
 
     if(!confirmed){
-
         return;
-
     }
 
 
     database.collections =
         database.collections.filter(
-            function(record){
 
-                return record.id !== id;
+            function(item){
+
+                return item.id !== id;
 
             }
+
         );
 
 
@@ -2805,14 +3122,19 @@ function clearAllData(){
 
     const confirmed =
         confirm(
-            "This will permanently remove all fuel collection records and stock data from this browser. Continue?"
+
+            "WARNING!\n\n" +
+
+            "This will permanently delete all fuel stock " +
+            "and collection records stored in this browser.\n\n" +
+
+            "Continue?"
+
         );
 
 
     if(!confirmed){
-
         return;
-
     }
 
 
@@ -2829,6 +3151,11 @@ function clearAllData(){
 
     renderDashboard();
 
+
+    document.getElementById(
+        "stockInput"
+    ).value = "";
+
 }
 
 
@@ -2837,26 +3164,18 @@ function clearAllData(){
 ============================================================ */
 
 function showMessage(
-    elementId,
-    message,
+    element,
+    text,
     type
 ){
 
-    const element =
-        document.getElementById(
-            elementId
-        );
-
-
     if(!element){
-
         return;
-
     }
 
 
     element.textContent =
-        message;
+        text;
 
 
     element.className =
@@ -2864,31 +3183,31 @@ function showMessage(
         type;
 
 
-    setTimeout(
-        function(){
+    if(type === "success"){
 
-            element.classList.remove(
-                "show"
-            );
+        setTimeout(
 
-        },
-        5000
-    );
+            function(){
+
+                element.className =
+                    "message";
+
+            },
+
+            5000
+
+        );
+
+    }
 
 }
 
 
 /* ============================================================
-   KPI RENDER
+   RENDER KPI
 ============================================================ */
 
 function renderKPI(){
-
-    const stock =
-        Number(
-            database.stock
-        ) || 0;
-
 
     const collected =
         getTotalCollected();
@@ -2906,566 +3225,364 @@ function renderKPI(){
         getUniqueSites();
 
 
-    const records =
-        database.collections.length;
-
-
     document.getElementById(
-        "kpiStock"
+        "totalStock"
     ).textContent =
-        stock;
+        database.stock;
 
 
     document.getElementById(
-        "kpiCollected"
+        "totalCollected"
     ).textContent =
         collected;
 
 
     document.getElementById(
-        "kpiAssigned"
+        "totalAssigned"
     ).textContent =
         assigned;
 
 
     document.getElementById(
-        "kpiRemaining"
+        "remainingStock"
     ).textContent =
         remaining;
 
 
     document.getElementById(
-        "kpiSites"
+        "sitesSupplied"
     ).textContent =
         sites;
 
 
     document.getElementById(
-        "kpiRecords"
+        "recordCount"
     ).textContent =
-        records;
+        database.collections.length;
 
 
     document.getElementById(
-        "stockCurrent"
-    ).textContent =
-        "Current stock: " +
-        stock +
-        " drums";
+        "stockInput"
+    ).value =
+        database.stock || "";
 
 }
 
 
 /* ============================================================
-   ZONE RENDER
+   RENDER ZONES
 ============================================================ */
 
 function renderZones(){
 
-    const zones = {
-
-        "Zone 1":0,
-
-        "Zone 2":0,
-
-        "Zone 3":0,
-
-        "Zone 4":0
-
-    };
-
-
-    const zoneSites = {
-
-        "Zone 1":0,
-
-        "Zone 2":0,
-
-        "Zone 3":0,
-
-        "Zone 4":0
-
-    };
-
-
-    database.collections.forEach(
-        function(record){
-
-            const zone =
-                record.zone;
-
-
-            if(
-                zones.hasOwnProperty(
-                    zone
-                )
-            ){
-
-                zones[zone] +=
-                    Number(
-                        record.collectedDrums
-                    ) || 0;
-
-
-                if(
-                    Array.isArray(
-                        record.sites
-                    )
-                ){
-
-                    zoneSites[zone] +=
-                        record.sites.length;
-
-                }
-
-            }
-
-        }
-    );
-
-
     const container =
         document.getElementById(
-            "zoneDashboard"
+            "zoneSummary"
         );
 
 
-    container.innerHTML =
-        "";
+    const zones = [
+
+        "Lae Zone 1",
+
+        "Lae Zone 2",
+
+        "Lae Zone 3",
+
+        "Lae Zone 4"
+
+    ];
 
 
-    Object.keys(zones).forEach(
+    container.innerHTML = "";
+
+
+    zones.forEach(
+
         function(zone){
 
-            const card =
+            const records =
+                database.collections.filter(
+
+                    function(record){
+
+                        return record.zone === zone;
+
+                    }
+
+                );
+
+
+            const total =
+                records.reduce(
+
+                    function(sum,record){
+
+                        return sum +
+
+                            Number(
+                                record.collectedDrums || 0
+                            );
+
+                    },
+
+                    0
+
+                );
+
+
+            const div =
                 document.createElement(
                     "div"
                 );
 
 
-            card.className =
-                "zone-card";
+            div.className =
+                "zone";
 
 
-            card.innerHTML = `
+            div.innerHTML = `
 
                 <div class="zone-name">
+
                     ${escapeHTML(zone)}
+
                 </div>
 
-                <div class="zone-value">
-                    ${zones[zone]} drums
+                <div class="zone-number">
+
+                    ${total}
+
                 </div>
 
-                <div class="zone-sites">
-                    ${zoneSites[zone]} site assignment(s)
+                <div
+                    style="
+                    font-size:12px;
+                    color:#6b7280;
+                    margin-top:3px;
+                    "
+                >
+
+                    fuel drums collected
+
                 </div>
 
             `;
 
 
             container.appendChild(
-                card
+                div
             );
 
         }
+
     );
 
 }
 
 
 /* ============================================================
-   TEAM RENDER
+   RENDER TEAM SUMMARY
 ============================================================ */
 
 function renderTeams(){
 
-    const teams = {};
-
-
-    database.collections.forEach(
-        function(record){
-
-            const team =
-                record.team ||
-                "Unknown";
-
-
-            if(
-                !teams[team]
-            ){
-
-                teams[team] = {
-
-                    drums:0,
-
-                    sites:0
-
-                };
-
-            }
-
-
-            teams[team].drums +=
-                Number(
-                    record.collectedDrums
-                ) || 0;
-
-
-            if(
-                Array.isArray(
-                    record.sites
-                )
-            ){
-
-                teams[team].sites +=
-                    record.sites.length;
-
-            }
-
-        }
-    );
-
-
     const container =
         document.getElementById(
-            "teamAccountability"
+            "teamSummary"
         );
 
 
-    container.innerHTML =
-        "";
+    const totals = {};
+
+
+    database.collections.forEach(
+
+        function(record){
+
+            const team =
+                record.team;
+
+
+            if(!totals[team]){
+
+                totals[team] =
+                    0;
+
+            }
+
+
+            totals[team] +=
+
+                Number(
+                    record.collectedDrums || 0
+                );
+
+        }
+
+    );
+
+
+    container.innerHTML = "";
 
 
     const names =
         Object.keys(
-            teams
-        ).sort();
+            totals
+        );
 
 
-    if(
-        names.length === 0
-    ){
+    if(names.length === 0){
 
-        container.innerHTML =
-            '<div style="color:#6b7280;font-size:13px;">No collection records yet.</div>';
+        container.innerHTML = `
+
+            <div
+                style="color:#6b7280;"
+            >
+
+                No fuel collection records yet.
+
+            </div>
+
+        `;
+
 
         return;
 
     }
 
 
+    let maximum = 0;
+
+
     names.forEach(
+
         function(name){
 
-            const row =
+            if(
+                totals[name] >
+                maximum
+            ){
+
+                maximum =
+                    totals[name];
+
+            }
+
+        }
+
+    );
+
+
+    names
+
+    .sort(
+
+        function(a,b){
+
+            return totals[b] -
+                   totals[a];
+
+        }
+
+    )
+
+    .forEach(
+
+        function(name){
+
+            const amount =
+                totals[name];
+
+
+            const percentage =
+                maximum > 0
+
+                ?
+                (
+                    amount /
+                    maximum
+                ) * 100
+
+                :
+                0;
+
+
+            const div =
                 document.createElement(
                     "div"
                 );
 
 
-            row.className =
+            div.className =
                 "team-row";
 
 
-            row.innerHTML = `
+            div.innerHTML = `
 
-                <div class="team-name">
-                    ${escapeHTML(name)}
+                <div class="team-line">
+
+                    <strong>
+
+                        ${escapeHTML(name)}
+
+                    </strong>
+
+                    <span>
+
+                        ${amount} drums
+
+                    </span>
+
                 </div>
 
-                <div class="team-drums">
-                    ${teams[name].drums}
-                </div>
+                <div class="progress">
 
-                <div class="team-sites">
-                    ${teams[name].sites} site(s)
+                    <div
+                        class="progress-bar"
+                        style="
+                        width:${percentage}%;
+                        "
+                    ></div>
+
                 </div>
 
             `;
 
 
             container.appendChild(
-                row
+                div
             );
 
         }
+
     );
 
 }
 
 
 /* ============================================================
-   FORMAT DATE
+   OPEN PHOTO
 ============================================================ */
 
-function formatDate(dateString){
+function openPhoto(photo){
 
-    if(!dateString){
-
-        return "";
-
-    }
-
-
-    const parts =
-        dateString.split("-");
-
-
-    if(
-        parts.length !== 3
-    ){
-
-        return dateString;
-
-    }
-
-
-    return (
-        parts[2] +
-        "/" +
-        parts[1] +
-        "/" +
-        parts[0]
-    );
-
-}
-
-
-/* ============================================================
-   HISTORY RENDER
-============================================================ */
-
-function renderHistory(){
-
-    const body =
-        document.getElementById(
-            "historyBody"
-        );
-
-
-    body.innerHTML =
-        "";
-
-
-    const records =
-        [...database.collections].sort(
-            function(a,b){
-
-                return (
-                    new Date(
-                        b.createdAt ||
-                        b.date
-                    ) -
-                    new Date(
-                        a.createdAt ||
-                        a.date
-                    )
-                );
-
-            }
-        );
-
-
-    if(
-        records.length === 0
-    ){
-
-        body.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="8"
-                    style="text-align:center;color:#6b7280;"
-                >
-                    No fuel collection records available.
-                </td>
-
-            </tr>
-
-        `;
-
+    if(!photo){
         return;
-
     }
 
 
-    records.forEach(
-        function(record){
-
-            const row =
-                document.createElement(
-                    "tr"
-                );
-
-
-            const sites =
-                Array.isArray(
-                    record.sites
-                )
-                ?
-                record.sites
-                :
-                [];
-
-
-            const siteText =
-                sites.map(
-                    function(site){
-
-                        return (
-                            escapeHTML(
-                                site.siteId
-                            ) +
-                            " (" +
-                            (
-                                Number(
-                                    site.drums
-                                ) || 0
-                            ) +
-                            " drums)"
-                        );
-
-                    }
-                ).join(
-                    "<br>"
-                );
-
-
-            let photoHTML =
-                '<span class="no-photo">No photo</span>';
-
-
-            if(
-                record.photo
-            ){
-
-                photoHTML = `
-
-                    <img
-                        src="${record.photo}"
-                        class="photo-thumb"
-                        alt="Fuel loaded drums"
-                        title="Click to view photo"
-                        onclick="viewPhoto('${record.id}')"
-                    >
-
-                `;
-
-            }
-
-
-            row.innerHTML = `
-
-                <td>
-                    ${escapeHTML(
-                        formatDate(
-                            record.date
-                        )
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        record.team ||
-                        ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        record.zone ||
-                        ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        record.vehicle ||
-                        "Not entered"
-                    )}
-                </td>
-
-                <td>
-                    ${Number(
-                        record.collectedDrums
-                    ) || 0}
-                </td>
-
-                <td>
-                    ${
-                        siteText ||
-                        '<span class="no-photo">No site assignment</span>'
-                    }
-                </td>
-
-                <td>
-                    ${photoHTML}
-                </td>
-
-                <td>
-
-                    <button
-                        type="button"
-                        class="delete-record"
-                        onclick="deleteRecord('${record.id}')"
-                    >
-                        Delete
-                    </button>
-
-                </td>
-
-            `;
-
-
-            body.appendChild(
-                row
-            );
-
-        }
-    );
-
-}
-
-
-/* ============================================================
-   VIEW PHOTO
-============================================================ */
-
-function viewPhoto(id){
-
-    const record =
-        database.collections.find(
-            function(item){
-
-                return item.id === id;
-
-            }
-        );
-
-
-    if(
-        !record ||
-        !record.photo
-    ){
-
-        return;
-
-    }
-
-
-    const photoWindow =
+    const newWindow =
         window.open(
             "",
             "_blank"
         );
 
 
-    if(!photoWindow){
+    if(!newWindow){
 
         alert(
-            "Please allow pop-ups to view the photo."
+            "Please allow pop-ups to view the fuel drum photo."
         );
 
         return;
@@ -3473,7 +3590,7 @@ function viewPhoto(id){
     }
 
 
-    photoWindow.document.write(`
+    newWindow.document.write(`
 
         <!DOCTYPE html>
 
@@ -3482,7 +3599,7 @@ function viewPhoto(id){
         <head>
 
             <title>
-                Fuel Collection Photo
+                Fuel Drum Photo
             </title>
 
             <meta
@@ -3493,18 +3610,29 @@ function viewPhoto(id){
             <style>
 
                 body{
+
                     margin:0;
-                    padding:20px;
-                    background:#111827;
-                    text-align:center;
-                    font-family:Arial;
+
+                    background:#111;
+
+                    display:flex;
+
+                    align-items:center;
+
+                    justify-content:center;
+
+                    min-height:100vh;
+
                 }
 
                 img{
+
                     max-width:100%;
-                    max-height:90vh;
+
+                    max-height:100vh;
+
                     object-fit:contain;
-                    border-radius:10px;
+
                 }
 
             </style>
@@ -3514,8 +3642,8 @@ function viewPhoto(id){
         <body>
 
             <img
-                src="${record.photo}"
-                alt="Fuel loaded drums"
+                src="${photo}"
+                alt="Fuel Drum Photo"
             >
 
         </body>
@@ -3525,18 +3653,765 @@ function viewPhoto(id){
     `);
 
 
-    photoWindow.document.close();
+    newWindow.document.close();
 
 }
 
 
 /* ============================================================
-   REPORT FILTERING
+   RENDER HISTORY
+============================================================ */
+
+function renderHistory(){
+
+    const table =
+        document.getElementById(
+            "history"
+        );
+
+
+    table.innerHTML = "";
+
+
+    if(
+        database.collections.length === 0
+    ){
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    style="
+                    text-align:center;
+                    padding:30px;
+                    color:#6b7280;
+                    "
+                >
+
+                    No fuel collection records yet.
+
+                    <br><br>
+
+                    Use the form on the left to record
+                    the first fuel collection.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    const records =
+        [...database.collections]
+        .reverse();
+
+
+    records.forEach(
+
+        function(record){
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            let siteHTML = "";
+
+
+            if(
+                Array.isArray(
+                    record.sites
+                )
+            ){
+
+                record.sites.forEach(
+
+                    function(site){
+
+                        siteHTML += `
+
+                            <div
+                                style="
+                                margin-bottom:5px;
+                                "
+                            >
+
+                                <strong>
+
+                                    ${escapeHTML(
+                                        site.siteId
+                                    )}
+
+                                </strong>
+
+                                :
+
+                                ${site.drums}
+                                drums
+
+                            </div>
+
+                        `;
+
+                    }
+
+                );
+
+            }
+
+
+            let photoHTML =
+                `<span class="no-photo">No photo</span>`;
+
+
+            if(record.photo){
+
+                photoHTML = `
+
+                    <img
+                        src="${record.photo}"
+                        class="register-photo"
+                        alt="Fuel drum photo"
+                        title="Click to view photo"
+                    >
+
+                `;
+
+            }
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    ${escapeHTML(
+                        record.date
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+
+                        ${escapeHTML(
+                            record.team
+                        )}
+
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        record.zone
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        record.vehicle
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+
+                        ${record.collectedDrums}
+
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    ${siteHTML}
+
+                </td>
+
+
+                <td>
+
+                    ${photoHTML}
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="btn-danger delete-record"
+                        style="
+                        padding:7px 10px;
+                        "
+                    >
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            const deleteButton =
+                row.querySelector(
+                    ".delete-record"
+                );
+
+
+            if(deleteButton){
+
+                deleteButton.addEventListener(
+
+                    "click",
+
+                    function(){
+
+                        deleteRecord(
+                            record.id
+                        );
+
+                    }
+
+                );
+
+            }
+
+
+            const photo =
+                row.querySelector(
+                    ".register-photo"
+                );
+
+
+            if(photo){
+
+                photo.addEventListener(
+
+                    "click",
+
+                    function(){
+
+                        openPhoto(
+                            record.photo
+                        );
+
+                    }
+
+                );
+
+            }
+
+
+            table.appendChild(
+                row
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   REPORT FILTER
 ============================================================ */
 
 function getReportRecords(){
 
     const type =
+        document.getElementById(
+            "reportType"
+        ).value;
+
+
+    const date =
+        document.getElementById(
+            "reportDate"
+        ).value;
+
+
+    const month =
+        document.getElementById(
+            "reportMonth"
+        ).value;
+
+
+    /* DAILY */
+
+    if(
+        type === "daily"
+    ){
+
+        return database.collections.filter(
+
+            function(record){
+
+                return record.date === date;
+
+            }
+
+        );
+
+    }
+
+
+    /* MONTHLY */
+
+    if(
+
+        type === "monthly"
+
+        ||
+
+        type === "selected-month"
+
+    ){
+
+        return database.collections.filter(
+
+            function(record){
+
+                return record.date.startsWith(
+                    month
+                );
+
+            }
+
+        );
+
+    }
+
+
+    /* WEEKLY */
+
+    const selected =
+        new Date(
+            date +
+            "T00:00:00"
+        );
+
+
+    const day =
+        selected.getDay();
+
+
+    const monday =
+        new Date(
+            selected
+        );
+
+
+    monday.setDate(
+
+        selected.getDate()
+
+        -
+
+        (
+            day === 0
+            ?
+            6
+            :
+            day - 1
+        )
+
+    );
+
+
+    const sunday =
+        new Date(
+            monday
+        );
+
+
+    sunday.setDate(
+        monday.getDate() +
+        6
+    );
+
+
+    const start =
+        formatDate(
+            monday
+        );
+
+
+    const end =
+        formatDate(
+            sunday
+        );
+
+
+    return database.collections.filter(
+
+        function(record){
+
+            return (
+
+                record.date >= start
+
+                &&
+
+                record.date <= end
+
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   FORMAT DATE
+============================================================ */
+
+function formatDate(date){
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(
+            date.getMonth()+1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+/* ============================================================
+   REPORT PREVIEW
+============================================================ */
+
+function updateReportPreview(){
+
+    const records =
+        getReportRecords();
+
+
+    const drums =
+        records.reduce(
+
+            function(sum,record){
+
+                return sum +
+
+                    Number(
+                        record.collectedDrums || 0
+                    );
+
+            },
+
+            0
+
+        );
+
+
+    document.getElementById(
+        "reportPreview"
+    ).innerHTML = `
+
+        <strong>
+
+            ${records.length}
+
+        </strong>
+
+        collection records
+
+        &nbsp; • &nbsp;
+
+        <strong>
+
+            ${drums}
+
+        </strong>
+
+        fuel drums
+
+    `;
+
+}
+
+
+/* ============================================================
+   CSV DOWNLOAD
+============================================================ */
+
+function downloadCSV(){
+
+    const records =
+        getReportRecords();
+
+
+    let csv =
+        "Date,Team,Zone,Vehicle,Collected Drums,Vodafone Site,Site Drums,Photo Available\n";
+
+
+    records.forEach(
+
+        function(record){
+
+            if(
+                !record.sites ||
+                record.sites.length === 0
+            ){
+
+                csv += [
+
+                    record.date,
+
+                    record.team,
+
+                    record.zone,
+
+                    record.vehicle,
+
+                    record.collectedDrums,
+
+                    "",
+
+                    "",
+
+                    record.photo
+                    ?
+                    "Yes"
+                    :
+                    "No"
+
+                ]
+
+                .map(
+                    csvEscape
+                )
+
+                .join(",");
+
+
+                csv += "\n";
+
+
+                return;
+
+            }
+
+
+            record.sites.forEach(
+
+                function(site){
+
+                    csv += [
+
+                        record.date,
+
+                        record.team,
+
+                        record.zone,
+
+                        record.vehicle,
+
+                        record.collectedDrums,
+
+                        site.siteId,
+
+                        site.drums,
+
+                        record.photo
+                        ?
+                        "Yes"
+                        :
+                        "No"
+
+                    ]
+
+                    .map(
+                        csvEscape
+                    )
+
+                    .join(",");
+
+
+                    csv += "\n";
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+    downloadFile(
+
+        csv,
+
+        "Vodafone_PNG_Fuel_Report.csv",
+
+        "text/csv;charset=utf-8"
+
+    );
+
+}
+
+
+/* ============================================================
+   CSV ESCAPE
+============================================================ */
+
+function csvEscape(value){
+
+    return '"' +
+
+        String(
+            value ?? ""
+        )
+
+        .replace(
+            /"/g,
+            '""'
+        )
+
+        + '"';
+
+}
+
+
+/* ============================================================
+   PDF DOWNLOAD
+============================================================ */
+
+function downloadPDF(){
+
+    const records =
+        getReportRecords();
+
+
+    if(
+        records.length === 0
+    ){
+
+        alert(
+
+            "There are no collection records for the selected report period."
+
+        );
+
+        return;
+
+    }
+
+
+    if(
+
+        !window.jspdf
+
+        ||
+
+        !window.jspdf.jsPDF
+
+    ){
+
+        alert(
+
+            "PDF library could not be loaded. Please check your internet connection and try again."
+
+        );
+
+        return;
+
+    }
+
+
+    const {
+        jsPDF
+    } = window.jspdf;
+
+
+    const doc =
+        new jsPDF(
+
+            "landscape",
+
+            "mm",
+
+            "a4"
+
+        );
+
+
+    /* =====================================================
+       REPORT TITLE
+    ====================================================== */
+
+    doc.setFontSize(
+        18
+    );
+
+
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    doc.text(
+
+        "Vodafone PNG Fuel Collection Report",
+
+        14,
+
+        15
+
+    );
+
+
+    /* =====================================================
+       REPORT INFORMATION
+    ====================================================== */
+
+    const reportType =
         document.getElementById(
             "reportType"
         ).value;
@@ -3554,433 +4429,352 @@ function getReportRecords(){
         ).value;
 
 
-    let records =
-        [...database.collections];
-
-
-    if(type === "daily"){
-
-        const date =
-            reportDate ||
-            getToday();
-
-
-        records =
-            records.filter(
-                function(record){
-
-                    return record.date === date;
-
-                }
-            );
-
-    }
-
-
-    else if(type === "weekly"){
-
-        const selected =
-            new Date(
-                (
-                    reportDate ||
-                    getToday()
-                ) +
-                "T00:00:00"
-            );
-
-
-        const day =
-            selected.getDay();
-
-
-        const mondayOffset =
-            day === 0
-            ?
-            -6
-            :
-            1 - day;
-
-
-        const monday =
-            new Date(
-                selected
-            );
-
-
-        monday.setDate(
-            selected.getDate() +
-            mondayOffset
-        );
-
-
-        const sunday =
-            new Date(
-                monday
-            );
-
-
-        sunday.setDate(
-            monday.getDate() +
-            6
-        );
-
-
-        const start =
-            monday
-                .toISOString()
-                .substring(
-                    0,
-                    10
-                );
-
-
-        const end =
-            sunday
-                .toISOString()
-                .substring(
-                    0,
-                    10
-                );
-
-
-        records =
-            records.filter(
-                function(record){
-
-                    return (
-                        record.date >= start &&
-                        record.date <= end
-                    );
-
-                }
-            );
-
-    }
-
-
-    else if(
-        type === "monthly" ||
-        type === "selected-month"
-    ){
-
-        const month =
-            reportMonth ||
-            getCurrentMonth();
-
-
-        records =
-            records.filter(
-                function(record){
-
-                    return (
-                        record.date &&
-                        record.date.startsWith(
-                            month
-                        )
-                    );
-
-                }
-            );
-
-    }
-
-
-    return records;
-
-}
-
-
-/* ============================================================
-   REPORT PREVIEW
-============================================================ */
-
-function updateReportPreview(){
-
-    const records =
-        getReportRecords();
-
-
-    const type =
-        document.getElementById(
-            "reportType"
-        ).value;
-
-
-    const total =
-        records.reduce(
-            function(sum,record){
-
-                return sum +
-                    (
-                        Number(
-                            record.collectedDrums
-                        ) || 0
-                    );
-
-            },
-            0
-        );
-
-
-    const assigned =
-        records.reduce(
-            function(sum,record){
-
-                if(
-                    !Array.isArray(
-                        record.sites
-                    )
-                ){
-
-                    return sum;
-
-                }
-
-
-                return sum +
-                    record.sites.reduce(
-                        function(siteSum,site){
-
-                            return siteSum +
-                                (
-                                    Number(
-                                        site.drums
-                                    ) || 0
-                                );
-
-                        },
-                        0
-                    );
-
-            },
-            0
-        );
-
-
-    const photos =
-        records.filter(
-            function(record){
-
-                return !!record.photo;
-
-            }
-        ).length;
-
-
-    const preview =
-        document.getElementById(
-            "reportPreview"
-        );
-
-
-    preview.innerHTML = `
-
-        <strong>
-            Report Type:
-        </strong>
-        ${escapeHTML(type)}
-        <br>
-
-        <strong>
-            Records:
-        </strong>
-        ${records.length}
-        <br>
-
-        <strong>
-            Fuel Collected:
-        </strong>
-        ${total} drums
-        <br>
-
-        <strong>
-            Site Allocation:
-        </strong>
-        ${assigned} drums
-        <br>
-
-        <strong>
-            Photos:
-        </strong>
-        ${photos}
-
-    `;
-
-}
-
-
-/* ============================================================
-   CSV ESCAPE
-============================================================ */
-
-function csvEscape(value){
-
-    const text =
-        String(
-            value === undefined ||
-            value === null
-            ?
-            ""
-            :
-            value
-        );
-
-
-    return '"' +
-        text.replace(
-            /"/g,
-            '""'
-        ) +
-        '"';
-
-}
-
-
-/* ============================================================
-   CSV
-============================================================ */
-
-function downloadCSV(){
-
-    const records =
-        getReportRecords();
-
-
-    if(
-        records.length === 0
-    ){
-
-        alert(
-            "There are no records for the selected report period."
-        );
-
-        return;
-
-    }
-
-
-    const rows = [];
-
-
-    rows.push([
-
-        "Date",
-
-        "Team",
-
-        "Zone",
-
-        "Vehicle",
-
-        "Collected Drums",
-
-        "Vodafone PNG Sites",
-
-        "Site Allocation Drums",
-
-        "Photo Available"
-
-    ]);
-
-
-    records.forEach(
-        function(record){
-
-            const sites =
-                Array.isArray(
-                    record.sites
-                )
-                ?
-                record.sites
-                :
-                [];
-
-
-            const siteNames =
-                sites.map(
-                    function(site){
-
-                        return (
-                            site.siteId +
-                            " (" +
-                            site.drums +
-                            " drums)"
-                        );
-
-                    }
-                ).join(
-                    " | "
-                );
-
-
-            const assigned =
-                sites.reduce(
-                    function(sum,site){
-
-                        return sum +
-                            (
-                                Number(
-                                    site.drums
-                                ) || 0
-                            );
-
-                    },
-                    0
-                );
-
-
-            rows.push([
-
-                record.date,
-
-                record.team,
-
-                record.zone,
-
-                record.vehicle,
-
-                Number(
-                    record.collectedDrums
-                ) || 0,
-
-                siteNames,
-
-                assigned,
-
-                record.photo
-                ?
-                "Yes"
-                :
-                "No"
-
-            ]);
-
-        }
+    doc.setFontSize(
+        10
     );
 
 
-    const csv =
-        rows.map(
-            function(row){
+    doc.setFont(
+        "helvetica",
+        "normal"
+    );
 
-                return row.map(
-                    csvEscape
-                ).join(",");
+
+    doc.text(
+
+        "Report Type: " +
+        reportType,
+
+        14,
+
+        23
+
+    );
+
+
+    if(
+        reportType === "daily"
+    ){
+
+        doc.text(
+
+            "Date: " +
+            reportDate,
+
+            14,
+
+            29
+
+        );
+
+    }
+
+
+    if(
+
+        reportType === "monthly"
+
+        ||
+
+        reportType === "selected-month"
+
+    ){
+
+        doc.text(
+
+            "Month: " +
+            reportMonth,
+
+            14,
+
+            29
+
+        );
+
+    }
+
+
+    if(
+        reportType === "weekly"
+    ){
+
+        doc.text(
+
+            "Week based on: " +
+            reportDate,
+
+            14,
+
+            29
+
+        );
+
+    }
+
+
+    const totalDrums =
+        records.reduce(
+
+            function(sum,record){
+
+                return sum +
+
+                    Number(
+                        record.collectedDrums || 0
+                    );
+
+            },
+
+            0
+
+        );
+
+
+    doc.text(
+
+        "Total Records: " +
+        records.length,
+
+        14,
+
+        35
+
+    );
+
+
+    doc.text(
+
+        "Total Fuel Collected: " +
+        totalDrums +
+        " drums",
+
+        14,
+
+        41
+
+    );
+
+
+    doc.text(
+
+        "Generated: " +
+        new Date().toLocaleString(),
+
+        14,
+
+        47
+
+    );
+
+
+    /* =====================================================
+       TABLE DATA
+    ====================================================== */
+
+    const tableData = [];
+
+
+    records.forEach(
+
+        function(record){
+
+            if(
+
+                !record.sites
+
+                ||
+
+                record.sites.length === 0
+
+            ){
+
+                tableData.push([
+
+                    record.date,
+
+                    record.team,
+
+                    record.zone,
+
+                    record.vehicle,
+
+                    record.collectedDrums,
+
+                    "-",
+
+                    "-",
+
+                    record.photo
+                    ?
+                    "Yes"
+                    :
+                    "No"
+
+                ]);
+
+
+                return;
 
             }
-        ).join("\n");
 
 
-    const date =
-        getToday();
+            record.sites.forEach(
+
+                function(site){
+
+                    tableData.push([
+
+                        record.date,
+
+                        record.team,
+
+                        record.zone,
+
+                        record.vehicle,
+
+                        record.collectedDrums,
+
+                        site.siteId,
+
+                        site.drums,
+
+                        record.photo
+                        ?
+                        "Yes"
+                        :
+                        "No"
+
+                    ]);
+
+                }
+
+            );
+
+        }
+
+    );
 
 
-    downloadFile(
-        csv,
+    /* =====================================================
+       PDF TABLE
+    ====================================================== */
+
+    doc.autoTable({
+
+        startY:53,
+
+        head:[[
+
+            "Date",
+
+            "Team",
+
+            "Zone",
+
+            "Vehicle",
+
+            "Collected Drums",
+
+            "Vodafone Site",
+
+            "Site Drums",
+
+            "Photo"
+
+        ]],
+
+        body:tableData,
+
+        theme:"grid",
+
+        styles:{
+
+            fontSize:8,
+
+            cellPadding:3
+
+        },
+
+        headStyles:{
+
+            fontStyle:"bold"
+
+        },
+
+        margin:{
+
+            left:14,
+
+            right:14
+
+        }
+
+    });
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    const pageCount =
+        doc.internal.getNumberOfPages();
+
+
+    for(
+
+        let i = 1;
+
+        i <= pageCount;
+
+        i++
+
+    ){
+
+        doc.setPage(
+            i
+        );
+
+
+        const pageHeight =
+            doc.internal.pageSize.height;
+
+
+        doc.setFontSize(
+            8
+        );
+
+
+        doc.text(
+
+            "Powered by Iso Yawi | Vodafone PNG Fuel Collection Dashboard | Page " +
+            i +
+            " of " +
+            pageCount,
+
+            14,
+
+            pageHeight - 8
+
+        );
+
+    }
+
+
+    /* =====================================================
+       DOWNLOAD
+    ====================================================== */
+
+    const filename =
+
         "Vodafone_PNG_Fuel_Report_" +
-        date +
-        ".csv",
-        "text/csv;charset=utf-8;"
+
+        getToday() +
+
+        ".pdf";
+
+
+    doc.save(
+        filename
     );
 
 }
@@ -3993,15 +4787,18 @@ function downloadCSV(){
 function downloadFile(
     content,
     filename,
-    mimeType
+    mime
 ){
 
     const blob =
         new Blob(
+
             [content],
+
             {
-                type:mimeType
+                type:mime
             }
+
         );
 
 
@@ -4037,6 +4834,7 @@ function downloadFile(
 
 
     setTimeout(
+
         function(){
 
             URL.revokeObjectURL(
@@ -4044,686 +4842,16 @@ function downloadFile(
             );
 
         },
-        1000
+
+        100
+
     );
 
 }
 
 
 /* ============================================================
-   PDF
-============================================================ */
-
-async function downloadPDF(){
-
-    const records =
-        getReportRecords();
-
-
-    if(
-        records.length === 0
-    ){
-
-        alert(
-            "There are no records for the selected report period."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !window.jspdf ||
-        !window.jspdf.jsPDF
-    ){
-
-        alert(
-            "PDF library is not available. Please check your internet connection and try again."
-        );
-
-        return;
-
-    }
-
-
-    const {
-        jsPDF
-    } =
-        window.jspdf;
-
-
-    const doc =
-        new jsPDF(
-            "landscape",
-            "mm",
-            "a4"
-        );
-
-
-    doc.setFontSize(
-        16
-    );
-
-
-    doc.text(
-        "Vodafone PNG Fuel Collection Report",
-        14,
-        15
-    );
-
-
-    doc.setFontSize(
-        9
-    );
-
-
-    doc.text(
-        "Lae Zone Fuel Collection • Team Accountability • Site Allocation",
-        14,
-        21
-    );
-
-
-    const totalCollected =
-        records.reduce(
-            function(sum,record){
-
-                return sum +
-                    (
-                        Number(
-                            record.collectedDrums
-                        ) || 0
-                    );
-
-            },
-            0
-        );
-
-
-    const totalAssigned =
-        records.reduce(
-            function(sum,record){
-
-                if(
-                    !Array.isArray(
-                        record.sites
-                    )
-                ){
-
-                    return sum;
-
-                }
-
-
-                return sum +
-                    record.sites.reduce(
-                        function(siteSum,site){
-
-                            return siteSum +
-                                (
-                                    Number(
-                                        site.drums
-                                    ) || 0
-                                );
-
-                        },
-                        0
-                    );
-
-            },
-            0
-        );
-
-
-    const photos =
-        records.filter(
-            function(record){
-
-                return !!record.photo;
-
-            }
-        ).length;
-
-
-    doc.text(
-        "Records: " +
-        records.length,
-        14,
-        28
-    );
-
-
-    doc.text(
-        "Fuel Collected: " +
-        totalCollected +
-        " drums",
-        70,
-        28
-    );
-
-
-    doc.text(
-        "Site Allocation: " +
-        totalAssigned +
-        " drums",
-        145,
-        28
-    );
-
-
-    doc.text(
-        "Photos: " +
-        photos,
-        225,
-        28
-    );
-
-
-    const tableRows =
-        records.map(
-            function(record){
-
-                const sites =
-                    Array.isArray(
-                        record.sites
-                    )
-                    ?
-                    record.sites
-                    :
-                    [];
-
-
-                const siteText =
-                    sites.map(
-                        function(site){
-
-                            return (
-                                site.siteId +
-                                " (" +
-                                site.drums +
-                                ")"
-                            );
-
-                        }
-                    ).join(
-                        ", "
-                    );
-
-
-                return [
-
-                    formatDate(
-                        record.date
-                    ),
-
-                    record.team ||
-                    "",
-
-                    record.zone ||
-                    "",
-
-                    record.vehicle ||
-                    "",
-
-                    String(
-                        Number(
-                            record.collectedDrums
-                        ) || 0
-                    ),
-
-                    siteText,
-
-                    record.photo
-                    ?
-                    "Yes"
-                    :
-                    "No"
-
-                ];
-
-            }
-        );
-
-
-    if(
-        typeof doc.autoTable ===
-        "function"
-    ){
-
-        doc.autoTable({
-
-            startY:34,
-
-            head:[
-
-                [
-
-                    "Date",
-
-                    "Team",
-
-                    "Zone",
-
-                    "Vehicle",
-
-                    "Drums",
-
-                    "Vodafone PNG Sites",
-
-                    "Photo"
-
-                ]
-
-            ],
-
-            body:
-                tableRows,
-
-            styles:{
-
-                fontSize:7,
-
-                cellPadding:2
-
-            },
-
-            headStyles:{
-
-                fontSize:7
-
-            },
-
-            columnStyles:{
-
-                0:{
-                    cellWidth:25
-                },
-
-                1:{
-                    cellWidth:32
-                },
-
-                2:{
-                    cellWidth:20
-                },
-
-                3:{
-                    cellWidth:32
-                },
-
-                4:{
-                    cellWidth:18
-                },
-
-                5:{
-                    cellWidth:110
-                },
-
-                6:{
-                    cellWidth:20
-                }
-
-            }
-
-        });
-
-    }
-    else{
-
-        let y =
-            40;
-
-
-        doc.setFontSize(
-            8
-        );
-
-
-        tableRows.forEach(
-            function(row){
-
-                doc.text(
-                    row.join(
-                        " | "
-                    ),
-                    10,
-                    y
-                );
-
-
-                y += 5;
-
-
-                if(
-                    y > 190
-                ){
-
-                    doc.addPage();
-
-                    y = 15;
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /*
-       PHOTO PAGES
-       Each recorded photo is placed on a separate
-       PDF page after the main table.
-    */
-
-    for(
-        let i = 0;
-        i < records.length;
-        i++
-    ){
-
-        const record =
-            records[i];
-
-
-        if(
-            !record.photo
-        ){
-
-            continue;
-
-        }
-
-
-        try{
-
-            doc.addPage();
-
-
-            doc.setFontSize(
-                13
-            );
-
-
-            doc.text(
-                "Fuel Loaded Drum Photo",
-                14,
-                15
-            );
-
-
-            doc.setFontSize(
-                9
-            );
-
-
-            doc.text(
-                "Date: " +
-                formatDate(
-                    record.date
-                ),
-                14,
-                22
-            );
-
-
-            doc.text(
-                "Team: " +
-                (
-                    record.team ||
-                    ""
-                ),
-                14,
-                28
-            );
-
-
-            doc.text(
-                "Zone: " +
-                (
-                    record.zone ||
-                    ""
-                ),
-                14,
-                34
-            );
-
-
-            doc.text(
-                "Vehicle: " +
-                (
-                    record.vehicle ||
-                    ""
-                ),
-                14,
-                40
-            );
-
-
-            doc.addImage(
-                record.photo,
-                "JPEG",
-                20,
-                48,
-                250,
-                140,
-                undefined,
-                "MEDIUM"
-            );
-
-        }
-        catch(error){
-
-            console.error(
-                "Could not add photo to PDF:",
-                error
-            );
-
-        }
-
-    }
-
-
-    doc.save(
-        "Vodafone_PNG_Fuel_Report_" +
-        getToday() +
-        ".pdf"
-    );
-
-}
-
-
-/* ============================================================
-   REPORT EVENTS
-============================================================ */
-
-function setupReportEvents(){
-
-    const reportType =
-        document.getElementById(
-            "reportType"
-        );
-
-
-    const reportDate =
-        document.getElementById(
-            "reportDate"
-        );
-
-
-    const reportMonth =
-        document.getElementById(
-            "reportMonth"
-        );
-
-
-    if(reportType){
-
-        reportType.addEventListener(
-            "change",
-            updateReportPreview
-        );
-
-    }
-
-
-    if(reportDate){
-
-        reportDate.addEventListener(
-            "change",
-            updateReportPreview
-        );
-
-    }
-
-
-    if(reportMonth){
-
-        reportMonth.addEventListener(
-            "change",
-            updateReportPreview
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   THEME
-============================================================ */
-
-function applyTheme(theme){
-
-    let actualTheme =
-        theme;
-
-
-    if(
-        theme === "system"
-    ){
-
-        actualTheme =
-            window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            ).matches
-            ?
-            "dark"
-            :
-            "light";
-
-    }
-
-
-    document.body.classList.toggle(
-        "dark",
-        actualTheme === "dark"
-    );
-
-}
-
-
-function setTheme(theme){
-
-    localStorage.setItem(
-        "VODAFONE_THEME",
-        theme
-    );
-
-
-    applyTheme(
-        theme
-    );
-
-}
-
-
-function loadTheme(){
-
-    const saved =
-        localStorage.getItem(
-            "VODAFONE_THEME"
-        ) ||
-        "system";
-
-
-    const selector =
-        document.getElementById(
-            "themeSelector"
-        );
-
-
-    if(selector){
-
-        selector.value =
-            saved;
-
-    }
-
-
-    applyTheme(
-        saved
-    );
-
-}
-
-
-/* ============================================================
-   LOGOUT
-============================================================ */
-
-function logout(){
-
-    const confirmed =
-        confirm(
-            "Are you sure you want to logout."
-        );
-
-
-    if(!confirmed){
-
-        return;
-
-    }
-
-
-    sessionStorage.removeItem(
-        "warehouseSession"
-    );
-
-
-    sessionStorage.removeItem(
-        "adminSession"
-    );
-
-
-    sessionStorage.removeItem(
-        "userRole"
-    );
-
-
-    sessionStorage.removeItem(
-        "username"
-    );
-
-
-    /*
-       IMPORTANT:
-       Dashboard data is NOT deleted here.
-       Only the login session is removed.
-    */
-
-
-    window.location.replace(
-        "index.html"
-    );
-
-}
-
-
-/* ============================================================
-   RENDER DASHBOARD
+   RENDER EVERYTHING
 ============================================================ */
 
 function renderDashboard(){
@@ -4742,79 +4870,43 @@ function renderDashboard(){
 
 
 /* ============================================================
-   INITIALISE
+   INITIALISE APPLICATION
 ============================================================ */
 
 function initialise(){
 
-    /* --------------------------------------------------------
-       SESSION CHECK
-    -------------------------------------------------------- */
+    /*
+       Load saved fuel database.
+    */
 
-    const session =
-        sessionStorage.getItem(
-            "warehouseSession"
-        );
+    loadDatabase();
 
 
-    const role =
-        sessionStorage.getItem(
-            "userRole"
-        );
+    /* =====================================================
+       DEFAULT DATES
+    ====================================================== */
+
+    document.getElementById(
+        "collectionDate"
+    ).value =
+        getToday();
 
 
-    if(
-        !session ||
-        role !== "Warehouse"
-    ){
-
-        window.location.replace(
-            "index.html"
-        );
-
-        return;
-
-    }
+    document.getElementById(
+        "reportDate"
+    ).value =
+        getToday();
 
 
-    /* --------------------------------------------------------
-       LOAD SAVED THEME
-    -------------------------------------------------------- */
-
-    loadTheme();
-
-
-    /* --------------------------------------------------------
-       THEME SELECTOR
-    -------------------------------------------------------- */
-
-    const themeSelector =
-        document.getElementById(
-            "themeSelector"
-        );
+    document.getElementById(
+        "reportMonth"
+    ).value =
+        getCurrentMonth();
 
 
-    if(themeSelector){
-
-        themeSelector.addEventListener(
-            "change",
-            function(){
-
-                setTheme(
-                    this.value
-                );
-
-            }
-        );
-
-    }
-
-
-    /* --------------------------------------------------------
-       FUEL DRUM PHOTO
-       IMPORTANT:
-       This is deliberately OUTSIDE the themeSelector block.
-    -------------------------------------------------------- */
+    /* =====================================================
+       PHOTO INPUT
+    ====================================================== */
 
     const fuelDrumPhoto =
         document.getElementById(
@@ -4825,8 +4917,11 @@ function initialise(){
     if(fuelDrumPhoto){
 
         fuelDrumPhoto.addEventListener(
+
             "change",
+
             handleFuelDrumPhoto
+
         );
 
     }
@@ -4841,108 +4936,187 @@ function initialise(){
     if(removePhotoButton){
 
         removePhotoButton.addEventListener(
+
             "click",
+
             function(){
 
                 removeFuelDrumPhoto();
 
             }
+
         );
 
     }
 
 
-    /* --------------------------------------------------------
-       LOAD DATABASE
-    -------------------------------------------------------- */
+    /* =====================================================
+       ADD SITE
+    ====================================================== */
 
-    loadDatabase();
+    document.getElementById(
+        "addSiteButton"
+    ).addEventListener(
 
+        "click",
 
-    /* --------------------------------------------------------
-       DEFAULT COLLECTION DATE
-    -------------------------------------------------------- */
+        function(event){
 
-    const collectionDate =
-        document.getElementById(
-            "collectionDate"
-        );
+            event.preventDefault();
 
+            addSite();
 
-    if(collectionDate){
+        }
 
-        collectionDate.value =
-            getToday();
-
-    }
+    );
 
 
-    /* --------------------------------------------------------
-       DEFAULT REPORT DATE
-    -------------------------------------------------------- */
+    /* =====================================================
+       RECORD
+    ====================================================== */
 
-    const reportDate =
-        document.getElementById(
-            "reportDate"
-        );
+    document.getElementById(
+        "recordButton"
+    ).addEventListener(
 
+        "click",
 
-    if(reportDate){
+        function(event){
 
-        reportDate.value =
-            getToday();
+            event.preventDefault();
 
-    }
+            recordFuelCollection();
 
+        }
 
-    /* --------------------------------------------------------
-       DEFAULT REPORT MONTH
-    -------------------------------------------------------- */
-
-    const reportMonth =
-        document.getElementById(
-            "reportMonth"
-        );
+    );
 
 
-    if(reportMonth){
+    /* =====================================================
+       STOCK
+    ====================================================== */
 
-        reportMonth.value =
-            getCurrentMonth();
+    document.getElementById(
+        "setStockButton"
+    ).addEventListener(
 
-    }
+        "click",
 
+        function(event){
 
-    /* --------------------------------------------------------
-       ADD INITIAL SITE ROW
-    -------------------------------------------------------- */
+            event.preventDefault();
 
-    const siteAssignments =
-        document.getElementById(
-            "siteAssignments"
-        );
+            setStock();
 
+        }
 
-    if(
-        siteAssignments &&
-        siteAssignments.children.length === 0
-    ){
-
-        addSite();
-
-    }
+    );
 
 
-    /* --------------------------------------------------------
-       REPORT EVENTS
-    -------------------------------------------------------- */
+    /* =====================================================
+       CSV
+    ====================================================== */
 
-    setupReportEvents();
+    document.getElementById(
+        "downloadCSV"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            downloadCSV();
+
+        }
+
+    );
 
 
-    /* --------------------------------------------------------
-       RENDER
-    -------------------------------------------------------- */
+    /* =====================================================
+       PDF
+    ====================================================== */
+
+    document.getElementById(
+        "downloadPDF"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            downloadPDF();
+
+        }
+
+    );
+
+
+    /* =====================================================
+       CLEAR DATA
+    ====================================================== */
+
+    document.getElementById(
+        "clearData"
+    ).addEventListener(
+
+        "click",
+
+        function(){
+
+            clearAllData();
+
+        }
+
+    );
+
+
+    /* =====================================================
+       REPORT FILTERS
+    ====================================================== */
+
+    document.getElementById(
+        "reportType"
+    ).addEventListener(
+
+        "change",
+
+        updateReportPreview
+
+    );
+
+
+    document.getElementById(
+        "reportDate"
+    ).addEventListener(
+
+        "change",
+
+        updateReportPreview
+
+    );
+
+
+    document.getElementById(
+        "reportMonth"
+    ).addEventListener(
+
+        "change",
+
+        updateReportPreview
+
+    );
+
+
+    /* =====================================================
+       FIRST SITE
+    ====================================================== */
+
+    addSite();
+
+
+    /* =====================================================
+       DASHBOARD
+    ====================================================== */
 
     renderDashboard();
 
@@ -4954,11 +5128,15 @@ function initialise(){
 ============================================================ */
 
 document.addEventListener(
+
     "DOMContentLoaded",
+
     initialise
+
 );
 
 </script>
+
 
 </body>
 
