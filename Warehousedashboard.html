@@ -44,14 +44,12 @@
 
 
 <!-- =========================================================
-     EXTERNAL LIBRARIES
+     jsPDF FOR PDF REPORTS
 ========================================================= -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
 
 
 <style>
@@ -145,7 +143,7 @@ body{
 
 
 /* =========================================================
-   THEME
+   THEME SELECTOR
 ========================================================= */
 
 .theme-select{
@@ -173,6 +171,9 @@ body{
 .theme-select:focus{
 
     outline:none;
+
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.35);
 
 }
 
@@ -242,6 +243,11 @@ body{
     box-shadow:
         0 3px 12px rgba(0,0,0,.08);
 
+    transition:
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+
 }
 
 .card h2{
@@ -281,6 +287,10 @@ body{
     box-shadow:
         0 3px 10px rgba(0,0,0,.07);
 
+    transition:
+        background .25s ease,
+        box-shadow .25s ease;
+
 }
 
 .kpi-title{
@@ -306,19 +316,27 @@ body{
 }
 
 .red{
+
     color:#e60000;
+
 }
 
 .green{
+
     color:#15803d;
+
 }
 
 .blue{
+
     color:#2563eb;
+
 }
 
 .orange{
+
     color:#d97706;
+
 }
 
 
@@ -376,6 +394,11 @@ select{
     background:#fff;
 
     color:#111827;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease;
 
 }
 
@@ -566,6 +589,12 @@ button:hover{
 
 }
 
+.photo-section label{
+
+    margin-bottom:8px;
+
+}
+
 .photo-input{
 
     width:100%;
@@ -577,6 +606,8 @@ button:hover{
     border-radius:8px;
 
     background:#fff;
+
+    cursor:pointer;
 
 }
 
@@ -608,6 +639,8 @@ button:hover{
 
     object-fit:contain;
 
+    background:#fff;
+
 }
 
 .photo-caption{
@@ -636,7 +669,7 @@ button:hover{
 
 
 /* =========================================================
-   REGISTER PHOTO
+   PHOTO REGISTER
 ========================================================= */
 
 .register-photo{
@@ -866,139 +899,11 @@ button:hover{
     display:grid;
 
     grid-template-columns:
-        repeat(3,1fr);
-
-    gap:10px;
-
-    margin-top:12px;
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search-panel{
-
-    margin-top:15px;
-
-    padding:15px;
-
-    background:#f9fafb;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:10px;
-
-}
-
-.search-title{
-
-    font-size:15px;
-
-    font-weight:900;
-
-    margin-bottom:14px;
-
-}
-
-.search-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:10px;
-
-}
-
-.search-actions{
-
-    display:grid;
-
-    grid-template-columns:
         1fr 1fr;
 
     gap:10px;
 
     margin-top:12px;
-
-}
-
-.search-results{
-
-    margin-top:14px;
-
-    padding:14px;
-
-    border-radius:9px;
-
-    background:#fff;
-
-    border:1px solid #e5e7eb;
-
-    font-size:13px;
-
-}
-
-.search-result-table{
-
-    width:100%;
-
-    margin-top:12px;
-
-    border-collapse:collapse;
-
-}
-
-.search-result-table th,
-.search-result-table td{
-
-    padding:9px;
-
-    border-bottom:
-        1px solid #e5e7eb;
-
-    text-align:left;
-
-    vertical-align:top;
-
-    font-size:12px;
-
-}
-
-.search-result-table th{
-
-    background:#f3f4f6;
-
-    position:sticky;
-
-    top:0;
-
-}
-
-
-/* =========================================================
-   SEARCH STATUS
-========================================================= */
-
-.search-status{
-
-    margin-top:10px;
-
-    padding:9px;
-
-    background:#eff6ff;
-
-    color:#1d4ed8;
-
-    border-radius:7px;
-
-    font-size:12px;
-
-    font-weight:bold;
 
 }
 
@@ -1138,9 +1043,18 @@ body.dark-theme input::placeholder{
 
 }
 
+body.dark-theme input:focus,
+body.dark-theme select:focus{
+
+    border-color:#e60000;
+
+}
+
 body.dark-theme .site-total{
 
     background:#111827;
+
+    color:#f9fafb;
 
 }
 
@@ -1214,34 +1128,6 @@ body.dark-theme #reportPreview{
 
 }
 
-body.dark-theme .search-panel{
-
-    background:#111827;
-
-    border-color:#374151;
-
-}
-
-body.dark-theme .search-results{
-
-    background:#1f2937;
-
-    border-color:#374151;
-
-}
-
-body.dark-theme .search-result-table th{
-
-    background:#111827;
-
-}
-
-body.dark-theme .search-result-table td{
-
-    border-color:#374151;
-
-}
-
 
 /* =========================================================
    SYSTEM THEME
@@ -1263,11 +1149,17 @@ body.dark-theme .search-result-table td{
 
         color:#f9fafb;
 
+        box-shadow:
+            0 3px 15px rgba(0,0,0,.35);
+
     }
 
     body.system-theme .kpi{
 
         background:#1f2937;
+
+        box-shadow:
+            0 3px 12px rgba(0,0,0,.35);
 
     }
 
@@ -1288,9 +1180,17 @@ body.dark-theme .search-result-table td{
 
     }
 
+    body.system-theme input::placeholder{
+
+        color:#9ca3af;
+
+    }
+
     body.system-theme .site-total{
 
         background:#111827;
+
+        color:#f9fafb;
 
     }
 
@@ -1308,6 +1208,8 @@ body.dark-theme .search-result-table td{
 
         color:#f9fafb;
 
+        border-color:#4b5563;
+
     }
 
     body.system-theme .zone{
@@ -1315,6 +1217,12 @@ body.dark-theme .search-result-table td{
         background:#111827;
 
         border-color:#374151;
+
+    }
+
+    body.system-theme .zone-name{
+
+        color:#9ca3af;
 
     }
 
@@ -1356,39 +1264,11 @@ body.dark-theme .search-result-table td{
 
     }
 
-    body.system-theme .search-panel{
-
-        background:#111827;
-
-        border-color:#374151;
-
-    }
-
-    body.system-theme .search-results{
-
-        background:#1f2937;
-
-        border-color:#374151;
-
-    }
-
-    body.system-theme .search-result-table th{
-
-        background:#111827;
-
-    }
-
-    body.system-theme .search-result-table td{
-
-        border-color:#374151;
-
-    }
-
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE
 ========================================================= */
 
 @media(max-width:1200px){
@@ -1401,6 +1281,7 @@ body.dark-theme .search-result-table td{
     }
 
 }
+
 
 @media(max-width:900px){
 
@@ -1417,14 +1298,8 @@ body.dark-theme .search-result-table td{
 
     }
 
-    .search-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
 }
+
 
 @media(max-width:600px){
 
@@ -1468,9 +1343,7 @@ body.dark-theme .search-result-table td{
 
     .two,
     .report-grid,
-    .report-buttons,
-    .search-grid,
-    .search-actions{
+    .report-buttons{
 
         grid-template-columns:1fr;
 
@@ -1518,6 +1391,7 @@ body.dark-theme .search-result-table td{
         <select
             id="themeSelector"
             class="theme-select"
+            title="Select dashboard theme"
         >
 
             <option value="light">
@@ -1552,7 +1426,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     KPI
+     KPI DASHBOARD
 ========================================================= -->
 
 <div class="kpis">
@@ -1663,7 +1537,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     LEFT
+     LEFT COLUMN
 ========================================================= -->
 
 <div>
@@ -1714,7 +1588,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     COLLECTION
+     COLLECTION FORM
 ========================================================= -->
 
 <div class="card">
@@ -1727,7 +1601,7 @@ body.dark-theme .search-result-table td{
     <div class="form-group">
 
         <label>
-            Team Member / Team Leader
+            Team Member
         </label>
 
         <select id="teamMember">
@@ -1888,7 +1762,7 @@ body.dark-theme .search-result-table td{
 
 
     <!-- =====================================================
-         PHOTO
+         FUEL DRUM PHOTO
     ====================================================== -->
 
     <div class="photo-section">
@@ -1939,7 +1813,7 @@ body.dark-theme .search-result-table td{
 
 
     <!-- =====================================================
-         SITE ASSIGNMENT
+         SITE ASSIGNMENTS
     ====================================================== -->
 
     <div class="form-group">
@@ -1990,6 +1864,7 @@ body.dark-theme .search-result-table td{
         class="message"
     ></div>
 
+
 </div>
 
 
@@ -1997,7 +1872,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     RIGHT
+     RIGHT COLUMN
 ========================================================= -->
 
 <div>
@@ -2010,7 +1885,7 @@ body.dark-theme .search-result-table td{
 <div class="card">
 
     <h2>
-        Reports & Search
+        Download Reports
     </h2>
 
 
@@ -2075,221 +1950,6 @@ body.dark-theme .search-result-table td{
     </div>
 
 
-    <!-- =====================================================
-         ADVANCED SEARCH
-    ====================================================== -->
-
-    <div class="search-panel">
-
-        <div class="search-title">
-
-            Search Fuel Collection Records
-
-        </div>
-
-
-        <div class="search-grid">
-
-
-            <div>
-
-                <label>
-                    Team Leader / Team Member
-                </label>
-
-                <input
-                    type="text"
-                    id="searchTeam"
-                    placeholder="Example: Iso Yawi"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Collection Month
-                </label>
-
-                <input
-                    type="month"
-                    id="searchMonth"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Collection Date
-                </label>
-
-                <input
-                    type="date"
-                    id="searchDate"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Vodafone PNG Site ID
-                </label>
-
-                <input
-                    type="text"
-                    id="searchSite"
-                    placeholder="Example: VP1066"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Lae Zone
-                </label>
-
-                <select id="searchZone">
-
-                    <option value="">
-                        All Zones
-                    </option>
-
-                    <option>
-                        Lae Zone 1
-                    </option>
-
-                    <option>
-                        Lae Zone 2
-                    </option>
-
-                    <option>
-                        Lae Zone 3
-                    </option>
-
-                    <option>
-                        Lae Zone 4
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Vehicle / Truck
-                </label>
-
-                <input
-                    type="text"
-                    id="searchVehicle"
-                    placeholder="Vehicle registration"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Minimum Drums
-                </label>
-
-                <input
-                    type="number"
-                    id="searchMinDrums"
-                    min="0"
-                    step="1"
-                    placeholder="Example: 5"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    Maximum Drums
-                </label>
-
-                <input
-                    type="number"
-                    id="searchMaxDrums"
-                    min="0"
-                    step="1"
-                    placeholder="Example: 50"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>
-                    General Search
-                </label>
-
-                <input
-                    type="text"
-                    id="searchKeyword"
-                    placeholder="Team, site, zone, vehicle..."
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="search-actions">
-
-            <button
-                type="button"
-                id="searchReport"
-                class="btn-black"
-            >
-                Search Reports
-            </button>
-
-
-            <button
-                type="button"
-                id="resetSearch"
-                class="btn-gray"
-            >
-                Reset Search
-            </button>
-
-        </div>
-
-
-        <div
-            id="searchStatus"
-            class="search-status"
-            style="display:none;"
-        ></div>
-
-
-        <div
-            id="searchResults"
-            class="search-results"
-            style="display:none;"
-        ></div>
-
-    </div>
-
-
-    <!-- =====================================================
-         DOWNLOAD
-    ====================================================== -->
-
     <div class="report-buttons">
 
         <button
@@ -2309,15 +1969,6 @@ body.dark-theme .search-result-table td{
             Download PDF
         </button>
 
-
-        <button
-            type="button"
-            id="downloadExcel"
-            class="btn-blue"
-        >
-            Download Excel
-        </button>
-
     </div>
 
 
@@ -2334,7 +1985,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     ZONES
+     ZONE DASHBOARD
 ========================================================= -->
 
 <div class="card">
@@ -2352,7 +2003,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     TEAM
+     TEAM ACCOUNTABILITY
 ========================================================= -->
 
 <div class="card">
@@ -2367,7 +2018,7 @@ body.dark-theme .search-result-table td{
 
 
 <!-- =========================================================
-     REGISTER
+     COLLECTION REGISTER
 ========================================================= -->
 
 <div class="card">
@@ -2472,7 +2123,7 @@ body.dark-theme .search-result-table td{
 <script>
 
 /* ============================================================
-   THEME
+   THEME SYSTEM
 ============================================================ */
 
 const THEME_STORAGE_KEY =
@@ -2553,8 +2204,11 @@ function loadTheme(){
 function saveTheme(theme){
 
     localStorage.setItem(
+
         THEME_STORAGE_KEY,
+
         theme
+
     );
 
 
@@ -2564,7 +2218,7 @@ function saveTheme(theme){
 
 
 /* ============================================================
-   SYSTEM THEME
+   SYSTEM THEME CHANGE
 ============================================================ */
 
 const systemThemeMedia =
@@ -2617,7 +2271,6 @@ if(systemThemeMedia){
     ){
 
         systemThemeMedia.addListener(
-            "change",
             systemThemeChanged
         );
 
@@ -2644,6 +2297,13 @@ function logout(){
 
     }
 
+
+    /*
+       Authentication is removed.
+
+       Dashboard data and theme remain
+       in localStorage.
+    */
 
     sessionStorage.removeItem(
         "warehouseSession"
@@ -2687,16 +2347,7 @@ let database = {
 
 
 /* ============================================================
-   SEARCH STATE
-============================================================ */
-
-let advancedSearchActive = false;
-
-let searchedReportRecords = [];
-
-
-/* ============================================================
-   PHOTO
+   PHOTO VARIABLE
 ============================================================ */
 
 let currentFuelDrumPhoto = "";
@@ -2790,7 +2441,7 @@ function saveDatabase(){
 
 
         alert(
-            "The browser could not save the dashboard data. Storage may be full. Try removing old records/photos."
+            "The browser could not save the dashboard data. The browser storage may be full. Try removing old records/photos."
         );
 
 
@@ -2916,7 +2567,7 @@ function getTotalCollected(){
 
 
 /* ============================================================
-   REMAINING
+   REMAINING STOCK
 ============================================================ */
 
 function getRemainingStock(){
@@ -2939,7 +2590,7 @@ function getRemainingStock(){
 
 
 /* ============================================================
-   ASSIGNED
+   TOTAL ASSIGNED
 ============================================================ */
 
 function getTotalAssigned(){
@@ -3018,11 +2669,7 @@ function getUniqueSites(){
                     if(site.siteId){
 
                         sites.add(
-                            String(
-                                site.siteId
-                            )
-                            .trim()
-                            .toUpperCase()
+                            site.siteId
                         );
 
                     }
@@ -3042,7 +2689,7 @@ function getUniqueSites(){
 
 
 /* ============================================================
-   SITE TOTAL
+   UPDATE SITE TOTAL
 ============================================================ */
 
 function updateSiteAllocationTotal(){
@@ -3294,11 +2941,9 @@ function getSiteAssignments(){
 
             sites.push({
 
-                siteId:
-                    siteId.toUpperCase(),
+                siteId:siteId,
 
-                drums:
-                    drums
+                drums:drums
 
             });
 
@@ -3313,7 +2958,7 @@ function getSiteAssignments(){
 
 
 /* ============================================================
-   TEAM MEMBER
+   GET TEAM MEMBER
 ============================================================ */
 
 function getTeamMember(){
@@ -3356,7 +3001,7 @@ function getTeamMember(){
 
 
 /* ============================================================
-   STOCK
+   SET STOCK
 ============================================================ */
 
 function setStock(){
@@ -3563,9 +3208,11 @@ function compressImage(
                         function(){
 
                             reject(
+
                                 new Error(
                                     "Could not load image."
                                 )
+
                             );
 
                         };
@@ -3581,9 +3228,11 @@ function compressImage(
                 function(){
 
                     reject(
+
                         new Error(
                             "Could not read image."
                         )
+
                     );
 
                 };
@@ -3601,7 +3250,7 @@ function compressImage(
 
 
 /* ============================================================
-   PHOTO
+   HANDLE FUEL DRUM PHOTO
 ============================================================ */
 
 async function handleFuelDrumPhoto(
@@ -3751,7 +3400,7 @@ function removeFuelDrumPhoto(){
 
 
 /* ============================================================
-   RECORD COLLECTION
+   RECORD FUEL COLLECTION
 ============================================================ */
 
 function recordFuelCollection(){
@@ -3799,9 +3448,13 @@ function recordFuelCollection(){
     if(!team){
 
         showMessage(
+
             messageBox,
+
             "Please select the team member.",
+
             "error"
+
         );
 
         return;
@@ -3812,9 +3465,13 @@ function recordFuelCollection(){
     if(!date){
 
         showMessage(
+
             messageBox,
+
             "Please select the collection date.",
+
             "error"
+
         );
 
         return;
@@ -3829,9 +3486,13 @@ function recordFuelCollection(){
     ){
 
         showMessage(
+
             messageBox,
+
             "Please enter a valid number of fuel drums collected.",
+
             "error"
+
         );
 
         return;
@@ -3842,9 +3503,13 @@ function recordFuelCollection(){
     if(!zone){
 
         showMessage(
+
             messageBox,
+
             "Please select one of the four Lae Zones.",
+
             "error"
+
         );
 
         return;
@@ -4041,13 +3706,6 @@ function recordFuelCollection(){
     }
 
 
-    advancedSearchActive =
-        false;
-
-    searchedReportRecords =
-        [];
-
-
     renderDashboard();
 
 
@@ -4109,7 +3767,7 @@ function recordFuelCollection(){
 
 
 /* ============================================================
-   DELETE
+   DELETE RECORD
 ============================================================ */
 
 function deleteRecord(id){
@@ -4169,21 +3827,13 @@ function deleteRecord(id){
 
     saveDatabase();
 
-
-    advancedSearchActive =
-        false;
-
-    searchedReportRecords =
-        [];
-
-
     renderDashboard();
 
 }
 
 
 /* ============================================================
-   CLEAR DATA
+   CLEAR ALL DATA
 ============================================================ */
 
 function clearAllData(){
@@ -4218,14 +3868,6 @@ function clearAllData(){
 
 
     saveDatabase();
-
-
-    advancedSearchActive =
-        false;
-
-    searchedReportRecords =
-        [];
-
 
     renderDashboard();
 
@@ -4284,7 +3926,7 @@ function showMessage(
 
 
 /* ============================================================
-   KPI
+   RENDER KPI
 ============================================================ */
 
 function renderKPI(){
@@ -4350,7 +3992,7 @@ function renderKPI(){
 
 
 /* ============================================================
-   ZONES
+   RENDER ZONES
 ============================================================ */
 
 function renderZones(){
@@ -4464,7 +4106,7 @@ function renderZones(){
 
 
 /* ============================================================
-   TEAM SUMMARY
+   RENDER TEAM SUMMARY
 ============================================================ */
 
 function renderTeams(){
@@ -4518,7 +4160,9 @@ function renderTeams(){
 
         container.innerHTML = `
 
-            <div style="color:#6b7280;">
+            <div
+                style="color:#6b7280;"
+            >
 
                 No fuel collection records yet.
 
@@ -4577,12 +4221,16 @@ function renderTeams(){
 
             const percentage =
                 maximum > 0
+
                 ?
+
                 (
                     amount /
                     maximum
                 ) * 100
+
                 :
+
                 0;
 
 
@@ -4601,11 +4249,16 @@ function renderTeams(){
                 <div class="team-line">
 
                     <strong>
+
                         ${escapeHTML(name)}
+
                     </strong>
 
+
                     <span>
+
                         ${amount} drums
+
                     </span>
 
                 </div>
@@ -4615,7 +4268,9 @@ function renderTeams(){
 
                     <div
                         class="progress-bar"
-                        style="width:${percentage}%"
+                        style="
+                        width:${percentage}%;
+                        "
                     ></div>
 
                 </div>
@@ -4794,6 +4449,13 @@ function downloadPhoto(record){
 
     try{
 
+        /*
+           Convert the Base64 data URL into a Blob.
+
+           This provides a proper downloadable JPG file
+           instead of simply opening the image.
+        */
+
         const parts =
             record.photo.split(",");
 
@@ -4949,7 +4611,7 @@ function downloadPhoto(record){
 
 
 /* ============================================================
-   HISTORY
+   RENDER HISTORY
 ============================================================ */
 
 function renderHistory(){
@@ -5030,7 +4692,9 @@ function renderHistory(){
                         siteHTML += `
 
                             <div
-                                style="margin-bottom:5px;"
+                                style="
+                                margin-bottom:5px;
+                                "
                             >
 
                                 <strong>
@@ -5101,40 +4765,69 @@ function renderHistory(){
             row.innerHTML = `
 
                 <td>
-                    ${escapeHTML(record.date)}
+
+                    ${escapeHTML(
+                        record.date
+                    )}
+
                 </td>
+
 
                 <td>
 
                     <strong>
-                        ${escapeHTML(record.team)}
+
+                        ${escapeHTML(
+                            record.team
+                        )}
+
                     </strong>
 
                 </td>
 
-                <td>
-                    ${escapeHTML(record.zone)}
-                </td>
 
                 <td>
-                    ${escapeHTML(record.vehicle)}
+
+                    ${escapeHTML(
+                        record.zone
+                    )}
+
                 </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        record.vehicle
+                    )}
+
+                </td>
+
 
                 <td>
 
                     <strong>
+
                         ${record.collectedDrums}
+
                     </strong>
 
                 </td>
 
-                <td>
-                    ${siteHTML}
-                </td>
 
                 <td>
-                    ${photoHTML}
+
+                    ${siteHTML}
+
                 </td>
+
+
+                <td>
+
+                    ${photoHTML}
+
+                </td>
+
 
                 <td>
 
@@ -5145,13 +4838,19 @@ function renderHistory(){
                         padding:7px 10px;
                         "
                     >
+
                         Delete
+
                     </button>
 
                 </td>
 
             `;
 
+
+            /* =================================================
+               DELETE BUTTON
+            ================================================= */
 
             const deleteButton =
                 row.querySelector(
@@ -5177,6 +4876,10 @@ function renderHistory(){
 
             }
 
+
+            /* =================================================
+               PHOTO VIEW
+            ================================================= */
 
             const photo =
                 row.querySelector(
@@ -5228,6 +4931,10 @@ function renderHistory(){
             }
 
 
+            /* =================================================
+               PHOTO DOWNLOAD
+            ================================================= */
+
             const downloadPhotoButton =
                 row.querySelector(
                     ".photo-download-btn"
@@ -5265,7 +4972,7 @@ function renderHistory(){
 
 
 /* ============================================================
-   NORMAL REPORT FILTER
+   REPORT FILTER
 ============================================================ */
 
 function getReportRecords(){
@@ -5315,13 +5022,6 @@ function getReportRecords(){
 
     ){
 
-        if(!month){
-
-            return [];
-
-        }
-
-
         return database.collections.filter(
 
             function(record){
@@ -5333,13 +5033,6 @@ function getReportRecords(){
             }
 
         );
-
-    }
-
-
-    if(!date){
-
-        return [];
 
     }
 
@@ -5457,828 +5150,13 @@ function formatDate(date){
 
 
 /* ============================================================
-   ADVANCED SEARCH
-============================================================ */
-
-function searchReports(){
-
-    const team =
-        document.getElementById(
-            "searchTeam"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-    const month =
-        document.getElementById(
-            "searchMonth"
-        ).value;
-
-
-    const date =
-        document.getElementById(
-            "searchDate"
-        ).value;
-
-
-    const site =
-        document.getElementById(
-            "searchSite"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-    const zone =
-        document.getElementById(
-            "searchZone"
-        ).value;
-
-
-    const vehicle =
-        document.getElementById(
-            "searchVehicle"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-    const minDrumsValue =
-        document.getElementById(
-            "searchMinDrums"
-        ).value;
-
-
-    const maxDrumsValue =
-        document.getElementById(
-            "searchMaxDrums"
-        ).value;
-
-
-    const keyword =
-        document.getElementById(
-            "searchKeyword"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-    const minDrums =
-        minDrumsValue === ""
-        ?
-        null
-        :
-        Number(minDrumsValue);
-
-
-    const maxDrums =
-        maxDrumsValue === ""
-        ?
-        null
-        :
-        Number(maxDrumsValue);
-
-
-    if(
-        minDrums !== null &&
-        (
-            !Number.isFinite(minDrums)
-            ||
-            minDrums < 0
-        )
-    ){
-
-        alert(
-            "Please enter a valid minimum drum quantity."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        maxDrums !== null &&
-        (
-            !Number.isFinite(maxDrums)
-            ||
-            maxDrums < 0
-        )
-    ){
-
-        alert(
-            "Please enter a valid maximum drum quantity."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        minDrums !== null &&
-        maxDrums !== null &&
-        minDrums > maxDrums
-    ){
-
-        alert(
-            "Minimum drums cannot be greater than maximum drums."
-        );
-
-        return;
-
-    }
-
-
-    searchedReportRecords =
-        database.collections.filter(
-
-            function(record){
-
-                const recordTeam =
-                    String(
-                        record.team || ""
-                    )
-                    .toLowerCase();
-
-
-                const recordDate =
-                    String(
-                        record.date || ""
-                    );
-
-
-                const recordZone =
-                    String(
-                        record.zone || ""
-                    );
-
-
-                const recordVehicle =
-                    String(
-                        record.vehicle || ""
-                    )
-                    .toLowerCase();
-
-
-                const recordDrums =
-                    Number(
-                        record.collectedDrums || 0
-                    );
-
-
-                const recordSites =
-                    Array.isArray(
-                        record.sites
-                    )
-                    ?
-                    record.sites
-                    :
-                    [];
-
-
-                const siteMatches =
-                    site === ""
-                    ||
-                    recordSites.some(
-
-                        function(siteRecord){
-
-                            return String(
-                                siteRecord.siteId || ""
-                            )
-                            .toLowerCase()
-                            .includes(
-                                site
-                            );
-
-                        }
-
-                    );
-
-
-                const siteText =
-                    recordSites
-
-                    .map(
-
-                        function(siteRecord){
-
-                            return String(
-                                siteRecord.siteId || ""
-                            );
-
-                        }
-
-                    )
-
-                    .join(" ")
-
-                    .toLowerCase();
-
-
-                const searchableText =
-
-                    recordTeam +
-                    " " +
-                    recordDate +
-                    " " +
-                    recordZone +
-                    " " +
-                    recordVehicle +
-                    " " +
-                    siteText +
-                    " " +
-                    recordDrums;
-
-
-                if(
-                    team &&
-                    !recordTeam.includes(team)
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    month &&
-                    !recordDate.startsWith(month)
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    date &&
-                    recordDate !== date
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    !siteMatches
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    zone &&
-                    recordZone !== zone
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    vehicle &&
-                    !recordVehicle.includes(vehicle)
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    minDrums !== null &&
-                    recordDrums < minDrums
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    maxDrums !== null &&
-                    recordDrums > maxDrums
-                ){
-
-                    return false;
-
-                }
-
-
-                if(
-                    keyword &&
-                    !searchableText.includes(keyword)
-                ){
-
-                    return false;
-
-                }
-
-
-                return true;
-
-            }
-
-        );
-
-
-    advancedSearchActive =
-        true;
-
-
-    renderSearchResults(
-        searchedReportRecords
-    );
-
-
-    updateReportPreview();
-
-}
-
-
-/* ============================================================
-   SEARCH RESULTS
-============================================================ */
-
-function renderSearchResults(
-    records
-){
-
-    const container =
-        document.getElementById(
-            "searchResults"
-        );
-
-
-    const status =
-        document.getElementById(
-            "searchStatus"
-        );
-
-
-    if(!container){
-
-        return;
-
-    }
-
-
-    container.style.display =
-        "block";
-
-
-    if(status){
-
-        status.style.display =
-            "block";
-
-        status.textContent =
-            "Advanced search is active. CSV, PDF and Excel downloads will use these search results.";
-
-    }
-
-
-    const totalDrums =
-        records.reduce(
-
-            function(total,record){
-
-                return total +
-
-                    Number(
-                        record.collectedDrums || 0
-                    );
-
-            },
-
-            0
-
-        );
-
-
-    const totalSites =
-        records.reduce(
-
-            function(total,record){
-
-                return total +
-
-                    (
-                        Array.isArray(
-                            record.sites
-                        )
-                        ?
-                        record.sites.length
-                        :
-                        0
-                    );
-
-            },
-
-            0
-
-        );
-
-
-    const totalPhotos =
-        records.filter(
-
-            function(record){
-
-                return Boolean(
-                    record.photo
-                );
-
-            }
-
-        ).length;
-
-
-    if(
-        records.length === 0
-    ){
-
-        container.innerHTML = `
-
-            <strong>
-                No matching records found.
-            </strong>
-
-            <br><br>
-
-            Try changing your search criteria.
-
-        `;
-
-
-        return;
-
-    }
-
-
-    let rows = "";
-
-
-    records
-
-        .slice()
-        .reverse()
-
-        .forEach(
-
-            function(record){
-
-                let sites = "-";
-
-
-                if(
-                    Array.isArray(
-                        record.sites
-                    ) &&
-                    record.sites.length > 0
-                ){
-
-                    sites =
-                        record.sites
-
-                        .map(
-
-                            function(site){
-
-                                return (
-
-                                    escapeHTML(
-                                        site.siteId
-                                    )
-
-                                    +
-
-                                    " ("
-
-                                    +
-
-                                    Number(
-                                        site.drums || 0
-                                    )
-
-                                    +
-
-                                    " drums)"
-
-                                );
-
-                            }
-
-                        )
-
-                        .join("<br>");
-
-                }
-
-
-                rows += `
-
-                    <tr>
-
-                        <td>
-                            ${escapeHTML(
-                                record.date
-                            )}
-                        </td>
-
-                        <td>
-
-                            <strong>
-                                ${escapeHTML(
-                                    record.team
-                                )}
-                            </strong>
-
-                        </td>
-
-                        <td>
-                            ${escapeHTML(
-                                record.zone
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHTML(
-                                record.vehicle
-                            )}
-                        </td>
-
-                        <td>
-
-                            <strong>
-                                ${record.collectedDrums}
-                            </strong>
-
-                        </td>
-
-                        <td>
-                            ${sites}
-                        </td>
-
-                        <td>
-
-                            ${
-                                record.photo
-                                ?
-                                "Yes"
-                                :
-                                "No"
-                            }
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-
-        );
-
-
-    container.innerHTML = `
-
-        <div>
-
-            <strong>
-                Search Results
-            </strong>
-
-            <br><br>
-
-            Found:
-
-            <strong>
-                ${records.length}
-            </strong>
-
-            collection records
-
-            &nbsp; • &nbsp;
-
-            Total Fuel:
-
-            <strong>
-                ${totalDrums}
-            </strong>
-
-            drums
-
-            &nbsp; • &nbsp;
-
-            Sites:
-
-            <strong>
-                ${totalSites}
-            </strong>
-
-            &nbsp; • &nbsp;
-
-            Photos:
-
-            <strong>
-                ${totalPhotos}
-            </strong>
-
-        </div>
-
-
-        <div class="table-wrap">
-
-            <table class="search-result-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            Team
-                        </th>
-
-                        <th>
-                            Zone
-                        </th>
-
-                        <th>
-                            Vehicle
-                        </th>
-
-                        <th>
-                            Drums
-                        </th>
-
-                        <th>
-                            Vodafone PNG Sites
-                        </th>
-
-                        <th>
-                            Photo
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    ${rows}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    `;
-
-}
-
-
-/* ============================================================
-   RESET SEARCH
-============================================================ */
-
-function resetReportSearch(){
-
-    const fields = [
-
-        "searchTeam",
-
-        "searchMonth",
-
-        "searchDate",
-
-        "searchSite",
-
-        "searchVehicle",
-
-        "searchMinDrums",
-
-        "searchMaxDrums",
-
-        "searchKeyword"
-
-    ];
-
-
-    fields.forEach(
-
-        function(id){
-
-            const element =
-                document.getElementById(
-                    id
-                );
-
-
-            if(element){
-
-                element.value = "";
-
-            }
-
-        }
-
-    );
-
-
-    document.getElementById(
-        "searchZone"
-    ).value = "";
-
-
-    searchedReportRecords =
-        [];
-
-
-    advancedSearchActive =
-        false;
-
-
-    const results =
-        document.getElementById(
-            "searchResults"
-        );
-
-
-    if(results){
-
-        results.style.display =
-            "none";
-
-        results.innerHTML =
-            "";
-
-    }
-
-
-    const status =
-        document.getElementById(
-            "searchStatus"
-        );
-
-
-    if(status){
-
-        status.style.display =
-            "none";
-
-        status.textContent =
-            "";
-
-    }
-
-
-    updateReportPreview();
-
-}
-
-
-/* ============================================================
-   ACTIVE REPORT RECORDS
-============================================================ */
-
-function getActiveReportRecords(){
-
-    if(
-        advancedSearchActive
-    ){
-
-        return searchedReportRecords;
-
-    }
-
-
-    return getReportRecords();
-
-}
-
-
-/* ============================================================
    REPORT PREVIEW
 ============================================================ */
 
 function updateReportPreview(){
 
     const records =
-        getActiveReportRecords();
+        getReportRecords();
 
 
     const drums =
@@ -6299,69 +5177,14 @@ function updateReportPreview(){
         );
 
 
-    const photos =
-        records.filter(
-
-            function(record){
-
-                return Boolean(
-                    record.photo
-                );
-
-            }
-
-        ).length;
-
-
-    const preview =
-        document.getElementById(
-            "reportPreview"
-        );
-
-
-    if(!preview){
-
-        return;
-
-    }
-
-
-    if(
-        advancedSearchActive
-    ){
-
-        preview.innerHTML = `
-
-            <strong>
-                Advanced Search:
-            </strong>
-
-            ${records.length}
-            matching collection records
-
-            &nbsp; • &nbsp;
-
-            <strong>
-                ${drums}
-            </strong>
-            fuel drums
-
-            &nbsp; • &nbsp;
-
-            ${photos}
-            photos
-
-        `;
-
-        return;
-
-    }
-
-
-    preview.innerHTML = `
+    document.getElementById(
+        "reportPreview"
+    ).innerHTML = `
 
         <strong>
+
             ${records.length}
+
         </strong>
 
         collection records
@@ -6369,15 +5192,12 @@ function updateReportPreview(){
         &nbsp; • &nbsp;
 
         <strong>
+
             ${drums}
+
         </strong>
 
         fuel drums
-
-        &nbsp; • &nbsp;
-
-        ${photos}
-        photos
 
     `;
 
@@ -6391,24 +5211,10 @@ function updateReportPreview(){
 function downloadCSV(){
 
     const records =
-        getActiveReportRecords();
-
-
-    if(
-        records.length === 0
-    ){
-
-        alert(
-            "There are no records available for the selected report/search."
-        );
-
-        return;
-
-    }
+        getReportRecords();
 
 
     let csv =
-
         "Date,Team,Zone,Vehicle,Collected Drums,Vodafone Site,Site Drums,Photo Available\n";
 
 
@@ -6506,24 +5312,11 @@ function downloadCSV(){
     );
 
 
-    const filename =
-
-        advancedSearchActive
-
-        ?
-
-        "Vodafone_PNG_Fuel_Search_Report.csv"
-
-        :
-
-        "Vodafone_PNG_Fuel_Report.csv";
-
-
     downloadFile(
 
         csv,
 
-        filename,
+        "Vodafone_PNG_Fuel_Report.csv",
 
         "text/csv;charset=utf-8"
 
@@ -6555,67 +5348,13 @@ function csvEscape(value){
 
 
 /* ============================================================
-   IMAGE DIMENSIONS
-============================================================ */
-
-function getImageDimensions(
-    dataUrl
-){
-
-    return new Promise(
-
-        function(resolve,reject){
-
-            const img =
-                new Image();
-
-
-            img.onload =
-                function(){
-
-                    resolve({
-
-                        width:
-                            img.naturalWidth,
-
-                        height:
-                            img.naturalHeight
-
-                    });
-
-                };
-
-
-            img.onerror =
-                function(){
-
-                    reject(
-                        new Error(
-                            "Could not load image."
-                        )
-                    );
-
-                };
-
-
-            img.src =
-                dataUrl;
-
-        }
-
-    );
-
-}
-
-
-/* ============================================================
    PDF DOWNLOAD
 ============================================================ */
 
-async function downloadPDF(){
+function downloadPDF(){
 
     const records =
-        getActiveReportRecords();
+        getReportRecords();
 
 
     if(
@@ -6623,7 +5362,9 @@ async function downloadPDF(){
     ){
 
         alert(
-            "There are no records available for the selected report/search."
+
+            "There are no collection records for the selected report period."
+
         );
 
         return;
@@ -6642,7 +5383,9 @@ async function downloadPDF(){
     ){
 
         alert(
-            "PDF library could not be loaded. Please check your internet connection."
+
+            "PDF library could not be loaded. Please check your internet connection and try again."
+
         );
 
         return;
@@ -6652,8 +5395,7 @@ async function downloadPDF(){
 
     const {
         jsPDF
-    } =
-        window.jspdf;
+    } = window.jspdf;
 
 
     const doc =
@@ -6690,6 +5432,24 @@ async function downloadPDF(){
     );
 
 
+    const reportType =
+        document.getElementById(
+            "reportType"
+        ).value;
+
+
+    const reportDate =
+        document.getElementById(
+            "reportDate"
+        ).value;
+
+
+    const reportMonth =
+        document.getElementById(
+            "reportMonth"
+        ).value;
+
+
     doc.setFontSize(
         10
     );
@@ -6701,108 +5461,74 @@ async function downloadPDF(){
     );
 
 
+    doc.text(
+
+        "Report Type: " +
+        reportType,
+
+        14,
+
+        23
+
+    );
+
+
     if(
-        advancedSearchActive
+        reportType === "daily"
     ){
 
         doc.text(
-            "Report Mode: Advanced Search",
+
+            "Date: " +
+            reportDate,
+
             14,
-            23
+
+            29
+
         );
 
     }
 
-    else{
 
-        const reportType =
-            document.getElementById(
-                "reportType"
-            ).value;
+    if(
 
+        reportType === "monthly"
 
-        const reportDate =
-            document.getElementById(
-                "reportDate"
-            ).value;
+        ||
 
+        reportType === "selected-month"
 
-        const reportMonth =
-            document.getElementById(
-                "reportMonth"
-            ).value;
-
+    ){
 
         doc.text(
 
-            "Report Type: " +
-            reportType,
+            "Month: " +
+            reportMonth,
 
             14,
 
-            23
+            29
 
         );
 
-
-        if(
-            reportType === "daily"
-        ){
-
-            doc.text(
-
-                "Date: " +
-                reportDate,
-
-                14,
-
-                29
-
-            );
-
-        }
+    }
 
 
-        if(
+    if(
+        reportType === "weekly"
+    ){
 
-            reportType === "monthly"
+        doc.text(
 
-            ||
+            "Week based on: " +
+            reportDate,
 
-            reportType === "selected-month"
+            14,
 
-        ){
+            29
 
-            doc.text(
-
-                "Month: " +
-                reportMonth,
-
-                14,
-
-                29
-
-            );
-
-        }
-
-
-        if(
-            reportType === "weekly"
-        ){
-
-            doc.text(
-
-                "Week based on: " +
-                reportDate,
-
-                14,
-
-                29
-
-            );
-
-        }
+        );
 
     }
 
@@ -6823,20 +5549,6 @@ async function downloadPDF(){
             0
 
         );
-
-
-    const totalPhotos =
-        records.filter(
-
-            function(record){
-
-                return Boolean(
-                    record.photo
-                );
-
-            }
-
-        ).length;
 
 
     doc.text(
@@ -6866,24 +5578,12 @@ async function downloadPDF(){
 
     doc.text(
 
-        "Photos: " +
-        totalPhotos,
-
-        14,
-
-        47
-
-    );
-
-
-    doc.text(
-
         "Generated: " +
         new Date().toLocaleString(),
 
         14,
 
-        53
+        47
 
     );
 
@@ -6974,8 +5674,7 @@ async function downloadPDF(){
 
     doc.autoTable({
 
-        startY:
-            59,
+        startY:53,
 
         head:[[
 
@@ -6997,318 +5696,33 @@ async function downloadPDF(){
 
         ]],
 
-        body:
-            tableData,
+        body:tableData,
 
-        theme:
-            "grid",
+        theme:"grid",
 
         styles:{
 
-            fontSize:
-                8,
+            fontSize:8,
 
-            cellPadding:
-                3
+            cellPadding:3
 
         },
 
         headStyles:{
 
-            fontStyle:
-                "bold"
+            fontStyle:"bold"
 
         },
 
         margin:{
 
-            left:
-                14,
+            left:14,
 
-            right:
-                14
+            right:14
 
         }
 
     });
-
-
-    /*
-       ADD ACTUAL PHOTOS
-       TO PDF
-    */
-
-    for(
-        let i = 0;
-        i < records.length;
-        i++
-    ){
-
-        const record =
-            records[i];
-
-
-        if(
-            !record.photo
-        ){
-
-            continue;
-
-        }
-
-
-        try{
-
-            doc.addPage();
-
-
-            doc.setFontSize(
-                16
-            );
-
-
-            doc.setFont(
-                "helvetica",
-                "bold"
-            );
-
-
-            doc.text(
-
-                "Fuel Drum Collection Photo",
-
-                148,
-
-                15,
-
-                {
-                    align:"center"
-                }
-
-            );
-
-
-            doc.setFontSize(
-                10
-            );
-
-
-            doc.setFont(
-                "helvetica",
-                "normal"
-            );
-
-
-            doc.text(
-
-                "Date: " +
-                record.date,
-
-                148,
-
-                23,
-
-                {
-                    align:"center"
-                }
-
-            );
-
-
-            doc.text(
-
-                "Team: " +
-                record.team,
-
-                148,
-
-                29,
-
-                {
-                    align:"center"
-                }
-
-            );
-
-
-            doc.text(
-
-                "Zone: " +
-                record.zone,
-
-                148,
-
-                35,
-
-                {
-                    align:"center"
-                }
-
-            );
-
-
-            doc.text(
-
-                "Vehicle: " +
-                record.vehicle,
-
-                148,
-
-                41,
-
-                {
-                    align:"center"
-                }
-
-            );
-
-
-            const dims =
-                await getImageDimensions(
-                    record.photo
-                );
-
-
-            const maxW =
-                245;
-
-
-            const maxH =
-                150;
-
-
-            const scale =
-                Math.min(
-
-                    maxW /
-                    dims.width,
-
-                    maxH /
-                    dims.height
-
-                );
-
-
-            const width =
-                dims.width *
-                scale;
-
-
-            const height =
-                dims.height *
-                scale;
-
-
-            const x =
-                148 -
-                (
-                    width /
-                    2
-                );
-
-
-            const y =
-                50;
-
-
-            doc.addImage(
-
-                record.photo,
-
-                "JPEG",
-
-                x,
-
-                y,
-
-                width,
-
-                height,
-
-                undefined,
-
-                "MEDIUM"
-
-            );
-
-
-            let siteText = "";
-
-
-            if(
-                Array.isArray(
-                    record.sites
-                )
-            ){
-
-                siteText =
-                    record.sites
-
-                    .map(
-
-                        function(site){
-
-                            return (
-
-                                site.siteId +
-
-                                " (" +
-
-                                site.drums +
-
-                                " drums)"
-
-                            );
-
-                        }
-
-                    )
-
-                    .join(
-                        ", "
-                    );
-
-            }
-
-
-            doc.setFontSize(
-                9
-            );
-
-
-            doc.text(
-
-                "Sites: " +
-                siteText,
-
-                148,
-
-                Math.min(
-                    210,
-                    y +
-                    height +
-                    10
-                ),
-
-                {
-                    align:"center",
-                    maxWidth:250
-                }
-
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                "PDF photo error:",
-                error
-            );
-
-        }
-
-    }
 
 
     const pageCount =
@@ -7339,12 +5753,6 @@ async function downloadPDF(){
         );
 
 
-        doc.setFont(
-            "helvetica",
-            "normal"
-        );
-
-
         doc.text(
 
             "Powered by Iso Yawi | Vodafone PNG Fuel Collection Dashboard | Page " +
@@ -7363,653 +5771,16 @@ async function downloadPDF(){
 
     const filename =
 
-        advancedSearchActive
-
-        ?
-
-        "Vodafone_PNG_Fuel_Search_Report_" +
-        getToday() +
-        ".pdf"
-
-        :
-
         "Vodafone_PNG_Fuel_Report_" +
+
         getToday() +
+
         ".pdf";
 
 
     doc.save(
         filename
     );
-
-}
-
-
-/* ============================================================
-   EXCEL DOWNLOAD
-============================================================ */
-
-async function downloadExcel(){
-
-    const records =
-        getActiveReportRecords();
-
-
-    if(
-        records.length === 0
-    ){
-
-        alert(
-            "There are no records available for the selected report/search."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        typeof ExcelJS === "undefined"
-    ){
-
-        alert(
-            "Excel library could not be loaded. Please check your internet connection."
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        const workbook =
-            new ExcelJS.Workbook();
-
-
-        workbook.creator =
-            "Iso Yawi";
-
-
-        workbook.created =
-            new Date();
-
-
-        workbook.modified =
-            new Date();
-
-
-        const worksheet =
-            workbook.addWorksheet(
-                "Fuel Collection Report"
-            );
-
-
-        worksheet.columns = [
-
-            {
-                header:"Date",
-                key:"date",
-                width:15
-            },
-
-            {
-                header:"Team Member",
-                key:"team",
-                width:25
-            },
-
-            {
-                header:"Lae Zone",
-                key:"zone",
-                width:18
-            },
-
-            {
-                header:"Vehicle",
-                key:"vehicle",
-                width:20
-            },
-
-            {
-                header:"Collected Drums",
-                key:"collected",
-                width:18
-            },
-
-            {
-                header:"Vodafone Site",
-                key:"site",
-                width:20
-            },
-
-            {
-                header:"Site Drums",
-                key:"siteDrums",
-                width:14
-            },
-
-            {
-                header:"Photo",
-                key:"photo",
-                width:20
-            }
-
-        ];
-
-
-        worksheet.getRow(1).font = {
-
-            bold:true
-
-        };
-
-
-        worksheet.getRow(1).alignment = {
-
-            vertical:"middle",
-
-            horizontal:"center"
-
-        };
-
-
-        let rowNumber = 2;
-
-
-        for(
-            let i = 0;
-            i < records.length;
-            i++
-        ){
-
-            const record =
-                records[i];
-
-
-            const sites =
-                Array.isArray(
-                    record.sites
-                )
-                &&
-                record.sites.length > 0
-
-                ?
-
-                record.sites
-
-                :
-
-                [
-
-                    {
-                        siteId:"",
-                        drums:""
-                    }
-
-                ];
-
-
-            const firstRow =
-                rowNumber;
-
-
-            for(
-                let s = 0;
-                s < sites.length;
-                s++
-            ){
-
-                const site =
-                    sites[s];
-
-
-                const row =
-                    worksheet.addRow({
-
-                        date:
-                            record.date,
-
-                        team:
-                            record.team,
-
-                        zone:
-                            record.zone,
-
-                        vehicle:
-                            record.vehicle,
-
-                        collected:
-                            record.collectedDrums,
-
-                        site:
-                            site.siteId,
-
-                        siteDrums:
-                            site.drums,
-
-                        photo:
-                            record.photo
-                            ?
-                            "Attached"
-                            :
-                            "No Photo"
-
-                    });
-
-
-                row.height =
-                    record.photo
-                    ?
-                    90
-                    :
-                    22;
-
-
-                row.alignment = {
-
-                    vertical:
-                        "middle"
-
-                };
-
-
-                rowNumber++;
-
-            }
-
-
-            const lastRow =
-                rowNumber - 1;
-
-
-            if(
-                lastRow >
-                firstRow
-            ){
-
-                worksheet.mergeCells(
-
-                    firstRow,
-                    1,
-
-                    lastRow,
-                    1
-
-                );
-
-
-                worksheet.mergeCells(
-
-                    firstRow,
-                    2,
-
-                    lastRow,
-                    2
-
-                );
-
-
-                worksheet.mergeCells(
-
-                    firstRow,
-                    3,
-
-                    lastRow,
-                    3
-
-                );
-
-
-                worksheet.mergeCells(
-
-                    firstRow,
-                    4,
-
-                    lastRow,
-                    4
-
-                );
-
-
-                worksheet.mergeCells(
-
-                    firstRow,
-                    5,
-
-                    lastRow,
-                    5
-
-                );
-
-
-                worksheet.mergeCells(
-
-                    firstRow,
-                    8,
-
-                    lastRow,
-                    8
-
-                );
-
-            }
-
-
-            if(
-                record.photo
-            ){
-
-                try{
-
-                    const imageId =
-                        workbook.addImage({
-
-                            base64:
-                                record.photo,
-
-                            extension:
-                                "jpeg"
-
-                        });
-
-
-                    worksheet.addImage(
-
-                        imageId,
-
-                        {
-
-                            tl:{
-
-                                col:7,
-
-                                row:
-                                    firstRow - 1 +
-                                    0.1
-
-                            },
-
-                            ext:{
-
-                                width:130,
-
-                                height:80
-
-                            },
-
-                            editAs:
-                                "oneCell"
-
-                        }
-
-                    );
-
-                }
-
-                catch(error){
-
-                    console.error(
-                        "Excel image error:",
-                        error
-                    );
-
-                }
-
-            }
-
-        }
-
-
-        worksheet.views = [
-
-            {
-                state:"frozen",
-                ySplit:1
-            }
-
-        ];
-
-
-        worksheet.autoFilter = {
-
-            from:"A1",
-
-            to:
-                "H" +
-                (
-                    rowNumber - 1
-                )
-
-        };
-
-
-        /*
-           SUMMARY SHEET
-        */
-
-        const summary =
-            workbook.addWorksheet(
-                "Summary"
-            );
-
-
-        summary.getCell(
-            "A1"
-        ).value =
-            "Vodafone PNG Fuel Collection Report";
-
-
-        summary.getCell(
-            "A1"
-        ).font = {
-
-            bold:true,
-
-            size:16
-
-        };
-
-
-        summary.getCell(
-            "A3"
-        ).value =
-            "Report Mode";
-
-
-        summary.getCell(
-            "B3"
-        ).value =
-
-            advancedSearchActive
-
-            ?
-
-            "Advanced Search"
-
-            :
-
-            document.getElementById(
-                "reportType"
-            ).value;
-
-
-        summary.getCell(
-            "A4"
-        ).value =
-            "Total Records";
-
-
-        summary.getCell(
-            "B4"
-        ).value =
-            records.length;
-
-
-        summary.getCell(
-            "A5"
-        ).value =
-            "Total Fuel Collected";
-
-
-        summary.getCell(
-            "B5"
-        ).value =
-            records.reduce(
-
-                function(total,record){
-
-                    return total +
-
-                        Number(
-                            record.collectedDrums || 0
-                        );
-
-                },
-
-                0
-
-            );
-
-
-        summary.getCell(
-            "A6"
-        ).value =
-            "Total Photos";
-
-
-        summary.getCell(
-            "B6"
-        ).value =
-            records.filter(
-
-                function(record){
-
-                    return Boolean(
-                        record.photo
-                    );
-
-                }
-
-            ).length;
-
-
-        summary.getCell(
-            "A7"
-        ).value =
-            "Generated";
-
-
-        summary.getCell(
-            "B7"
-        ).value =
-            new Date().toLocaleString();
-
-
-        summary.getColumn(
-            1
-        ).width =
-            28;
-
-
-        summary.getColumn(
-            2
-        ).width =
-            35;
-
-
-        const buffer =
-            await workbook.xlsx.writeBuffer();
-
-
-        const blob =
-            new Blob(
-
-                [buffer],
-
-                {
-
-                    type:
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
-                }
-
-            );
-
-
-        const url =
-            URL.createObjectURL(
-                blob
-            );
-
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-
-        link.href =
-            url;
-
-
-        link.download =
-
-            advancedSearchActive
-
-            ?
-
-            "Vodafone_PNG_Fuel_Search_Report_" +
-            getToday() +
-            ".xlsx"
-
-            :
-
-            "Vodafone_PNG_Fuel_Report_" +
-            getToday() +
-            ".xlsx";
-
-
-        document.body.appendChild(
-            link
-        );
-
-
-        link.click();
-
-
-        link.remove();
-
-
-        setTimeout(
-
-            function(){
-
-                URL.revokeObjectURL(
-                    url
-                );
-
-            },
-
-            1000
-
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Excel error:",
-            error
-        );
-
-
-        alert(
-            "The Excel report could not be generated."
-        );
-
-    }
 
 }
 
@@ -8104,7 +5875,7 @@ function renderDashboard(){
 
 
 /* ============================================================
-   INITIALISE
+   INITIALISE APPLICATION
 ============================================================ */
 
 function initialise(){
@@ -8115,7 +5886,7 @@ function initialise(){
 
 
     /* =====================================================
-       THEME
+       THEME SELECTOR
     ====================================================== */
 
     const themeSelector =
@@ -8166,7 +5937,7 @@ function initialise(){
 
 
     /* =====================================================
-       PHOTO
+       PHOTO INPUT
     ====================================================== */
 
     const fuelDrumPhoto =
@@ -8313,26 +6084,7 @@ function initialise(){
 
 
     /* =====================================================
-       EXCEL
-    ====================================================== */
-
-    document.getElementById(
-        "downloadExcel"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            downloadExcel();
-
-        }
-
-    );
-
-
-    /* =====================================================
-       CLEAR
+       CLEAR DATA
     ====================================================== */
 
     document.getElementById(
@@ -8351,44 +6103,6 @@ function initialise(){
 
 
     /* =====================================================
-       SEARCH
-    ====================================================== */
-
-    document.getElementById(
-        "searchReport"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            searchReports();
-
-        }
-
-    );
-
-
-    /* =====================================================
-       RESET SEARCH
-    ====================================================== */
-
-    document.getElementById(
-        "resetSearch"
-    ).addEventListener(
-
-        "click",
-
-        function(){
-
-            resetReportSearch();
-
-        }
-
-    );
-
-
-    /* =====================================================
        REPORT FILTERS
     ====================================================== */
 
@@ -8398,17 +6112,7 @@ function initialise(){
 
         "change",
 
-        function(){
-
-            advancedSearchActive =
-                false;
-
-            searchedReportRecords =
-                [];
-
-            updateReportPreview();
-
-        }
+        updateReportPreview
 
     );
 
@@ -8419,17 +6123,7 @@ function initialise(){
 
         "change",
 
-        function(){
-
-            advancedSearchActive =
-                false;
-
-            searchedReportRecords =
-                [];
-
-            updateReportPreview();
-
-        }
+        updateReportPreview
 
     );
 
@@ -8440,66 +6134,7 @@ function initialise(){
 
         "change",
 
-        function(){
-
-            advancedSearchActive =
-                false;
-
-            searchedReportRecords =
-                [];
-
-            updateReportPreview();
-
-        }
-
-    );
-
-
-    /* =====================================================
-       ENTER KEY SEARCH
-    ====================================================== */
-
-    const searchInputs =
-        document.querySelectorAll(
-
-            "#searchTeam," +
-            "#searchMonth," +
-            "#searchDate," +
-            "#searchSite," +
-            "#searchVehicle," +
-            "#searchMinDrums," +
-            "#searchMaxDrums," +
-            "#searchKeyword"
-
-        );
-
-
-    searchInputs.forEach(
-
-        function(input){
-
-            input.addEventListener(
-
-                "keydown",
-
-                function(event){
-
-                    if(
-                        event.key ===
-                        "Enter"
-                    ){
-
-                        event.preventDefault();
-
-                        searchReports();
-
-                    }
-
-                }
-
-            );
-
-        }
+        updateReportPreview
 
     );
 
