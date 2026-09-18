@@ -14,9 +14,10 @@
     Vodafone PNG Fuel Collection Dashboard
 </title>
 
+
 <!-- =========================================================
      SESSION PROTECTION
-     ========================================================= -->
+========================================================= -->
 
 <script>
 
@@ -668,6 +669,85 @@ button:hover{
 
 
 /* =========================================================
+   PHOTO REGISTER
+========================================================= */
+
+.register-photo{
+
+    width:85px;
+
+    height:65px;
+
+    object-fit:cover;
+
+    border-radius:7px;
+
+    border:1px solid #d1d5db;
+
+    cursor:pointer;
+
+    display:block;
+
+}
+
+.register-photo:hover{
+
+    opacity:.85;
+
+}
+
+.photo-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    margin-top:6px;
+
+    width:85px;
+
+}
+
+.photo-view-btn{
+
+    background:#111827;
+
+    color:#fff;
+
+    padding:6px 7px;
+
+    font-size:11px;
+
+    width:100%;
+
+}
+
+.photo-download-btn{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:6px 7px;
+
+    font-size:11px;
+
+    width:100%;
+
+}
+
+.no-photo{
+
+    color:#9ca3af;
+
+    font-size:12px;
+
+}
+
+
+/* =========================================================
    MESSAGES
 ========================================================= */
 
@@ -886,35 +966,6 @@ td strong{
 
 
 /* =========================================================
-   PHOTO REGISTER
-========================================================= */
-
-.register-photo{
-
-    width:65px;
-
-    height:50px;
-
-    object-fit:cover;
-
-    border-radius:6px;
-
-    border:1px solid #d1d5db;
-
-    cursor:pointer;
-
-}
-
-.no-photo{
-
-    color:#9ca3af;
-
-    font-size:12px;
-
-}
-
-
-/* =========================================================
    FOOTER
 ========================================================= */
 
@@ -949,9 +1000,6 @@ body.dark-theme{
 
 }
 
-
-/* CARDS */
-
 body.dark-theme .card{
 
     background:#1f2937;
@@ -962,9 +1010,6 @@ body.dark-theme .card{
         0 3px 15px rgba(0,0,0,.35);
 
 }
-
-
-/* KPI */
 
 body.dark-theme .kpi{
 
@@ -980,9 +1025,6 @@ body.dark-theme .kpi-title{
     color:#9ca3af;
 
 }
-
-
-/* FORMS */
 
 body.dark-theme input,
 body.dark-theme select{
@@ -1008,9 +1050,6 @@ body.dark-theme select:focus{
 
 }
 
-
-/* SITE TOTAL */
-
 body.dark-theme .site-total{
 
     background:#111827;
@@ -1018,9 +1057,6 @@ body.dark-theme .site-total{
     color:#f9fafb;
 
 }
-
-
-/* PHOTO */
 
 body.dark-theme .photo-section{
 
@@ -1040,9 +1076,6 @@ body.dark-theme .photo-input{
 
 }
 
-
-/* ZONES */
-
 body.dark-theme .zone{
 
     background:#111827;
@@ -1057,17 +1090,11 @@ body.dark-theme .zone-name{
 
 }
 
-
-/* PROGRESS */
-
 body.dark-theme .progress{
 
     background:#374151;
 
 }
-
-
-/* TABLE */
 
 body.dark-theme th{
 
@@ -1083,9 +1110,6 @@ body.dark-theme td{
 
 }
 
-
-/* FOOTER */
-
 body.dark-theme .footer{
 
     color:#9ca3af;
@@ -1097,9 +1121,6 @@ body.dark-theme .footer strong{
     color:#f9fafb;
 
 }
-
-
-/* REPORT PREVIEW */
 
 body.dark-theme #reportPreview{
 
@@ -1367,10 +1388,6 @@ body.dark-theme #reportPreview{
 
     <div class="header-right">
 
-        <!-- =================================================
-             THEME SELECTOR
-        ================================================== -->
-
         <select
             id="themeSelector"
             class="theme-select"
@@ -1391,10 +1408,6 @@ body.dark-theme #reportPreview{
 
         </select>
 
-
-        <!-- =================================================
-             LOGOUT
-        ================================================== -->
 
         <button
             type="button"
@@ -1417,7 +1430,6 @@ body.dark-theme #reportPreview{
 ========================================================= -->
 
 <div class="kpis">
-
 
     <div class="kpi">
 
@@ -1513,7 +1525,6 @@ body.dark-theme #reportPreview{
         </div>
 
     </div>
-
 
 </div>
 
@@ -1669,7 +1680,6 @@ body.dark-theme #reportPreview{
 
     <div class="two">
 
-
         <div class="form-group">
 
             <label>
@@ -1699,7 +1709,6 @@ body.dark-theme #reportPreview{
             >
 
         </div>
-
 
     </div>
 
@@ -1770,6 +1779,7 @@ body.dark-theme #reportPreview{
             capture="environment"
         >
 
+
         <div
             id="photoPreview"
             class="photo-preview"
@@ -1781,9 +1791,13 @@ body.dark-theme #reportPreview{
                 alt="Fuel loaded drum photo"
             >
 
+
             <div class="photo-caption">
+
                 Photo captured/selected for this fuel collection
+
             </div>
+
 
             <button
                 type="button"
@@ -1807,6 +1821,7 @@ body.dark-theme #reportPreview{
         <label>
             Vodafone PNG Site Assignment
         </label>
+
 
         <div id="siteAssignments"></div>
 
@@ -1876,7 +1891,6 @@ body.dark-theme #reportPreview{
 
     <div class="report-grid">
 
-
         <div>
 
             <label>
@@ -1933,12 +1947,10 @@ body.dark-theme #reportPreview{
 
         </div>
 
-
     </div>
 
 
     <div class="report-buttons">
-
 
         <button
             type="button"
@@ -1957,7 +1969,6 @@ body.dark-theme #reportPreview{
             Download PDF
         </button>
 
-
     </div>
 
 
@@ -1969,7 +1980,6 @@ body.dark-theme #reportPreview{
             font-size:13px
         "
     ></div>
-
 
 </div>
 
@@ -2078,7 +2088,6 @@ body.dark-theme #reportPreview{
         Clear All Dashboard Data
     </button>
 
-
 </div>
 
 
@@ -2112,7 +2121,6 @@ body.dark-theme #reportPreview{
 
 
 <script>
-
 
 /* ============================================================
    THEME SYSTEM
@@ -2251,11 +2259,8 @@ if(systemThemeMedia){
     ){
 
         systemThemeMedia.addEventListener(
-
             "change",
-
             systemThemeChanged
-
         );
 
     }
@@ -2272,38 +2277,6 @@ if(systemThemeMedia){
     }
 
 }
-
-
-/* ============================================================
-   LOGIN / SESSION PROTECTION
-============================================================ */
-
-(function(){
-
-    const warehouseSession =
-        sessionStorage.getItem(
-            "warehouseSession"
-        );
-
-
-    const role =
-        sessionStorage.getItem(
-            "userRole"
-        );
-
-
-    if(
-        !warehouseSession ||
-        role !== "Warehouse"
-    ){
-
-        window.location.replace(
-            "index.html"
-        );
-
-    }
-
-})();
 
 
 /* ============================================================
@@ -2326,9 +2299,10 @@ function logout(){
 
 
     /*
-       Remove authentication only.
+       Authentication is removed.
 
-       Dashboard data remains in localStorage.
+       Dashboard data and theme remain
+       in localStorage.
     */
 
     sessionStorage.removeItem(
@@ -2467,7 +2441,7 @@ function saveDatabase(){
 
 
         alert(
-            "The browser could not save the dashboard data."
+            "The browser could not save the dashboard data. The browser storage may be full. Try removing old records/photos."
         );
 
 
@@ -2578,6 +2552,7 @@ function getTotalCollected(){
         function(total,record){
 
             return total +
+
                 Number(
                     record.collectedDrums || 0
                 );
@@ -2604,7 +2579,9 @@ function getRemainingStock(){
         Number(
             database.stock || 0
         )
+
         -
+
         getTotalCollected()
 
     );
@@ -2641,6 +2618,7 @@ function getTotalAssigned(){
                 function(site){
 
                     total +=
+
                         Number(
                             site.drums || 0
                         );
@@ -2783,10 +2761,6 @@ function addSite(
 
     if(!container){
 
-        console.error(
-            "siteAssignments container not found."
-        );
-
         return;
 
     }
@@ -2842,11 +2816,8 @@ function addSite(
 
 
     quantity.addEventListener(
-
         "input",
-
         updateSiteAllocationTotal
-
     );
 
 
@@ -2891,6 +2862,7 @@ function addSite(
 
 
             row.remove();
+
 
             updateSiteAllocationTotal();
 
@@ -4099,11 +4071,13 @@ function renderZones(){
 
                 </div>
 
+
                 <div class="zone-number">
 
                     ${total}
 
                 </div>
+
 
                 <div
                     style="
@@ -4280,6 +4254,7 @@ function renderTeams(){
 
                     </strong>
 
+
                     <span>
 
                         ${amount} drums
@@ -4287,6 +4262,7 @@ function renderTeams(){
                     </span>
 
                 </div>
+
 
                 <div class="progress">
 
@@ -4413,6 +4389,228 @@ function openPhoto(photo){
 
 
 /* ============================================================
+   SANITIZE FILE NAME
+============================================================ */
+
+function sanitizeFileName(value){
+
+    return String(
+        value ?? ""
+    )
+
+    .trim()
+
+    .replace(
+        /[<>:"/\\|?*\x00-\x1F]/g,
+        "_"
+    )
+
+    .replace(
+        /\s+/g,
+        "_"
+    )
+
+    .replace(
+        /_+/g,
+        "_"
+    )
+
+    .substring(
+        0,
+        100
+    )
+
+    ||
+
+    "Unknown";
+
+}
+
+
+/* ============================================================
+   DOWNLOAD PHOTO
+============================================================ */
+
+function downloadPhoto(record){
+
+    if(
+        !record ||
+        !record.photo
+    ){
+
+        alert(
+            "No fuel drum photo is available for this record."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        /*
+           Convert the Base64 data URL into a Blob.
+
+           This provides a proper downloadable JPG file
+           instead of simply opening the image.
+        */
+
+        const parts =
+            record.photo.split(",");
+
+
+        if(
+            parts.length < 2
+        ){
+
+            throw new Error(
+                "Invalid image data."
+            );
+
+        }
+
+
+        const header =
+            parts[0];
+
+
+        const base64 =
+            parts[1];
+
+
+        const mimeMatch =
+            header.match(
+                /data:(.*?);base64/
+            );
+
+
+        const mime =
+            mimeMatch
+            ?
+            mimeMatch[1]
+            :
+            "image/jpeg";
+
+
+        const binary =
+            atob(base64);
+
+
+        const bytes =
+            new Uint8Array(
+                binary.length
+            );
+
+
+        for(
+            let i = 0;
+            i < binary.length;
+            i++
+        ){
+
+            bytes[i] =
+                binary.charCodeAt(i);
+
+        }
+
+
+        const blob =
+            new Blob(
+
+                [bytes],
+
+                {
+                    type:mime
+                }
+
+            );
+
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.download =
+
+            "Fuel_Drum_Photo_" +
+
+            sanitizeFileName(
+                record.date
+            ) +
+
+            "_" +
+
+            sanitizeFileName(
+                record.team
+            ) +
+
+            "_" +
+
+            sanitizeFileName(
+                record.zone
+            ) +
+
+            ".jpg";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        setTimeout(
+
+            function(){
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            },
+
+            1000
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Photo download error:",
+            error
+        );
+
+
+        alert(
+            "The fuel drum photo could not be downloaded."
+        );
+
+    }
+
+}
+
+
+/* ============================================================
    RENDER HISTORY
 ============================================================ */
 
@@ -4524,7 +4722,10 @@ function renderHistory(){
 
 
             let photoHTML =
-                `<span class="no-photo">No photo</span>`;
+
+                `<span class="no-photo">
+                    No photo
+                </span>`;
 
 
             if(record.photo){
@@ -4535,8 +4736,26 @@ function renderHistory(){
                         src="${record.photo}"
                         class="register-photo"
                         alt="Fuel drum photo"
-                        title="Click to view photo"
+                        title="Click image to view"
                     >
+
+                    <div class="photo-actions">
+
+                        <button
+                            type="button"
+                            class="photo-view-btn"
+                        >
+                            View Photo
+                        </button>
+
+                        <button
+                            type="button"
+                            class="photo-download-btn"
+                        >
+                            Download Photo
+                        </button>
+
+                    </div>
 
                 `;
 
@@ -4629,6 +4848,10 @@ function renderHistory(){
             `;
 
 
+            /* =================================================
+               DELETE BUTTON
+            ================================================= */
+
             const deleteButton =
                 row.querySelector(
                     ".delete-record"
@@ -4654,6 +4877,10 @@ function renderHistory(){
             }
 
 
+            /* =================================================
+               PHOTO VIEW
+            ================================================= */
+
             const photo =
                 row.querySelector(
                     ".register-photo"
@@ -4670,6 +4897,60 @@ function renderHistory(){
 
                         openPhoto(
                             record.photo
+                        );
+
+                    }
+
+                );
+
+            }
+
+
+            const viewPhotoButton =
+                row.querySelector(
+                    ".photo-view-btn"
+                );
+
+
+            if(viewPhotoButton){
+
+                viewPhotoButton.addEventListener(
+
+                    "click",
+
+                    function(){
+
+                        openPhoto(
+                            record.photo
+                        );
+
+                    }
+
+                );
+
+            }
+
+
+            /* =================================================
+               PHOTO DOWNLOAD
+            ================================================= */
+
+            const downloadPhotoButton =
+                row.querySelector(
+                    ".photo-download-btn"
+                );
+
+
+            if(downloadPhotoButton){
+
+                downloadPhotoButton.addEventListener(
+
+                    "click",
+
+                    function(){
+
+                        downloadPhoto(
+                            record
                         );
 
                     }
@@ -5599,16 +5880,7 @@ function renderDashboard(){
 
 function initialise(){
 
-    /*
-       Load saved theme first.
-    */
-
     loadTheme();
-
-
-    /*
-       Load saved fuel database.
-    */
 
     loadDatabase();
 
