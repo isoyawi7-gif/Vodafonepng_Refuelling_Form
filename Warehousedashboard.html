@@ -15,6 +15,34 @@
 </title>
 
 <!-- =========================================================
+     SESSION PROTECTION
+     ========================================================= -->
+
+<script>
+
+(function(){
+
+    const warehouseSession =
+        sessionStorage.getItem("warehouseSession");
+
+    const role =
+        sessionStorage.getItem("userRole");
+
+    if(
+        !warehouseSession ||
+        role !== "Warehouse"
+    ){
+
+        window.location.replace("index.html");
+
+    }
+
+})();
+
+</script>
+
+
+<!-- =========================================================
      jsPDF FOR PDF REPORTS
 ========================================================= -->
 
@@ -34,10 +62,22 @@
 }
 
 body{
+
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background:#f3f4f6;
+
     color:#111827;
+
+    transition:
+        background .25s ease,
+        color .25s ease;
+
 }
 
 
@@ -46,29 +86,94 @@ body{
 ========================================================= */
 
 .header{
+
     background:#e60000;
+
     color:#fff;
+
     padding:20px 24px;
 
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
     gap:20px;
+
 }
 
 .header-left{
+
     flex:1;
+
 }
 
 .header h1{
+
     margin:0;
+
     font-size:28px;
+
 }
 
 .header p{
+
     margin:8px 0 0;
+
     opacity:.9;
+
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+/* =========================================================
+   THEME SELECTOR
+========================================================= */
+
+.theme-select{
+
+    background:#111827;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:11px 12px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    min-width:115px;
+
+}
+
+.theme-select:focus{
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.35);
+
 }
 
 
@@ -77,23 +182,31 @@ body{
 ========================================================= */
 
 .logout-btn{
+
     background:#111827;
+
     color:#fff;
 
     border:none;
+
     border-radius:9px;
 
     padding:11px 18px;
 
     font-size:14px;
+
     font-weight:bold;
 
     cursor:pointer;
+
     white-space:nowrap;
+
 }
 
 .logout-btn:hover{
+
     background:#000;
+
 }
 
 
@@ -102,9 +215,13 @@ body{
 ========================================================= */
 
 .container{
+
     max-width:1500px;
+
     margin:auto;
+
     padding:20px;
+
 }
 
 
@@ -113,6 +230,7 @@ body{
 ========================================================= */
 
 .card{
+
     background:#fff;
 
     border-radius:14px;
@@ -123,11 +241,20 @@ body{
 
     box-shadow:
         0 3px 12px rgba(0,0,0,.08);
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+
 }
 
 .card h2{
+
     margin-top:0;
+
     margin-bottom:18px;
+
 }
 
 
@@ -136,6 +263,7 @@ body{
 ========================================================= */
 
 .kpis{
+
     display:grid;
 
     grid-template-columns:
@@ -144,9 +272,11 @@ body{
     gap:14px;
 
     margin-bottom:20px;
+
 }
 
 .kpi{
+
     background:#fff;
 
     border-radius:12px;
@@ -155,9 +285,15 @@ body{
 
     box-shadow:
         0 3px 10px rgba(0,0,0,.07);
+
+    transition:
+        background .25s ease,
+        box-shadow .25s ease;
+
 }
 
 .kpi-title{
+
     color:#6b7280;
 
     font-size:12px;
@@ -165,30 +301,41 @@ body{
     font-weight:bold;
 
     text-transform:uppercase;
+
 }
 
 .kpi-value{
+
     font-size:30px;
 
     font-weight:900;
 
     margin-top:7px;
+
 }
 
 .red{
+
     color:#e60000;
+
 }
 
 .green{
+
     color:#15803d;
+
 }
 
 .blue{
+
     color:#2563eb;
+
 }
 
 .orange{
+
     color:#d97706;
+
 }
 
 
@@ -197,12 +344,14 @@ body{
 ========================================================= */
 
 .main-grid{
+
     display:grid;
 
     grid-template-columns:
         380px 1fr;
 
     gap:20px;
+
 }
 
 
@@ -211,10 +360,13 @@ body{
 ========================================================= */
 
 .form-group{
+
     margin-bottom:15px;
+
 }
 
 label{
+
     display:block;
 
     font-size:13px;
@@ -222,6 +374,7 @@ label{
     font-weight:bold;
 
     margin-bottom:6px;
+
 }
 
 input,
@@ -238,6 +391,14 @@ select{
     font-size:14px;
 
     background:#fff;
+
+    color:#111827;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+
 }
 
 input:focus,
@@ -249,6 +410,7 @@ select:focus{
 
     box-shadow:
         0 0 0 2px rgba(230,0,0,.08);
+
 }
 
 .two{
@@ -259,6 +421,7 @@ select:focus{
         1fr 1fr;
 
     gap:10px;
+
 }
 
 
@@ -279,45 +442,69 @@ button{
     font-weight:bold;
 
     cursor:pointer;
+
 }
 
 button:hover{
+
     opacity:.9;
+
 }
 
 .btn-red{
+
     background:#e60000;
+
     color:#fff;
+
 }
 
 .btn-black{
+
     background:#111827;
+
     color:#fff;
+
 }
 
 .btn-green{
+
     background:#15803d;
+
     color:#fff;
+
 }
 
 .btn-blue{
+
     background:#2563eb;
+
     color:#fff;
+
 }
 
 .btn-gray{
+
     background:#e5e7eb;
+
     color:#111827;
+
 }
 
 .btn-danger{
+
     background:#fee2e2;
+
     color:#991b1b;
+
 }
 
 .full{
+
     width:100%;
+
     margin-top:7px;
+
 }
 
 
@@ -337,10 +524,13 @@ button:hover{
     margin-bottom:9px;
 
     align-items:center;
+
 }
 
 .site-row input{
+
     min-width:0;
+
 }
 
 .remove-site{
@@ -352,6 +542,7 @@ button:hover{
     padding:10px 5px;
 
     font-size:12px;
+
 }
 
 .site-total{
@@ -367,6 +558,7 @@ button:hover{
     font-size:13px;
 
     font-weight:bold;
+
 }
 
 .site-total span{
@@ -374,6 +566,7 @@ button:hover{
     color:#e60000;
 
     font-size:16px;
+
 }
 
 
@@ -392,10 +585,13 @@ button:hover{
     border:1px solid #e5e7eb;
 
     border-radius:10px;
+
 }
 
 .photo-section label{
+
     margin-bottom:8px;
+
 }
 
 .photo-input{
@@ -411,6 +607,7 @@ button:hover{
     background:#fff;
 
     cursor:pointer;
+
 }
 
 .photo-preview{
@@ -420,10 +617,13 @@ button:hover{
     margin-top:12px;
 
     text-align:center;
+
 }
 
 .photo-preview.show{
+
     display:block;
+
 }
 
 .photo-preview img{
@@ -439,6 +639,7 @@ button:hover{
     object-fit:contain;
 
     background:#fff;
+
 }
 
 .photo-caption{
@@ -448,6 +649,7 @@ button:hover{
     color:#6b7280;
 
     font-size:12px;
+
 }
 
 .photo-remove{
@@ -461,6 +663,7 @@ button:hover{
     padding:8px 12px;
 
     font-size:12px;
+
 }
 
 
@@ -479,10 +682,13 @@ button:hover{
     border-radius:8px;
 
     font-size:13px;
+
 }
 
 .message.show{
+
     display:block;
+
 }
 
 .message.success{
@@ -490,6 +696,7 @@ button:hover{
     background:#dcfce7;
 
     color:#166534;
+
 }
 
 .message.error{
@@ -497,6 +704,7 @@ button:hover{
     background:#fee2e2;
 
     color:#991b1b;
+
 }
 
 
@@ -512,6 +720,7 @@ button:hover{
         repeat(4,1fr);
 
     gap:12px;
+
 }
 
 .zone{
@@ -523,6 +732,7 @@ button:hover{
     border-radius:10px;
 
     padding:15px;
+
 }
 
 .zone-name{
@@ -532,6 +742,7 @@ button:hover{
     font-size:12px;
 
     font-weight:bold;
+
 }
 
 .zone-number{
@@ -541,6 +752,7 @@ button:hover{
     font-weight:900;
 
     margin-top:5px;
+
 }
 
 
@@ -549,7 +761,9 @@ button:hover{
 ========================================================= */
 
 .team-row{
+
     margin-bottom:17px;
+
 }
 
 .team-line{
@@ -561,6 +775,7 @@ button:hover{
     margin-bottom:6px;
 
     font-size:13px;
+
 }
 
 .progress{
@@ -572,6 +787,7 @@ button:hover{
     border-radius:20px;
 
     overflow:hidden;
+
 }
 
 .progress-bar{
@@ -579,6 +795,7 @@ button:hover{
     height:100%;
 
     background:#e60000;
+
 }
 
 
@@ -594,6 +811,7 @@ button:hover{
         1fr 1fr 1fr;
 
     gap:10px;
+
 }
 
 .report-buttons{
@@ -606,6 +824,7 @@ button:hover{
     gap:10px;
 
     margin-top:12px;
+
 }
 
 
@@ -620,6 +839,7 @@ button:hover{
     overflow:auto;
 
     max-height:550px;
+
 }
 
 table{
@@ -629,6 +849,7 @@ table{
     border-collapse:collapse;
 
     font-size:13px;
+
 }
 
 th,
@@ -642,6 +863,7 @@ td{
     text-align:left;
 
     vertical-align:top;
+
 }
 
 th{
@@ -653,10 +875,13 @@ th{
     top:0;
 
     z-index:1;
+
 }
 
 td strong{
+
     color:#e60000;
+
 }
 
 
@@ -677,6 +902,7 @@ td strong{
     border:1px solid #d1d5db;
 
     cursor:pointer;
+
 }
 
 .no-photo{
@@ -684,6 +910,7 @@ td strong{
     color:#9ca3af;
 
     font-size:12px;
+
 }
 
 
@@ -700,10 +927,322 @@ td strong{
     font-size:12px;
 
     padding:25px;
+
 }
 
 .footer strong{
+
     color:#111827;
+
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+body.dark-theme{
+
+    background:#111827;
+
+    color:#f9fafb;
+
+}
+
+
+/* CARDS */
+
+body.dark-theme .card{
+
+    background:#1f2937;
+
+    color:#f9fafb;
+
+    box-shadow:
+        0 3px 15px rgba(0,0,0,.35);
+
+}
+
+
+/* KPI */
+
+body.dark-theme .kpi{
+
+    background:#1f2937;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.35);
+
+}
+
+body.dark-theme .kpi-title{
+
+    color:#9ca3af;
+
+}
+
+
+/* FORMS */
+
+body.dark-theme input,
+body.dark-theme select{
+
+    background:#111827;
+
+    color:#f9fafb;
+
+    border-color:#4b5563;
+
+}
+
+body.dark-theme input::placeholder{
+
+    color:#9ca3af;
+
+}
+
+body.dark-theme input:focus,
+body.dark-theme select:focus{
+
+    border-color:#e60000;
+
+}
+
+
+/* SITE TOTAL */
+
+body.dark-theme .site-total{
+
+    background:#111827;
+
+    color:#f9fafb;
+
+}
+
+
+/* PHOTO */
+
+body.dark-theme .photo-section{
+
+    background:#111827;
+
+    border-color:#374151;
+
+}
+
+body.dark-theme .photo-input{
+
+    background:#1f2937;
+
+    color:#f9fafb;
+
+    border-color:#4b5563;
+
+}
+
+
+/* ZONES */
+
+body.dark-theme .zone{
+
+    background:#111827;
+
+    border-color:#374151;
+
+}
+
+body.dark-theme .zone-name{
+
+    color:#9ca3af;
+
+}
+
+
+/* PROGRESS */
+
+body.dark-theme .progress{
+
+    background:#374151;
+
+}
+
+
+/* TABLE */
+
+body.dark-theme th{
+
+    background:#111827;
+
+    color:#f9fafb;
+
+}
+
+body.dark-theme td{
+
+    border-color:#374151;
+
+}
+
+
+/* FOOTER */
+
+body.dark-theme .footer{
+
+    color:#9ca3af;
+
+}
+
+body.dark-theme .footer strong{
+
+    color:#f9fafb;
+
+}
+
+
+/* REPORT PREVIEW */
+
+body.dark-theme #reportPreview{
+
+    color:#9ca3af !important;
+
+}
+
+
+/* =========================================================
+   SYSTEM THEME
+========================================================= */
+
+@media(prefers-color-scheme:dark){
+
+    body.system-theme{
+
+        background:#111827;
+
+        color:#f9fafb;
+
+    }
+
+    body.system-theme .card{
+
+        background:#1f2937;
+
+        color:#f9fafb;
+
+        box-shadow:
+            0 3px 15px rgba(0,0,0,.35);
+
+    }
+
+    body.system-theme .kpi{
+
+        background:#1f2937;
+
+        box-shadow:
+            0 3px 12px rgba(0,0,0,.35);
+
+    }
+
+    body.system-theme .kpi-title{
+
+        color:#9ca3af;
+
+    }
+
+    body.system-theme input,
+    body.system-theme select{
+
+        background:#111827;
+
+        color:#f9fafb;
+
+        border-color:#4b5563;
+
+    }
+
+    body.system-theme input::placeholder{
+
+        color:#9ca3af;
+
+    }
+
+    body.system-theme .site-total{
+
+        background:#111827;
+
+        color:#f9fafb;
+
+    }
+
+    body.system-theme .photo-section{
+
+        background:#111827;
+
+        border-color:#374151;
+
+    }
+
+    body.system-theme .photo-input{
+
+        background:#1f2937;
+
+        color:#f9fafb;
+
+        border-color:#4b5563;
+
+    }
+
+    body.system-theme .zone{
+
+        background:#111827;
+
+        border-color:#374151;
+
+    }
+
+    body.system-theme .zone-name{
+
+        color:#9ca3af;
+
+    }
+
+    body.system-theme .progress{
+
+        background:#374151;
+
+    }
+
+    body.system-theme th{
+
+        background:#111827;
+
+        color:#f9fafb;
+
+    }
+
+    body.system-theme td{
+
+        border-color:#374151;
+
+    }
+
+    body.system-theme .footer{
+
+        color:#9ca3af;
+
+    }
+
+    body.system-theme .footer strong{
+
+        color:#f9fafb;
+
+    }
+
+    body.system-theme #reportPreview{
+
+        color:#9ca3af !important;
+
+    }
+
 }
 
 
@@ -714,24 +1253,32 @@ td strong{
 @media(max-width:1200px){
 
     .kpis{
+
         grid-template-columns:
             repeat(3,1fr);
+
     }
 
 }
+
 
 @media(max-width:900px){
 
     .main-grid{
+
         grid-template-columns:1fr;
+
     }
 
     .zone-grid{
+
         grid-template-columns:
             repeat(2,1fr);
+
     }
 
 }
+
 
 @media(max-width:600px){
 
@@ -742,19 +1289,35 @@ td strong{
         align-items:stretch;
 
         text-align:center;
+
     }
 
-    .logout-btn{
+    .header-right{
+
+        flex-direction:column;
+
         width:100%;
+
+    }
+
+    .theme-select,
+    .logout-btn{
+
+        width:100%;
+
     }
 
     .container{
+
         padding:10px;
+
     }
 
     .kpis{
+
         grid-template-columns:
             repeat(2,1fr);
+
     }
 
     .two,
@@ -762,12 +1325,14 @@ td strong{
     .report-buttons{
 
         grid-template-columns:1fr;
+
     }
 
     .site-row{
 
         grid-template-columns:
             1fr 75px 65px;
+
     }
 
 }
@@ -800,13 +1365,46 @@ td strong{
     </div>
 
 
-    <button
-        type="button"
-        class="logout-btn"
-        onclick="logout()"
-    >
-        Logout
-    </button>
+    <div class="header-right">
+
+        <!-- =================================================
+             THEME SELECTOR
+        ================================================== -->
+
+        <select
+            id="themeSelector"
+            class="theme-select"
+            title="Select dashboard theme"
+        >
+
+            <option value="light">
+                Light
+            </option>
+
+            <option value="dark">
+                Dark
+            </option>
+
+            <option value="system">
+                System
+            </option>
+
+        </select>
+
+
+        <!-- =================================================
+             LOGOUT
+        ================================================== -->
+
+        <button
+            type="button"
+            class="logout-btn"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </div>
 
 </div>
 
@@ -1517,24 +2115,168 @@ td strong{
 
 
 /* ============================================================
-   LOGIN / SESSION PROTECTION
+   THEME SYSTEM
 ============================================================ */
 
-/*
-   IMPORTANT:
+const THEME_STORAGE_KEY =
+    "VODAFONE_PNG_DASHBOARD_THEME";
 
-   Login authentication uses sessionStorage.
 
-   Fuel dashboard data uses localStorage.
+function applyTheme(theme){
 
-   Therefore:
+    document.body.classList.remove(
+        "dark-theme",
+        "system-theme"
+    );
 
-   - Login session disappears when the browser session ends.
-   - Logout removes the login session.
-   - Fuel records remain saved.
-   - Direct access without login is blocked.
-*/
 
+    if(theme === "dark"){
+
+        document.body.classList.add(
+            "dark-theme"
+        );
+
+    }
+
+
+    if(theme === "system"){
+
+        document.body.classList.add(
+            "system-theme"
+        );
+
+    }
+
+
+    const selector =
+        document.getElementById(
+            "themeSelector"
+        );
+
+
+    if(selector){
+
+        selector.value =
+            theme;
+
+    }
+
+}
+
+
+function loadTheme(){
+
+    const savedTheme =
+        localStorage.getItem(
+            THEME_STORAGE_KEY
+        );
+
+
+    const theme =
+        savedTheme === "dark"
+        ||
+        savedTheme === "system"
+        ||
+        savedTheme === "light"
+
+        ?
+
+        savedTheme
+
+        :
+
+        "light";
+
+
+    applyTheme(theme);
+
+}
+
+
+function saveTheme(theme){
+
+    localStorage.setItem(
+
+        THEME_STORAGE_KEY,
+
+        theme
+
+    );
+
+
+    applyTheme(theme);
+
+}
+
+
+/* ============================================================
+   SYSTEM THEME CHANGE
+============================================================ */
+
+const systemThemeMedia =
+    window.matchMedia
+    ?
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    )
+    :
+    null;
+
+
+if(systemThemeMedia){
+
+    const systemThemeChanged =
+        function(){
+
+            const currentTheme =
+                localStorage.getItem(
+                    THEME_STORAGE_KEY
+                );
+
+
+            if(
+                currentTheme === "system"
+            ){
+
+                applyTheme("system");
+
+            }
+
+        };
+
+
+    if(
+        typeof systemThemeMedia.addEventListener ===
+        "function"
+    ){
+
+        systemThemeMedia.addEventListener(
+
+            "change",
+
+            systemThemeChanged
+
+        );
+
+    }
+
+    else if(
+        typeof systemThemeMedia.addListener ===
+        "function"
+    ){
+
+        systemThemeMedia.addListener(
+            systemThemeChanged
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   LOGIN / SESSION PROTECTION
+============================================================ */
 
 (function(){
 
@@ -1543,16 +2285,12 @@ td strong{
             "warehouseSession"
         );
 
+
     const role =
         sessionStorage.getItem(
             "userRole"
         );
 
-
-    /*
-       Only Warehouse users may enter
-       this dashboard.
-    */
 
     if(
         !warehouseSession ||
@@ -1581,23 +2319,24 @@ function logout(){
 
 
     if(!confirmed){
+
         return;
+
     }
 
 
     /*
-       REMOVE LOGIN SESSION ONLY.
+       Remove authentication only.
 
-       DO NOT DELETE:
-
-       VODAFONE_PNG_FUEL_DASHBOARD
-
-       Fuel records remain available
-       after the next login.
+       Dashboard data remains in localStorage.
     */
 
     sessionStorage.removeItem(
         "warehouseSession"
+    );
+
+    sessionStorage.removeItem(
+        "adminSession"
     );
 
     sessionStorage.removeItem(
@@ -1608,14 +2347,6 @@ function logout(){
         "username"
     );
 
-    sessionStorage.removeItem(
-        "adminSession"
-    );
-
-
-    /*
-       Return to login page.
-    */
 
     window.location.replace(
         "index.html"
@@ -1764,13 +2495,19 @@ function getToday(){
     const m =
         String(
             date.getMonth()+1
-        ).padStart(2,"0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const d =
         String(
             date.getDate()
-        ).padStart(2,"0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     return `${y}-${m}-${d}`;
@@ -1893,7 +2630,9 @@ function getTotalAssigned(){
                     record.sites
                 )
             ){
+
                 return;
+
             }
 
 
@@ -1939,7 +2678,9 @@ function getUniqueSites(){
                     record.sites
                 )
             ){
+
                 return;
+
             }
 
 
@@ -2101,8 +2842,11 @@ function addSite(
 
 
     quantity.addEventListener(
+
         "input",
+
         updateSiteAllocationTotal
+
     );
 
 
@@ -2360,7 +3104,9 @@ function setStock(){
 
 
     if(!saveDatabase()){
+
         return;
+
     }
 
 
@@ -2544,7 +3290,9 @@ async function handleFuelDrumPhoto(
 
 
     if(!file){
+
         return;
+
     }
 
 
@@ -2620,7 +3368,6 @@ async function handleFuelDrumPhoto(
 
         currentFuelDrumPhoto = "";
 
-
         event.target.value = "";
 
     }
@@ -2656,12 +3403,16 @@ function removeFuelDrumPhoto(){
 
 
     if(input){
+
         input.value = "";
+
     }
 
 
     if(image){
+
         image.src = "";
+
     }
 
 
@@ -2924,10 +3675,6 @@ function recordFuelCollection(){
     }
 
 
-    /*
-       CREATE RECORD
-    */
-
     const record = {
 
         id:
@@ -2979,11 +3726,6 @@ function recordFuelCollection(){
 
 
     if(!saved){
-
-        /*
-           Remove the record again if
-           saving failed.
-        */
 
         database.collections.pop();
 
@@ -3071,7 +3813,9 @@ function deleteRecord(id){
 
 
     if(!record){
+
         return;
+
     }
 
 
@@ -3091,7 +3835,9 @@ function deleteRecord(id){
 
 
     if(!confirmed){
+
         return;
+
     }
 
 
@@ -3134,7 +3880,9 @@ function clearAllData(){
 
 
     if(!confirmed){
+
         return;
+
     }
 
 
@@ -3170,7 +3918,9 @@ function showMessage(
 ){
 
     if(!element){
+
         return;
+
     }
 
 
@@ -3499,12 +4249,14 @@ function renderTeams(){
                 maximum > 0
 
                 ?
+
                 (
                     amount /
                     maximum
                 ) * 100
 
                 :
+
                 0;
 
 
@@ -3568,7 +4320,9 @@ function renderTeams(){
 function openPhoto(photo){
 
     if(!photo){
+
         return;
+
     }
 
 
@@ -3960,8 +4714,6 @@ function getReportRecords(){
         ).value;
 
 
-    /* DAILY */
-
     if(
         type === "daily"
     ){
@@ -3978,8 +4730,6 @@ function getReportRecords(){
 
     }
 
-
-    /* MONTHLY */
 
     if(
 
@@ -4005,8 +4755,6 @@ function getReportRecords(){
 
     }
 
-
-    /* WEEKLY */
 
     const selected =
         new Date(
@@ -4381,10 +5129,6 @@ function downloadPDF(){
         );
 
 
-    /* =====================================================
-       REPORT TITLE
-    ====================================================== */
-
     doc.setFontSize(
         18
     );
@@ -4406,10 +5150,6 @@ function downloadPDF(){
 
     );
 
-
-    /* =====================================================
-       REPORT INFORMATION
-    ====================================================== */
 
     const reportType =
         document.getElementById(
@@ -4567,10 +5307,6 @@ function downloadPDF(){
     );
 
 
-    /* =====================================================
-       TABLE DATA
-    ====================================================== */
-
     const tableData = [];
 
 
@@ -4655,10 +5391,6 @@ function downloadPDF(){
     );
 
 
-    /* =====================================================
-       PDF TABLE
-    ====================================================== */
-
     doc.autoTable({
 
         startY:53,
@@ -4712,10 +5444,6 @@ function downloadPDF(){
     });
 
 
-    /* =====================================================
-       FOOTER
-    ====================================================== */
-
     const pageCount =
         doc.internal.getNumberOfPages();
 
@@ -4759,10 +5487,6 @@ function downloadPDF(){
 
     }
 
-
-    /* =====================================================
-       DOWNLOAD
-    ====================================================== */
 
     const filename =
 
@@ -4876,10 +5600,46 @@ function renderDashboard(){
 function initialise(){
 
     /*
+       Load saved theme first.
+    */
+
+    loadTheme();
+
+
+    /*
        Load saved fuel database.
     */
 
     loadDatabase();
+
+
+    /* =====================================================
+       THEME SELECTOR
+    ====================================================== */
+
+    const themeSelector =
+        document.getElementById(
+            "themeSelector"
+        );
+
+
+    if(themeSelector){
+
+        themeSelector.addEventListener(
+
+            "change",
+
+            function(){
+
+                saveTheme(
+                    themeSelector.value
+                );
+
+            }
+
+        );
+
+    }
 
 
     /* =====================================================
